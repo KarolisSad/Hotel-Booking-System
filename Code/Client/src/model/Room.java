@@ -103,10 +103,12 @@ public class Room
     return roomId;
   }
 
-  public String getRoomType()
+  public RoomType getRoomType()
   {
-    return roomType.toString();
+    return roomType;
   }
+
+
 
   public int getNumberOfBeds()
   {

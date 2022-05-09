@@ -144,12 +144,12 @@ public class ModelManager implements Model
    * @param nrBeds The (new) number of beds in the room.
    * @return true if editing succeeds
    */
-  @Override public boolean editRoomInfo(String roomId, String type, int nrBeds)
+  @Override public boolean editRoomInfo(String roomId, RoomType type, int nrBeds)
   {
     // TODO decide if this should be a boolean after all??
 
     Room roomToEdit = roomList.getRoom(roomId);
-    roomToEdit.setRoomType(Room.convertRoomTypeFromString(type));
+    roomToEdit.setRoomType(type);
     roomToEdit.setNumberOfBeds(nrBeds);
     property.firePropertyChange("RoomEdit", roomId, roomToEdit);
     return true;
