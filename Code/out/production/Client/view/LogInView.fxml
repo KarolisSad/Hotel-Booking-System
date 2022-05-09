@@ -7,8 +7,9 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:controller="view.LogInViewController" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-font-family: Arial" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInViewController">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -32,8 +33,14 @@
       </MenuBar>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button layoutX="272.0" layoutY="130.0" mnemonicParsing="false" onAction="#guestButton" prefHeight="38.0" prefWidth="57.0" text="Guest" />
-            <Button layoutX="246.0" layoutY="197.0" mnemonicParsing="false" onAction="#hotelManagerButton" prefHeight="38.0" prefWidth="109.0" text="Hotel Manager" />
+            <Button layoutX="272.0" layoutY="130.0" mnemonicParsing="false" onAction="#guestButton" prefHeight="38.0" prefWidth="57.0" text="Guest">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Button>
+            <Button layoutX="246.0" layoutY="197.0" mnemonicParsing="false" onAction="#hotelManagerButton" prefHeight="38.0" prefWidth="109.0" text="Hotel Manager">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>
