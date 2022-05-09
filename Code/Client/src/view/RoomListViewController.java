@@ -23,12 +23,11 @@ public class RoomListViewController extends ViewController
   @FXML private TableColumn<SimpleRoomViewModel, String> typeColumn;
   @FXML private TableColumn<SimpleRoomViewModel, Integer> numberOfBedsColumn;
   @FXML private Label errorLabel;
-  private Region root;
-  private ViewHandler viewHandler;
   private RoomListViewModel viewModel;
 
-  @Override public void init()
+  @Override protected void init()
   {
+    viewModel = getViewModelFactory().getRoomListViewModel();
     // Bindings
     numberColumn.setCellValueFactory(
         cellData -> cellData.getValue().roomNumberProperty());
@@ -58,27 +57,9 @@ public class RoomListViewController extends ViewController
     reset();
   }
 
-  /**
-   * A void method initializing instance variables.
-   *
-   * @param viewHandler      A ViewHandler object which will be used to set the instance variable.
-   * @param viewModelFactory A ViewModelFactory object which will be used to set the instance variable.
-   * @param root             A Region object which will be used to set the instance variable.
-   */
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory,
-      Region root) throws RemoteException
-  {
-    this.root = root;
-    this.viewHandler = viewHandler;
-    this.viewModelFactory = viewModelFactory;
-    this.viewModel = viewModelFactory.getRoomListViewModel();
-    init();
-  }
 
-  public Region getRoot()
-  {
-    return root;
-  }
+
+
 
   @Override public void reset()
   {
@@ -90,7 +71,7 @@ public class RoomListViewController extends ViewController
   public void addButton() throws IOException
   {
     viewModel.setAdd();
-    viewHandler.openView("AddEditView.fxml");
+    getViewHandler().openView("AddEditView.fxml");
 
   }
 
@@ -103,7 +84,7 @@ public class RoomListViewController extends ViewController
   public void editButton() throws IOException
   {
     viewModel.setEdit();
-    viewHandler.openView("AddEditView.fxml");
+    getViewHandler().openView("AddEditView.fxml");
 
     errorLabel.setTextFill(Color.GREEN);
     errorLabel.textProperty().set("Room: " + roomTable.getSelectionModel()

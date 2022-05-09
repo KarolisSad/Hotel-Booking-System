@@ -1,5 +1,6 @@
 package view;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -17,20 +18,21 @@ import java.rmi.RemoteException;
 
 public class GuestInformationController extends ViewController
 {
-    public TextField firstNameFields;
-    public TextField lastNameField;
-    public TextField emailField;
-    public TextField phoneNumberField;
-    public Label errorLabel;
+    @FXML private TextField firstNameFields;
+    @FXML private TextField lastNameField;
+    @FXML private TextField emailField;
+    @FXML private TextField phoneNumberField;
+    @FXML private Label errorLabel;
     private GuestInformationViewModel viewModel;
-    private Region root;
-    private ViewHandler viewHandler;
+
 
     /**
      * A none argument, void method initializing instance variables.
      */
     @Override
-    public void init() {
+    protected void init() {
+
+        viewModel = getViewModelFactory().getGuestInformationViewModel();
         // Binding
         firstNameFields.textProperty().bindBidirectional(viewModel.getFirstNameField());
         lastNameField.textProperty().bindBidirectional(viewModel.getLastNameField());
@@ -39,33 +41,6 @@ public class GuestInformationController extends ViewController
         errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
     }
 
-    /**
-     * A void method initializing instance variables.
-     *
-     * @param viewHandler A ViewHandler object which will be used to set the instance variable.
-     * @param viewModelFactory  A ViewModelFactory object which will be used to set the instance variable.
-     * @param root        A Region object which will be used to set the instance variable.
-     */
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root)
-        throws RemoteException {
-        this.root = root;
-        this.viewHandler = viewHandler;
-        this.viewModelFactory = viewModelFactory;
-        this.viewModel = viewModelFactory.getGuestInformationViewModel();
-
-        init();
-
-    }
-
-
-    /**
-     * A getter method returning the Region object.
-     *
-     * @return A Region object called root.
-     */
-    public Region getRoot(){
-        return root;
-    }
 
     /**
      * A non argument method that calls the clear() method from viewModel.
@@ -82,7 +57,7 @@ public class GuestInformationController extends ViewController
     public void confirmButton() {
         try
         {
-            viewModel.bookRoomWithGuest();
+            getViewModelFactory().getGuestInformationViewModel().bookRoomWithGuest();
         }
 
         catch (Exception e)
@@ -96,6 +71,6 @@ public class GuestInformationController extends ViewController
      * A void method opening the reservation view.
      */
     public void goBack() throws IOException {
-        viewHandler.openView("ReservationView.fxml");
+        getViewHandler().openView("ReservationView.fxml");
     }
 }

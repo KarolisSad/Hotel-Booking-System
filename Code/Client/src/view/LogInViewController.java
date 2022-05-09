@@ -16,30 +16,13 @@ import java.io.IOException;
 public class LogInViewController extends ViewController
 {
 
-  private Region root;
-  private ViewHandler viewHandler;
-  private LogInViewModel viewModel;
 
-  @Override public void init()
+  @Override protected void init()
   {
 
   }
 
-  /**
-   * A void method initializing instance variables
-   *
-   * @param viewHandler A ViewHandler object is initializing the viewHandler instance variable.
-   * @param viewModelFactory a ViewModelFactory object is initializing the viewModelFactory instance variable.
-   * @param root A Region object which is initializing the root instance variable.
-   */
-  @Override public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root)
-  {
-    this.root = root;
-    this.viewHandler = viewHandler;
-    this.viewModelFactory = viewModelFactory;
-    this.viewModel = viewModelFactory.getLogInViewModel();
-    init();
-  }
+
 
   /**
    * A method that provides functionality to the Hotel Manager button.
@@ -49,7 +32,7 @@ public class LogInViewController extends ViewController
    */
   public void hotelManagerButton() throws IOException
   {
-    viewHandler.openView("RoomListView.fxml");
+    getViewHandler().openView("RoomListView.fxml");
   }
 
   /**
@@ -60,7 +43,7 @@ public class LogInViewController extends ViewController
    */
   public void guestButton() throws IOException
   {
-    viewHandler.openView("ReservationView.fxml");
+    getViewHandler().openView("ReservationView.fxml");
   }
 
   /**
@@ -68,9 +51,7 @@ public class LogInViewController extends ViewController
    *
    * @return A Region object called root.
    */
-  public Region getRoot(){
-    return root;
-  }
+
 
   @Override public void reset()
   {

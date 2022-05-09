@@ -20,7 +20,7 @@ public abstract class ViewController {
     /**
      * A none argument, void method initializing instance variables.
      */
-    public abstract void init();
+    protected abstract void init();
 
 
     /**
@@ -30,10 +30,12 @@ public abstract class ViewController {
      * @param root A Region object which is initializing the root instance variable.
      * @param viewModelFactory a ViewModelFactory object is initializing the viewModelFactory instance variable.
      */
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root) throws RemoteException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root)
+    {
         this.root = root;
         this.viewHandler = viewHandler;
         this.viewModelFactory = viewModelFactory;
+
         init();
     }
 
