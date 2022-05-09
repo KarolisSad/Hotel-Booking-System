@@ -55,6 +55,8 @@ public class AddEditViewController extends ViewController {
     {
       //
     }
+
+    reset();
   }
 
   /**
@@ -89,11 +91,16 @@ public class AddEditViewController extends ViewController {
    */
   public void confirmButton() throws IOException {
 
+
+
+    if (viewModel.getViewState().isAdd())
+    {
+
       selectedType = typeDropdown.getSelectionModel().getSelectedItem();
       System.out.println(selectedType);
       viewModel.setType(selectedType);
 
-    SwingUtilities.invokeLater( () -> {
+
       JFrame jframe = new JFrame();
 
       int result = JOptionPane.showConfirmDialog(jframe, "Are you sure you want to make changes?");
@@ -101,14 +108,22 @@ public class AddEditViewController extends ViewController {
       if (result == 0) {
         viewModel.addRoom();
         System.out.println("You confirmed.");
-        try {
-          viewHandler.openView("RoomListView.fxml");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      } else if (result == 1)
+
+        viewHandler.openView("RoomListView.fxml");
+      }
+      else if (result == 1)
         System.out.println("You pressed NO");
-    });
+    }
+
+    else
+    {
+      selectedType = typeDropdown.getSelectionModel().getSelectedItem();
+      viewModel.setType(selectedType);
+
+      viewModel.editRoomInfo();
+      System.out.println("TEST TEST TEST TEST TEST TEST");
+      viewHandler.openView("RoomListView.fxml");
+    }
   }
 
   /**
