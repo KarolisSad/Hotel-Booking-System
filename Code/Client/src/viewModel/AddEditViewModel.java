@@ -9,7 +9,11 @@ import model.RoomType;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A class providing functionality for AddEditViewController.
+ *
+ * @version 09/05/2022
+ */
 public class AddEditViewModel
 {
   private StringProperty roomId;
@@ -20,6 +24,14 @@ public class AddEditViewModel
   private Model model;
   private StringProperty errorProperty;
 
+  /**
+   * Constructor initializing instance variables.
+   *
+   * @param model    model interface
+   * @param state    shared object with a ReservationViewModel
+   *                 that checks if the view needs to be filled with information
+   *                 of the selected view or empty.
+   */
   public AddEditViewModel(Model model, ViewState state)
   {
     this.model = model;
@@ -43,6 +55,10 @@ public class AddEditViewModel
     reset();
   }
 
+  /**
+   * A non argument method that that checks if the view needs to be filled with information
+   * of the selected view or empty and creates the view accurately.
+   */
   public void reset()
   {
     errorProperty.set("");
@@ -76,31 +92,56 @@ public class AddEditViewModel
 
   }
 
+  /**
+   * A getter method that returns a String object
+   * taken from a StringProperty.
+   * @return a String object
+   */
   public String getRoomId()
   {
     return roomId.get();
   }
 
+  /**
+   * A getter method that returns a StringProperty object
+   * @return a StringProperty object called roomId
+   */
   public StringProperty getRoomIdProperty()
   {
     return roomId;
   }
 
+  /**
+   * A getter method that returns a ViewState object
+   * @return a ViewState object called viewState
+   */
   public ViewState getViewState()
   {
     return viewState;
   }
 
+  /**
+   * A getter method that returns a Integer object
+   * @return an Integer object
+   */
   public int getNumberOfBeds()
   {
     return nrOfBeds.get();
   }
 
+  /**
+   * A getter method that returns a IntegerProperty object
+   * @return a IntegerProperty object called nrOfBeds
+   */
   public IntegerProperty numberOfBedsProperty()
   {
     return nrOfBeds;
   }
 
+  /**
+   * A non argument method calls an addRoom(String roomId, RoomTypes type, int nrBeds)
+   * from the model
+   */
   public void addRoom()
   {
     model.addRoom(roomId.get(), type, nrOfBeds.get());
@@ -109,6 +150,10 @@ public class AddEditViewModel
     reset();
   }
 
+  /**
+   * A non argument method calls an editRoomInfo(String roomId, RoomTypes type, int nrBeds)
+   * from the model
+   */
   public void editRoomInfo()
   {
     System.out.println(roomId.get());
@@ -118,21 +163,28 @@ public class AddEditViewModel
     reset();
   }
 
-
+  /**
+   * A non argument method setting a RoomTypes instance valuable called type.
+   */
   public void setType(RoomType type)
   {
     this.type = type;
   }
 
 
+  /**
+   * A getter method that returns a String object
+   * @return a String object
+   */
   public String getErrorProperty()
   {
     return errorProperty.get();
   }
 
-
-
-
+  /**
+   * A getter method that returns a StringProperty object
+   * @return a StringProperty object called nrOfBeds
+   */
   public StringProperty errorPropertyProperty()
   {
     return errorProperty;

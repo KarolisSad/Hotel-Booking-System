@@ -39,7 +39,6 @@ public class AddEditViewController extends ViewController {
 
     try
     {
-
     // Binding
     idField.textProperty().bindBidirectional(viewModel.getRoomIdProperty());
 
@@ -93,18 +92,23 @@ public class AddEditViewController extends ViewController {
   public void confirmButton() throws IOException {
 
 
+
     if (viewModel.getViewState().isAdd())
     {
+
       selectedType = typeDropdown.getSelectionModel().getSelectedItem();
       System.out.println(selectedType);
       viewModel.setType(selectedType);
 
+
       JFrame jframe = new JFrame();
+
       int result = JOptionPane.showConfirmDialog(jframe, "Are you sure you want to make changes?");
 
       if (result == 0) {
         viewModel.addRoom();
         System.out.println("You confirmed.");
+
         viewHandler.openView("RoomListView.fxml");
       }
       else if (result == 1)
@@ -120,7 +124,6 @@ public class AddEditViewController extends ViewController {
       System.out.println("TEST TEST TEST TEST TEST TEST");
       viewHandler.openView("RoomListView.fxml");
     }
-
   }
 
   /**
