@@ -42,6 +42,12 @@ public class AddEditViewModel
     type = null;
     types = new ArrayList<>();
 
+    System.out.println(viewState.isAdd());
+    if (!viewState.isAdd())
+    {
+      System.out.println("DJDJ");
+      roomId.setValue(viewState.getNumber());
+    }
     //List.of() makes a collection out of the simple Array.
     types.addAll(List.of(RoomType.values()));
     errorProperty = new SimpleStringProperty("");
@@ -65,12 +71,21 @@ public class AddEditViewModel
     }
     else
     {
+      System.out.println("NOT ADD");
+      roomId.setValue(viewState.getNumber());
       for (int i = 0; i < model.getAllRooms().size(); i++)
       {
-        if (model.getAllRooms().get(i).getRoomId() == roomId.get())
+        if (model.getAllRooms().get(i).getRoomId().equals(roomId.get()))
         {
-          model.getAllRooms().get(i).setRoomType(type);
-          model.getAllRooms().get(i).setNumberOfBeds(nrOfBeds.get());
+          System.out.println("WUHU!");
+          nrOfBeds.set(model.getAllRooms().get(i).getNumberOfBeds());
+          setType(model.getAllRooms().get(i).getRoomType());
+          System.out.println("TYPE: " + type);
+
+
+          System.out.println("ROOM ID: " + roomId.get());
+          System.out.println("ROOM TYPE: " + type);
+          System.out.println("NUMBER BEDS: " + getNumberOfBeds());
         }
       }
     }
@@ -141,7 +156,11 @@ public class AddEditViewModel
    */
   public void editRoomInfo()
   {
-    model.editRoomInfo(roomId.get(), type.toString(), nrOfBeds.get());
+    System.out.println(roomId.get());
+    System.out.println(type);
+    System.out.println(nrOfBeds);
+    model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
+    reset();
   }
 
   /**
@@ -151,6 +170,7 @@ public class AddEditViewModel
   {
     this.type = type;
   }
+
 
   /**
    * A getter method that returns a String object
