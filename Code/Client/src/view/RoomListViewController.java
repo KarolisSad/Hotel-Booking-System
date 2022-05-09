@@ -119,6 +119,12 @@ public class RoomListViewController extends ViewController
   public void removeButton()
   {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    //Style
+    DialogPane dialogPane = alert.getDialogPane();
+    dialogPane.getStylesheets().add("");
+    dialogPane.getStylesheets().add(getClass().getResource("box.css").toExternalForm());
+    dialogPane.getStyleClass().add("box.css");
+    //
     alert.setHeaderText(
         "Confirm deletion of room: " + roomTable.getSelectionModel()
             .getSelectedItem().roomNumberProperty().get());
