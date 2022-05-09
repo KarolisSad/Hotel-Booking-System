@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" prefHeight="97.0" prefWidth="601.0" text="Pick a date">
+         <font>
+            <Font name="Bodoni MT" size="36.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <DatePicker fx:id="startDate" />
+            <Label alignment="CENTER" prefHeight="28.0" prefWidth="91.0" text="TO" />
+            <DatePicker fx:id="endDate" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#lookForAvailableRooms" prefHeight="29.0" prefWidth="157.0" text="Look for available rooms" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" prefHeight="44.0" prefWidth="613.0" text="Pick your room">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="212.0" prefWidth="600.0">
+         <children>
+            <ListView prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="13.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="errorLabel" prefHeight="31.0" prefWidth="517.0" text="Error label" textFill="#f51616" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#reservationButton" prefHeight="29.0" prefWidth="153.0" text="Reserve" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

@@ -1,0 +1,1687 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (safepoint.cpp:919), pid=43039, tid=29703
+#  fatal error: Illegal threadstate encountered: 4
+#
+# JRE version: OpenJDK Runtime Environment SapMachine (11.0.13+8) (build 11.0.13+8-LTS-sapmachine)
+# Java VM: OpenJDK 64-Bit Server VM SapMachine (11.0.13+8-LTS-sapmachine, mixed mode, tiered, compressed oops, g1 gc, bsd-amd64)
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/SAP/SapMachine/issues/new
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.library.path=/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=61409:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 Run
+
+Host: MacBookPro14,1 x86_64 2300 MHz, 4 cores, 8G, Darwin 21.3.0
+Time: Tue Apr 26 20:36:44 2022 CEST elapsed time: 7.505343 seconds (0d 0h 0m 7s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fadbf36b800):  JavaThread "InvokeLaterDispatcher" daemon [_thread_in_native, id=29703, stack(0x000070000ec35000,0x000070000ed35000)]
+
+Stack: [0x000070000ec35000,0x000070000ed35000],  sp=0x000070000ed332b0,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.dylib+0x768826]  _ZN7VMError14report_and_dieEiPKcS1_P13__va_list_tagP6ThreadPhPvS7_S1_im+0x652
+V  [libjvm.dylib+0x27ce7d]  _Z12report_fatal11VMErrorTypePKciS1_z+0xc1
+V  [libjvm.dylib+0x68a471]  _ZN20SafepointSynchronize5blockEP10JavaThread+0x1db
+V  [libjvm.dylib+0x68c03b]  _ZN18SafepointMechanism23block_if_requested_slowEP10JavaThread+0x1d
+V  [libjvm.dylib+0x722099]  _ZN10JavaThread44check_safepoint_and_suspend_for_native_transEPS_+0x9f
+V  [libjvm.dylib+0x1e0449]  _ZN20ThreadInVMfromNativeC1EP10JavaThread+0x6d
+V  [libjvm.dylib+0x3f670b]  jni_DeleteGlobalRef+0x3e
+C  [libglass.dylib+0x8851]  -[GlassRunnable dealloc]+0x31
+C  [Foundation+0x80eab]  -[_NSThreadPerformInfo dealloc]+0x2a
+C  [Foundation+0x4dcd7]  -[NSObject(NSThreadPerformAdditions) performSelectorOnMainThread:withObject:waitUntilDone:]+0x7c
+j  com.sun.glass.ui.mac.MacApplication._submitForLaterInvocation(Ljava/lang/Runnable;)V+0
+j  com.sun.glass.ui.mac.MacApplication.submitForLaterInvocation(Ljava/lang/Runnable;)V+2
+j  com.sun.glass.ui.InvokeLaterDispatcher.run()V+82
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x3b9aeb]  _ZN9JavaCalls11call_helperEP9JavaValueRK12methodHandleP17JavaCallArgumentsP6Thread+0x257
+V  [libjvm.dylib+0x3b8f35]  _ZN9JavaCalls12call_virtualEP9JavaValueP5KlassP6SymbolS5_P17JavaCallArgumentsP6Thread+0xd7
+V  [libjvm.dylib+0x3b8fec]  _ZN9JavaCalls12call_virtualEP9JavaValue6HandleP5KlassP6SymbolS6_P6Thread+0x62
+V  [libjvm.dylib+0x4381a1]  _ZL12thread_entryP10JavaThreadP6Thread+0x78
+V  [libjvm.dylib+0x720b9b]  _ZN10JavaThread17thread_main_innerEv+0x89
+V  [libjvm.dylib+0x7209e6]  _ZN10JavaThread3runEv+0x12e
+V  [libjvm.dylib+0x71e986]  _ZN6Thread8call_runEv+0x68
+V  [libjvm.dylib+0x61cc1d]  _ZL19thread_native_entryP6Thread+0x12d
+C  [libsystem_pthread.dylib+0x64f4]  _pthread_start+0x7d
+C  [libsystem_pthread.dylib+0x200f]  thread_start+0xf
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  com.sun.glass.ui.mac.MacApplication._submitForLaterInvocation(Ljava/lang/Runnable;)V+0
+j  com.sun.glass.ui.mac.MacApplication.submitForLaterInvocation(Ljava/lang/Runnable;)V+2
+j  com.sun.glass.ui.InvokeLaterDispatcher.run()V+82
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+uid  : 501 euid : 501 gid  : 20 egid : 20
+
+umask: 0022 (----w--w-)
+
+Threads class SMR info:
+_java_thread_list=0x0000600001890c00, length=18, elements={
+0x00007fadbe00a000, 0x00007fadc0008800, 0x00007fadc000d800, 0x00007fadc000a000,
+0x00007fadbf009800, 0x00007fadbe02f000, 0x00007fadbd8d8800, 0x00007fadbd8d9000,
+0x00007fadbe050800, 0x00007fadbd934800, 0x00007fadbf013800, 0x00007fadbe16d800,
+0x00007fadbf36b800, 0x00007fadbd9f6000, 0x00007fadc0248000, 0x00007fadbd939800,
+0x00007fadc02fe800, 0x00007fadbf59a800
+}
+
+Java Threads: ( => current thread )
+  0x00007fadbe00a000 JavaThread "main" [_thread_blocked, id=6659, stack(0x000070000d6f3000,0x000070000d7f3000)]
+  0x00007fadc0008800 JavaThread "Reference Handler" daemon [_thread_blocked, id=18691, stack(0x000070000de08000,0x000070000df08000)]
+  0x00007fadc000d800 JavaThread "Finalizer" daemon [_thread_blocked, id=14339, stack(0x000070000df0b000,0x000070000e00b000)]
+  0x00007fadc000a000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=16387, stack(0x000070000e114000,0x000070000e214000)]
+  0x00007fadbf009800 JavaThread "Service Thread" daemon [_thread_blocked, id=43267, stack(0x000070000e217000,0x000070000e317000)]
+  0x00007fadbe02f000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=42755, stack(0x000070000e31a000,0x000070000e41a000)]
+  0x00007fadbd8d8800 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=41987, stack(0x000070000e41d000,0x000070000e51d000)]
+  0x00007fadbd8d9000 JavaThread "Sweeper thread" daemon [_thread_blocked, id=22275, stack(0x000070000e520000,0x000070000e620000)]
+  0x00007fadbe050800 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=22787, stack(0x000070000e623000,0x000070000e723000)]
+  0x00007fadbd934800 JavaThread "Monitor Ctrl-Break" daemon [_thread_in_native, id=23555, stack(0x000070000e726000,0x000070000e826000)]
+  0x00007fadbf013800 JavaThread "JavaFX-Launcher" [_thread_blocked, id=24579, stack(0x000070000ea2f000,0x000070000eb2f000)]
+  0x00007fadbe16d800 JavaThread "QuantumRenderer-0" daemon [_thread_blocked, id=25091, stack(0x000070000eb32000,0x000070000ec32000)]
+=>0x00007fadbf36b800 JavaThread "InvokeLaterDispatcher" daemon [_thread_in_native, id=29703, stack(0x000070000ec35000,0x000070000ed35000)]
+  0x00007fadbd9f6000 JavaThread "JavaFX Application Thread" [_thread_in_native, id=259, stack(0x00007ff7b05db000,0x00007ff7b0ddb000)]
+  0x00007fadc0248000 JavaThread "Thread-3" daemon [_thread_in_native, id=47631, stack(0x000070000ed38000,0x000070000edb8000)]
+  0x00007fadbd939800 JavaThread "Attach Listener" daemon [_thread_blocked, id=74499, stack(0x000070000f1ca000,0x000070000f2ca000)]
+  0x00007fadc02fe800 JavaThread "Prism Font Disposer" daemon [_thread_blocked, id=71967, stack(0x000070000f2cd000,0x000070000f3cd000)]
+  0x00007fadbf59a800 JavaThread "Cleaner-0" daemon [_thread_blocked, id=60171, stack(0x000070000f4d6000,0x000070000f5d6000)]
+
+Other Threads:
+  0x00007fadbe031000 VMThread "VM Thread" [stack: 0x000070000dd05000,0x000070000de05000] [id=18947]
+  0x00007fadc00e9800 WatcherThread [stack: 0x000070000e92c000,0x000070000ea2c000] [id=40707]
+  0x00007fadbe030000 Thread "vitals sampler thread" [stack: 0x000070000e829000,0x000070000e929000] [id=40963]
+  0x00007fadbd814800 GCTaskThread "GC Thread#0" [stack: 0x000070000d7f6000,0x000070000d8f6000] [id=11523]
+  0x00007fadbda11800 GCTaskThread "GC Thread#1" [stack: 0x000070000eec1000,0x000070000efc1000] [id=79111]
+  0x00007fadbda86000 GCTaskThread "GC Thread#2" [stack: 0x000070000efc4000,0x000070000f0c4000] [id=75011]
+  0x00007fadbda98000 GCTaskThread "GC Thread#3" [stack: 0x000070000f0c7000,0x000070000f1c7000] [id=54787]
+  0x00007fadbd835000 ConcurrentGCThread "G1 Main Marker" [stack: 0x000070000d8f9000,0x000070000d9f9000] [id=20483]
+  0x00007fadbd835800 ConcurrentGCThread "G1 Conc#0" [stack: 0x000070000d9fc000,0x000070000dafc000] [id=19971]
+  0x00007fadbf011800 ConcurrentGCThread "G1 Refine#0" [stack: 0x000070000daff000,0x000070000dbff000] [id=12547]
+  0x00007fadbd87f800 ConcurrentGCThread "G1 Young RemSet Sampling" [stack: 0x000070000dc02000,0x000070000dd02000] [id=19459]
+
+Threads with active compile tasks:
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000780000000, size: 2048 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0
+Compressed class space size: 1073741824 Address: 0x0000000800000000
+
+Heap:
+ garbage-first heap   total 131072K, used 25748K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 21 young (21504K), 4 survivors (4096K)
+ Metaspace       used 24985K, capacity 25933K, committed 26240K, reserved 1071104K
+  class space    used 3190K, capacity 3598K, committed 3712K, reserved 1048576K
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, A=archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x0000000780000000, 0x0000000780100000, 0x0000000780100000|100%| O|  |TAMS 0x0000000780100000, 0x0000000780000000| Untracked 
+|   1|0x0000000780100000, 0x0000000780200000, 0x0000000780200000|100%| O|  |TAMS 0x0000000780200000, 0x0000000780100000| Untracked 
+|   2|0x0000000780200000, 0x0000000780300000, 0x0000000780300000|100%| O|  |TAMS 0x0000000780300000, 0x0000000780200000| Untracked 
+|   3|0x0000000780300000, 0x0000000780325000, 0x0000000780400000| 14%| O|  |TAMS 0x0000000780325000, 0x0000000780300000| Untracked 
+|   4|0x0000000780400000, 0x0000000780500000, 0x0000000780500000|100%|HS|  |TAMS 0x0000000780400000, 0x0000000780400000| Complete 
+|   5|0x0000000780500000, 0x0000000780600000, 0x0000000780600000|100%|HC|  |TAMS 0x0000000780500000, 0x0000000780500000| Complete 
+|   6|0x0000000780600000, 0x0000000780600000, 0x0000000780700000|  0%| F|  |TAMS 0x0000000780600000, 0x0000000780600000| Untracked 
+|   7|0x0000000780700000, 0x0000000780700000, 0x0000000780800000|  0%| F|  |TAMS 0x0000000780700000, 0x0000000780700000| Untracked 
+|   8|0x0000000780800000, 0x0000000780800000, 0x0000000780900000|  0%| F|  |TAMS 0x0000000780800000, 0x0000000780800000| Untracked 
+|   9|0x0000000780900000, 0x0000000780900000, 0x0000000780a00000|  0%| F|  |TAMS 0x0000000780900000, 0x0000000780900000| Untracked 
+|  10|0x0000000780a00000, 0x0000000780a00000, 0x0000000780b00000|  0%| F|  |TAMS 0x0000000780a00000, 0x0000000780a00000| Untracked 
+|  11|0x0000000780b00000, 0x0000000780b00000, 0x0000000780c00000|  0%| F|  |TAMS 0x0000000780b00000, 0x0000000780b00000| Untracked 
+|  12|0x0000000780c00000, 0x0000000780c00000, 0x0000000780d00000|  0%| F|  |TAMS 0x0000000780c00000, 0x0000000780c00000| Untracked 
+|  13|0x0000000780d00000, 0x0000000780d00000, 0x0000000780e00000|  0%| F|  |TAMS 0x0000000780d00000, 0x0000000780d00000| Untracked 
+|  14|0x0000000780e00000, 0x0000000780e00000, 0x0000000780f00000|  0%| F|  |TAMS 0x0000000780e00000, 0x0000000780e00000| Untracked 
+|  15|0x0000000780f00000, 0x0000000780f00000, 0x0000000781000000|  0%| F|  |TAMS 0x0000000780f00000, 0x0000000780f00000| Untracked 
+|  16|0x0000000781000000, 0x0000000781000000, 0x0000000781100000|  0%| F|  |TAMS 0x0000000781000000, 0x0000000781000000| Untracked 
+|  17|0x0000000781100000, 0x0000000781100000, 0x0000000781200000|  0%| F|  |TAMS 0x0000000781100000, 0x0000000781100000| Untracked 
+|  18|0x0000000781200000, 0x0000000781200000, 0x0000000781300000|  0%| F|  |TAMS 0x0000000781200000, 0x0000000781200000| Untracked 
+|  19|0x0000000781300000, 0x0000000781300000, 0x0000000781400000|  0%| F|  |TAMS 0x0000000781300000, 0x0000000781300000| Untracked 
+|  20|0x0000000781400000, 0x0000000781400000, 0x0000000781500000|  0%| F|  |TAMS 0x0000000781400000, 0x0000000781400000| Untracked 
+|  21|0x0000000781500000, 0x0000000781500000, 0x0000000781600000|  0%| F|  |TAMS 0x0000000781500000, 0x0000000781500000| Untracked 
+|  22|0x0000000781600000, 0x0000000781600000, 0x0000000781700000|  0%| F|  |TAMS 0x0000000781600000, 0x0000000781600000| Untracked 
+|  23|0x0000000781700000, 0x0000000781700000, 0x0000000781800000|  0%| F|  |TAMS 0x0000000781700000, 0x0000000781700000| Untracked 
+|  24|0x0000000781800000, 0x0000000781800000, 0x0000000781900000|  0%| F|  |TAMS 0x0000000781800000, 0x0000000781800000| Untracked 
+|  25|0x0000000781900000, 0x0000000781900000, 0x0000000781a00000|  0%| F|  |TAMS 0x0000000781900000, 0x0000000781900000| Untracked 
+|  26|0x0000000781a00000, 0x0000000781a00000, 0x0000000781b00000|  0%| F|  |TAMS 0x0000000781a00000, 0x0000000781a00000| Untracked 
+|  27|0x0000000781b00000, 0x0000000781b00000, 0x0000000781c00000|  0%| F|  |TAMS 0x0000000781b00000, 0x0000000781b00000| Untracked 
+|  28|0x0000000781c00000, 0x0000000781c00000, 0x0000000781d00000|  0%| F|  |TAMS 0x0000000781c00000, 0x0000000781c00000| Untracked 
+|  29|0x0000000781d00000, 0x0000000781d00000, 0x0000000781e00000|  0%| F|  |TAMS 0x0000000781d00000, 0x0000000781d00000| Untracked 
+|  30|0x0000000781e00000, 0x0000000781e00000, 0x0000000781f00000|  0%| F|  |TAMS 0x0000000781e00000, 0x0000000781e00000| Untracked 
+|  31|0x0000000781f00000, 0x0000000781f00000, 0x0000000782000000|  0%| F|  |TAMS 0x0000000781f00000, 0x0000000781f00000| Untracked 
+|  32|0x0000000782000000, 0x0000000782000000, 0x0000000782100000|  0%| F|  |TAMS 0x0000000782000000, 0x0000000782000000| Untracked 
+|  33|0x0000000782100000, 0x0000000782100000, 0x0000000782200000|  0%| F|  |TAMS 0x0000000782100000, 0x0000000782100000| Untracked 
+|  34|0x0000000782200000, 0x0000000782200000, 0x0000000782300000|  0%| F|  |TAMS 0x0000000782200000, 0x0000000782200000| Untracked 
+|  35|0x0000000782300000, 0x0000000782300000, 0x0000000782400000|  0%| F|  |TAMS 0x0000000782300000, 0x0000000782300000| Untracked 
+|  36|0x0000000782400000, 0x0000000782400000, 0x0000000782500000|  0%| F|  |TAMS 0x0000000782400000, 0x0000000782400000| Untracked 
+|  37|0x0000000782500000, 0x0000000782500000, 0x0000000782600000|  0%| F|  |TAMS 0x0000000782500000, 0x0000000782500000| Untracked 
+|  38|0x0000000782600000, 0x0000000782600000, 0x0000000782700000|  0%| F|  |TAMS 0x0000000782600000, 0x0000000782600000| Untracked 
+|  39|0x0000000782700000, 0x0000000782700000, 0x0000000782800000|  0%| F|  |TAMS 0x0000000782700000, 0x0000000782700000| Untracked 
+|  40|0x0000000782800000, 0x0000000782800000, 0x0000000782900000|  0%| F|  |TAMS 0x0000000782800000, 0x0000000782800000| Untracked 
+|  41|0x0000000782900000, 0x0000000782900000, 0x0000000782a00000|  0%| F|  |TAMS 0x0000000782900000, 0x0000000782900000| Untracked 
+|  42|0x0000000782a00000, 0x0000000782a00000, 0x0000000782b00000|  0%| F|  |TAMS 0x0000000782a00000, 0x0000000782a00000| Untracked 
+|  43|0x0000000782b00000, 0x0000000782b00000, 0x0000000782c00000|  0%| F|  |TAMS 0x0000000782b00000, 0x0000000782b00000| Untracked 
+|  44|0x0000000782c00000, 0x0000000782c00000, 0x0000000782d00000|  0%| F|  |TAMS 0x0000000782c00000, 0x0000000782c00000| Untracked 
+|  45|0x0000000782d00000, 0x0000000782d00000, 0x0000000782e00000|  0%| F|  |TAMS 0x0000000782d00000, 0x0000000782d00000| Untracked 
+|  46|0x0000000782e00000, 0x0000000782e00000, 0x0000000782f00000|  0%| F|  |TAMS 0x0000000782e00000, 0x0000000782e00000| Untracked 
+|  47|0x0000000782f00000, 0x0000000782f00000, 0x0000000783000000|  0%| F|  |TAMS 0x0000000782f00000, 0x0000000782f00000| Untracked 
+|  48|0x0000000783000000, 0x0000000783000000, 0x0000000783100000|  0%| F|  |TAMS 0x0000000783000000, 0x0000000783000000| Untracked 
+|  49|0x0000000783100000, 0x0000000783100000, 0x0000000783200000|  0%| F|  |TAMS 0x0000000783100000, 0x0000000783100000| Untracked 
+|  50|0x0000000783200000, 0x0000000783200000, 0x0000000783300000|  0%| F|  |TAMS 0x0000000783200000, 0x0000000783200000| Untracked 
+|  51|0x0000000783300000, 0x0000000783300000, 0x0000000783400000|  0%| F|  |TAMS 0x0000000783300000, 0x0000000783300000| Untracked 
+|  52|0x0000000783400000, 0x0000000783400000, 0x0000000783500000|  0%| F|  |TAMS 0x0000000783400000, 0x0000000783400000| Untracked 
+|  53|0x0000000783500000, 0x0000000783500000, 0x0000000783600000|  0%| F|  |TAMS 0x0000000783500000, 0x0000000783500000| Untracked 
+|  54|0x0000000783600000, 0x0000000783600000, 0x0000000783700000|  0%| F|  |TAMS 0x0000000783600000, 0x0000000783600000| Untracked 
+|  55|0x0000000783700000, 0x0000000783700000, 0x0000000783800000|  0%| F|  |TAMS 0x0000000783700000, 0x0000000783700000| Untracked 
+|  56|0x0000000783800000, 0x0000000783800000, 0x0000000783900000|  0%| F|  |TAMS 0x0000000783800000, 0x0000000783800000| Untracked 
+|  57|0x0000000783900000, 0x0000000783900000, 0x0000000783a00000|  0%| F|  |TAMS 0x0000000783900000, 0x0000000783900000| Untracked 
+|  58|0x0000000783a00000, 0x0000000783a00000, 0x0000000783b00000|  0%| F|  |TAMS 0x0000000783a00000, 0x0000000783a00000| Untracked 
+|  59|0x0000000783b00000, 0x0000000783b00000, 0x0000000783c00000|  0%| F|  |TAMS 0x0000000783b00000, 0x0000000783b00000| Untracked 
+|  60|0x0000000783c00000, 0x0000000783c00000, 0x0000000783d00000|  0%| F|  |TAMS 0x0000000783c00000, 0x0000000783c00000| Untracked 
+|  61|0x0000000783d00000, 0x0000000783d00000, 0x0000000783e00000|  0%| F|  |TAMS 0x0000000783d00000, 0x0000000783d00000| Untracked 
+|  62|0x0000000783e00000, 0x0000000783e00000, 0x0000000783f00000|  0%| F|  |TAMS 0x0000000783e00000, 0x0000000783e00000| Untracked 
+|  63|0x0000000783f00000, 0x0000000783f00000, 0x0000000784000000|  0%| F|  |TAMS 0x0000000783f00000, 0x0000000783f00000| Untracked 
+|  64|0x0000000784000000, 0x0000000784000000, 0x0000000784100000|  0%| F|  |TAMS 0x0000000784000000, 0x0000000784000000| Untracked 
+|  65|0x0000000784100000, 0x0000000784100000, 0x0000000784200000|  0%| F|  |TAMS 0x0000000784100000, 0x0000000784100000| Untracked 
+|  66|0x0000000784200000, 0x0000000784200000, 0x0000000784300000|  0%| F|  |TAMS 0x0000000784200000, 0x0000000784200000| Untracked 
+|  67|0x0000000784300000, 0x0000000784300000, 0x0000000784400000|  0%| F|  |TAMS 0x0000000784300000, 0x0000000784300000| Untracked 
+|  68|0x0000000784400000, 0x0000000784400000, 0x0000000784500000|  0%| F|  |TAMS 0x0000000784400000, 0x0000000784400000| Untracked 
+|  69|0x0000000784500000, 0x0000000784500000, 0x0000000784600000|  0%| F|  |TAMS 0x0000000784500000, 0x0000000784500000| Untracked 
+|  70|0x0000000784600000, 0x0000000784600000, 0x0000000784700000|  0%| F|  |TAMS 0x0000000784600000, 0x0000000784600000| Untracked 
+|  71|0x0000000784700000, 0x0000000784700000, 0x0000000784800000|  0%| F|  |TAMS 0x0000000784700000, 0x0000000784700000| Untracked 
+|  72|0x0000000784800000, 0x0000000784800000, 0x0000000784900000|  0%| F|  |TAMS 0x0000000784800000, 0x0000000784800000| Untracked 
+|  73|0x0000000784900000, 0x0000000784900000, 0x0000000784a00000|  0%| F|  |TAMS 0x0000000784900000, 0x0000000784900000| Untracked 
+|  74|0x0000000784a00000, 0x0000000784a00000, 0x0000000784b00000|  0%| F|  |TAMS 0x0000000784a00000, 0x0000000784a00000| Untracked 
+|  75|0x0000000784b00000, 0x0000000784b00000, 0x0000000784c00000|  0%| F|  |TAMS 0x0000000784b00000, 0x0000000784b00000| Untracked 
+|  76|0x0000000784c00000, 0x0000000784c00000, 0x0000000784d00000|  0%| F|  |TAMS 0x0000000784c00000, 0x0000000784c00000| Untracked 
+|  77|0x0000000784d00000, 0x0000000784d00000, 0x0000000784e00000|  0%| F|  |TAMS 0x0000000784d00000, 0x0000000784d00000| Untracked 
+|  78|0x0000000784e00000, 0x0000000784e00000, 0x0000000784f00000|  0%| F|  |TAMS 0x0000000784e00000, 0x0000000784e00000| Untracked 
+|  79|0x0000000784f00000, 0x0000000784f00000, 0x0000000785000000|  0%| F|  |TAMS 0x0000000784f00000, 0x0000000784f00000| Untracked 
+|  80|0x0000000785000000, 0x0000000785000000, 0x0000000785100000|  0%| F|  |TAMS 0x0000000785000000, 0x0000000785000000| Untracked 
+|  81|0x0000000785100000, 0x0000000785100000, 0x0000000785200000|  0%| F|  |TAMS 0x0000000785100000, 0x0000000785100000| Untracked 
+|  82|0x0000000785200000, 0x0000000785200000, 0x0000000785300000|  0%| F|  |TAMS 0x0000000785200000, 0x0000000785200000| Untracked 
+|  83|0x0000000785300000, 0x0000000785300000, 0x0000000785400000|  0%| F|  |TAMS 0x0000000785300000, 0x0000000785300000| Untracked 
+|  84|0x0000000785400000, 0x0000000785400000, 0x0000000785500000|  0%| F|  |TAMS 0x0000000785400000, 0x0000000785400000| Untracked 
+|  85|0x0000000785500000, 0x0000000785500000, 0x0000000785600000|  0%| F|  |TAMS 0x0000000785500000, 0x0000000785500000| Untracked 
+|  86|0x0000000785600000, 0x0000000785600000, 0x0000000785700000|  0%| F|  |TAMS 0x0000000785600000, 0x0000000785600000| Untracked 
+|  87|0x0000000785700000, 0x0000000785700000, 0x0000000785800000|  0%| F|  |TAMS 0x0000000785700000, 0x0000000785700000| Untracked 
+|  88|0x0000000785800000, 0x0000000785800000, 0x0000000785900000|  0%| F|  |TAMS 0x0000000785800000, 0x0000000785800000| Untracked 
+|  89|0x0000000785900000, 0x0000000785900000, 0x0000000785a00000|  0%| F|  |TAMS 0x0000000785900000, 0x0000000785900000| Untracked 
+|  90|0x0000000785a00000, 0x0000000785a00000, 0x0000000785b00000|  0%| F|  |TAMS 0x0000000785a00000, 0x0000000785a00000| Untracked 
+|  91|0x0000000785b00000, 0x0000000785b00000, 0x0000000785c00000|  0%| F|  |TAMS 0x0000000785b00000, 0x0000000785b00000| Untracked 
+|  92|0x0000000785c00000, 0x0000000785c00000, 0x0000000785d00000|  0%| F|  |TAMS 0x0000000785c00000, 0x0000000785c00000| Untracked 
+|  93|0x0000000785d00000, 0x0000000785d00000, 0x0000000785e00000|  0%| F|  |TAMS 0x0000000785d00000, 0x0000000785d00000| Untracked 
+|  94|0x0000000785e00000, 0x0000000785e00000, 0x0000000785f00000|  0%| F|  |TAMS 0x0000000785e00000, 0x0000000785e00000| Untracked 
+|  95|0x0000000785f00000, 0x0000000785f00000, 0x0000000786000000|  0%| F|  |TAMS 0x0000000785f00000, 0x0000000785f00000| Untracked 
+|  96|0x0000000786000000, 0x0000000786000000, 0x0000000786100000|  0%| F|  |TAMS 0x0000000786000000, 0x0000000786000000| Untracked 
+|  97|0x0000000786100000, 0x0000000786100000, 0x0000000786200000|  0%| F|  |TAMS 0x0000000786100000, 0x0000000786100000| Untracked 
+|  98|0x0000000786200000, 0x0000000786200000, 0x0000000786300000|  0%| F|  |TAMS 0x0000000786200000, 0x0000000786200000| Untracked 
+|  99|0x0000000786300000, 0x0000000786300000, 0x0000000786400000|  0%| F|  |TAMS 0x0000000786300000, 0x0000000786300000| Untracked 
+| 100|0x0000000786400000, 0x0000000786500000, 0x0000000786500000|100%| S|CS|TAMS 0x0000000786400000, 0x0000000786400000| Complete 
+| 101|0x0000000786500000, 0x0000000786600000, 0x0000000786600000|100%| S|CS|TAMS 0x0000000786500000, 0x0000000786500000| Complete 
+| 102|0x0000000786600000, 0x0000000786700000, 0x0000000786700000|100%| S|CS|TAMS 0x0000000786600000, 0x0000000786600000| Complete 
+| 103|0x0000000786700000, 0x0000000786800000, 0x0000000786800000|100%| S|CS|TAMS 0x0000000786700000, 0x0000000786700000| Complete 
+| 104|0x0000000786800000, 0x0000000786800000, 0x0000000786900000|  0%| F|  |TAMS 0x0000000786800000, 0x0000000786800000| Untracked 
+| 105|0x0000000786900000, 0x0000000786900000, 0x0000000786a00000|  0%| F|  |TAMS 0x0000000786900000, 0x0000000786900000| Untracked 
+| 106|0x0000000786a00000, 0x0000000786a00000, 0x0000000786b00000|  0%| F|  |TAMS 0x0000000786a00000, 0x0000000786a00000| Untracked 
+| 107|0x0000000786b00000, 0x0000000786b00000, 0x0000000786c00000|  0%| F|  |TAMS 0x0000000786b00000, 0x0000000786b00000| Untracked 
+| 108|0x0000000786c00000, 0x0000000786c00000, 0x0000000786d00000|  0%| F|  |TAMS 0x0000000786c00000, 0x0000000786c00000| Untracked 
+| 109|0x0000000786d00000, 0x0000000786d00000, 0x0000000786e00000|  0%| F|  |TAMS 0x0000000786d00000, 0x0000000786d00000| Untracked 
+| 110|0x0000000786e00000, 0x0000000786e00000, 0x0000000786f00000|  0%| F|  |TAMS 0x0000000786e00000, 0x0000000786e00000| Untracked 
+| 111|0x0000000786f00000, 0x0000000787000000, 0x0000000787000000|100%| E|  |TAMS 0x0000000786f00000, 0x0000000786f00000| Complete 
+| 112|0x0000000787000000, 0x0000000787100000, 0x0000000787100000|100%| E|CS|TAMS 0x0000000787000000, 0x0000000787000000| Complete 
+| 113|0x0000000787100000, 0x0000000787200000, 0x0000000787200000|100%| E|CS|TAMS 0x0000000787100000, 0x0000000787100000| Complete 
+| 114|0x0000000787200000, 0x0000000787300000, 0x0000000787300000|100%| E|CS|TAMS 0x0000000787200000, 0x0000000787200000| Complete 
+| 115|0x0000000787300000, 0x0000000787400000, 0x0000000787400000|100%| E|CS|TAMS 0x0000000787300000, 0x0000000787300000| Complete 
+| 116|0x0000000787400000, 0x0000000787500000, 0x0000000787500000|100%| E|CS|TAMS 0x0000000787400000, 0x0000000787400000| Complete 
+| 117|0x0000000787500000, 0x0000000787600000, 0x0000000787600000|100%| E|CS|TAMS 0x0000000787500000, 0x0000000787500000| Complete 
+| 118|0x0000000787600000, 0x0000000787700000, 0x0000000787700000|100%| E|CS|TAMS 0x0000000787600000, 0x0000000787600000| Complete 
+| 119|0x0000000787700000, 0x0000000787800000, 0x0000000787800000|100%| E|CS|TAMS 0x0000000787700000, 0x0000000787700000| Complete 
+| 120|0x0000000787800000, 0x0000000787900000, 0x0000000787900000|100%| E|CS|TAMS 0x0000000787800000, 0x0000000787800000| Complete 
+| 121|0x0000000787900000, 0x0000000787a00000, 0x0000000787a00000|100%| E|CS|TAMS 0x0000000787900000, 0x0000000787900000| Complete 
+| 122|0x0000000787a00000, 0x0000000787b00000, 0x0000000787b00000|100%| E|CS|TAMS 0x0000000787a00000, 0x0000000787a00000| Complete 
+| 123|0x0000000787b00000, 0x0000000787c00000, 0x0000000787c00000|100%| E|CS|TAMS 0x0000000787b00000, 0x0000000787b00000| Complete 
+| 124|0x0000000787c00000, 0x0000000787d00000, 0x0000000787d00000|100%| E|CS|TAMS 0x0000000787c00000, 0x0000000787c00000| Complete 
+| 125|0x0000000787d00000, 0x0000000787e00000, 0x0000000787e00000|100%| E|CS|TAMS 0x0000000787d00000, 0x0000000787d00000| Complete 
+| 126|0x0000000787e00000, 0x0000000787f00000, 0x0000000787f00000|100%| E|CS|TAMS 0x0000000787e00000, 0x0000000787e00000| Complete 
+| 127|0x0000000787f00000, 0x0000000788000000, 0x0000000788000000|100%| E|CS|TAMS 0x0000000787f00000, 0x0000000787f00000| Complete 
+
+Card table byte_map: [0x000000010f922000,0x000000010fd22000] _byte_map_base: 0x000000010bd22000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x00007fadbd82c450, (CMBitMap*) 0x00007fadbd82c418
+ Prev Bits: [0x000000012aab8000, 0x000000012cab8000)
+ Next Bits: [0x0000000128ab8000, 0x000000012aab8000)
+
+Polling page: 0x000000010f24c000
+
+Metaspace:
+
+Usage:
+  Non-class:     21.81 MB capacity,    21.29 MB ( 98%) used,   427.68 KB (  2%) free+waste,   110.62 KB ( <1%) overhead. 
+      Class:      3.51 MB capacity,     3.12 MB ( 89%) used,   350.79 KB ( 10%) free+waste,    56.94 KB (  2%) overhead. 
+       Both:     25.33 MB capacity,    24.40 MB ( 96%) used,   778.47 KB (  3%) free+waste,   167.56 KB ( <1%) overhead. 
+
+Virtual space:
+  Non-class space:       22.00 MB reserved,      22.00 MB (100%) committed 
+      Class space:        1.00 GB reserved,       3.62 MB ( <1%) committed 
+             Both:        1.02 GB reserved,      25.62 MB (  2%) committed 
+
+Chunk freelists:
+   Non-Class:  57.00 KB
+       Class:  18.00 KB
+        Both:  75.00 KB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 20.80 MB
+Current GC threshold: 35.00 MB
+CDS: off
+
+CodeHeap 'non-profiled nmethods': size=120032Kb used=830Kb max_used=830Kb free=119201Kb
+ bounds [0x0000000121180000, 0x00000001213f0000, 0x00000001286b8000]
+CodeHeap 'profiled nmethods': size=120032Kb used=3966Kb max_used=3966Kb free=116065Kb
+ bounds [0x0000000119c48000, 0x000000011a028000, 0x0000000121180000]
+CodeHeap 'non-nmethods': size=5696Kb used=1426Kb max_used=1450Kb free=4269Kb
+ bounds [0x00000001196b8000, 0x0000000119928000, 0x0000000119c48000]
+ total_blobs=3016 nmethods=2258 adapters=671
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (75 events):
+Event: 7.108 Thread 0x00007fadbd8d8800 2225       3       javafx.scene.Node::localToScene (46 bytes)
+Event: 7.109 Thread 0x00007fadbd8d8800 nmethod 2225 0x000000011a011e90 code [0x000000011a0121a0, 0x000000011a013930]
+Event: 7.109 Thread 0x00007fadbd8d8800 2223       3       javafx.scene.Scene$ClickCounter::access$7000 (7 bytes)
+Event: 7.109 Thread 0x00007fadbd8d8800 nmethod 2223 0x000000011a013f10 code [0x000000011a0140c0, 0x000000011a0141c0]
+Event: 7.109 Thread 0x00007fadbd8d8800 2224       3       com.sun.glass.ui.mac.MacApplication::staticView_getMultiClickMaxX (4 bytes)
+Event: 7.109 Thread 0x00007fadbd8d8800 nmethod 2224 0x000000011a014290 code [0x000000011a014440, 0x000000011a014590]
+Event: 7.120 Thread 0x00007fadbd8d8800 2227       3       com.sun.javafx.event.CompositeEventDispatcher::dispatchCapturingEvent (35 bytes)
+Event: 7.120 Thread 0x00007fadbd8d8800 nmethod 2227 0x000000011a014690 code [0x000000011a014880, 0x000000011a014cd0]
+Event: 7.120 Thread 0x00007fadbd8d8800 2226       3       com.sun.javafx.event.BasicEventDispatcher::dispatchEvent (44 bytes)
+Event: 7.120 Thread 0x00007fadbd8d8800 nmethod 2226 0x000000011a014e10 code [0x000000011a015000, 0x000000011a015560]
+Event: 7.143 Thread 0x00007fadbd8d8800 2228       3       javafx.scene.Parent::pickChildrenNode (53 bytes)
+Event: 7.144 Thread 0x00007fadbd8d8800 nmethod 2228 0x000000011a015710 code [0x000000011a015920, 0x000000011a015fd0]
+Event: 7.144 Thread 0x00007fadbd8d8800 2230       3       com.sun.glass.ui.Application::GetApplication (4 bytes)
+Event: 7.144 Thread 0x00007fadbd8d8800 nmethod 2230 0x000000011a016210 code [0x000000011a0163c0, 0x000000011a0164b0]
+Event: 7.144 Thread 0x00007fadbd8d8800 2229       3       com.sun.prism.GraphicsPipeline::getPipeline (4 bytes)
+Event: 7.144 Thread 0x00007fadbd8d8800 nmethod 2229 0x000000011a016510 code [0x000000011a0166c0, 0x000000011a0167b0]
+Event: 7.150 Thread 0x00007fadbd8d8800 2231       3       com.sun.javafx.geom.Vec3d::<init> (5 bytes)
+Event: 7.150 Thread 0x00007fadbd8d8800 nmethod 2231 0x000000011a016810 code [0x000000011a0169c0, 0x000000011a016b10]
+Event: 7.172 Thread 0x00007fadbd8d8800 2232       3       com.sun.javafx.geom.transform.Identity::inverseTransform (20 bytes)
+Event: 7.172 Thread 0x00007fadbd8d8800 nmethod 2232 0x000000011a016c10 code [0x000000011a016de0, 0x000000011a017170]
+Event: 7.172 Thread 0x00007fadbd8d8800 2233       3       javafx.scene.Node::sceneToLocal (21 bytes)
+Event: 7.173 Thread 0x00007fadbd8d8800 nmethod 2233 0x000000011a017310 code [0x000000011a0175e0, 0x000000011a018ae0]
+Event: 7.173 Thread 0x00007fadbd8d8800 2234       3       javafx.scene.Node::parentToLocal (15 bytes)
+Event: 7.174 Thread 0x00007fadbd8d8800 nmethod 2234 0x000000011a018f10 code [0x000000011a0190e0, 0x000000011a019370]
+Event: 7.176 Thread 0x00007fadbd8d8800 2235       3       java.lang.invoke.VarHandleGuards::guard_LLL_Z (70 bytes)
+Event: 7.177 Thread 0x00007fadbd8d8800 nmethod 2235 0x000000011a019490 code [0x000000011a019740, 0x000000011a01a800]
+Event: 7.177 Thread 0x00007fadbd8d8800 2236       3       java.lang.invoke.VarHandleObjects$FieldInstanceReadWrite::compareAndSet (38 bytes)
+Event: 7.178 Thread 0x00007fadbd8d8800 nmethod 2236 0x000000011a01ad90 code [0x000000011a01b000, 0x000000011a01b9a0]
+Event: 7.195 Thread 0x00007fadbd8d8800 2240       3       java.lang.Math::min (46 bytes)
+Event: 7.195 Thread 0x00007fadbd8d8800 nmethod 2240 0x000000011a01bd10 code [0x000000011a01bec0, 0x000000011a01c1b0]
+Event: 7.195 Thread 0x00007fadbd8d8800 2238       1       com.sun.javafx.geom.PickRay::getNearClip (5 bytes)
+Event: 7.195 Thread 0x00007fadbd8d8800 nmethod 2238 0x000000012124c990 code [0x000000012124cb40, 0x000000012124cbf0]
+Event: 7.195 Thread 0x00007fadbd8d8800 2239       1       com.sun.javafx.geom.PickRay::getFarClip (5 bytes)
+Event: 7.195 Thread 0x00007fadbd8d8800 nmethod 2239 0x000000012124cc90 code [0x000000012124ce40, 0x000000012124cef0]
+Event: 7.210 Thread 0x00007fadbd8d8800 2241       3       com.sun.prism.es2.ES2Pipeline::is3DSupported (4 bytes)
+Event: 7.210 Thread 0x00007fadbd8d8800 nmethod 2241 0x000000011a01c210 code [0x000000011a01c3c0, 0x000000011a01c4b0]
+Event: 7.263 Thread 0x00007fadbd8d8800 2242       3       com.sun.javafx.event.EventHandlerManager::dispatchCapturingEvent (23 bytes)
+Event: 7.264 Thread 0x00007fadbd8d8800 nmethod 2242 0x000000011a01c590 code [0x000000011a01c7c0, 0x000000011a01d080]
+Event: 7.268 Thread 0x00007fadbd8d8800 2243   !   3       java.util.concurrent.locks.AbstractQueuedSynchronizer::acquireQueued (74 bytes)
+Event: 7.270 Thread 0x00007fadbd8d8800 nmethod 2243 0x000000011a01d390 code [0x000000011a01d640, 0x000000011a01e320]
+Event: 7.272 Thread 0x00007fadbe02f000 2244       4       com.sun.javafx.geom.RectBounds::getBoundsType (4 bytes)
+Event: 7.272 Thread 0x00007fadbd8d8800 2245       1       com.sun.javafx.stage.WindowEventDispatcher::getFirstDispatcher (5 bytes)
+Event: 7.272 Thread 0x00007fadbd8d8800 nmethod 2245 0x000000012124cf90 code [0x000000012124d140, 0x000000012124d1f0]
+Event: 7.272 Thread 0x00007fadbe02f000 nmethod 2244 0x000000012124d290 code [0x000000012124d420, 0x000000012124d498]
+Event: 7.292 Thread 0x00007fadbd8d8800 2246       1       com.sun.javafx.scene.SceneEventDispatcher::getFirstDispatcher (5 bytes)
+Event: 7.293 Thread 0x00007fadbd8d8800 nmethod 2246 0x000000012124d590 code [0x000000012124d740, 0x000000012124d7f0]
+Event: 7.322 Thread 0x00007fadbd8d8800 2247       3       jdk.internal.misc.Unsafe::getAndSetInt (24 bytes)
+Event: 7.323 Thread 0x00007fadbd8d8800 nmethod 2247 0x000000011a01e890 code [0x000000011a01ea40, 0x000000011a01ec70]
+Event: 7.344 Thread 0x00007fadbd8d8800 2248       3       com.sun.glass.ui.View::getWindow (8 bytes)
+Event: 7.345 Thread 0x00007fadbd8d8800 nmethod 2248 0x000000011a01ed90 code [0x000000011a01ef80, 0x000000011a01f2d0]
+Event: 7.345 Thread 0x00007fadbd8d8800 2249       1       javafx.scene.Camera::getViewHeight (5 bytes)
+Event: 7.345 Thread 0x00007fadbd8d8800 nmethod 2249 0x000000012124d890 code [0x000000012124da40, 0x000000012124daf0]
+Event: 7.495 Thread 0x00007fadbe02f000 2251       4       java.util.WeakHashMap$HashIterator::hasNext (95 bytes)
+Event: 7.496 Thread 0x00007fadbd8d8800 2252       3       java.util.concurrent.locks.AbstractQueuedSynchronizer$Node::setPrevRelaxed (9 bytes)
+Event: 7.497 Thread 0x00007fadbd8d8800 nmethod 2252 0x000000011a01f490 code [0x000000011a01f6e0, 0x000000011a01ff10]
+Event: 7.497 Thread 0x00007fadbd8d8800 2253       3       java.util.concurrent.locks.AbstractQueuedSynchronizer::compareAndSetTail (10 bytes)
+Event: 7.499 Thread 0x00007fadbd8d8800 nmethod 2253 0x000000011a020210 code [0x000000011a0204a0, 0x000000011a021030]
+Event: 7.499 Thread 0x00007fadbd8d8800 2256       3       com.sun.javafx.geom.Path2D::needRoom (94 bytes)
+Event: 7.499 Thread 0x00007fadbd8d8800 nmethod 2256 0x000000011a021410 code [0x000000011a021620, 0x000000011a021bc0]
+Event: 7.499 Thread 0x00007fadbd8d8800 2261       3       com.sun.javafx.geom.transform.Affine3D::updateState (96 bytes)
+Event: 7.500 Thread 0x00007fadbd8d8800 nmethod 2261 0x000000011a021d90 code [0x000000011a022060, 0x000000011a022be0]
+Event: 7.500 Thread 0x00007fadbd8d8800 2262       3       com.sun.javafx.geom.transform.Affine3D::almostOne (22 bytes)
+Event: 7.500 Thread 0x00007fadbd8d8800 nmethod 2262 0x000000011a022d90 code [0x000000011a022f60, 0x000000011a023130]
+Event: 7.500 Thread 0x00007fadbd8d8800 2254       3       javafx.geometry.Point2D::<init> (20 bytes)
+Event: 7.500 Thread 0x00007fadbd8d8800 nmethod 2254 0x000000011a023210 code [0x000000011a0233c0, 0x000000011a023530]
+Event: 7.500 Thread 0x00007fadbd8d8800 2255       3       javafx.scene.input.MouseEvent::copyFor (18 bytes)
+Event: 7.501 Thread 0x00007fadbd8d8800 nmethod 2255 0x000000011a023610 code [0x000000011a023800, 0x000000011a023bd0]
+Event: 7.501 Thread 0x00007fadbd8d8800 2257       1       javafx.scene.Scene::isDepthBuffer (5 bytes)
+Event: 7.501 Thread 0x00007fadbd8d8800 nmethod 2257 0x000000012124df90 code [0x000000012124e140, 0x000000012124e1f0]
+Event: 7.501 Thread 0x00007fadbd8d8800 2258       1       javafx.scene.Scene$TargetWrapper::getResult (5 bytes)
+Event: 7.501 Thread 0x00007fadbd8d8800 nmethod 2258 0x000000012124e290 code [0x000000012124e440, 0x000000012124e4f0]
+Event: 7.501 Thread 0x00007fadbd8d8800 2259       1       javafx.scene.input.MouseEvent::getClickCount (5 bytes)
+Event: 7.501 Thread 0x00007fadbd8d8800 nmethod 2259 0x000000012124e590 code [0x000000012124e740, 0x000000012124e7f0]
+Event: 7.501 Thread 0x00007fadbd8d8800 2260       1       javafx.scene.input.MouseEvent::isStillSincePress (5 bytes)
+Event: 7.501 Thread 0x00007fadbd8d8800 nmethod 2260 0x000000012124e890 code [0x000000012124ea40, 0x000000012124eaf0]
+
+GC Heap History (6 events):
+Event: 0.928 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total 131072K, used 13312K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 14 young (14336K), 0 survivors (0K)
+ Metaspace       used 10299K, capacity 10642K, committed 10880K, reserved 1058816K
+  class space    used 1025K, capacity 1152K, committed 1152K, reserved 1048576K
+}
+Event: 0.932 GC heap after
+{Heap after GC invocations=1 (full 0):
+ garbage-first heap   total 131072K, used 3061K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 2 young (2048K), 2 survivors (2048K)
+ Metaspace       used 10299K, capacity 10642K, committed 10880K, reserved 1058816K
+  class space    used 1025K, capacity 1152K, committed 1152K, reserved 1048576K
+}
+Event: 1.051 GC heap before
+{Heap before GC invocations=1 (full 0):
+ garbage-first heap   total 131072K, used 8181K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 7 young (7168K), 2 survivors (2048K)
+ Metaspace       used 12300K, capacity 12639K, committed 13056K, reserved 1060864K
+  class space    used 1311K, capacity 1456K, committed 1536K, reserved 1048576K
+}
+Event: 1.063 GC heap after
+{Heap after GC invocations=2 (full 0):
+ garbage-first heap   total 131072K, used 3450K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 1 young (1024K), 1 survivors (1024K)
+ Metaspace       used 12300K, capacity 12639K, committed 13056K, reserved 1060864K
+  class space    used 1311K, capacity 1456K, committed 1536K, reserved 1048576K
+}
+Event: 1.787 GC heap before
+{Heap before GC invocations=2 (full 0):
+ garbage-first heap   total 131072K, used 24954K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 24 young (24576K), 1 survivors (1024K)
+ Metaspace       used 20635K, capacity 21190K, committed 21248K, reserved 1067008K
+  class space    used 2509K, capacity 2772K, committed 2816K, reserved 1048576K
+}
+Event: 1.797 GC heap after
+{Heap after GC invocations=3 (full 0):
+ garbage-first heap   total 131072K, used 7316K [0x0000000780000000, 0x0000000800000000)
+  region size 1024K, 4 young (4096K), 4 survivors (4096K)
+ Metaspace       used 20635K, capacity 21190K, committed 21248K, reserved 1067008K
+  class space    used 2509K, capacity 2772K, committed 2816K, reserved 1048576K
+}
+
+Deoptimization events (75 events):
+Event: 1.319 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000012118ce94 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 162 c2
+Event: 1.319 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x000000012118ce94 sp=0x00007ff7b0dd2180
+Event: 1.319 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd2120 mode 2
+Event: 1.504 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211b9564 relative=0x0000000000000044
+Event: 1.504 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211b9564 method=java.lang.CharacterData.of(I)Ljava/lang/CharacterData; @ 4 c2
+Event: 1.504 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211b9564 sp=0x00007ff7b0dd43d0
+Event: 1.504 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd4388 mode 2
+Event: 1.505 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211895f8 relative=0x0000000000000058
+Event: 1.505 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211895f8 method=java.lang.String.isLatin1()Z @ 10 c2
+Event: 1.505 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211895f8 sp=0x00007ff7b0dd3bd0
+Event: 1.505 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd3b80 mode 2
+Event: 1.507 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x000000012118a39c relative=0x00000000000001fc
+Event: 1.507 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000012118a39c method=java.lang.String.isLatin1()Z @ 10 c2
+Event: 1.507 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x000000012118a39c sp=0x00007ff7b0dd4490
+Event: 1.507 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd43d8 mode 2
+Event: 1.507 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x0000000121194648 relative=0x00000000000001a8
+Event: 1.507 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000121194648 method=java.lang.String.isLatin1()Z @ 10 c2
+Event: 1.507 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x0000000121194648 sp=0x00007ff7b0dd43d0
+Event: 1.507 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd4328 mode 2
+Event: 1.541 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x00000001211e107c relative=0x000000000000059c
+Event: 1.541 Thread 0x00007fadbd9f6000 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x00000001211e107c method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126 c2
+Event: 1.541 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211e107c sp=0x00007ff7b0dd1db0
+Event: 1.541 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd1ce8 mode 2
+Event: 1.541 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x00000001211e107c relative=0x000000000000059c
+Event: 1.541 Thread 0x00007fadbd9f6000 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x00000001211e107c method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126 c2
+Event: 1.541 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211e107c sp=0x00007ff7b0dd1d30
+Event: 1.541 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd1c68 mode 2
+Event: 1.542 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x00000001211e107c relative=0x000000000000059c
+Event: 1.542 Thread 0x00007fadbd9f6000 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x00000001211e107c method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126 c2
+Event: 1.542 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211e107c sp=0x00007ff7b0dd1da0
+Event: 1.542 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd1cd8 mode 2
+Event: 1.542 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x00000001211e107c relative=0x000000000000059c
+Event: 1.542 Thread 0x00007fadbd9f6000 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x00000001211e107c method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126 c2
+Event: 1.542 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211e107c sp=0x00007ff7b0dd1db0
+Event: 1.542 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd1ce8 mode 2
+Event: 1.542 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x00000001211d9888 relative=0x0000000000000428
+Event: 1.542 Thread 0x00007fadbd9f6000 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x00000001211d9888 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126 c2
+Event: 1.542 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211d9888 sp=0x00007ff7b0dd1d30
+Event: 1.542 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd1ce0 mode 2
+Event: 1.548 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211b886c relative=0x00000000000001cc
+Event: 1.548 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211b886c method=java.lang.String.startsWith(Ljava/lang/String;I)Z @ 1 c2
+Event: 1.548 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211b886c sp=0x00007ff7b0dd4720
+Event: 1.548 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd46b0 mode 2
+Event: 1.626 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211e6674 relative=0x0000000000000514
+Event: 1.626 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211e6674 method=java.util.HashMap.hash(Ljava/lang/Object;)I @ 1 c2
+Event: 1.626 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211e6674 sp=0x00007ff7b0dd43a0
+Event: 1.626 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd4308 mode 2
+Event: 1.636 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211be2e4 relative=0x00000000000000c4
+Event: 1.636 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211be2e4 method=sun.net.www.ParseUtil.firstEncodeIndex(Ljava/lang/String;)I @ 51 c2
+Event: 1.636 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211be2e4 sp=0x00007ff7b0dd3250
+Event: 1.636 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd31f8 mode 2
+Event: 1.652 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffffcc fr.pc=0x00000001211e8d6c relative=0x00000000000001ac
+Event: 1.652 Thread 0x00007fadbd9f6000 Uncommon trap: reason=intrinsic_or_type_checked_inlining action=make_not_entrant pc=0x00000001211e8d6c method=java.util.Arrays.copyOf([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object; @ 35 c2
+Event: 1.652 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211e8d6c sp=0x00007ff7b0dd32b0
+Event: 1.652 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd3258 mode 2
+Event: 1.676 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211a0954 relative=0x0000000000000034
+Event: 1.676 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211a0954 method=java.lang.StringLatin1.canEncode(I)Z @ 4 c2
+Event: 1.676 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211a0954 sp=0x00007ff7b0dd32d0
+Event: 1.676 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd3280 mode 2
+Event: 1.919 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211eda1c relative=0x0000000000000e5c
+Event: 1.919 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211eda1c method=java.util.HashMap.hash(Ljava/lang/Object;)I @ 1 c2
+Event: 1.919 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211eda1c sp=0x00007ff7b0dd3030
+Event: 1.919 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd2fe0 mode 2
+Event: 2.242 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211ca808 relative=0x00000000000003c8
+Event: 2.242 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211ca808 method=jdk.internal.org.objectweb.asm.Type.getArgumentsAndReturnSizes(Ljava/lang/String;)I @ 47 c2
+Event: 2.242 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211ca808 sp=0x00007ff7b0dd4400
+Event: 2.242 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd43a0 mode 2
+Event: 2.242 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x00000001211d61c8 relative=0x00000000000034c8
+Event: 2.242 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000001211d61c8 method=jdk.internal.org.objectweb.asm.Frame.push(Ljdk/internal/org/objectweb/asm/ClassWriter;Ljava/lang/String;)V @ 18 c2
+Event: 2.242 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x00000001211d61c8 sp=0x00007ff7b0dd4410
+Event: 2.242 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd4330 mode 2
+Event: 3.030 Thread 0x00007fadbd9f6000 Uncommon trap: trap_request=0xffffff4d fr.pc=0x0000000121216530 relative=0x0000000000003e90
+Event: 3.030 Thread 0x00007fadbd9f6000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000121216530 method=java.net.URL.<init>(Ljava/net/URL;Ljava/lang/String;Ljava/net/URLStreamHandler;)V @ 347 c2
+Event: 3.030 Thread 0x00007fadbd9f6000 DEOPT PACKING pc=0x0000000121216530 sp=0x00007ff7b0dd3800
+Event: 3.030 Thread 0x00007fadbd9f6000 DEOPT UNPACKING pc=0x0000000119701ea5 sp=0x00007ff7b0dd37c0 mode 2
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (37 events):
+Event: 0.329 Thread 0x00007fadbf013800 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787bd9500}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x0000000787bd9500) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 0.334 Thread 0x00007fadbf013800 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787bf4e50}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int)'> (0x0000000787bf4e50) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 0.338 Thread 0x00007fadbf013800 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787a10868}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int, java.lang.Object)'> (0x0000000787a10868) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 0.682 Thread 0x00007fadbf013800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007877e4240}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000007877e4240) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 0.686 Thread 0x00007fadbf013800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007877efb68}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object)'> (0x00000007877efb68) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 0.833 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007873265a8}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object)'> (0x00000007873265a8) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 0.999 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787c13d38}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787c13d38) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.001 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NullPointerException'{0x0000000787c204c8}> (0x0000000787c204c8) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 1358]
+Event: 1.001 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NullPointerException'{0x0000000787c204c8}> (0x0000000787c204c8) thrown at [src/hotspot/share/prims/jvm.cpp, line 1335]
+Event: 1.004 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787c373b0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787c373b0) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.073 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787f59090}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787f59090) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.074 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787f66e88}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787f66e88) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, lin
+Event: 1.075 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787f74af8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, int, int, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787f74af8) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.075 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787f78088}: 'java.lang.Object java.lang.invoke.DelegatingMethodHandle$Holder.reinvoke_L(java.lang.Object, int, int, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787f78088) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.076 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787f7c188}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x0000000787f7c188) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.187 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007879dd620}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x00000007879dd620) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.188 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007879e9818}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int)'> (0x00000007879e9818) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.189 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787802a00}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int, java.lang.Object)'> (0x0000000787802a00) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.215 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/ClassNotFoundException'{0x0000000787880ec8}: sun/util/logging/resources/spi/loggingProvider> (0x0000000787880ec8) thrown at [src/hotspot/share/classfile/systemDictionary.cpp, line 231]
+Event: 1.241 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007877ec308}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x00000007877ec308) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.241 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007877f62b0}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, int, java.lang.Object, java.lang.Object)'> (0x00000007877f62b0) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.256 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x000000078768a958}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x000000078768a958) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.257 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007876a8df0}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int)'> (0x00000007876a8df0) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.259 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007876c7e28}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int, java.lang.Object)'> (0x00000007876c7e28) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.261 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007876e84e8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, int, java.lang.Object, java.lang.Object)'> (0x00000007876e84e8) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.334 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x000000078727bd10}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object)'> (0x000000078727bd10) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.513 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787175888}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, int, java.lang.Object)'> (0x0000000787175888) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.576 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000786f233b0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000786f233b0) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.626 Thread 0x00007fadbd9f6000 Implicit null exception at 0x00000001211e6195 to 0x00000001211e6660
+Event: 1.782 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007868549d8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeInterface(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000007868549d8) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.782 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/IncompatibleClassChangeError'{0x0000000786857b90}: Found class java.lang.Object, but interface was expected> (0x0000000786857b90) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 839]
+Event: 1.840 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787eaaa60}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecialIFC(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787eaaa60) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 1.919 Thread 0x00007fadbd9f6000 Implicit null exception at 0x00000001211ecbfe to 0x00000001211eda04
+Event: 2.242 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787448640}: 'long java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000787448640) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 2.243 Thread 0x00007fadbe16d800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007874de170}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object)'> (0x00000007874de170) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 2.247 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787460c88}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, long)'> (0x0000000787460c88) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+Event: 2.247 Thread 0x00007fadbd9f6000 Exception <a 'java/lang/NoSuchMethodError'{0x0000000787466e00}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, long, java.lang.Object)'> (0x0000000787466e00) thrown at [src/hotspot/share/interpreter/linkResolver.cpp, line 773]
+
+Events (75 events):
+Event: 2.410 loading class javafx/scene/image/PixelFormat$ByteRgb
+Event: 2.410 loading class javafx/scene/image/PixelFormat$ByteRgb done
+Event: 2.410 loading class javafx/scene/image/WritablePixelFormat$IntArgbPre
+Event: 2.410 loading class javafx/scene/image/WritablePixelFormat$IntArgbPre done
+Event: 2.411 loading class javafx/scene/image/WritablePixelFormat$ByteBgraPre
+Event: 2.411 loading class javafx/scene/image/WritablePixelFormat$ByteBgraPre done
+Event: 2.411 loading class javafx/scene/image/WritablePixelFormat$ByteBgra
+Event: 2.411 loading class javafx/scene/image/WritablePixelFormat$ByteBgra done
+Event: 2.411 loading class javafx/scene/image/WritablePixelFormat$IntArgb
+Event: 2.411 loading class javafx/scene/image/WritablePixelFormat$IntArgb done
+Event: 2.411 loading class javafx/scene/image/PixelFormat$Type
+Event: 2.411 loading class javafx/scene/image/PixelFormat$Type done
+Event: 2.413 loading class com/sun/prism/shader/Texture_LinearGradient_PAD_Loader
+Event: 2.413 loading class com/sun/prism/shader/Texture_LinearGradient_PAD_Loader done
+Event: 2.420 loading class com/sun/prism/impl/ps/BaseShaderContext$1
+Event: 2.420 loading class com/sun/prism/impl/ps/BaseShaderContext$1 done
+Event: 2.438 loading class com/sun/prism/MultiTexture
+Event: 2.438 loading class com/sun/prism/MultiTexture done
+Event: 2.439 loading class com/sun/prism/shader/Solid_TextureRGB_Loader
+Event: 2.439 loading class com/sun/prism/shader/Solid_TextureRGB_Loader done
+Event: 2.448 loading class com/sun/prism/shader/FillPgram_LinearGradient_PAD_Loader
+Event: 2.448 loading class com/sun/prism/shader/FillPgram_LinearGradient_PAD_Loader done
+Event: 2.469 loading class com/sun/scenario/effect/impl/prism/PrEffectHelper
+Event: 2.469 loading class com/sun/scenario/effect/impl/prism/PrEffectHelper done
+Event: 2.478 Executing VM operation: RevokeBias
+Event: 2.478 Executing VM operation: RevokeBias done
+Event: 2.487 loading class com/sun/javafx/sg/prism/NGPerspectiveCamera
+Event: 2.487 loading class com/sun/javafx/sg/prism/NGPerspectiveCamera done
+Event: 2.488 loading class com/sun/javafx/geom/transform/TransformHelper
+Event: 2.488 loading class com/sun/javafx/geom/transform/TransformHelper done
+Event: 2.489 loading class com/sun/javafx/sg/prism/NGNode$RenderRootResult
+Event: 2.489 loading class com/sun/javafx/sg/prism/NGNode$RenderRootResult done
+Event: 2.494 loading class com/sun/prism/impl/ps/CachingShapeRep
+Event: 2.494 loading class com/sun/prism/impl/ps/CachingShapeRep done
+Event: 2.494 loading class com/sun/prism/impl/ps/CachingShapeRepState
+Event: 2.494 loading class com/sun/prism/impl/ps/CachingShapeRepState done
+Event: 2.495 loading class com/sun/prism/impl/ps/CachingShapeRepState$MaskCache
+Event: 2.495 loading class com/sun/prism/impl/ps/CachingShapeRepState$MaskCache done
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CacheEntry
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CacheEntry done
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CacheEntry
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CacheEntry done
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CacheEntry
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CacheEntry done
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$MaskTexData
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$MaskTexData done
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CSRDisposerRecord
+Event: 2.496 loading class com/sun/prism/impl/ps/CachingShapeRepState$CSRDisposerRecord done
+Event: 5.696 Loaded shared library /Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/server/libjvm.dylib
+Event: 6.370 loading class com/sun/javafx/tk/quantum/GlassViewEventHandler
+Event: 6.370 loading class com/sun/javafx/tk/quantum/GlassViewEventHandler done
+Event: 6.370 loading class javafx/scene/input/MouseEvent$Flags
+Event: 6.370 loading class javafx/scene/input/MouseEvent$Flags done
+Event: 6.370 loading class javafx/scene/input/PickResult
+Event: 6.370 loading class javafx/scene/input/PickResult done
+Event: 6.371 loading class com/sun/javafx/scene/input/InputEventUtils
+Event: 6.371 loading class com/sun/javafx/scene/input/InputEventUtils done
+Event: 6.372 loading class java/util/EnumMap$Values
+Event: 6.372 loading class java/util/EnumMap$Values done
+Event: 6.372 loading class java/util/EnumMap$ValueIterator
+Event: 6.372 loading class java/util/EnumMap$EnumMapIterator
+Event: 6.372 loading class java/util/EnumMap$EnumMapIterator done
+Event: 6.372 loading class java/util/EnumMap$ValueIterator done
+Event: 6.372 loading class javafx/event/Event
+Event: 6.372 loading class javafx/event/Event done
+Event: 6.372 loading class javafx/event/Event
+Event: 6.372 loading class javafx/event/Event done
+Event: 6.372 loading class javafx/scene/Node
+Event: 6.372 loading class javafx/scene/Node done
+Event: 6.424 loading class javafx/util/Pair
+Event: 6.424 loading class javafx/util/Pair done
+Event: 6.424 loading class javafx/util/Pair
+Event: 6.424 loading class javafx/util/Pair done
+Event: 6.424 loading class javafx/util/Pair
+Event: 6.424 loading class javafx/util/Pair done
+
+
+Dynamic libraries:
+0x000000010f24e000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/jli/libjli.dylib
+0x00007ff818da9000 	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x00007ff804c1a000 	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x00007ff808116000 	/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x00007ff803031000 	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x00007ff80cede000 	/usr/lib/libSystem.B.dylib
+0x00007ff805aac000 	/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation
+0x00007ff812d55000 	/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
+0x00007ff80b140000 	/System/Library/PrivateFrameworks/XCTTargetBootstrap.framework/Versions/A/XCTTargetBootstrap
+0x00007ff80ecee000 	/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport
+0x00007ff80ed78000 	/System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity
+0x00007ff80e0ce000 	/usr/lib/libspindump.dylib
+0x00007ff805d3a000 	/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers
+0x00007ff809879000 	/usr/lib/libapp_launch_measurement.dylib
+0x00007ff808ae2000 	/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics
+0x00007ff80987c000 	/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout
+0x00007ff80aa9c000 	/System/Library/Frameworks/Metal.framework/Versions/A/Metal
+0x00007ff80b7b6000 	/usr/lib/liblangid.dylib
+0x00007ff80b144000 	/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG
+0x00007ff807101000 	/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight
+0x00007ff807497000 	/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x00007ff8133c4000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x00007ff80db49000 	/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices
+0x00007ff80aa81000 	/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface
+0x00007ff808b10000 	/usr/lib/libDiagnosticMessagesClient.dylib
+0x00007ff80cdfe000 	/usr/lib/libz.1.dylib
+0x00007ff816a35000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x00007ff80b12c000 	/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation
+0x00007ff80450b000 	/usr/lib/libicucore.A.dylib
+0x00007ff80fa13000 	/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x00007ff80ecfa000 	/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore
+0x00007ff90a652000 	/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput
+0x00007ff807085000 	/usr/lib/libMobileGestalt.dylib
+0x00007ff80ae34000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x00007ff8092a6000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x00007ff8041ab000 	/System/Library/Frameworks/Security.framework/Versions/A/Security
+0x00007ff812d8d000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x00007ff8095d9000 	/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI
+0x00007ff803a83000 	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x00007ff808bfe000 	/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x00007ff80e4b5000 	/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport
+0x00007ff807084000 	/usr/lib/libenergytrace.dylib
+0x00007ff804b06000 	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x00007ff813179000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x00007ff809813000 	/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis
+0x00007ffa19e22000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x00007ff80c42b000 	/System/Library/PrivateFrameworks/MobileKeyBag.framework/Versions/A/MobileKeyBag
+0x00007ff801ff2000 	/usr/lib/libobjc.A.dylib
+0x00007ff807b63000 	/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x00007ff8021ab000 	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x00007ff80b3bd000 	/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage
+0x00007ff803899000 	/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText
+0x00007ff80b173000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x00007ff80cee4000 	/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking
+0x00007ff8098c4000 	/usr/lib/libxml2.2.dylib
+0x00007ff8020b8000 	/usr/lib/libc++.1.dylib
+0x00007ff80d168000 	/usr/lib/libcompression.dylib
+0x00007ff80ec24000 	/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO
+0x00007ff80d85b000 	/usr/lib/libate.dylib
+0x00007ff80ced9000 	/usr/lib/system/libcache.dylib
+0x00007ff80ce95000 	/usr/lib/system/libcommonCrypto.dylib
+0x00007ff80cebe000 	/usr/lib/system/libcompiler_rt.dylib
+0x00007ff80ceb4000 	/usr/lib/system/libcopyfile.dylib
+0x00007ff801eec000 	/usr/lib/system/libcorecrypto.dylib
+0x00007ff801fab000 	/usr/lib/system/libdispatch.dylib
+0x00007ff80216a000 	/usr/lib/system/libdyld.dylib
+0x00007ff80ced0000 	/usr/lib/system/libkeymgr.dylib
+0x00007ff80ce73000 	/usr/lib/system/libmacho.dylib
+0x00007ff80c4ff000 	/usr/lib/system/libquarantine.dylib
+0x00007ff80cece000 	/usr/lib/system/libremovefile.dylib
+0x00007ff8070d1000 	/usr/lib/system/libsystem_asl.dylib
+0x00007ff801e9a000 	/usr/lib/system/libsystem_blocks.dylib
+0x00007ff80202f000 	/usr/lib/system/libsystem_c.dylib
+0x00007ff80cec6000 	/usr/lib/system/libsystem_collections.dylib
+0x00007ff80b7a7000 	/usr/lib/system/libsystem_configuration.dylib
+0x00007ff80aa64000 	/usr/lib/system/libsystem_containermanager.dylib
+0x00007ff80cbb0000 	/usr/lib/system/libsystem_coreservices.dylib
+0x00007ff804794000 	/usr/lib/system/libsystem_darwin.dylib
+0x00007ff80ced1000 	/usr/lib/system/libsystem_dnssd.dylib
+0x00007ff80202c000 	/usr/lib/system/libsystem_featureflags.dylib
+0x00007ff802180000 	/usr/lib/system/libsystem_info.dylib
+0x00007ff80ce11000 	/usr/lib/system/libsystem_m.dylib
+0x00007ff801f7f000 	/usr/lib/system/libsystem_malloc.dylib
+0x00007ff80706e000 	/usr/lib/system/libsystem_networkextension.dylib
+0x00007ff804bbc000 	/usr/lib/system/libsystem_notify.dylib
+0x00007ff81304e000 	/usr/lib/system/libsystem_product_info_filter.dylib
+0x00007ff80b7ab000 	/usr/lib/system/libsystem_sandbox.dylib
+0x00007ff80cecb000 	/usr/lib/system/libsystem_secinit.dylib
+0x00007ff802127000 	/usr/lib/system/libsystem_kernel.dylib
+0x00007ff802176000 	/usr/lib/system/libsystem_platform.dylib
+0x00007ff80215e000 	/usr/lib/system/libsystem_pthread.dylib
+0x00007ff808929000 	/usr/lib/system/libsystem_symptoms.dylib
+0x00007ff801ed3000 	/usr/lib/system/libsystem_trace.dylib
+0x00007ff80cea1000 	/usr/lib/system/libunwind.dylib
+0x00007ff801e9c000 	/usr/lib/system/libxpc.dylib
+0x00007ff802111000 	/usr/lib/libc++abi.dylib
+0x00007ff80ceac000 	/usr/lib/liboah.dylib
+0x00007ff80d639000 	/usr/lib/liblzma.5.dylib
+0x00007ff802d42000 	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x00007ff80cee0000 	/usr/lib/libfakelink.dylib
+0x00007ff806bd7000 	/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x00007ff80d01f000 	/usr/lib/libarchive.2.dylib
+0x00007ff80b7b2000 	/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/AppleSystemInfo
+0x00007ff80c526000 	/usr/lib/libbsm.0.dylib
+0x00007ff80620d000 	/usr/lib/libnetwork.dylib
+0x00007ff80ce79000 	/usr/lib/system/libkxld.dylib
+0x00007ff80c154000 	/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer
+0x00007ffb17c47000 	/usr/lib/libCoreEntitlements.dylib
+0x00007ff80cb92000 	/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
+0x00007ff80c50e000 	/usr/lib/libcoretls.dylib
+0x00007ff80d653000 	/usr/lib/libcoretls_cfhelpers.dylib
+0x00007ff80d163000 	/usr/lib/libpam.2.dylib
+0x00007ff80854b000 	/usr/lib/libsqlite3.dylib
+0x00007ff80d6c2000 	/usr/lib/libxar.1.dylib
+0x00007ff80cba2000 	/usr/lib/libbz2.1.0.dylib
+0x00007ff80cee5000 	/usr/lib/libpcap.A.dylib
+0x00007ff808920000 	/usr/lib/libdns_services.dylib
+0x00007ff80d132000 	/usr/lib/libapple_nghttp2.dylib
+0x00007ff80cf1c000 	/usr/lib/libiconv.2.dylib
+0x00007ff80ce72000 	/usr/lib/libcharset.1.dylib
+0x00007ff809847000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents
+0x00007ff80479e000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x00007ff808b63000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x00007ff80cbb5000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x00007ff80d0a6000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x00007ff8088b2000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x00007ff8026ae000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x00007ff80d5ea000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+0x00007ff809854000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList
+0x00007ff80c502000 	/usr/lib/libCheckFix.dylib
+0x00007ff8070e8000 	/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
+0x00007ff80b7b8000 	/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP
+0x00007ff808b13000 	/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities
+0x00007ff802df2000 	/usr/lib/libmecabra.dylib
+0x00007ff80c536000 	/usr/lib/libmecab.dylib
+0x00007ff802dbd000 	/usr/lib/libCRFSuite.dylib
+0x00007ff80c593000 	/usr/lib/libgermantok.dylib
+0x00007ff80d10d000 	/usr/lib/libThaiTokenizer.dylib
+0x00007ff808c05000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x00007ff813150000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x00007ff80d703000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x00007ff80bf72000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x00007ff802a26000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x00007ff80d244000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x00007ff80c596000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib
+0x00007ff80d14b000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib
+0x00007ff80d23e000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib
+0x00007ff80b8a2000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib
+0x00007ff802cd3000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib
+0x00007ff80b89b000 	/System/Library/PrivateFrameworks/LinguisticData.framework/Versions/A/LinguisticData
+0x00007ff802c88000 	/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon
+0x00007ff80d6fc000 	/usr/lib/libChineseTokenizer.dylib
+0x00007ff8033ec000 	/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling
+0x00007ff80d10f000 	/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce
+0x00007ff80c142000 	/System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji
+0x00007ff80d00e000 	/usr/lib/libcmph.dylib
+0x00007ff80982b000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+0x00007ff80981f000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory
+0x00007ff80d655000 	/System/Library/PrivateFrameworks/APFS.framework/Versions/A/APFS
+0x00007ff80c463000 	/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x00007ff80d6d0000 	/usr/lib/libutil.dylib
+0x00007ff804ac9000 	/System/Library/PrivateFrameworks/CoreServicesStore.framework/Versions/A/CoreServicesStore
+0x00007ff80d6d4000 	/usr/lib/libxslt.1.dylib
+0x00007ff80c4f0000 	/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Versions/A/BackgroundTaskManagement
+0x00007ff80eb44000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x00007ff80eb4d000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x00007ff80ea9d000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x00007ff80eabe000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x00007ff80ebad000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x00007ff80e3ce000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x00007ff80db10000 	/usr/lib/libexpat.1.dylib
+0x00007ff80e383000 	/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG
+0x00007ff80acf7000 	/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib
+0x00007ff80885c000 	/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices
+0x00007ff819325000 	/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator
+0x00007ff80e4b1000 	/System/Library/PrivateFrameworks/WatchdogClient.framework/Versions/A/WatchdogClient
+0x00007ff8034db000 	/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay
+0x00007ff80abf6000 	/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia
+0x00007ff80aa93000 	/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator
+0x00007ff8099a7000 	/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+0x00007ff80d161000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders
+0x00007ff80e4ec000 	/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox
+0x00007ff8087a4000 	/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard
+0x00007ff808531000 	/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer
+0x00007ff80eb3d000 	/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler
+0x00007ff80eb20000 	/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment
+0x00007ff80eb47000 	/System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay
+0x00007ffa19e16000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib
+0x00007ffb05eb7000 	/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerUtils.dylib
+0x00007ff80ebb2000 	/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore
+0x00007ff80e0bc000 	/System/Library/PrivateFrameworks/AppServerSupport.framework/Versions/A/AppServerSupport
+0x00007ff810299000 	/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata
+0x00007ff803607000 	/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore
+0x00007ff80abd3000 	/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk
+0x00007ff80fbbd000 	/usr/lib/libAudioStatistics.dylib
+0x00007ff906ee0000 	/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy
+0x00007ff80fe12000 	/usr/lib/libSMC.dylib
+0x00007ff818c5c000 	/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI
+0x00007ff80ea6d000 	/usr/lib/libAudioToolboxUtility.dylib
+0x00007ff9032f2000 	/System/Library/PrivateFrameworks/OSAServicesClient.framework/Versions/A/OSAServicesClient
+0x00007ff8102a6000 	/usr/lib/libperfcheck.dylib
+0x00007ff907972000 	/usr/lib/libmis.dylib
+0x00007ffa19e72000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x00007ffa19e35000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
+0x00007ffa1a043000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x00007ffa19e3e000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x00007ffa19e32000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib
+0x00007ffa19e1d000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
+0x00007ff80b736000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore
+0x00007ff80cafd000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage
+0x00007ff80c5ac000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork
+0x00007ff80ca21000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix
+0x00007ff80c7dd000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector
+0x00007ff80ca5a000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray
+0x00007ffa1ea37000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSFunctions.framework/Versions/A/MPSFunctions
+0x00007ff802909000 	/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools
+0x00007ff80b7b0000 	/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary
+0x00007ff80d8f2000 	/usr/lib/libIOReport.dylib
+0x00007ffa1b452000 	/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL
+0x00007ff80dc56000 	/System/Library/PrivateFrameworks/FaceCore.framework/Versions/A/FaceCore
+0x00007ff80dc47000 	/System/Library/PrivateFrameworks/GraphVisualizer.framework/Versions/A/GraphVisualizer
+0x00007ffb05dc2000 	/System/Library/PrivateFrameworks/FontServices.framework/Versions/A/FontServices
+0x00007ff80e073000 	/System/Library/PrivateFrameworks/OTSVG.framework/Versions/A/OTSVG
+0x00007ff80958f000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
+0x00007ff80e0c4000 	/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib
+0x00007ffb05dc3000 	/System/Library/PrivateFrameworks/FontServices.framework/libXTFontStaticRegistryData.dylib
+0x00007ff80dac0000 	/System/Library/PrivateFrameworks/AppleVA.framework/Versions/A/AppleVA
+0x00007ff80fbe1000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x00007ff807c5f000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x00007ff80ebbc000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x00007ff80ff65000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x00007ff80ff5d000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy
+0x00007ff80fbd1000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x00007ff80eb7d000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI
+0x00007ff80fef2000 	/usr/lib/libcups.2.dylib
+0x00007ff8102b5000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+0x00007ff8102c4000 	/System/Library/Frameworks/GSS.framework/Versions/A/GSS
+0x00007ff80fc4d000 	/usr/lib/libresolv.9.dylib
+0x00007ff80e0d3000 	/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal
+0x00007ff816db2000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib
+0x00007ff808931000 	/System/Library/Frameworks/Network.framework/Versions/A/Network
+0x00007ff80db2a000 	/usr/lib/libheimdal-asn1.dylib
+0x00007ff810310000 	/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
+0x00007ff80fb4e000 	/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession
+0x00007ff80dbba000 	/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience
+0x00007ff80f9e2000 	/System/Library/PrivateFrameworks/AudioSession.framework/libSessionUtility.dylib
+0x00007ff80ff71000 	/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration
+0x00007ff813f63000 	/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog
+0x00007ff80db33000 	/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation
+0x00007ff812d7d000 	/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore
+0x000000010ff5a000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/server/libjvm.dylib
+0x000000010f285000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libverify.dylib
+0x000000010f2c8000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libjava.dylib
+0x000000010f299000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libjimage.dylib
+0x000000010f2f8000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libinstrument.dylib
+0x000000010f2b8000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libzip.dylib
+0x000000010fd8a000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libnio.dylib
+0x000000010fdc1000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libnet.dylib
+0x000000010fda2000 	/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home/lib/libextnet.dylib
+0x000000010fdb2000 	/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/libprism_es2.dylib
+0x00007ff804a8a000 	/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
+0x00007ffa1a04e000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Resources/GLEngine.bundle/GLEngine
+0x00007ffa19eb0000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib
+0x00007ffa0e276000 	/System/Library/Extensions/AppleIntelKBLGraphicsGLDriver.bundle/Contents/MacOS/AppleIntelKBLGraphicsGLDriver
+0x00007ff911856000 	/System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupportMercury.dylib
+0x00007ffa1a1dd000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Resources/GLRendererFloat.bundle/GLRendererFloat
+0x00000001318f6000 	/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/libglass.dylib
+0x00007ff814554000 	/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider
+0x00007ff808710000 	/System/Library/Frameworks/Accounts.framework/Versions/A/Accounts
+0x00007ff8146cc000 	/System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage
+0x00007ff8151de000 	/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication
+0x00007ff813f58000 	/System/Library/PrivateFrameworks/SymptomDiagnosticReporter.framework/Versions/A/SymptomDiagnosticReporter
+0x00007ff805d4e000 	/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv
+0x00007ff804bcb000 	/usr/lib/libsandbox.1.dylib
+0x00007ff809a26000 	/System/Library/PrivateFrameworks/UserManagement.framework/Versions/A/UserManagement
+0x00007ff8151a3000 	/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols
+0x00007ff80ff52000 	/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth
+0x00007ff810e41000 	/System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing
+0x00007ff8099f9000 	/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport
+0x00007ff8162e4000 	/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211
+0x00007ff80cbe2000 	/System/Library/PrivateFrameworks/AuthKit.framework/Versions/A/AuthKit
+0x00007ff80c238000 	/System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils
+0x00007ff80c15f000 	/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN
+0x00007ff810f9c000 	/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth
+0x00007ff81634c000 	/System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi
+0x00007ff814d78000 	/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices
+0x00007ff814e0a000 	/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices
+0x00007ff80c452000 	/System/Library/PrivateFrameworks/AssertionServices.framework/Versions/A/AssertionServices
+0x00007ff8164d0000 	/System/Library/PrivateFrameworks/BackBoardServices.framework/Versions/A/BackBoardServices
+0x00007ff81039f000 	/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers
+0x00007ff814075000 	/System/Library/PrivateFrameworks/DiskManagement.framework/Versions/A/DiskManagement
+0x00007ff813f89000 	/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport
+0x00007ffa209f0000 	/System/Library/PrivateFrameworks/AAAFoundation.framework/Versions/A/AAAFoundation
+0x00007ff810380000 	/System/Library/PrivateFrameworks/KeychainCircle.framework/Versions/A/KeychainCircle
+0x00007ff814041000 	/System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit
+0x00007ff813f95000 	/System/Library/Frameworks/DiscRecording.framework/Versions/A/DiscRecording
+0x00007ff80da38000 	/usr/lib/libCoreStorage.dylib
+0x00007ff8167bf000 	/usr/lib/libcsfde.dylib
+0x00007ff811069000 	/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Versions/A/ProtectedCloudStorage
+0x00007ff8167bb000 	/System/Library/PrivateFrameworks/EFILogin.framework/Versions/A/EFILogin
+0x00007ff8146f2000 	/System/Library/PrivateFrameworks/OctagonTrust.framework/Versions/A/OctagonTrust
+0x00007ffb050e4000 	/System/Library/PrivateFrameworks/CoreUtilsExtras.framework/Versions/A/CoreUtilsExtras
+0x00007ff813ecb000 	/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth
+0x00007ff816e37000 	/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
+0x00007ff80da30000 	/usr/lib/libMatch.1.dylib
+0x00007ff90bdd6000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/Libraries/libCGInterfaces.dylib
+0x0000000132d53000 	/usr/lib/libobjc-trampolines.dylib
+0x00007ff80971f000 	/System/Library/PrivateFrameworks/ViewBridge.framework/Versions/A/ViewBridge
+0x00007ffb17d59000 	/usr/lib/libRosetta.dylib
+0x00000001358fb000 	/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/libjavafx_font.dylib
+0x00007ff80e18d000 	/System/Library/PrivateFrameworks/login.framework/Versions/A/login
+
+
+VM Arguments:
+jvm_args: -Djava.library.path=/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=61409:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 
+java_command: Run
+java_class_path (initial): /Users/karolissadeckas/IdeaProjects/Gituhub - Projects/SEP2---HotelBookingSystem/General (to delete)/production/Main:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/src.zip:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx-swt.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.web.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.base.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.fxml.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.media.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.swing.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.controls.jar:/Users/karolissadeckas/Downloads/javafx-sdk-11.0.2/lib/javafx.graphics.jar:/Users/karolissadeckas/IdeaProjects/library collection/MyObserver-1.4.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+      int ActiveProcessorCount                     = -1                                        {product} {default}
+    uintx AdaptiveSizeDecrementScaleFactor         = 4                                         {product} {default}
+    uintx AdaptiveSizeMajorGCDecayTimeScale        = 10                                        {product} {default}
+    uintx AdaptiveSizePolicyCollectionCostMargin   = 50                                        {product} {default}
+    uintx AdaptiveSizePolicyInitializingSteps      = 20                                        {product} {default}
+    uintx AdaptiveSizePolicyOutputInterval         = 0                                         {product} {default}
+    uintx AdaptiveSizePolicyWeight                 = 10                                        {product} {default}
+    uintx AdaptiveSizeThroughPutPolicy             = 0                                         {product} {default}
+    uintx AdaptiveTimeWeight                       = 25                                        {product} {default}
+     bool AggressiveHeap                           = false                                     {product} {default}
+     bool AggressiveOpts                           = false                                     {product} {default}
+     intx AliasLevel                               = 3                                      {C2 product} {default}
+     bool AlignVector                              = false                                  {C2 product} {default}
+    ccstr AllocateHeapAt                           =                                           {product} {default}
+     intx AllocateInstancePrefetchLines            = 1                                         {product} {default}
+     intx AllocatePrefetchDistance                 = 192                                       {product} {default}
+     intx AllocatePrefetchInstr                    = 3                                         {product} {default}
+     intx AllocatePrefetchLines                    = 4                                         {product} {default}
+     intx AllocatePrefetchStepSize                 = 64                                        {product} {default}
+     intx AllocatePrefetchStyle                    = 1                                         {product} {default}
+     bool AllowJNIEnvProxy                         = false                                     {product} {default}
+     bool AllowNonVirtualCalls                     = false                                     {product} {default}
+     bool AllowParallelDefineClass                 = false                                     {product} {default}
+     bool AllowUserSignalHandlers                  = false                                     {product} {default}
+     bool AllowVectorizeOnDemand                   = true                                   {C2 product} {default}
+     bool AlwaysActAsServerClassMachine            = false                                     {product} {default}
+     bool AlwaysCompileLoopMethods                 = false                                     {product} {default}
+     bool AlwaysLockClassLoader                    = false                                     {product} {default}
+     bool AlwaysPreTouch                           = false                                     {product} {default}
+     bool AlwaysRestoreFPU                         = false                                     {product} {default}
+     bool AlwaysTenure                             = false                                     {product} {default}
+     intx ArrayCopyLoadStoreMaxElem                = 8                                      {C2 product} {default}
+     bool AssertOnSuspendWaitFailure               = false                                     {product} {default}
+     bool AssumeMP                                 = true                                      {product} {default}
+     intx AutoBoxCacheMax                          = 128                                    {C2 product} {default}
+     intx BCEATraceLevel                           = 0                                         {product} {default}
+     bool BackgroundCompilation                    = true                                   {pd product} {default}
+   size_t BaseFootPrintEstimate                    = 268435456                                 {product} {default}
+     intx BiasedLockingBulkRebiasThreshold         = 20                                        {product} {default}
+     intx BiasedLockingBulkRevokeThreshold         = 40                                        {product} {default}
+     intx BiasedLockingDecayTime                   = 25000                                     {product} {default}
+     intx BiasedLockingStartupDelay                = 0                                         {product} {default}
+     bool BindGCTaskThreadsToCPUs                  = false                                     {product} {default}
+     bool BlockLayoutByFrequency                   = true                                   {C2 product} {default}
+     intx BlockLayoutMinDiamondPercentage          = 20                                     {C2 product} {default}
+     bool BlockLayoutRotateLoops                   = true                                   {C2 product} {default}
+     bool BranchOnRegister                         = false                                  {C2 product} {default}
+     bool BytecodeVerificationLocal                = false                                     {product} {default}
+     bool BytecodeVerificationRemote               = true                                      {product} {default}
+     bool C1OptimizeVirtualCallProfiling           = true                                   {C1 product} {default}
+     bool C1ProfileBranches                        = true                                   {C1 product} {default}
+     bool C1ProfileCalls                           = true                                   {C1 product} {default}
+     bool C1ProfileCheckcasts                      = true                                   {C1 product} {default}
+     bool C1ProfileInlinedCalls                    = true                                   {C1 product} {default}
+     bool C1ProfileVirtualCalls                    = true                                   {C1 product} {default}
+     bool C1UpdateMethodData                       = true                                   {C1 product} {default}
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     bool CICompilerCountPerCPU                    = true                                      {product} {default}
+     bool CITime                                   = false                                     {product} {default}
+     bool CMSAbortSemantics                        = false                                     {product} {default}
+    uintx CMSAbortablePrecleanMinWorkPerIteration  = 100                                       {product} {default}
+     intx CMSAbortablePrecleanWaitMillis           = 100                                    {manageable} {default}
+   size_t CMSBitMapYieldQuantum                    = 10485760                                  {product} {default}
+    uintx CMSBootstrapOccupancy                    = 50                                        {product} {default}
+     bool CMSClassUnloadingEnabled                 = true                                      {product} {default}
+    uintx CMSClassUnloadingMaxInterval             = 0                                         {product} {default}
+     bool CMSCleanOnEnter                          = true                                      {product} {default}
+   size_t CMSConcMarkMultiple                      = 32                                        {product} {default}
+     bool CMSConcurrentMTEnabled                   = true                                      {product} {default}
+    uintx CMSCoordinatorYieldSleepCount            = 10                                        {product} {default}
+     bool CMSEdenChunksRecordAlways                = true                                      {product} {default}
+    uintx CMSExpAvgFactor                          = 50                                        {product} {default}
+     bool CMSExtrapolateSweep                      = false                                     {product} {default}
+    uintx CMSIncrementalSafetyFactor               = 10                                        {product} {default}
+    uintx CMSIndexedFreeListReplenish              = 4                                         {product} {default}
+     intx CMSInitiatingOccupancyFraction           = -1                                        {product} {default}
+    uintx CMSIsTooFullPercentage                   = 98                                        {product} {default}
+   double CMSLargeCoalSurplusPercent               = 0.950000                                  {product} {default}
+   double CMSLargeSplitSurplusPercent              = 1.000000                                  {product} {default}
+     bool CMSLoopWarn                              = false                                     {product} {default}
+    uintx CMSMaxAbortablePrecleanLoops             = 0                                         {product} {default}
+     intx CMSMaxAbortablePrecleanTime              = 5000                                      {product} {default}
+   size_t CMSOldPLABMax                            = 1024                                      {product} {default}
+   size_t CMSOldPLABMin                            = 16                                        {product} {default}
+    uintx CMSOldPLABNumRefills                     = 4                                         {product} {default}
+    uintx CMSOldPLABReactivityFactor               = 2                                         {product} {default}
+     bool CMSOldPLABResizeQuicker                  = false                                     {product} {default}
+    uintx CMSOldPLABToleranceFactor                = 4                                         {product} {default}
+     bool CMSPLABRecordAlways                      = true                                      {product} {default}
+     bool CMSParallelInitialMarkEnabled            = true                                      {product} {default}
+     bool CMSParallelRemarkEnabled                 = true                                      {product} {default}
+     bool CMSParallelSurvivorRemarkEnabled         = true                                      {product} {default}
+    uintx CMSPrecleanDenominator                   = 3                                         {product} {default}
+    uintx CMSPrecleanIter                          = 3                                         {product} {default}
+    uintx CMSPrecleanNumerator                     = 2                                         {product} {default}
+     bool CMSPrecleanRefLists1                     = true                                      {product} {default}
+     bool CMSPrecleanRefLists2                     = false                                     {product} {default}
+     bool CMSPrecleanSurvivors1                    = false                                     {product} {default}
+     bool CMSPrecleanSurvivors2                    = true                                      {product} {default}
+    uintx CMSPrecleanThreshold                     = 1000                                      {product} {default}
+     bool CMSPrecleaningEnabled                    = true                                      {product} {default}
+     bool CMSPrintChunksInDump                     = false                                     {product} {default}
+     bool CMSPrintObjectsInDump                    = false                                     {product} {default}
+    uintx CMSRemarkVerifyVariant                   = 1                                         {product} {default}
+     bool CMSReplenishIntermediate                 = true                                      {product} {default}
+   size_t CMSRescanMultiple                        = 32                                        {product} {default}
+    uintx CMSSamplingGrain                         = 16384                                     {product} {default}
+     bool CMSScavengeBeforeRemark                  = false                                     {product} {default}
+    uintx CMSScheduleRemarkEdenPenetration         = 50                                        {product} {default}
+   size_t CMSScheduleRemarkEdenSizeThreshold       = 2097152                                   {product} {default}
+    uintx CMSScheduleRemarkSamplingRatio           = 5                                         {product} {default}
+   double CMSSmallCoalSurplusPercent               = 1.050000                                  {product} {default}
+   double CMSSmallSplitSurplusPercent              = 1.100000                                  {product} {default}
+     bool CMSSplitIndexedFreeListBlocks            = true                                      {product} {default}
+     intx CMSTriggerInterval                       = -1                                     {manageable} {default}
+    uintx CMSTriggerRatio                          = 80                                        {product} {default}
+     intx CMSWaitDuration                          = 2000                                   {manageable} {default}
+    uintx CMSWorkQueueDrainThreshold               = 10                                        {product} {default}
+     bool CMSYield                                 = true                                      {product} {default}
+    uintx CMSYieldSleepCount                       = 0                                         {product} {default}
+   size_t CMSYoungGenPerWorker                     = 67108864                               {pd product} {default}
+    uintx CMS_FLSPadding                           = 1                                         {product} {default}
+    uintx CMS_FLSWeight                            = 75                                        {product} {default}
+    uintx CMS_SweepPadding                         = 1                                         {product} {default}
+    uintx CMS_SweepTimerThresholdMillis            = 10                                        {product} {default}
+    uintx CMS_SweepWeight                          = 75                                        {product} {default}
+     bool CalculateClassFingerprint                = false                                     {product} {default}
+     bool CheckJNICalls                            = false                                     {product} {default}
+     bool ClassUnloading                           = true                                      {product} {default}
+     bool ClassUnloadingWithConcurrentMark         = true                                      {product} {default}
+     bool ClipInlining                             = true                                      {product} {default}
+    uintx CodeCacheExpansionSize                   = 65536                                  {pd product} {default}
+     bool CompactFields                            = true                                      {product} {default}
+     bool CompactStrings                           = true                                   {pd product} {default}
+     intx CompilationPolicyChoice                  = 2                                         {product} {default}
+ccstrlist CompileCommand                           =                                           {product} {default}
+    ccstr CompileCommandFile                       =                                           {product} {default}
+ccstrlist CompileOnly                              =                                           {product} {default}
+     intx CompileThreshold                         = 10000                                  {pd product} {default}
+   double CompileThresholdScaling                  = 1.000000                                  {product} {default}
+     bool CompilerThreadHintNoPreempt              = false                                     {product} {default}
+     intx CompilerThreadPriority                   = -1                                        {product} {default}
+     intx CompilerThreadStackSize                  = 1024                                   {pd product} {default}
+   size_t CompressedClassSpaceSize                 = 1073741824                                {product} {default}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     intx ConditionalMoveLimit                     = 3                                   {C2 pd product} {default}
+     intx ContendedPaddingWidth                    = 128                                       {product} {default}
+     bool CrashOnOutOfMemoryError                  = false                                     {product} {default}
+     bool CreateCoredumpOnCrash                    = true                                      {product} {default}
+     bool CriticalJNINatives                       = true                                      {product} {default}
+     bool DTraceAllocProbes                        = false                                     {product} {default}
+     bool DTraceMethodProbes                       = false                                     {product} {default}
+     bool DTraceMonitorProbes                      = false                                     {product} {default}
+     bool Debugging                                = false                                     {product} {default}
+     bool DeoptimizeRandom                         = false                                     {product} {default}
+     bool DisableAttachMechanism                   = false                                     {product} {default}
+     bool DisableExplicitGC                        = false                                     {product} {default}
+     bool DisplayVMOutputToStderr                  = false                                     {product} {default}
+     bool DisplayVMOutputToStdout                  = false                                     {product} {default}
+     bool DoEscapeAnalysis                         = true                                   {C2 product} {default}
+     bool DoReserveCopyInSuperWord                 = true                                   {C2 product} {default}
+     bool DontCompileHugeMethods                   = true                                      {product} {default}
+     bool DontYieldALot                            = false                                  {pd product} {default}
+    ccstr DumpLoadedClassList                      =                                           {product} {default}
+     bool DumpReplayDataOnError                    = true                                      {product} {default}
+     bool DumpSharedSpaces                         = false                                     {product} {default}
+     bool DumpVitalsAtExit                         = false                                     {product} {default}
+     bool EagerXrunInit                            = false                                     {product} {default}
+     intx EliminateAllocationArraySizeLimit        = 64                                     {C2 product} {default}
+     bool EliminateAllocations                     = true                                   {C2 product} {default}
+     bool EliminateAutoBox                         = true                                   {C2 product} {default}
+     bool EliminateLocks                           = true                                   {C2 product} {default}
+     bool EliminateNestedLocks                     = true                                   {C2 product} {default}
+     bool EnableContended                          = true                                      {product} {default}
+     bool EnableDynamicAgentLoading                = true                                      {product} {default}
+     bool EnableVitals                             = true                                      {product} {default}
+   size_t ErgoHeapSizeLimit                        = 0                                         {product} {default}
+    ccstr ErrorFile                                =                                           {product} {default}
+     bool ErrorFileToStderr                        = false                                     {product} {default}
+     bool ErrorFileToStdout                        = false                                     {product} {default}
+ uint64_t ErrorLogTimeout                          = 120                                       {product} {default}
+    ccstr ErrorReportServer                        =                                           {product} {default}
+   double EscapeAnalysisTimeout                    = 20.000000                              {C2 product} {default}
+     bool EstimateArgEscape                        = true                                      {product} {default}
+     bool ExecutingUnitTests                       = false                                     {product} {default}
+     bool ExitOnOutOfMemoryError                   = false                                     {product} {default}
+     bool ExitVMOnOutOfMemoryError                 = false                                     {product} {default}
+     bool ExplicitGCInvokesConcurrent              = false                                     {product} {default}
+     bool ExtendedDTraceProbes                     = false                                     {product} {default}
+     bool ExtensiveErrorReports                    = true                                      {product} {default}
+    ccstr ExtraSharedClassListFile                 =                                           {product} {default}
+     bool FLSAlwaysCoalesceLarge                   = false                                     {product} {default}
+    uintx FLSCoalescePolicy                        = 2                                         {product} {default}
+   double FLSLargestBlockCoalesceProximity         = 0.990000                                  {product} {default}
+     bool FailOverToOldVerifier                    = true                                      {product} {default}
+     intx FieldsAllocationStyle                    = 1                                         {product} {default}
+     bool FilterSpuriousWakeups                    = true                                      {product} {default}
+     bool FlightRecorder                           = false                                     {product} {default}
+    ccstr FlightRecorderOptions                    =                                           {product} {default}
+     bool ForceNUMA                                = false                                     {product} {default}
+     bool ForceTimeHighResolution                  = false                                     {product} {default}
+     intx FreqInlineSize                           = 325                                    {pd product} {default}
+   double G1ConcMarkStepDurationMillis             = 10.000000                                 {product} {default}
+    uintx G1ConcRSHotCardLimit                     = 4                                         {product} {default}
+   size_t G1ConcRSLogCacheSize                     = 10                                        {product} {default}
+   size_t G1ConcRefinementGreenZone                = 0                                         {product} {default}
+   size_t G1ConcRefinementRedZone                  = 0                                         {product} {default}
+    uintx G1ConcRefinementServiceIntervalMillis    = 300                                       {product} {default}
+     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
+   size_t G1ConcRefinementThresholdStep            = 2                                         {product} {default}
+   size_t G1ConcRefinementYellowZone               = 0                                         {product} {default}
+    uintx G1ConfidencePercent                      = 50                                        {product} {default}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx G1HeapWastePercent                       = 5                                         {product} {default}
+    uintx G1MixedGCCountTarget                     = 8                                         {product} {default}
+     intx G1RSetRegionEntries                      = 256                                       {product} {default}
+   size_t G1RSetScanBlockSize                      = 64                                        {product} {default}
+     intx G1RSetSparseRegionEntries                = 4                                         {product} {default}
+     intx G1RSetUpdatingPauseTimePercent           = 10                                        {product} {default}
+     uint G1RefProcDrainInterval                   = 1000                                      {product} {default}
+    uintx G1ReservePercent                         = 10                                        {product} {default}
+    uintx G1SATBBufferEnqueueingThresholdPercent   = 60                                        {product} {default}
+   size_t G1SATBBufferSize                         = 1024                                      {product} {default}
+   size_t G1UpdateBufferSize                       = 256                                       {product} {default}
+     bool G1UseAdaptiveConcRefinement              = true                                      {product} {default}
+     bool G1UseAdaptiveIHOP                        = true                                      {product} {default}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+    uintx GCHeapFreeLimit                          = 2                                         {product} {default}
+    uintx GCLockerEdenExpansionPercent             = 5                                         {product} {default}
+     bool GCLockerInvokesConcurrent                = false                                     {product} {default}
+    uintx GCPauseIntervalMillis                    = 201                                       {product} {default}
+     uint GCTaskTimeStampEntries                   = 200                                       {product} {default}
+    uintx GCTimeLimit                              = 98                                        {product} {default}
+    uintx GCTimeRatio                              = 12                                        {product} {default}
+   size_t HeapBaseMinAddress                       = 2147483648                             {pd product} {default}
+     bool HeapDumpAfterFullGC                      = false                                  {manageable} {default}
+     bool HeapDumpBeforeFullGC                     = false                                  {manageable} {default}
+     bool HeapDumpOnOutOfMemoryError               = false                                  {manageable} {default}
+    ccstr HeapDumpPath                             =                                        {manageable} {default}
+    uintx HeapFirstMaximumCompactionCount          = 3                                         {product} {default}
+    uintx HeapMaximumCompactionInterval            = 20                                        {product} {default}
+    uintx HeapSearchSteps                          = 3                                         {product} {default}
+   size_t HeapSizePerGCThread                      = 43620760                                  {product} {default}
+     bool IgnoreEmptyClassPaths                    = false                                     {product} {default}
+     bool IgnoreUnrecognizedVMOptions              = false                                     {product} {default}
+    uintx IncreaseFirstTierCompileThresholdAt      = 50                                        {product} {default}
+     bool IncrementalInline                        = true                                   {C2 product} {default}
+   size_t InitialBootClassLoaderMetaspaceSize      = 4194304                                   {product} {default}
+    uintx InitialCodeCacheSize                     = 2555904                                {pd product} {default}
+   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
+    uintx InitialRAMFraction                       = 64                                        {product} {default}
+   double InitialRAMPercentage                     = 1.562500                                  {product} {default}
+    uintx InitialSurvivorRatio                     = 8                                         {product} {default}
+    uintx InitialTenuringThreshold                 = 7                                         {product} {default}
+    uintx InitiatingHeapOccupancyPercent           = 45                                        {product} {default}
+     bool Inline                                   = true                                      {product} {default}
+    ccstr InlineDataFile                           =                                           {product} {default}
+     intx InlineSmallCode                          = 2000                                   {pd product} {default}
+     bool InlineSynchronizedMethods                = true                                   {C1 product} {default}
+     bool InsertMemBarAfterArraycopy               = true                                   {C2 product} {default}
+     intx InteriorEntryAlignment                   = 16                                  {C2 pd product} {default}
+     intx InterpreterProfilePercentage             = 33                                        {product} {default}
+     bool JavaMonitorsInStackTrace                 = true                                      {product} {default}
+     intx JavaPriority10_To_OSPriority             = -1                                        {product} {default}
+     intx JavaPriority1_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority2_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority3_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority4_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority5_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority6_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority7_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority8_To_OSPriority              = -1                                        {product} {default}
+     intx JavaPriority9_To_OSPriority              = -1                                        {product} {default}
+     bool LIRFillDelaySlots                        = false                               {C1 pd product} {default}
+   size_t LargePageHeapSizeThreshold               = 134217728                                 {product} {default}
+   size_t LargePageSizeInBytes                     = 0                                         {product} {default}
+     intx LiveNodeCountInliningCutoff              = 40000                                  {C2 product} {default}
+     intx LoopMaxUnroll                            = 16                                     {C2 product} {default}
+     intx LoopOptsCount                            = 43                                     {C2 product} {default}
+     intx LoopPercentProfileLimit                  = 30                                  {C2 pd product} {default}
+    uintx LoopStripMiningIter                      = 1000                                   {C2 product} {default}
+    uintx LoopStripMiningIterShortLoop             = 100                                    {C2 product} {default}
+     intx LoopUnrollLimit                          = 60                                  {C2 pd product} {default}
+     intx LoopUnrollMin                            = 4                                      {C2 product} {default}
+     bool LoopUnswitching                          = true                                   {C2 product} {default}
+     bool ManagementServer                         = false                                     {product} {default}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MarkStackSizeMax                         = 16777216                                  {product} {default}
+     uint MarkSweepAlwaysCompactCount              = 4                                         {product} {default}
+    uintx MarkSweepDeadRatio                       = 5                                         {product} {default}
+     intx MaxBCEAEstimateLevel                     = 5                                         {product} {default}
+     intx MaxBCEAEstimateSize                      = 150                                       {product} {default}
+ uint64_t MaxDirectMemorySize                      = 0                                         {product} {default}
+     bool MaxFDLimit                               = true                                      {product} {default}
+    uintx MaxGCMinorPauseMillis                    = 18446744073709551615                      {product} {default}
+    uintx MaxGCPauseMillis                         = 200                                       {product} {default}
+    uintx MaxHeapFreeRatio                         = 70                                     {manageable} {default}
+   size_t MaxHeapSize                              = 2147483648                                {product} {ergonomic}
+     intx MaxInlineLevel                           = 15                                        {product} {default}
+     intx MaxInlineSize                            = 35                                        {product} {default}
+     intx MaxJNILocalCapacity                      = 65536                                     {product} {default}
+     intx MaxJavaStackTraceDepth                   = 1024                                      {product} {default}
+     intx MaxJumpTableSize                         = 65000                                  {C2 product} {default}
+     intx MaxJumpTableSparseness                   = 5                                      {C2 product} {default}
+     intx MaxLabelRootDepth                        = 1100                                   {C2 product} {default}
+     intx MaxLoopPad                               = 11                                     {C2 product} {default}
+   size_t MaxMetaspaceExpansion                    = 5451776                                   {product} {default}
+    uintx MaxMetaspaceFreeRatio                    = 70                                        {product} {default}
+   size_t MaxMetaspaceSize                         = 18446744073709547520                      {product} {default}
+   size_t MaxNewSize                               = 1287651328                                {product} {ergonomic}
+     intx MaxNodeLimit                             = 80000                                  {C2 product} {default}
+ uint64_t MaxRAM                                   = 137438953472                           {pd product} {default}
+    uintx MaxRAMFraction                           = 4                                         {product} {default}
+   double MaxRAMPercentage                         = 25.000000                                 {product} {default}
+     intx MaxRecursiveInlineLevel                  = 1                                         {product} {default}
+    uintx MaxTenuringThreshold                     = 15                                        {product} {default}
+     intx MaxTrivialSize                           = 6                                         {product} {default}
+     intx MaxVectorSize                            = 32                                     {C2 product} {default}
+   size_t MetaspaceSize                            = 21807104                               {pd product} {default}
+     bool MethodFlushing                           = true                                      {product} {default}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+    uintx MinHeapFreeRatio                         = 40                                     {manageable} {default}
+     intx MinInliningThreshold                     = 250                                       {product} {default}
+     intx MinJumpTableSize                         = 10                                  {C2 pd product} {default}
+   size_t MinMetaspaceExpansion                    = 339968                                    {product} {default}
+    uintx MinMetaspaceFreeRatio                    = 40                                        {product} {default}
+    uintx MinRAMFraction                           = 2                                         {product} {default}
+   double MinRAMPercentage                         = 50.000000                                 {product} {default}
+    uintx MinSurvivorRatio                         = 3                                         {product} {default}
+   size_t MinTLABSize                              = 2048                                      {product} {default}
+     intx MonitorBound                             = 0                                         {product} {default}
+     bool MonitorInUseLists                        = true                                      {product} {default}
+     intx MultiArrayExpandLimit                    = 6                                      {C2 product} {default}
+    uintx NUMAChunkResizeWeight                    = 20                                        {product} {default}
+   size_t NUMAInterleaveGranularity                = 2097152                                   {product} {default}
+    uintx NUMAPageScanRate                         = 256                                       {product} {default}
+   size_t NUMASpaceResizeRate                      = 1073741824                                {product} {default}
+     bool NUMAStats                                = false                                     {product} {default}
+    ccstr NativeMemoryTracking                     = off                                       {product} {default}
+     bool NeedsDeoptSuspend                        = false                                  {pd product} {default}
+     bool NeverActAsServerClassMachine             = false                                  {pd product} {default}
+     bool NeverTenure                              = false                                     {product} {default}
+    uintx NewRatio                                 = 2                                         {product} {default}
+   size_t NewSize                                  = 1363144                                   {product} {default}
+   size_t NewSizeThreadIncrease                    = 5320                                   {pd product} {default}
+     intx NmethodSweepActivity                     = 10                                        {product} {default}
+     intx NodeLimitFudgeFactor                     = 2000                                   {C2 product} {default}
+    uintx NonNMethodCodeHeapSize                   = 5830732                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122913754                              {pd product} {ergonomic}
+     intx NumberOfLoopInstrToAlign                 = 4                                      {C2 product} {default}
+     intx ObjectAlignmentInBytes                   = 8                                    {lp64_product} {default}
+   size_t OldPLABSize                              = 1024                                      {product} {default}
+    uintx OldPLABWeight                            = 50                                        {product} {default}
+   size_t OldSize                                  = 5452592                                   {product} {default}
+     bool OmitStackTraceInFastThrow                = true                                      {product} {default}
+ccstrlist OnError                                  =                                           {product} {default}
+ccstrlist OnOutOfMemoryError                       =                                           {product} {default}
+     intx OnStackReplacePercentage                 = 140                                    {pd product} {default}
+     bool OptimizeFill                             = true                                   {C2 product} {default}
+     bool OptimizePtrCompare                       = true                                   {C2 product} {default}
+     bool OptimizeStringConcat                     = true                                   {C2 product} {default}
+     bool OptoBundling                             = false                               {C2 pd product} {default}
+     intx OptoLoopAlignment                        = 16                                     {pd product} {default}
+     bool OptoRegScheduling                        = true                                {C2 pd product} {default}
+     bool OptoScheduling                           = false                               {C2 pd product} {default}
+    uintx PLABWeight                               = 75                                        {product} {default}
+     bool PSChunkLargeArrays                       = true                                      {product} {default}
+      int ParGCArrayScanChunk                      = 50                                        {product} {default}
+    uintx ParGCDesiredObjsFromOverflowList         = 20                                        {product} {default}
+     bool ParGCTrimOverflow                        = true                                      {product} {default}
+     bool ParGCUseLocalOverflow                    = false                                     {product} {default}
+    uintx ParallelGCBufferWastePct                 = 10                                        {product} {default}
+     uint ParallelGCThreads                        = 4                                         {product} {default}
+   size_t ParallelOldDeadWoodLimiterMean           = 50                                        {product} {default}
+   size_t ParallelOldDeadWoodLimiterStdDev         = 80                                        {product} {default}
+     bool ParallelRefProcBalancingEnabled          = true                                      {product} {default}
+     bool ParallelRefProcEnabled                   = true                                      {product} {default}
+     bool PartialPeelAtUnsignedTests               = true                                   {C2 product} {default}
+     bool PartialPeelLoop                          = true                                   {C2 product} {default}
+     intx PartialPeelNewPhiDelta                   = 0                                      {C2 product} {default}
+    uintx PausePadding                             = 1                                         {product} {default}
+     intx PerBytecodeRecompilationCutoff           = 200                                       {product} {default}
+     intx PerBytecodeTrapLimit                     = 4                                         {product} {default}
+     intx PerMethodRecompilationCutoff             = 400                                       {product} {default}
+     intx PerMethodTrapLimit                       = 100                                       {product} {default}
+     bool PerfAllowAtExitRegistration              = false                                     {product} {default}
+     bool PerfBypassFileSystemCheck                = false                                     {product} {default}
+     intx PerfDataMemorySize                       = 32768                                     {product} {default}
+     intx PerfDataSamplingInterval                 = 50                                        {product} {default}
+    ccstr PerfDataSaveFile                         =                                           {product} {default}
+     bool PerfDataSaveToFile                       = false                                     {product} {default}
+     bool PerfDisableSharedMem                     = false                                     {product} {default}
+     intx PerfMaxStringConstLength                 = 1024                                      {product} {default}
+   size_t PreTouchParallelChunkSize                = 1073741824                                {product} {default}
+     bool PreferInterpreterNativeStubs             = false                                  {pd product} {default}
+     intx PrefetchCopyIntervalInBytes              = 576                                       {product} {default}
+     intx PrefetchFieldsAhead                      = 1                                         {product} {default}
+     intx PrefetchScanIntervalInBytes              = 576                                       {product} {default}
+     bool PreserveAllAnnotations                   = false                                     {product} {default}
+     bool PreserveFramePointer                     = false                                  {pd product} {default}
+   size_t PretenureSizeThreshold                   = 0                                         {product} {default}
+     bool PrintClassHistogram                      = false                                  {manageable} {default}
+     bool PrintCodeCache                           = false                                     {product} {default}
+     bool PrintCodeCacheOnCompilation              = false                                     {product} {default}
+     bool PrintCommandLineFlags                    = false                                     {product} {default}
+     bool PrintCompilation                         = false                                     {product} {default}
+     bool PrintConcurrentLocks                     = false                                  {manageable} {default}
+     bool PrintExtendedThreadInfo                  = true                                      {product} {default}
+     bool PrintFlagsFinal                          = false                                     {product} {default}
+     bool PrintFlagsInitial                        = false                                     {product} {default}
+     bool PrintFlagsRanges                         = false                                     {product} {default}
+     bool PrintGC                                  = false                                     {product} {default}
+     bool PrintGCDetails                           = false                                     {product} {default}
+     bool PrintHeapAtSIGBREAK                      = true                                      {product} {default}
+     bool PrintJNIResolving                        = false                                     {product} {default}
+     bool PrintSafepointStatistics                 = false                                     {product} {default}
+     intx PrintSafepointStatisticsCount            = 300                                       {product} {default}
+     intx PrintSafepointStatisticsTimeout          = -1                                        {product} {default}
+     bool PrintSharedArchiveAndExit                = false                                     {product} {default}
+     bool PrintSharedDictionary                    = false                                     {product} {default}
+     bool PrintStringTableStatistics               = false                                     {product} {default}
+     bool PrintTieredEvents                        = false                                     {product} {default}
+     bool PrintVMOptions                           = false                                     {product} {default}
+     bool PrintVMQWaitTime                         = false                                     {product} {default}
+     bool PrintVitalsAtExit                        = false                                     {product} {default}
+     bool PrintWarnings                            = true                                      {product} {default}
+    uintx ProcessDistributionStride                = 4                                         {product} {default}
+     bool ProfileInterpreter                       = true                                   {pd product} {default}
+     bool ProfileIntervals                         = false                                     {product} {default}
+     intx ProfileIntervalsTicks                    = 100                                       {product} {default}
+     intx ProfileMaturityPercentage                = 20                                        {product} {default}
+     bool ProfileVM                                = false                                     {product} {default}
+    uintx ProfiledCodeHeapSize                     = 122913754                              {pd product} {ergonomic}
+     bool ProfilerPrintByteCodeStatistics          = false                                     {product} {default}
+     bool ProfilerRecordPC                         = false                                     {product} {default}
+    uintx PromotedPadding                          = 3                                         {product} {default}
+    uintx QueuedAllocationWarningCount             = 0                                         {product} {default}
+      int RTMRetryCount                            = 5                                    {ARCH product} {default}
+     bool RangeCheckElimination                    = true                                      {product} {default}
+     bool ReassociateInvariants                    = true                                   {C2 product} {default}
+     bool ReduceBulkZeroing                        = true                                   {C2 product} {default}
+     bool ReduceFieldZeroing                       = true                                   {C2 product} {default}
+     bool ReduceInitialCardMarks                   = true                                   {C2 product} {default}
+     bool ReduceSignalUsage                        = false                                     {product} {default}
+     intx RefDiscoveryPolicy                       = 0                                         {product} {default}
+     bool RegisterFinalizersAtInit                 = true                                      {product} {default}
+     bool RelaxAccessControlCheck                  = false                                     {product} {default}
+    ccstr ReplayDataFile                           =                                           {product} {default}
+     bool RequireSharedSpaces                      = false                                     {product} {default}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool ResizeOldPLAB                            = true                                      {product} {default}
+     bool ResizePLAB                               = true                                      {product} {default}
+     bool ResizeTLAB                               = true                                   {pd product} {default}
+     bool RestoreMXCSROnJNICalls                   = false                                     {product} {default}
+     bool RestrictContended                        = true                                      {product} {default}
+     bool RestrictReservedStack                    = true                                      {product} {default}
+     bool RewriteBytecodes                         = true                                   {pd product} {default}
+     bool RewriteFrequentPairs                     = true                                   {pd product} {default}
+     bool SafepointTimeout                         = false                                     {product} {default}
+     intx SafepointTimeoutDelay                    = 10000                                     {product} {default}
+     bool ScavengeBeforeFullGC                     = false                                     {product} {default}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     intx SelfDestructTimer                        = 0                                         {product} {default}
+    ccstr SharedArchiveConfigFile                  =                                           {product} {default}
+    ccstr SharedArchiveFile                        =                                           {product} {default}
+   size_t SharedBaseAddress                        = 34359738368                               {product} {default}
+    ccstr SharedClassListFile                      =                                           {product} {default}
+    uintx SharedSymbolTableBucketSize              = 4                                         {product} {default}
+     bool ShowCodeDetailsInExceptionMessages       = true                                   {manageable} {default}
+     bool ShowMessageBoxOnError                    = false                                     {product} {default}
+     bool ShrinkHeapInSteps                        = true                                      {product} {default}
+     intx SoftRefLRUPolicyMSPerMB                  = 1000                                      {product} {default}
+     bool SplitIfBlocks                            = true                                   {C2 product} {default}
+     intx StackRedPages                            = 1                                      {pd product} {default}
+     intx StackReservedPages                       = 1                                      {pd product} {default}
+     intx StackShadowPages                         = 20                                     {pd product} {default}
+     bool StackTraceInThrowable                    = true                                      {product} {default}
+     intx StackYellowPages                         = 2                                      {pd product} {default}
+    uintx StartAggressiveSweepingAt                = 10                                        {product} {default}
+     bool StartAttachListener                      = false                                     {product} {default}
+    ccstr StartFlightRecording                     =                                           {product} {default}
+     bool StressLdcRewrite                         = false                                     {product} {default}
+    uintx StringDeduplicationAgeThreshold          = 3                                         {product} {default}
+    uintx StringTableSize                          = 65536                                     {product} {default}
+     bool SuperWordLoopUnrollAnalysis              = true                                {C2 pd product} {default}
+     bool SuperWordReductions                      = true                                   {C2 product} {default}
+     bool SuppressFatalErrorMessage                = false                                     {product} {default}
+    uintx SurvivorPadding                          = 3                                         {product} {default}
+    uintx SurvivorRatio                            = 8                                         {product} {default}
+     intx SuspendRetryCount                        = 50                                        {product} {default}
+     intx SuspendRetryDelay                        = 5                                         {product} {default}
+    uintx TLABAllocationWeight                     = 35                                        {product} {default}
+    uintx TLABRefillWasteFraction                  = 64                                        {product} {default}
+   size_t TLABSize                                 = 0                                         {product} {default}
+     bool TLABStats                                = true                                      {product} {default}
+    uintx TLABWasteIncrement                       = 4                                         {product} {default}
+    uintx TLABWasteTargetPercent                   = 1                                         {product} {default}
+    uintx TargetPLABWastePct                       = 10                                        {product} {default}
+    uintx TargetSurvivorRatio                      = 50                                        {product} {default}
+    uintx TenuredGenerationSizeIncrement           = 20                                        {product} {default}
+    uintx TenuredGenerationSizeSupplement          = 80                                        {product} {default}
+    uintx TenuredGenerationSizeSupplementDecay     = 2                                         {product} {default}
+     bool ThreadLocalHandshakes                    = true                                   {pd product} {default}
+     intx ThreadPriorityPolicy                     = 0                                         {product} {default}
+     bool ThreadPriorityVerbose                    = false                                     {product} {default}
+     intx ThreadStackSize                          = 1024                                   {pd product} {default}
+    uintx ThresholdTolerance                       = 10                                        {product} {default}
+     intx Tier0BackedgeNotifyFreqLog               = 10                                        {product} {default}
+     intx Tier0InvokeNotifyFreqLog                 = 7                                         {product} {default}
+     intx Tier0ProfilingStartPercentage            = 200                                       {product} {default}
+     intx Tier23InlineeNotifyFreqLog               = 20                                        {product} {default}
+     intx Tier2BackEdgeThreshold                   = 0                                         {product} {default}
+     intx Tier2BackedgeNotifyFreqLog               = 14                                        {product} {default}
+     intx Tier2CompileThreshold                    = 0                                         {product} {default}
+     intx Tier2InvokeNotifyFreqLog                 = 11                                        {product} {default}
+     intx Tier3AOTBackEdgeThreshold                = 120000                                    {product} {default}
+     intx Tier3AOTCompileThreshold                 = 15000                                     {product} {default}
+     intx Tier3AOTInvocationThreshold              = 10000                                     {product} {default}
+     intx Tier3AOTMinInvocationThreshold           = 1000                                      {product} {default}
+     intx Tier3BackEdgeThreshold                   = 60000                                     {product} {default}
+     intx Tier3BackedgeNotifyFreqLog               = 13                                        {product} {default}
+     intx Tier3CompileThreshold                    = 2000                                      {product} {default}
+     intx Tier3DelayOff                            = 2                                         {product} {default}
+     intx Tier3DelayOn                             = 5                                         {product} {default}
+     intx Tier3InvocationThreshold                 = 200                                       {product} {default}
+     intx Tier3InvokeNotifyFreqLog                 = 10                                        {product} {default}
+     intx Tier3LoadFeedback                        = 5                                         {product} {default}
+     intx Tier3MinInvocationThreshold              = 100                                       {product} {default}
+     intx Tier4BackEdgeThreshold                   = 40000                                     {product} {default}
+     intx Tier4CompileThreshold                    = 15000                                     {product} {default}
+     intx Tier4InvocationThreshold                 = 5000                                      {product} {default}
+     intx Tier4LoadFeedback                        = 3                                         {product} {default}
+     intx Tier4MinInvocationThreshold              = 600                                       {product} {default}
+     bool TieredCompilation                        = true                                   {pd product} {default}
+     intx TieredCompileTaskTimeout                 = 50                                        {product} {default}
+     intx TieredRateUpdateMaxTime                  = 25                                        {product} {default}
+     intx TieredRateUpdateMinTime                  = 1                                         {product} {default}
+     intx TieredStopAtLevel                        = 4                                         {product} {default}
+     bool TimeLinearScan                           = false                                  {C1 product} {default}
+    ccstr TraceJVMTI                               =                                           {product} {default}
+     bool TraceSuspendWaitFailures                 = false                                     {product} {default}
+     intx TrackedInitializationLimit               = 50                                     {C2 product} {default}
+     bool TransmitErrorReport                      = false                                     {product} {default}
+     bool TrapBasedNullChecks                      = false                                  {pd product} {default}
+     bool TrapBasedRangeChecks                     = false                               {C2 pd product} {default}
+     intx TypeProfileArgsLimit                     = 2                                         {product} {default}
+    uintx TypeProfileLevel                         = 111                                    {pd product} {default}
+     intx TypeProfileMajorReceiverPercent          = 90                                     {C2 product} {default}
+     intx TypeProfileParmsLimit                    = 2                                         {product} {default}
+     intx TypeProfileWidth                         = 2                                         {product} {default}
+     intx UnguardOnExecutionViolation              = 0                                         {product} {default}
+     bool UnlinkSymbolsALot                        = false                                     {product} {default}
+     bool UseAES                                   = true                                      {product} {default}
+     intx UseAVX                                   = 2                                    {ARCH product} {default}
+     bool UseAdaptiveGCBoundary                    = false                                     {product} {default}
+     bool UseAdaptiveGenerationSizePolicyAtMajorCollection  = true                             {product} {default}
+     bool UseAdaptiveGenerationSizePolicyAtMinorCollection  = true                             {product} {default}
+     bool UseAdaptiveNUMAChunkSizing               = true                                      {product} {default}
+     bool UseAdaptiveSizeDecayMajorGCCost          = true                                      {product} {default}
+     bool UseAdaptiveSizePolicy                    = true                                      {product} {default}
+     bool UseAdaptiveSizePolicyFootprintGoal       = true                                      {product} {default}
+     bool UseAdaptiveSizePolicyWithSystemGC        = false                                     {product} {default}
+     bool UseAddressNop                            = true                                 {ARCH product} {default}
+     bool UseBASE64Intrinsics                      = false                                     {product} {default}
+     bool UseBMI1Instructions                      = true                                 {ARCH product} {default}
+     bool UseBMI2Instructions                      = true                                 {ARCH product} {default}
+     bool UseBiasedLocking                         = true                                      {product} {default}
+     bool UseBimorphicInlining                     = true                                   {C2 product} {default}
+     bool UseBsdPosixThreadCPUClocks               = true                                      {product} {default}
+     bool UseCLMUL                                 = true                                 {ARCH product} {default}
+     bool UseCMSBestFit                            = true                                      {product} {default}
+     bool UseCMSInitiatingOccupancyOnly            = false                                     {product} {default}
+     bool UseCMoveUnconditionally                  = false                                  {C2 product} {default}
+     bool UseCodeAging                             = true                                      {product} {default}
+     bool UseCodeCacheFlushing                     = true                                      {product} {default}
+     bool UseCompiler                              = true                                      {product} {default}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseConcMarkSweepGC                       = false                                     {product} {default}
+     bool UseCondCardMark                          = false                                     {product} {default}
+     bool UseCountLeadingZerosInstruction          = true                                 {ARCH product} {default}
+     bool UseCountTrailingZerosInstruction         = true                                 {ARCH product} {default}
+     bool UseCountedLoopSafepoints                 = true                                   {C2 product} {default}
+     bool UseCounterDecay                          = true                                      {product} {default}
+     bool UseDivMod                                = true                                   {C2 product} {default}
+     bool UseDynamicNumberOfCompilerThreads        = true                                      {product} {default}
+     bool UseDynamicNumberOfGCThreads              = true                                      {product} {default}
+     bool UseFMA                                   = true                                      {product} {default}
+     bool UseFPUForSpilling                        = true                                   {C2 product} {default}
+     bool UseFastJNIAccessors                      = true                                      {product} {default}
+     bool UseFastStosb                             = true                                 {ARCH product} {default}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseGCOverheadLimit                       = true                                      {product} {default}
+     bool UseGCTaskAffinity                        = false                                     {product} {default}
+     bool UseHeavyMonitors                         = false                                     {product} {default}
+     bool UseHugeTLBFS                             = false                                     {product} {default}
+     bool UseInlineCaches                          = true                                      {product} {default}
+     bool UseInterpreter                           = true                                      {product} {default}
+     bool UseJumpTables                            = true                                   {C2 product} {default}
+     bool UseLWPSynchronization                    = true                                      {product} {default}
+     bool UseLargePages                            = false                                  {pd product} {default}
+     bool UseLargePagesInMetaspace                 = false                                     {product} {default}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {default}
+     bool UseLegacyJNINameEscaping                 = false                                     {product} {default}
+     bool UseLoopCounter                           = true                                      {product} {default}
+     bool UseLoopInvariantCodeMotion               = true                                   {C1 product} {default}
+     bool UseLoopPredicate                         = true                                   {C2 product} {default}
+     bool UseMaximumCompactionOnSystemGC           = true                                      {product} {default}
+     bool UseMembar                                = true                                   {pd product} {default}
+     bool UseNUMA                                  = false                                     {product} {default}
+     bool UseNUMAInterleaving                      = false                                     {product} {default}
+     bool UseNewLongLShift                         = false                                {ARCH product} {default}
+     bool UseOSErrorReporting                      = false                                  {pd product} {default}
+     bool UseOnStackReplacement                    = true                                   {pd product} {default}
+     bool UseOnlyInlinedBimorphic                  = true                                   {C2 product} {default}
+     bool UseOprofile                              = false                                     {product} {default}
+     bool UseOptoBiasInlining                      = true                                   {C2 product} {default}
+     bool UsePSAdaptiveSurvivorSizePolicy          = true                                      {product} {default}
+     bool UseParallelGC                            = false                                     {product} {default}
+     bool UseParallelOldGC                         = false                                     {product} {default}
+     bool UsePerfData                              = true                                      {product} {default}
+     bool UsePopCountInstruction                   = true                                      {product} {default}
+     bool UseProfiledLoopPredicate                 = true                                   {C2 product} {default}
+     bool UseRDPCForConstantTableBase              = false                                  {C2 product} {default}
+     bool UseRTMDeopt                              = false                                {ARCH product} {default}
+     bool UseRTMLocking                            = false                                {ARCH product} {default}
+     bool UseSHA                                   = true                                      {product} {default}
+     bool UseSHM                                   = false                                     {product} {default}
+     intx UseSSE                                   = 4                                         {product} {default}
+     bool UseSSE42Intrinsics                       = true                                 {ARCH product} {default}
+     bool UseSerialGC                              = false                                     {product} {default}
+     bool UseSharedSpaces                          = false                                     {product} {default}
+     bool UseSignalChaining                        = true                                      {product} {default}
+     bool UseStoreImmI16                           = false                                {ARCH product} {default}
+     bool UseStringDeduplication                   = false                                     {product} {default}
+     bool UseSubwordForMaxVector                   = true                                   {C2 product} {default}
+     bool UseSuperWord                             = true                                   {C2 product} {default}
+     bool UseTLAB                                  = true                                   {pd product} {default}
+     bool UseThreadPriorities                      = true                                   {pd product} {default}
+     bool UseTypeProfile                           = true                                      {product} {default}
+     bool UseTypeSpeculation                       = true                                   {C2 product} {default}
+     bool UseUnalignedLoadStores                   = true                                 {ARCH product} {default}
+     bool UseVectorCmov                            = false                                  {C2 product} {default}
+     bool UseXMMForArrayCopy                       = true                                      {product} {default}
+     bool UseXMMForObjInit                         = false                                {ARCH product} {default}
+     bool UseXmmI2D                                = false                                {ARCH product} {default}
+     bool UseXmmI2F                                = false                                {ARCH product} {default}
+     bool UseXmmLoadAndClearUpper                  = true                                 {ARCH product} {default}
+     bool UseXmmRegToRegMoveAll                    = true                                 {ARCH product} {default}
+     bool VMThreadHintNoPreempt                    = false                                     {product} {default}
+     intx VMThreadPriority                         = -1                                        {product} {default}
+     intx VMThreadStackSize                        = 1024                                   {pd product} {default}
+     intx ValueMapInitialSize                      = 11                                     {C1 product} {default}
+     intx ValueMapMaxLoopSize                      = 8                                      {C1 product} {default}
+     intx ValueSearchLimit                         = 1000                                   {C2 product} {default}
+     bool VerifyMergedCPBytecodes                  = true                                      {product} {default}
+     bool VerifySharedSpaces                       = false                                     {product} {default}
+    ccstr VitalsFile                               =                                           {product} {default}
+    uintx VitalsSampleInterval                     = 10                                        {product} {default}
+    uintx YoungGenerationSizeIncrement             = 20                                        {product} {default}
+    uintx YoungGenerationSizeSupplement            = 80                                        {product} {default}
+    uintx YoungGenerationSizeSupplementDecay       = 8                                         {product} {default}
+   size_t YoungPLABSize                            = 4096                                      {product} {default}
+     bool ZeroTLAB                                 = false                                     {product} {default}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=/Users/karolissadeckas/Library/Java/JavaVirtualMachines/sapmachine-11.0.13/Contents/Home
+PATH=/usr/local/lib/ruby/gems/2.7.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+SHELL=/bin/bash
+
+Signal Handlers:
+SIGSEGV: [libjvm.dylib+0x769690], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_ONSTACK|SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.dylib+0x769690], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.dylib+0x769690], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.dylib+0x61ed4c], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.dylib+0x61ed4c], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.dylib+0x769690], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR2: [libjvm.dylib+0x61f32a], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.dylib+0x61dedd], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.dylib+0x61dedd], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.dylib+0x61dedd], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.dylib+0x61dedd], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+
+Vitals:
+-------------jvm--------------
+       heap-comm: Java Heap Size, committed
+       heap-used: Java Heap Size, used
+       meta-comm: Meta Space Size (class+nonclass), committed
+       meta-used: Meta Space Size (class+nonclass), used
+        meta-csc: Class Space Size, committed
+        meta-csu: Class Space Size, used
+       meta-gctr: GC threshold
+            code: Code cache, committed
+             mlc: Memory malloced by hotspot (requires NMT)
+        jthr-num: Number of java threads
+         jthr-nd: Number of non-demon java threads
+         jthr-cr: Threads created [delta]
+         jthr-st: Total reserved size of java thread stacks
+         cls-num: Classes (instance + array)
+          cls-ld: Class loaded [delta]
+         cls-uld: Classes unloaded [delta]
+
+[delta] values refer to the previous measurement.
+
+Now:
+                      --------------------------------jvm---------------------------------
+                      --heap--- ----------meta----------          ----jthr---- ----cls----
+                      comm used comm used csc  csu  gctr code mlc num nd cr st num  ld uld 
+
+                Now              26m  24m   4m   3m  35m   9m      18  3       4622        
+
+Last 60 minutes:
+                      --------------------------------jvm---------------------------------
+                      --heap--- ----------meta----------          ----jthr---- ----cls----
+                      comm used comm used csc  csu  gctr code mlc num nd cr st num  ld uld 
+
+2022-04-26 20:36:36   128m   3m   6m   6m 640k 509k  21m   7m      10  1        832        
+
+Last 24 hours:
+                      --------------------------------jvm---------------------------------
+                      --heap--- ----------meta----------          ----jthr---- ----cls----
+                      comm used comm used csc  csu  gctr code mlc num nd cr st num  ld uld 
+
+(no samples)
+
+Last 10 days:
+                      --------------------------------jvm---------------------------------
+                      --heap--- ----------meta----------          ----jthr---- ----cls----
+                      comm used comm used csc  csu  gctr code mlc num nd cr st num  ld uld 
+
+(no samples)
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:uname:Darwin 21.3.0 Darwin Kernel Version 21.3.0: Wed Jan  5 21:37:58 PST 2022; root:xnu-8019.80.24~20/RELEASE_X86_64 x86_64
+OS uptime: 5 days 12:22 hours
+rlimit (soft/hard): STACK 8192k/65532k , CORE 0k/infinity , NPROC 1392/2088 , NOFILE 10240/infinity , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK infinity/infinity , RSS infinity/infinity
+load average:2.12 2.21 2.20
+
+CPU:total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 142 stepping 9 microcode 0xec, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma
+
+Memory: 4k page, physical 8388608k(42192k free), swap 2097152k(964352k free)
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.13+8-LTS-sapmachine) for bsd-amd64 JRE (11.0.13+8-LTS-sapmachine), built on Oct 20 2021 09:20:06 by "apurple" with clang Apple LLVM 13.0.0 (clang-1300.0.29.3)
+
+END.

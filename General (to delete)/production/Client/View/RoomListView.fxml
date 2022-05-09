@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RoomListViewController">
+   <children>
+      <Label alignment="CENTER" prefHeight="54.0" prefWidth="696.0" text="Rooms Overview">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <TableView fx:id="roomTable" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="numberColumn" prefWidth="145.0" text="Room Number" />
+          <TableColumn fx:id="typeColumn" prefWidth="200.0" text="Type" />
+            <TableColumn fx:id="numberOfBedsColumn" prefWidth="118.0" text="Number of beds" />
+        </columns>
+      </TableView>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#addButton" prefHeight="50.0" prefWidth="150.0" text="Add">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButton" prefHeight="50.0" prefWidth="150.0" text="Edit">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button  fx:id="removeButton" mnemonicParsing="false" onAction="#removeButton" prefHeight="50.0" prefWidth="150.0" text="Remove">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="errorLabel" prefHeight="60.0" prefWidth="600.0" text="ErrorLabel" textFill="#fc0a0a" />
+   </children>
+</VBox>
