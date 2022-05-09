@@ -49,6 +49,9 @@ public class AddEditViewController extends ViewController {
     typeDropdown.getItems().add(RoomType.SINGLE);
     typeDropdown.getItems().add(RoomType.SUITE);
 
+
+
+
     errorLabel.textProperty().bind(viewModel.errorPropertyProperty());
     }
     catch (NullPointerException e)
@@ -57,6 +60,7 @@ public class AddEditViewController extends ViewController {
     }
 
     reset();
+
   }
 
   /**
@@ -82,6 +86,9 @@ public class AddEditViewController extends ViewController {
   @Override
   public void reset() {
     viewModel.reset();
+    selectedType = viewModel.getType();
+    typeDropdown.getSelectionModel().select(selectedType);
+
   }
 
   /**
@@ -102,7 +109,6 @@ public class AddEditViewController extends ViewController {
 
 
       JFrame jframe = new JFrame();
-
       int result = JOptionPane.showConfirmDialog(jframe, "Are you sure you want to make changes?");
 
       if (result == 0) {
@@ -118,6 +124,7 @@ public class AddEditViewController extends ViewController {
     else
     {
       selectedType = typeDropdown.getSelectionModel().getSelectedItem();
+
       viewModel.setType(selectedType);
 
       viewModel.editRoomInfo();

@@ -89,8 +89,9 @@ public class RoomListViewController extends ViewController
 
   public void addButton() throws IOException
   {
-    viewHandler.openView("AddEditView.fxml");
     viewModel.setAdd();
+    viewHandler.openView("AddEditView.fxml");
+
   }
 
   public void editButton() throws IOException

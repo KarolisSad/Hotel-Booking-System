@@ -67,7 +67,7 @@ public class AddEditViewModel
     {
       roomId.set("");
       nrOfBeds.set(0);
-      type = null;
+      setType(null);
     }
     else
     {
@@ -77,7 +77,6 @@ public class AddEditViewModel
       {
         if (model.getAllRooms().get(i).getRoomId().equals(roomId.get()))
         {
-          System.out.println("WUHU!");
           nrOfBeds.set(model.getAllRooms().get(i).getNumberOfBeds());
           setType(model.getAllRooms().get(i).getRoomType());
           System.out.println("TYPE: " + type);
@@ -188,5 +187,10 @@ public class AddEditViewModel
   public StringProperty errorPropertyProperty()
   {
     return errorProperty;
+  }
+
+  public RoomType getType()
+  {
+    return type;
   }
 }
