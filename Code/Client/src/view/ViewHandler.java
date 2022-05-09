@@ -50,7 +50,10 @@ public class ViewHandler extends ViewCreator{
      * @param id a String object used to create or find a specific ViewController object.
      */
     public void openView(String id) throws IOException {
-        Region root = getViewController(id).getRoot();
+
+        Region root = null;
+        ViewController viewController = getViewController(id);
+        root = viewController.getRoot();
 
         currentScene.setRoot(root);
         String title = "";
@@ -73,7 +76,8 @@ public class ViewHandler extends ViewCreator{
      * @param root A Region object which sets the Region object in ViewController
      */
     @Override
-    protected void initViewController(ViewController viewController, Region root) throws RemoteException {
+    protected void initViewController(ViewController viewController, Region root)
+    {
         viewController.init(this, viewModelFactory, root);
     }
 

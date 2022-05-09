@@ -14,6 +14,7 @@ public class ViewModelFactory {
     public ViewModelFactory(Model model){
         TemporaryInformation tempInfo = new TemporaryInformation();
         ViewState state = new ViewState();
+
         this.reservationViewModel = new ReservationViewModel(model,tempInfo);
         this.guestInformationViewModel = new GuestInformationViewModel(model,tempInfo);
         this.roomListViewModel = new RoomListViewModel(model, state);
