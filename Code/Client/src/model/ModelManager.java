@@ -133,7 +133,6 @@ public class ModelManager implements Model {
     @Override
     public ArrayList<Room> getAllRooms() {
         return roomList.getRoomList();
-
     }
 
     /**

@@ -126,7 +126,6 @@ public class RoomListViewModel implements PropertyChangeListener
 
   public void setEdit()
   {
-    state.setNumber(selectedRoomProperty.get().roomNumberProperty().get());
     state.setAdd(false);
   }
 

@@ -69,8 +69,9 @@ public class AddEditViewModel
 
       for (int i = 0; i < model.getAllRooms().size(); i++)
       {
-        if (model.getAllRooms().get(i).getRoomId().equals(roomId.get()))
+        if (model.getAllRooms().get(i).getRoomId() == roomId.get())
         {
+
           nrOfBeds.set(model.getAllRooms().get(i).getNumberOfBeds());
           setType(model.getAllRooms().get(i).getRoomType());
         }
@@ -144,7 +145,6 @@ public class AddEditViewModel
   public void editRoomInfo()
   {
     // TODO add Observer!
-
     model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
   }
 
@@ -155,7 +155,6 @@ public class AddEditViewModel
   {
     this.type = type;
   }
-
 
   /**
    * A getter method that returns a String object

@@ -33,7 +33,7 @@ public class RoomListViewController extends ViewController
     numberColumn.setCellValueFactory(
         cellData -> cellData.getValue().roomNumberProperty());
     typeColumn.setCellValueFactory(
-        cellData -> cellData.getValue().roomTypeProperty().asString());
+        cellData -> cellData.getValue().roomTypeProperty());
     numberOfBedsColumn.setCellValueFactory(
         cellData -> cellData.getValue().numberOfBedsProperty().asObject());
     errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());

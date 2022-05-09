@@ -1,20 +1,22 @@
 package viewModel;
 
-import javafx.beans.property.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import model.Room;
-import model.RoomType;
 
 public class SimpleRoomViewModel
 {
   private StringProperty roomNumberProperty;
-  private ObjectProperty<RoomType> roomTypeProperty;
+  private StringProperty roomTypeProperty;
   private IntegerProperty numberOfBedsProperty;
 
 
   public SimpleRoomViewModel(Room room)
   {
     roomNumberProperty = new SimpleStringProperty(room.getRoomId());
-    roomTypeProperty = new SimpleObjectProperty<>(room.getRoomType());
+    roomTypeProperty = new SimpleStringProperty(room.getRoomType());
     numberOfBedsProperty = new SimpleIntegerProperty(room.getNumberOfBeds());
   }
 
@@ -25,7 +27,7 @@ public class SimpleRoomViewModel
   }
 
 
-  public ObjectProperty<RoomType> roomTypeProperty()
+  public StringProperty roomTypeProperty()
   {
     return roomTypeProperty;
   }
