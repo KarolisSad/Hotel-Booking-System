@@ -1,9 +1,7 @@
 package view;
 
 import javafx.beans.binding.Bindings;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.util.converter.NumberStringConverter;
 import model.RoomType;
@@ -13,6 +11,7 @@ import viewModel.ViewModelFactory;
 import javax.swing.*;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.Optional;
 
 /**
  * A class creating an AddEditViewController object.
@@ -82,12 +81,27 @@ public class AddEditViewController extends ViewController {
 
   /**
    * A non argument method that calls the reset() method from viewModel.
+   * Furthermore, this checks whether the user accessed the windows by clicking Add or Edit, and updates accordingly:
+   * If add, the Room Id field is available for the user to write in, and if Edit the field has read-only access.
+   *
    */
   @Override
   public void reset() {
     viewModel.reset();
     selectedType = viewModel.getType();
     typeDropdown.getSelectionModel().select(selectedType);
+    if (!viewModel.getViewState().isAdd())
+    {
+      idField.textProperty().unbindBidirectional(viewModel.getRoomIdProperty());
+      idField.textProperty().bind(viewModel.getRoomIdProperty());
+      idField.setDisable(true);
+    }
+    else
+    {
+      idField.textProperty().unbind();
+      idField.textProperty().bindBidirectional(viewModel.getRoomIdProperty());
+      idField.setDisable(false);
+    }
 
   }
 
@@ -104,7 +118,6 @@ public class AddEditViewController extends ViewController {
     {
 
       selectedType = typeDropdown.getSelectionModel().getSelectedItem();
-      System.out.println(selectedType);
       viewModel.setType(selectedType);
 
 
@@ -124,11 +137,28 @@ public class AddEditViewController extends ViewController {
     else
     {
       selectedType = typeDropdown.getSelectionModel().getSelectedItem();
-
       viewModel.setType(selectedType);
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setHeaderText(
+          "Confirm edit of room: " + viewModel.getRoomId());
+      alert.setContentText("Type: " + getType() + "\nNumber of beds: " + viewModel.getNumberOfBeds());
 
-      viewModel.editRoomInfo();
-      System.out.println("TEST TEST TEST TEST TEST TEST");
+      ButtonType confirm = new ButtonType("Confirm");
+      ButtonType cancel = new ButtonType("Cancel",
+          ButtonBar.ButtonData.CANCEL_CLOSE);
+      alert.getButtonTypes().setAll(confirm, cancel);
+
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == confirm)
+      {
+        viewModel.editRoomInfo();
+        viewModel.reset();
+      }
+      else
+      {
+        alert.close();
+      }
+
       viewHandler.openView("RoomListView.fxml");
     }
   }
@@ -156,6 +186,7 @@ public class AddEditViewController extends ViewController {
    * A void method opening the RoomList view.
    */
   public void exitButton() throws IOException {
+    reset();
     viewHandler.openView("RoomListView.fxml");
   }
 

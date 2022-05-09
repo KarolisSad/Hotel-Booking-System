@@ -26,9 +26,6 @@ public class ViewState {
   }
 
   public void setAdd(boolean add){
-
-    System.out.println("VIEWSTATE SET ADD: " + add);
-    System.out.println("VIEWSTATE NUMBER: " + number);
     this.add = add;
   }
 }

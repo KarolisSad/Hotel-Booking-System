@@ -42,12 +42,6 @@ public class AddEditViewModel
     type = null;
     types = new ArrayList<>();
 
-    System.out.println(viewState.isAdd());
-    if (!viewState.isAdd())
-    {
-      System.out.println("DJDJ");
-      roomId.setValue(viewState.getNumber());
-    }
     //List.of() makes a collection out of the simple Array.
     types.addAll(List.of(RoomType.values()));
     errorProperty = new SimpleStringProperty("");
@@ -71,20 +65,14 @@ public class AddEditViewModel
     }
     else
     {
-      System.out.println("NOT ADD");
       roomId.setValue(viewState.getNumber());
+
       for (int i = 0; i < model.getAllRooms().size(); i++)
       {
         if (model.getAllRooms().get(i).getRoomId().equals(roomId.get()))
         {
           nrOfBeds.set(model.getAllRooms().get(i).getNumberOfBeds());
           setType(model.getAllRooms().get(i).getRoomType());
-          System.out.println("TYPE: " + type);
-
-
-          System.out.println("ROOM ID: " + roomId.get());
-          System.out.println("ROOM TYPE: " + type);
-          System.out.println("NUMBER BEDS: " + getNumberOfBeds());
         }
       }
     }
@@ -155,11 +143,9 @@ public class AddEditViewModel
    */
   public void editRoomInfo()
   {
-    System.out.println(roomId.get());
-    System.out.println(type);
-    System.out.println(nrOfBeds);
+    // TODO add Observer!
+
     model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
-    reset();
   }
 
   /**
@@ -189,6 +175,10 @@ public class AddEditViewModel
     return errorProperty;
   }
 
+  /**
+   * A getter method for getting the type of the selected room.
+   * @return the type of the selected room, or null if no room is selected.
+   */
   public RoomType getType()
   {
     return type;
