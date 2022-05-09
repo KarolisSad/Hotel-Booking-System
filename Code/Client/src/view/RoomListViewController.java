@@ -89,27 +89,35 @@ public class RoomListViewController extends ViewController
 
   public void addButton() throws IOException
   {
-    viewHandler.openView("AddEditView.fxml");
     viewModel.setAdd();
+    viewHandler.openView("AddEditView.fxml");
+
   }
 
+  /**
+   * Method called when clicking the edit button when a room is selected.
+   * If a room is not selected, button will be inactive - and thus, unable to be clicked
+   *
+   * After successfully editing a room, a confirmation message is shown.
+   */
   public void editButton() throws IOException
   {
-    ObjectProperty<SimpleRoomViewModel> selectedRoom = viewModel.getSelectedProperty();
-
-    viewHandler.openView("AddEditView.fxml");
     viewModel.setEdit();
+    viewHandler.openView("AddEditView.fxml");
+
+    errorLabel.setTextFill(Color.GREEN);
+    errorLabel.textProperty().set("Room: " + roomTable.getSelectionModel()
+        .getSelectedItem().roomNumberProperty().get()  + " changed successfully");
   }
 
   /**
    * Method called when clicking the delete button.
-   * If a room is not selected, the error-label will be set with instructions for selecting a room,
+   * If a room is not selected, button will be inactive - and thus, unable to be clicked.
    * if a room is selected, a pop-up will show, and if confirm is pressed the removeRoom-method from RoomListViewModel will be called.
    * After successfully removing a room, a confirmation message will show.
    */
   public void removeButton()
   {
-    // TODO NEW VERSION:
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setHeaderText(
         "Confirm deletion of room: " + roomTable.getSelectionModel()

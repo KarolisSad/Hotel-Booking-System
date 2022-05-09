@@ -61,16 +61,19 @@ public class AddEditViewModel
     {
       roomId.set("");
       nrOfBeds.set(0);
-      type = null;
+      setType(null);
     }
     else
     {
+      roomId.setValue(viewState.getNumber());
+
       for (int i = 0; i < model.getAllRooms().size(); i++)
       {
         if (model.getAllRooms().get(i).getRoomId() == roomId.get())
         {
-          model.getAllRooms().get(i).setRoomType(type);
-          model.getAllRooms().get(i).setNumberOfBeds(nrOfBeds.get());
+
+          nrOfBeds.set(model.getAllRooms().get(i).getNumberOfBeds());
+          setType(model.getAllRooms().get(i).getRoomType());
         }
       }
     }
@@ -141,7 +144,8 @@ public class AddEditViewModel
    */
   public void editRoomInfo()
   {
-    model.editRoomInfo(roomId.get(), type.toString(), nrOfBeds.get());
+    // TODO add Observer!
+    model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
   }
 
   /**
@@ -168,5 +172,14 @@ public class AddEditViewModel
   public StringProperty errorPropertyProperty()
   {
     return errorProperty;
+  }
+
+  /**
+   * A getter method for getting the type of the selected room.
+   * @return the type of the selected room, or null if no room is selected.
+   */
+  public RoomType getType()
+  {
+    return type;
   }
 }

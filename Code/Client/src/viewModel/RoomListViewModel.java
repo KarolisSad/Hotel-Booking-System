@@ -120,7 +120,6 @@ public class RoomListViewModel implements PropertyChangeListener
         case "RoomRemove":
           removeRoom((String) evt.getNewValue());
           break;
-        case "RoomEdit":
       }
     });
   }
