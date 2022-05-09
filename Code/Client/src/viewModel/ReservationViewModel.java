@@ -48,7 +48,7 @@ public class ReservationViewModel {
      */
     public void getAllAvailableRooms() {
         displayRoomsInListView(model.availableRooms(dateFromDatePicker(startDatePicker.getValue().toString()),
-                dateFromDatePicker(endDatePicker.getValue().toString())));
+            dateFromDatePicker(endDatePicker.getValue().toString())));
     }
 
     /**

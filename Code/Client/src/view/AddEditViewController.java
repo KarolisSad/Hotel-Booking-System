@@ -38,20 +38,20 @@ public class AddEditViewController extends ViewController {
 
     try
     {
-    // Binding
-    idField.textProperty().bindBidirectional(viewModel.getRoomIdProperty());
+      // Binding
+      idField.textProperty().bindBidirectional(viewModel.getRoomIdProperty());
 
-    Bindings.bindBidirectional(nrOfBedsField.textProperty(), viewModel.numberOfBedsProperty(), new NumberStringConverter());
-    typeDropdown.getItems().removeAll(typeDropdown.getItems());
-    typeDropdown.getItems().add(RoomType.FAMILY);
-    typeDropdown.getItems().add(RoomType.DOUBLE);
-    typeDropdown.getItems().add(RoomType.SINGLE);
-    typeDropdown.getItems().add(RoomType.SUITE);
-
-
+      Bindings.bindBidirectional(nrOfBedsField.textProperty(), viewModel.numberOfBedsProperty(), new NumberStringConverter());
+      typeDropdown.getItems().removeAll(typeDropdown.getItems());
+      typeDropdown.getItems().add(RoomType.FAMILY);
+      typeDropdown.getItems().add(RoomType.DOUBLE);
+      typeDropdown.getItems().add(RoomType.SINGLE);
+      typeDropdown.getItems().add(RoomType.SUITE);
 
 
-    errorLabel.textProperty().bind(viewModel.errorPropertyProperty());
+
+
+      errorLabel.textProperty().bind(viewModel.errorPropertyProperty());
     }
     catch (NullPointerException e)
     {
@@ -112,22 +112,25 @@ public class AddEditViewController extends ViewController {
    */
   public void confirmButton() throws IOException {
 
+
+
+    if (viewModel.getViewState().isAdd())
+    {
+
       selectedType = typeDropdown.getSelectionModel().getSelectedItem();
       viewModel.setType(selectedType);
 
-    SwingUtilities.invokeLater( () -> {
+
       JFrame jframe = new JFrame();
       int result = JOptionPane.showConfirmDialog(jframe, "Are you sure you want to make changes?");
 
       if (result == 0) {
         viewModel.addRoom();
         System.out.println("You confirmed.");
-        try {
-          viewHandler.openView("RoomListView.fxml");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      } else if (result == 1)
+
+        viewHandler.openView("RoomListView.fxml");
+      }
+      else if (result == 1)
         System.out.println("You pressed NO");
     }
 

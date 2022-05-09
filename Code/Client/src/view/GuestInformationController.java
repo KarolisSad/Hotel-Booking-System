@@ -47,7 +47,7 @@ public class GuestInformationController extends ViewController
      * @param root        A Region object which will be used to set the instance variable.
      */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root)
-            throws RemoteException {
+        throws RemoteException {
         this.root = root;
         this.viewHandler = viewHandler;
         this.viewModelFactory = viewModelFactory;

@@ -46,16 +46,16 @@ public class ModelManager implements Model {
      */
     @Override
     public ArrayList<Room> availableRooms(LocalDate startDate,
-                                          LocalDate endDate) {
+        LocalDate endDate) {
         ArrayList<Room> notAvailableRooms = allBookings.getBookedRoomsBy(startDate,
-                endDate);
+            endDate);
         ArrayList<Room> allRooms = roomList.getRoomList();
         ArrayList<Room> finalList = roomList.getRoomList();
 
         for (int i = 0; i < allRooms.size(); i++) {
             for (int j = 0; j < notAvailableRooms.size(); j++) {
                 if (allRooms.get(i).getRoomId()
-                        .equals(notAvailableRooms.get(j).getRoomId())) {
+                    .equals(notAvailableRooms.get(j).getRoomId())) {
                     finalList.remove(allRooms.get(i));
                 }
             }
@@ -72,9 +72,9 @@ public class ModelManager implements Model {
      * @return true if rooms is allowed to be booked and false is room is not allowed to be booked
      */
     public boolean isBookingAllowed(String roomId, LocalDate startDate,
-                                    LocalDate endDate) {
+        LocalDate endDate) {
         ArrayList<Room> notAvailableRooms = allBookings.getBookedRoomsBy(startDate,
-                endDate);
+            endDate);
 
         for (int i = 0; i < notAvailableRooms.size(); i++) {
             if (notAvailableRooms.get(i).getRoomId().equals(roomId)) {
@@ -133,6 +133,7 @@ public class ModelManager implements Model {
     @Override
     public ArrayList<Room> getAllRooms() {
         return roomList.getRoomList();
+
     }
 
     /**
@@ -168,14 +169,14 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean book(String roomId, LocalDate startDate,
-                        LocalDate endDate, Guest guest) {
+        LocalDate endDate, Guest guest) {
         if (isBookingAllowed(roomId, startDate, endDate)) {
             allBookings.addBooking(
-                    new RoomBooking(startDate, endDate, roomList.getRoom(roomId), guest));
+                new RoomBooking(startDate, endDate, roomList.getRoom(roomId), guest));
             return true;
         } else {
             throw new IllegalArgumentException(
-                    "Selected Room is no longer available for selected dates.");
+                "Selected Room is no longer available for selected dates.");
         }
     }
 

@@ -47,7 +47,7 @@ public class ReservationController extends ViewController{
 
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root)
-            throws RemoteException
+        throws RemoteException
     {
         this.root = root;
         this.viewHandler = viewHandler;

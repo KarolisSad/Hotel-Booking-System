@@ -17,11 +17,11 @@
          </font>
       </Label>
       <TableView fx:id="roomTable" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="numberColumn" prefWidth="145.0" text="Room Number" />
-          <TableColumn fx:id="typeColumn" prefWidth="200.0" text="Type" />
+         <columns>
+            <TableColumn fx:id="numberColumn" prefWidth="145.0" text="Room Number" />
+            <TableColumn fx:id="typeColumn" prefWidth="200.0" text="Type" />
             <TableColumn fx:id="numberOfBedsColumn" prefWidth="118.0" text="Number of beds" />
-        </columns>
+         </columns>
       </TableView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>

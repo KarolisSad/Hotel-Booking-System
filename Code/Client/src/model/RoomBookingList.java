@@ -43,7 +43,7 @@ public class RoomBookingList
   {
     if (booking == null)
     {
-     throw new NullPointerException("No booking passed as argument.");
+      throw new NullPointerException("No booking passed as argument.");
     }
 
     else

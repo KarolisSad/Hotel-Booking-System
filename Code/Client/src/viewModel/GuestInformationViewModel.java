@@ -47,8 +47,8 @@ public class GuestInformationViewModel {
     public void bookRoomWithGuest() {
 
         if (model.book(temp.getRoomID(), temp.getStartDate(), temp.getEndDate(), new Guest(
-                firstNameField.getValue(), lastNameField.getValue(),
-                emailField.getValue(), Integer.parseInt(phoneNumberField.getValue())))) {
+            firstNameField.getValue(), lastNameField.getValue(),
+            emailField.getValue(), Integer.parseInt(phoneNumberField.getValue())))) {
             errorLabel.setValue("Room was booked!");
         } else {
             errorLabel.setValue("This room is booked during this time period!");
