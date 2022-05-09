@@ -9,6 +9,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="JavaFX11.02" level="application" />
     <orderEntry type="library" name="MyObserver-1.4" level="application" />
+<<<<<<< HEAD
     <orderEntry type="library" name="java-fx" level="application" />
+=======
+    <orderEntry type="library" name="javafx-swt" level="application" />
+>>>>>>> 02cf9e4635e3a1df9aed684a812e166ee253c79a
   </component>
 </module>

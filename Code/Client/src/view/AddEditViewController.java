@@ -39,8 +39,6 @@ public class AddEditViewController extends ViewController {
 
     try
     {
-
-
     // Binding
     idField.textProperty().bindBidirectional(viewModel.getRoomIdProperty());
 
