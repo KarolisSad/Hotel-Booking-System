@@ -145,9 +145,7 @@ public class HotelClient implements Model {
                 e.printStackTrace();
             }
         }
-        RoomTransfer r = json.fromJson(message,RoomTransfer.class);
-        System.out.println(r.getRoomList());
-        return r;
+      return json.fromJson(message,RoomTransfer.class);
     }
 
     /**

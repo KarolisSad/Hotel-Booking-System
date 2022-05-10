@@ -73,7 +73,8 @@ public class MyDataBase {
                 statement.setString(1, ID);
                 statement.executeUpdate();
             } catch (Exception e) {
-                throw new IllegalArgumentException("Room wasn't removed.");
+                e.printStackTrace();
+                throw new IllegalArgumentException("Remove all bookings including this room.");
             }
         }
 //        return "Room with ID: " + ID + " was removed.";

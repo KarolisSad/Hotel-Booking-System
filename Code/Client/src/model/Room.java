@@ -25,9 +25,9 @@ public class Room
     this.roomId = roomId;
     this.roomType = roomOfType;
     this.numberOfBeds = numberOfBeds;
-//    setRoomId(roomId);
-//    setRoomType(roomOfType);
-//    setNumberOfBeds(numberOfBeds);
+    setRoomId(roomId);
+    setRoomType(roomOfType);
+    setNumberOfBeds(numberOfBeds);
   }
 
   /**
