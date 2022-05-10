@@ -39,7 +39,6 @@ public class AddEditViewController extends ViewController {
     try
     {
       // Binding
-      idField.textProperty().bindBidirectional(viewModel.getRoomIdProperty());
 
       Bindings.bindBidirectional(nrOfBedsField.textProperty(), viewModel.numberOfBedsProperty(), new NumberStringConverter());
       typeDropdown.getItems().removeAll(typeDropdown.getItems());
