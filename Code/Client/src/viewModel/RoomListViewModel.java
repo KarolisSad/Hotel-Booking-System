@@ -48,10 +48,18 @@ public class RoomListViewModel implements PropertyChangeListener
     allRooms.clear();
 
     RoomTransfer roomTransfer = model.getAllRooms();
-    for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
+
+    if (roomTransfer.getMessage() == null)
     {
-      allRooms.add(new SimpleRoomViewModel(roomTransfer.getRoomList().get(i)));
+      for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
+      {
+        allRooms.add(new SimpleRoomViewModel(roomTransfer.getRoomList().get(i)));
+      }
     }
+    else {
+      errorLabel.setValue(roomTransfer.getMessage());
+    }
+
   }
 
   /**
@@ -74,9 +82,6 @@ public class RoomListViewModel implements PropertyChangeListener
         errorLabel.setValue("Room: " + roomId + " deleted successfully");
         updateRoomList();
       }
-
-
-
 
   }
 

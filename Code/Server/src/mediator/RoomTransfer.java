@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 /**
  * Purpose of this object is to store different values when sending to a server
- *
+ * <p>
  * 2020-05-08
+ *
  * @author Group5
  */
 
@@ -21,13 +22,12 @@ public class RoomTransfer {
     private int nrBeds;
     private String type;
     private ArrayList<Room> roomList;
-    private LocalDate  startDate;
+    private LocalDate startDate;
     private LocalDate endDate;
     private Guest guest;
     private String message;
 
-    public RoomTransfer(String type , String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList)
-    {
+    public RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList) {
         this.roomId = roomId;
         this.roomType = roomType;
         this.nrBeds = nrBeds;
@@ -36,8 +36,7 @@ public class RoomTransfer {
     }
 
     //Book
-    public RoomTransfer(String type,String roomId, LocalDate startDate, LocalDate endDate, Guest guest)
-    {
+    public RoomTransfer(String type, String roomId, LocalDate startDate, LocalDate endDate, Guest guest) {
         this.type = type;
         this.roomId = roomId;
         this.startDate = startDate;
@@ -45,38 +44,34 @@ public class RoomTransfer {
         this.guest = guest;
     }
 
-    public RoomTransfer(String type, LocalDate startDate, LocalDate endDate)
-    {
+    public RoomTransfer(String type, LocalDate startDate, LocalDate endDate) {
         this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public RoomTransfer(String type, String message)
-    {
+    public RoomTransfer(String type, String message) {
         this.type = type;
         this.message = message;
     }
 
-    RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds)
-    {
-        this.type =type;
+    RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds) {
+        this.roomType =roomType;
+        this.type = type;
         this.roomId = roomId;
         this.nrBeds = nrBeds;
     }
-    public RoomTransfer(String type)
-    {
+
+    public RoomTransfer(String type) {
         this.type = type;
     }
 
-    public RoomTransfer(String type, ArrayList<Room> rooms)
-    {
-        this.roomList =rooms;
+    public RoomTransfer(String type, ArrayList<Room> rooms) {
+        this.roomList = rooms;
         this.type = type;
     }
 
-    public RoomTransfer(String type, ArrayList<Room> roomList, String message)
-    {
+    public RoomTransfer(String type, ArrayList<Room> roomList, String message) {
         this.type = type;
         this.roomList = roomList;
         this.message = message;

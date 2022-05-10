@@ -51,7 +51,6 @@ public class MyDataBase {
                     throw new IllegalArgumentException("Room wasn't added!");
             }
         }
-//        return "Room with ID: " + roomID + " was successfully added!";
     }
 
     // Return true if room exits.
@@ -79,7 +78,6 @@ public class MyDataBase {
                 throw new IllegalArgumentException("This room has active bookings, cannot be removed..");
             }
         }
-//        return "Room with ID: " + ID + " was removed.";
     }
 
     public ArrayList<Room> getAllRooms() throws SQLException {
@@ -167,7 +165,6 @@ public class MyDataBase {
                 throw new IllegalArgumentException("Room wasn't booked");
             }
         }
-//        return  "Room: "+ roomId + " From: "+ startDate.toString() + " To: " + endDate.toString()+ " was successfully booked!";
     }
 
     // Adding guest, if guest already exists, no exceptions will be thrown.
@@ -182,7 +179,6 @@ public class MyDataBase {
                 statement.setInt(4, guest.getPhoneNr());
                 statement.executeUpdate();
             } catch (Exception e) {
-                // :)
             }
         }
     }
@@ -205,7 +201,6 @@ public class MyDataBase {
                 throw new IllegalArgumentException("Unable to edit " + roomID+ " room.");
             }
         }
-//        return "Changes were successfully made to " + roomID;
     }
 
 

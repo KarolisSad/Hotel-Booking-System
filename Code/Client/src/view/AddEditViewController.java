@@ -119,22 +119,6 @@ public class AddEditViewController extends ViewController {
                 alert.close();
             }
 
-            //                                          OLD VERSION
-//        JFrame jframe = new JFrame();
-//        int result = JOptionPane.showConfirmDialog(jframe, "Are you sure you want to make changes?");
-//
-//        if (result == 0) {
-//          viewModel.addRoom();
-//          System.out.println("You confirmed.");
-//
-//          try {
-//            viewHandler.openView("RoomListView.fxml");
-//          } catch (IOException e) {
-//
-//          }
-//        }
-//        else if (result == 1)
-//          System.out.println("You pressed NO");
         } else {
             selectedType = typeDropdown.getSelectionModel().getSelectedItem();
             viewModel.setType(selectedType);

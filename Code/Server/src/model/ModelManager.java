@@ -69,6 +69,11 @@ public class ModelManager implements Model {
      */
     @Override
     public void addRoom(String roomId, RoomType type, int nrBeds) throws SQLException {
+
+        if (roomId.equals(""))
+        {
+            throw new IllegalArgumentException("gd");
+        }
         dataBaseAdapter.addRoom(roomId,type,nrBeds);
     }
 

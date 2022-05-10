@@ -132,9 +132,18 @@ public class AddEditViewModel
    * A non argument method calls an addRoom(String roomId, RoomTypes type, int nrBeds)
    * from the model
    */
+
+  //todo error label
   public void addRoom()
   {
    RoomTransfer roomTransfer= model.addRoom(roomId.get(), type, nrOfBeds.get());
+   if (roomTransfer.getMessage() == null)
+   {
+     errorProperty.set("Room was successfully added!");
+   }
+   else {
+     errorProperty.set(roomTransfer.getMessage());
+   }
     reset();
   }
 
@@ -146,7 +155,13 @@ public class AddEditViewModel
   {
     // TODO add Observer!
     RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
-
+    if (roomTransfer.getMessage() == null)
+    {
+      errorProperty.set("Room was successfully edited!");
+    }
+    else {
+      errorProperty.set(roomTransfer.getMessage());
+    }
   }
 
   /**
