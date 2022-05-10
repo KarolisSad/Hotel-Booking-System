@@ -22,9 +22,12 @@ public class Room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
-    setRoomId(roomId);
-    setRoomType(roomOfType);
-    setNumberOfBeds(numberOfBeds);
+    this.roomId = roomId;
+    this.roomType = roomOfType;
+    this.numberOfBeds = numberOfBeds;
+//    setRoomId(roomId);
+//    setRoomType(roomOfType);
+//    setNumberOfBeds(numberOfBeds);
   }
 
   /**
@@ -109,7 +112,6 @@ public class Room
   }
 
 
-
   public int getNumberOfBeds()
   {
     return numberOfBeds;
@@ -126,10 +128,12 @@ public class Room
     return other;
   }
 
-  @Override public String toString()
-  {
-    return "Room number: " + roomId + ", Type: " + roomType.toString()
-        + ", Number of beds: " + numberOfBeds;
+  @Override
+  public String toString() {
+    return "Room{" +
+            "roomId='" + roomId + '\'' +
+            ", roomType=" + roomType +
+            ", numberOfBeds=" + numberOfBeds +
+            '}';
   }
-
 }

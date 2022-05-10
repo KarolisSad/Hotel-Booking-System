@@ -2,6 +2,7 @@ package viewModel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import mediator.RoomTransfer;
 import model.Guest;
 import model.Model;
 
@@ -33,7 +34,7 @@ public class GuestInformationViewModel {
         this.firstNameField = new SimpleStringProperty("Bob");
         this.lastNameField = new SimpleStringProperty("Builder");
         this.emailField = new SimpleStringProperty("Bob@Builder.build");
-        this.phoneNumberField = new SimpleStringProperty("202020");
+        this.phoneNumberField = new SimpleStringProperty("20202020");
         this.errorLabel = new SimpleStringProperty();
         this.temp = tempInfo;
     }
@@ -46,13 +47,19 @@ public class GuestInformationViewModel {
      */
     public void bookRoomWithGuest() {
 
-        if (model.book(temp.getRoomID(), temp.getStartDate(), temp.getEndDate(), new Guest(
+
+        RoomTransfer roomTransfer =model.book(temp.getRoomID(), temp.getStartDate(), temp.getEndDate(), new Guest(
             firstNameField.getValue(), lastNameField.getValue(),
-            emailField.getValue(), Integer.parseInt(phoneNumberField.getValue())))) {
+            emailField.getValue(), Integer.parseInt(phoneNumberField.getValue())));
+        if (roomTransfer.getMessage() == null)
+        {
             errorLabel.setValue("Room was booked!");
-        } else {
-            errorLabel.setValue("This room is booked during this time period!");
+
         }
+        else {
+            errorLabel.setValue(roomTransfer.getMessage());
+        }
+
     }
 
     public StringProperty getFirstNameField() {

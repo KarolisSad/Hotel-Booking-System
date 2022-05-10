@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import mediator.RoomTransfer;
 import model.Model;
 import model.RoomType;
 
@@ -67,12 +68,14 @@ public class AddEditViewModel
     {
       roomId.setValue(viewState.getNumber());
 
-      for (int i = 0; i < model.getAllRooms().size(); i++)
+      RoomTransfer roomTransfer = model.getAllRooms();
+
+      for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
       {
-        if (model.getAllRooms().get(i).getRoomId().equals(roomId.get()))
+        if (roomTransfer.getRoomList().get(i).getRoomId().equals(roomId.get()))
         {
-          nrOfBeds.set(model.getAllRooms().get(i).getNumberOfBeds());
-          setType(model.getAllRooms().get(i).getRoomType());
+          nrOfBeds.set(roomTransfer.getRoomList().get(i).getNumberOfBeds());
+          setType(roomTransfer.getRoomList().get(i).getRoomType());
         }
       }
     }
@@ -131,9 +134,7 @@ public class AddEditViewModel
    */
   public void addRoom()
   {
-    model.addRoom(roomId.get(), type, nrOfBeds.get());
-    System.out.println(model.getAllRooms());
-
+   RoomTransfer roomTransfer= model.addRoom(roomId.get(), type.toString(), nrOfBeds.get());
     reset();
   }
 
@@ -145,7 +146,7 @@ public class AddEditViewModel
   {
     // TODO add Observer!
 
-    model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
+    model.editRoomInfo(roomId.get(), type.toString(), nrOfBeds.get());
   }
 
   /**

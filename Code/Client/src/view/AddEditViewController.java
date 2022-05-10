@@ -109,7 +109,6 @@ public class AddEditViewController extends ViewController {
             ButtonType cancel = new ButtonType("Cancel",
                     ButtonBar.ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().setAll(confirm, cancel);
-
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == confirm) {
                 viewModel.addRoom();

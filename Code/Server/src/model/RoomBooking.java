@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
 /**
  * A class that creates a room booking.
  *
@@ -10,8 +8,8 @@ import java.time.LocalDate;
  */
 public class RoomBooking
 {
-  private LocalDate startDate;
-  private LocalDate endDate;
+  private String startDate;
+  private String endDate;
   private Room room;
   private Guest guest;
 
@@ -25,10 +23,11 @@ public class RoomBooking
    * @param room      room
    * @param guest     guest
    */
-  public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
+  public RoomBooking(String startDate, String endDate, Room room,
       Guest guest)
   {
-    setStartAndEndDate(startDate, endDate);
+    this.startDate = startDate;
+    this.endDate = endDate;
     setRoom(room);
     setGuest(guest);
   }
@@ -44,34 +43,6 @@ public class RoomBooking
    * - End date is the same as start date
    * - End date is before start date.
    */
-  public void setStartAndEndDate(LocalDate startDate, LocalDate endDate)
-  {
-    if (startDate == null || endDate == null)
-    {
-      throw new NullPointerException("Please enter a start date and an end date.");
-    }
-
-    else if (startDate.isBefore(LocalDate.now()))
-    {
-      throw new IllegalArgumentException(
-          "Start date should not be before current date: " + LocalDate.now());
-    }
-
-    else if (endDate.isEqual(startDate))
-    {
-      throw new IllegalArgumentException(
-          "End date cannot be the same date as start-date.");
-    }
-
-    else if (endDate.isBefore(startDate))
-    {
-      throw new IllegalArgumentException(
-          "End date cannot be before start date.");
-    }
-
-    this.startDate = startDate;
-    this.endDate = endDate;
-  }
 
   /**
    * Method setting the room variable to a copy of the room passed as an argument.
@@ -110,8 +81,7 @@ public class RoomBooking
    *
    * @return endDate
    */
-  public LocalDate getEndDate()
-  {
+  public String getEndDate() {
     return endDate;
   }
 
@@ -120,8 +90,7 @@ public class RoomBooking
    *
    * @return startDate
    */
-  public LocalDate getStartDate()
-  {
+  public String getStartDate() {
     return startDate;
   }
 

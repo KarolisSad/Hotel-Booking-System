@@ -1,5 +1,6 @@
 package model;
 
+import mediator.RoomTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.time.LocalDate;
@@ -7,11 +8,11 @@ import java.util.ArrayList;
 
 public interface Model extends UnnamedPropertyChangeSubject
 {
-  ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate);
-  boolean book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest);
-  boolean isBookingAllowed(String roomId, LocalDate startDate, LocalDate endDate);
-  boolean addRoom(String roomId, RoomType type, int nrBeds);
-  boolean removeRoom(String roomId);
-  boolean editRoomInfo(String roomId, RoomType type, int nrBeds);
-  ArrayList<Room> getAllRooms();
+  RoomTransfer availableRooms(LocalDate startDate, LocalDate endDate);
+  RoomTransfer book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest);
+  RoomTransfer isBookingAllowed(String roomId, LocalDate startDate, LocalDate endDate);
+  RoomTransfer addRoom(String roomId, String type, int nrBeds);
+  RoomTransfer removeRoom(String roomId);
+  RoomTransfer editRoomInfo(String roomId, String type, int nrBeds);
+  RoomTransfer getAllRooms();
 }

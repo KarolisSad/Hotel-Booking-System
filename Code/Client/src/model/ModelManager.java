@@ -1,7 +1,11 @@
 package model;
 
+import mediator.HotelClient;
+import mediator.RoomTransfer;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,6 +20,7 @@ public class ModelManager implements Model {
     private RoomBookingList allBookings;
     private RoomList roomList;
     private PropertyChangeSupport property;
+    private HotelClient hotelClient;
 
     /**
      * A constructor that is meant to initialize
@@ -23,10 +28,15 @@ public class ModelManager implements Model {
      * that will store a list of all rooms and a list of booked rooms.
      */
     public ModelManager() {
+        try {
+            hotelClient = new HotelClient(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         allBookings = new RoomBookingList();
         roomList = new RoomList();
         property = new PropertyChangeSupport(this);
-        createDummyData();
+//        createDummyData();
     }
 
     private void createDummyData() {
@@ -45,22 +55,24 @@ public class ModelManager implements Model {
      * @return available rooms
      */
     @Override
-    public ArrayList<Room> availableRooms(LocalDate startDate,
-        LocalDate endDate) {
-        ArrayList<Room> notAvailableRooms = allBookings.getBookedRoomsBy(startDate,
-            endDate);
-        ArrayList<Room> allRooms = roomList.getRoomList();
-        ArrayList<Room> finalList = roomList.getRoomList();
+    public RoomTransfer availableRooms(LocalDate startDate,
+                                       LocalDate endDate) {
 
-        for (int i = 0; i < allRooms.size(); i++) {
-            for (int j = 0; j < notAvailableRooms.size(); j++) {
-                if (allRooms.get(i).getRoomId()
-                    .equals(notAvailableRooms.get(j).getRoomId())) {
-                    finalList.remove(allRooms.get(i));
-                }
-            }
-        }
-        return finalList;
+        return hotelClient.availableRooms(startDate,endDate);
+//        ArrayList<Room> notAvailableRooms = allBookings.getBookedRoomsBy(startDate,
+//                endDate);
+//        ArrayList<Room> allRooms = roomList.getRoomList();
+//        ArrayList<Room> finalList = roomList.getRoomList();
+//
+//        for (int i = 0; i < allRooms.size(); i++) {
+//            for (int j = 0; j < notAvailableRooms.size(); j++) {
+//                if (allRooms.get(i).getRoomId()
+//                        .equals(notAvailableRooms.get(j).getRoomId())) {
+//                    finalList.remove(allRooms.get(i));
+//                }
+//            }
+//        }
+//        return finalList;
     }
 
     /**
@@ -71,17 +83,18 @@ public class ModelManager implements Model {
      * @param endDate   end date
      * @return true if rooms is allowed to be booked and false is room is not allowed to be booked
      */
-    public boolean isBookingAllowed(String roomId, LocalDate startDate,
-        LocalDate endDate) {
-        ArrayList<Room> notAvailableRooms = allBookings.getBookedRoomsBy(startDate,
-            endDate);
-
-        for (int i = 0; i < notAvailableRooms.size(); i++) {
-            if (notAvailableRooms.get(i).getRoomId().equals(roomId)) {
-                return false;
-            }
-        }
-        return true;
+    public RoomTransfer isBookingAllowed(String roomId, LocalDate startDate,
+                                    LocalDate endDate) {
+        return null;
+//        ArrayList<Room> notAvailableRooms = allBookings.getBookedRoomsBy(startDate,
+//                endDate);
+//
+//        for (int i = 0; i < notAvailableRooms.size(); i++) {
+//            if (notAvailableRooms.get(i).getRoomId().equals(roomId)) {
+//                return false;
+//            }
+//        }
+//        return true;
     }
 
     /**
@@ -93,11 +106,13 @@ public class ModelManager implements Model {
      * @return true if room is added successfully
      */
     @Override
-    public boolean addRoom(String roomId, RoomType type, int nrBeds) {
-        Room room = new Room(roomId, type, nrBeds);
-        roomList.addRoom(room);
+    public RoomTransfer addRoom(String roomId, String type, int nrBeds) {
 
-        return true;
+        return hotelClient.addRoom(roomId,type,nrBeds);
+//        Room room = new Room(roomId, type, nrBeds);
+//        roomList.addRoom(room);
+//
+//        return true;
     }
 
     /**
@@ -110,19 +125,21 @@ public class ModelManager implements Model {
      * @throws IllegalArgumentException if room to be removed has any current or future bookings.
      */
     @Override
-    public boolean removeRoom(String roomId) {
-        if (isBookingAllowed(roomId, LocalDate.now(), LocalDate.MAX)) {
-            roomList.removeRoom(roomId);
-            property.firePropertyChange("RoomRemove", roomList, roomId);
-            return true;
-        }
+    public RoomTransfer removeRoom(String roomId) {
 
-        //TODO make something fancy regarding this -> when we have booking id,
-        // return conflicting booking id's.
-
-        else {
-            throw new IllegalArgumentException("ERROR: Room is part of current or future bookings. Room not deleted.");
-        }
+        return   hotelClient.removeRoom(roomId);
+//        if (isBookingAllowed(roomId, LocalDate.now(), LocalDate.MAX)) {
+//            roomList.removeRoom(roomId);
+//            property.firePropertyChange("RoomRemove", roomList, roomId);
+//            return true;
+//        }
+//
+//        //TODO make something fancy regarding this -> when we have booking id,
+//        // return conflicting booking id's.
+//
+//        else {
+//            throw new IllegalArgumentException("ERROR: Room is part of current or future bookings. Room not deleted.");
+//        }
     }
 
     /**
@@ -131,8 +148,9 @@ public class ModelManager implements Model {
      * @return list of all rooms.
      */
     @Override
-    public ArrayList<Room> getAllRooms() {
-        return roomList.getRoomList();
+    public RoomTransfer getAllRooms() {
+        return hotelClient.getAllRooms();
+//        return roomList.getRoomList();
 
     }
 
@@ -146,14 +164,17 @@ public class ModelManager implements Model {
      * @return true if editing succeeds
      */
     @Override
-    public boolean editRoomInfo(String roomId, RoomType type, int nrBeds) {
-        // TODO decide if this should be a boolean after all??
+    public RoomTransfer editRoomInfo(String roomId, String type, int nrBeds) {
 
-        Room roomToEdit = roomList.getRoom(roomId);
-        roomToEdit.setRoomType(type);
-        roomToEdit.setNumberOfBeds(nrBeds);
-        property.firePropertyChange("RoomEdit", roomId, roomToEdit);
-        return true;
+        return hotelClient.editRoomInfo(roomId,type,nrBeds);
+
+//        // TODO decide if this should be a boolean after all??
+//
+//        Room roomToEdit = roomList.getRoom(roomId);
+//        roomToEdit.setRoomType(type);
+//        roomToEdit.setNumberOfBeds(nrBeds);
+//        property.firePropertyChange("RoomEdit", roomId, roomToEdit);
+//        return true;
 
     }
 
@@ -168,16 +189,19 @@ public class ModelManager implements Model {
      * @return true if the room is booked and false if the room is not booked
      */
     @Override
-    public boolean book(String roomId, LocalDate startDate,
-        LocalDate endDate, Guest guest) {
-        if (isBookingAllowed(roomId, startDate, endDate)) {
-            allBookings.addBooking(
-                new RoomBooking(startDate, endDate, roomList.getRoom(roomId), guest));
-            return true;
-        } else {
-            throw new IllegalArgumentException(
-                "Selected Room is no longer available for selected dates.");
-        }
+    public RoomTransfer book(String roomId, LocalDate startDate,
+                        LocalDate endDate, Guest guest) {
+
+        return hotelClient.book(roomId,startDate,endDate,guest);
+
+//        if (isBookingAllowed(roomId, startDate, endDate)) {
+//            allBookings.addBooking(
+//                    new RoomBooking(startDate, endDate, roomList.getRoom(roomId), guest));
+//            return true;
+//        } else {
+//            throw new IllegalArgumentException(
+//                    "Selected Room is no longer available for selected dates.");
+//        }
     }
 
     @Override

@@ -92,23 +92,6 @@ public class RoomBookingList
   public ArrayList<Room> getBookedRoomsBy(LocalDate startDate,
       LocalDate endDate)
   {
-    ArrayList<Room> rooms = new ArrayList<>();
-    for (int i = 0; i < allBookings.size(); i++)
-    {
-      if (allBookings.get(i).getStartDate().isBefore(endDate)
-          && allBookings.get(i).getStartDate().isAfter(startDate)
-          || allBookings.get(i).getEndDate().isBefore(endDate)
-          && allBookings.get(i).getEndDate().isAfter(startDate) || (
-          startDate.isBefore(allBookings.get(i).getEndDate())
-              && startDate.isAfter(allBookings.get(i).getStartDate())
-              || endDate.isBefore(allBookings.get(i).getEndDate())
-              && endDate.isAfter(allBookings.get(i).getStartDate()))
-          || startDate.equals(allBookings.get(i).getStartDate())
-          || endDate.equals(allBookings.get(i).getEndDate()))
-      {
-        rooms.add(allBookings.get(i).getRoom());
-      }
-    }
-    return rooms;
+    return null;
   }
 }

@@ -5,6 +5,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import mediator.RoomTransfer;
 import viewModel.ReservationViewModel;
 import viewModel.ViewModelFactory;
 
