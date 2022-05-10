@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import mediator.RoomTransfer;
 import model.Model;
 import model.Room;
+import model.RoomType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

@@ -50,16 +50,15 @@ public class ReservationViewModel {
     public void getAllAvailableRooms() {
         RoomTransfer roomTransfer = model.availableRooms(dateFromDatePicker(startDatePicker.getValue().toString()),
             dateFromDatePicker(endDatePicker.getValue().toString()));
-        System.out.println("times");
-        if (roomTransfer.getMessage().equals(""))
-        {
+//        if (roomTransfer.getMessage().equals(""))
+//        {
             displayRoomsInListView(roomTransfer.getRoomList());
 
-        }
-        else {
-            System.out.println(roomTransfer.getMessage());
-            errorLabel.setValue(roomTransfer.getMessage());
-        }
+//        }
+//        else {
+//            System.out.println(roomTransfer.getMessage());
+//            errorLabel.setValue(roomTransfer.getMessage());
+//        }
     }
 
     /**

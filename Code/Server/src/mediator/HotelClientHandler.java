@@ -58,7 +58,7 @@ public class HotelClientHandler implements Runnable {
                 case "addOneRoom":
                      RoomTransfer room = json.fromJson(message, RoomTransfer.class);
                     try {
-                        model.addRoom(room.getRoomId(), room.getType(), room.getNrBeds());
+                        model.addRoom(room.getRoomId(), room.getRoomType(), room.getNrBeds());
                         out.println(successMessage);
                     } catch (Exception e) {
                         RoomTransfer roomTransfer = new RoomTransfer("error",e.getMessage());
@@ -84,7 +84,7 @@ public class HotelClientHandler implements Runnable {
                     } catch (Exception e) {
                         out.println(json.toJson(new RoomTransfer("error",e.getMessage())));
                     }
-                    room = new RoomTransfer(rooms);
+                    room = new RoomTransfer("getALlRooms",rooms);
                     String jsonString = json.toJson(room);
                     out.println(jsonString);
                     break;
@@ -92,8 +92,8 @@ public class HotelClientHandler implements Runnable {
                 case "availableRooms":
                     room = json.fromJson(message, RoomTransfer.class);
                     try {
-                        RoomTransfer availableRooms = model.availableRooms(room.getStartDate(), room.getEndDate());
-                        jsonString = json.toJson(availableRooms);
+                        RoomTransfer transfer = new RoomTransfer("availableRooms",model.availableRooms(room.getStartDate(), room.getEndDate()));
+                        jsonString = json.toJson(transfer);
                         out.println(jsonString);
                     } catch (Exception e) {
                         out.println(json.toJson(new RoomTransfer("error",e.getMessage())));
@@ -112,8 +112,9 @@ public class HotelClientHandler implements Runnable {
 
                 case "edit":
                     room = json.fromJson(message, RoomTransfer.class);
-                    try {
-                        model.editRoomInfo(room.getRoomId(),room.getType(),room.getNrBeds());
+                    try {  System.out.println(room.getRoomType());
+                        model.editRoomInfo(room.getRoomId(),room.getRoomType(),room.getNrBeds());
+
                         out.println(successMessage);
                     } catch (Exception e) {
                         out.println(json.toJson(new RoomTransfer("error",e.getMessage())));

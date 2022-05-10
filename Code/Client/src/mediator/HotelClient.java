@@ -3,6 +3,8 @@ package mediator;
 import com.google.gson.Gson;
 import model.Guest;
 import model.Model;
+import model.Room;
+import model.RoomType;
 
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
@@ -73,7 +75,7 @@ public class HotelClient implements Model {
      * @return message containing information if room was successfully added
      */
     @Override
-    public synchronized RoomTransfer addRoom(String roomID, String type, int numberOfBeds) {
+    public synchronized RoomTransfer addRoom(String roomID, RoomType type, int numberOfBeds) {
         sendToServerAsJson(new RoomTransfer("addOneRoom", roomID, type, numberOfBeds, null));
         message = null;
         while (message == null) {
@@ -96,8 +98,8 @@ public class HotelClient implements Model {
      * @return message containing information if room was successfully edited
      */
     @Override
-    public synchronized RoomTransfer editRoomInfo(String roomID, String type, int nrBeds) {
-        sendToServerAsJson(new RoomTransfer("edit", roomID, type, nrBeds, null));
+    public synchronized RoomTransfer editRoomInfo(String roomID, RoomType type, int nrBeds) {
+        sendToServerAsJson(new RoomTransfer("edit",roomID,type,nrBeds));
         message = null;
         try {
             wait();
@@ -168,7 +170,6 @@ public class HotelClient implements Model {
                 e.printStackTrace();
             }
         }
-        RoomTransfer roomTransfer = json.fromJson(message, RoomTransfer.class);
         return json.fromJson(message, RoomTransfer.class);
     }
 
@@ -192,11 +193,6 @@ public class HotelClient implements Model {
             }
         }
         return json.fromJson(message,RoomTransfer.class);
-    }
-
-    @Override
-    public RoomTransfer isBookingAllowed(String roomId, LocalDate startDate, LocalDate endDate) {
-        return null;
     }
 
 

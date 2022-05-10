@@ -9,8 +9,10 @@ package model;
 public class Room
 {
   private String roomId;
-  private String type;
-  private int nrBeds;
+  private RoomType roomType;
+  private int numberOfBeds;
+
+  //todo change javadoc
 
   /**
    * One-argument contructor
@@ -18,26 +20,67 @@ public class Room
    *
    * @param roomId room number
    */
-  public Room(String roomId, String type, int nrBeds)
+  public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
     setRoomId(roomId);
-    setType(type);
-    this.nrBeds = nrBeds;
-  }
-
-  public void setType(String type)
-  {
-    if (type == null)
-    {
-      throw new IllegalArgumentException("Room type should not be empty. Please select room type.");
-    }
-    else this.type = type;
+    setRoomType(roomOfType);
+    setNumberOfBeds(numberOfBeds);
   }
 
   /**
-   * Method setting the roomId variable to the string given as argument.
-   * @throws IllegalArgumentException if argument is null or an empty String.
+   * Static method that converts from String to a Room type ENUM value.
+   * @param roomType a String corresponding to the room type enum.
+   * @return the room-type enum value of the string passed as arguments, or null.
+   */
+  public static RoomType convertRoomTypeFromString(String roomType)
+  {
+    switch (roomType)
+    {
+      case "single":
+        return RoomType.SINGLE;
+      case "double":
+        return RoomType.DOUBLE;
+      case "family":
+        return RoomType.FAMILY;
+      case "suite":
+        return RoomType.SUITE;
+      default:
+        return null;
+    }
+  }
+
+
+  public void setRoomType(RoomType roomOfType)
+  {
+    if (roomOfType == null)
+    {
+      throw new IllegalArgumentException("Room type cannot be null");
+    }
+
+    else
+    {
+      this.roomType = roomOfType;
+    }
+  }
+
+  public void setNumberOfBeds(int numberOfBeds)
+  {
+    if (numberOfBeds == 0)
+    {
+      throw new IllegalArgumentException("Number of beds should not be 0");
+    }
+
+    else
+    {
+      this.numberOfBeds = numberOfBeds;
+    }
+  }
+
+  /**
+   * Private method setting the roomId variable to the string given as argument.
+   *
    * @param roomId
+   * @throws IllegalArgumentException if argument is null or an empty String.
    */
   public void setRoomId(String roomId)
   {
@@ -60,14 +103,17 @@ public class Room
     return roomId;
   }
 
-  public int getNrBeds() {
-    return nrBeds;
+  public RoomType getRoomType()
+  {
+    return roomType;
   }
 
-  public String getType() {
-    return type;
-  }
 
+
+  public int getNumberOfBeds()
+  {
+    return numberOfBeds;
+  }
 
   /**
    * A method meant for making a copy of a room object
@@ -76,16 +122,14 @@ public class Room
    */
   public Room copy()
   {
-    Room other = new Room(roomId, type, nrBeds);
+    Room other = new Room(roomId, roomType, numberOfBeds);
     return other;
   }
 
-  @Override
-  public String toString() {
-    return "Room{" +
-            "roomId='" + roomId + '\'' +
-            ", type='" + type + '\'' +
-            ", nrBeds=" + nrBeds +
-            '}';
+  @Override public String toString()
+  {
+    return "Room number: " + roomId + ", Type: " + roomType.toString()
+        + ", Number of beds: " + numberOfBeds;
   }
+
 }

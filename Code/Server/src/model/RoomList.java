@@ -18,14 +18,6 @@ public class RoomList
   RoomList()
   {
     this.roomList = new ArrayList<>();
-    createDummyData();
-  }
-
-  public void createDummyData()
-  {
-    addRoom(new Room("1.01","Family",5));
-    addRoom(new Room("1.02", "Regular",2));
-    addRoom(new Room("1.03","Lux", 3));
   }
 
   /**
@@ -38,17 +30,6 @@ public class RoomList
     return new ArrayList<>(roomList);
   }
 
-  //  public void removeRoomById(String id)
-  //  {
-  //    for (int i = 0; i<roomList.size(); i++)
-  //    {
-  //      if (roomList.get(i).getRoomId().equals(id))
-  //      {
-  //        roomList.remove(i);
-  //        return;
-  //      }
-  //    }
-  //  }
 
   /**
    * A method that is meant for added a new room to the room list.
@@ -116,10 +97,26 @@ public class RoomList
     return roomList.size();
   }
 
-  @Override
-  public String toString() {
-    return "RoomList{" +
-            "roomList=" + roomList +
-            '}';
+  /**
+   * Method removing a room from the list of all rooms.
+   *
+   * @param roomId ID of the room to be removed.
+   * @return true if room is successfully removed (if room is present in list.)
+   * @throws IllegalArgumentException if room is not  found.
+   */
+  public boolean removeRoom(String roomId)
+  {
+    Room roomToRemove = null;
+    if (roomList.contains(getRoom(roomId)))
+    {
+      roomToRemove = getRoom(roomId);
+      roomList.remove(roomToRemove);
+      return true;
+    }
+
+    else
+    {
+      throw new IllegalArgumentException("Room not present in RoomList.");
+    }
   }
 }

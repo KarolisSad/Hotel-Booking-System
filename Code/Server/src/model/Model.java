@@ -1,18 +1,17 @@
 package model;
 
-import mediator.RoomTransfer;
+import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface Model
+public interface Model extends UnnamedPropertyChangeSubject
 {
-  RoomTransfer availableRooms(LocalDate startDate, LocalDate endDate) throws SQLException;
-  void book(String roomId, LocalDate  startDate, LocalDate  endDate, Guest guest) throws SQLException;
-  boolean isBookingAllowed(String roomId, LocalDate  startDate, LocalDate  endDate);
-  void addRoom(String roomID, String type, int numberOfBeds) throws SQLException;
-  void removeRoom(String ID) throws SQLException;
+  ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate) throws SQLException;
+  void book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) throws SQLException;
+  void addRoom(String roomId, RoomType type, int nrBeds) throws SQLException;
+  void removeRoom(String roomId) throws SQLException;
+  void editRoomInfo(String roomId, RoomType type, int nrBeds) throws SQLException;
   ArrayList<Room> getAllRooms() throws SQLException;
-  void editRoomInfo(String roomID, String type, int nrBeds) throws SQLException;
 }

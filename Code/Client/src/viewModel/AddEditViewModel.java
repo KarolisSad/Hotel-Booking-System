@@ -134,7 +134,7 @@ public class AddEditViewModel
    */
   public void addRoom()
   {
-   RoomTransfer roomTransfer= model.addRoom(roomId.get(), type.toString(), nrOfBeds.get());
+   RoomTransfer roomTransfer= model.addRoom(roomId.get(), type, nrOfBeds.get());
     reset();
   }
 
@@ -145,8 +145,8 @@ public class AddEditViewModel
   public void editRoomInfo()
   {
     // TODO add Observer!
+    RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
 
-    model.editRoomInfo(roomId.get(), type.toString(), nrOfBeds.get());
   }
 
   /**

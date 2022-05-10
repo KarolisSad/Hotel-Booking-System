@@ -13,7 +13,7 @@ public class HotelDataBase implements HotelPersistence {
     }
 
     @Override
-    public void addRoom(String ID, String type, int numberOfBeds) throws SQLException {
+    public void addRoom(String ID, RoomType type, int numberOfBeds) throws SQLException {
         MyDataBase dataBase = MyDataBase.getInstance();
         dataBase.addOneRoom(ID, type, numberOfBeds);
     }
@@ -31,13 +31,13 @@ public class HotelDataBase implements HotelPersistence {
     }
 
     @Override
-    public RoomTransfer availableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+    public ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
         MyDataBase dataBase = MyDataBase.getInstance();
         return dataBase.availableRooms(startDate,endDate);
     }
 
     @Override
-    public void editRoomInfo(String roomID, String type, int nrBeds) throws SQLException {
+    public void editRoomInfo(String roomID, RoomType type, int nrBeds) throws SQLException {
         MyDataBase dataBase = MyDataBase.getInstance();
         dataBase.editRoomInfo(roomID,type,nrBeds);
     }

@@ -65,4 +65,8 @@ public class ReservationController extends ViewController{
         getViewHandler().openView("GuestInformationView.fxml");
     }
 
+    public void back() throws IOException {
+        getViewHandler().openView("LoginView.fxml");
+    }
+
 }

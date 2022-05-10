@@ -54,7 +54,6 @@ public class GuestInformationViewModel {
         if (roomTransfer.getMessage() == null)
         {
             errorLabel.setValue("Room was booked!");
-
         }
         else {
             errorLabel.setValue(roomTransfer.getMessage());

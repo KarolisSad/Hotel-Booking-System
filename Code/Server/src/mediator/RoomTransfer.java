@@ -2,6 +2,7 @@ package mediator;
 
 import model.Guest;
 import model.Room;
+import model.RoomType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class RoomTransfer {
 
     private String roomId;
-    private String roomType;
+    private RoomType roomType;
     private int nrBeds;
     private String type;
     private ArrayList<Room> roomList;
@@ -25,7 +26,7 @@ public class RoomTransfer {
     private Guest guest;
     private String message;
 
-    public RoomTransfer(String type , String roomId, String roomType, int nrBeds, ArrayList<Room> roomList)
+    public RoomTransfer(String type , String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList)
     {
         this.roomId = roomId;
         this.roomType = roomType;
@@ -57,14 +58,21 @@ public class RoomTransfer {
         this.message = message;
     }
 
+    RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds)
+    {
+        this.type =type;
+        this.roomId = roomId;
+        this.nrBeds = nrBeds;
+    }
     public RoomTransfer(String type)
     {
         this.type = type;
     }
 
-    public RoomTransfer(ArrayList<Room> rooms)
+    public RoomTransfer(String type, ArrayList<Room> rooms)
     {
         this.roomList =rooms;
+        this.type = type;
     }
 
     public RoomTransfer(String type, ArrayList<Room> roomList, String message)
@@ -86,7 +94,7 @@ public class RoomTransfer {
         return startDate;
     }
 
-    public String getRoomType() {
+    public RoomType getRoomType() {
         return roomType;
     }
 
@@ -95,15 +103,11 @@ public class RoomTransfer {
     }
 
     public String getType() {
-        return roomType;
+        return type;
     }
 
     public int getNrBeds() {
         return nrBeds;
-    }
-
-    public String getTypeOfAction() {
-        return type;
     }
 
     public ArrayList<Room> getRoomList() {
