@@ -9,12 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-font-family: Arial" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReservationController">
    <children>
       <Label alignment="CENTER" prefHeight="97.0" prefWidth="601.0" text="Pick a date">
          <font>
-            <Font name="Bodoni MT" size="36.0" />
+            <Font name="Arial" size="36.0" />
          </font>
       </Label>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -36,12 +35,15 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="212.0" prefWidth="600.0">
          <children>
-            <ListView prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="availableRoom" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="13.0" prefWidth="600.0">
          <children>
-            <Label fx:id="errorLabel" prefHeight="31.0" prefWidth="517.0" text="Error label" textFill="#f51616" />
+            <Label fx:id="errorLabel" prefHeight="31.0" prefWidth="517.0" text="Error label" textFill="#f51616">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Label>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#reservationButton" prefHeight="29.0" prefWidth="153.0" text="Reserve" />
          </children>
       </HBox>
