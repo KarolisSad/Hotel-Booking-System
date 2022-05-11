@@ -1,3 +1,8 @@
+-- DELETE ALL --
+DROP SCHEMA hotel CASCADE;
+--------------------------
+
+
 create schema hotel;
 set schema 'hotel';
 
@@ -17,11 +22,12 @@ create table if not exists guest(
 );
 
 CREATE TABLE IF NOT EXISTS roomBooking(
+    bookingID       SERIAL    PRIMARY KEY                        ,
     startDate       date                                         ,
     endDate         date                                         ,
     guest           integer                                      ,
     roomID          varchar(20)                                  ,
-    PRIMARY KEY (guest, roomID, startDate)                       ,
+    state           varchar(12)                                  ,
     FOREIGN KEY (roomID) REFERENCES room(roomID)                 ,
     FOREIGN KEY (guest) REFERENCES guest(phoneNr)
 );

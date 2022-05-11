@@ -22,9 +22,6 @@ public class Room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
-    this.roomId = roomId;
-    this.roomType = roomOfType;
-    this.numberOfBeds = numberOfBeds;
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);
@@ -40,12 +37,16 @@ public class Room
     switch (roomType)
     {
       case "single":
+      case "Single":
         return RoomType.SINGLE;
       case "double":
+      case "Double":
         return RoomType.DOUBLE;
       case "family":
+      case "Family":
         return RoomType.FAMILY;
       case "suite":
+      case "Suite":
         return RoomType.SUITE;
       default:
         return null;

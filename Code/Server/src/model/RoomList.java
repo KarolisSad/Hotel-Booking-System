@@ -30,6 +30,11 @@ public class RoomList
     return new ArrayList<>(roomList);
   }
 
+  //TODO comment
+  public void addAll(ArrayList<Room> rooms)
+  {
+    roomList.addAll(rooms);
+  }
 
   /**
    * A method that is meant for added a new room to the room list.
@@ -55,6 +60,7 @@ public class RoomList
     else
     {
       roomList.add(room);
+
     }
   }
 

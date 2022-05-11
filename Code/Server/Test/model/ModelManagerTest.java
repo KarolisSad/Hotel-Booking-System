@@ -1,9 +1,9 @@
 package model;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +18,7 @@ class ModelManagerTest
 
   Guest guest = new Guest("Bob", "Builder", "bob@builder.test", 88888888);
 
-  @BeforeEach void setUp()
+  @BeforeEach void setUp() throws SQLException
   {
     managerEmpty = new ModelManager();
     manager1Booking = new ModelManager();
@@ -59,33 +59,33 @@ class ModelManagerTest
   // availableRooms test \\
 
   // Zero
-  @Test void availableRoomsOnEmptyList()
+  @Test void availableRoomsOnEmptyList() throws SQLException
   {
     assertEquals(5, managerEmpty.availableRooms(LocalDate.now(),
         LocalDate.now().plusDays(10)).size());
   }
 
-  @Test void availableRoomsNoRoomsAvailable()
+  @Test void availableRoomsNoRoomsAvailable() throws SQLException
   {
     assertEquals(0, manager5Bookings.availableRooms(LocalDate.now(),
         LocalDate.now().plusDays(5)).size());
   }
 
   // One
-  @Test void availableRooms1Booking()
+  @Test void availableRooms1Booking() throws SQLException
   {
     assertEquals(4, manager1Booking.availableRooms(LocalDate.now(),
         LocalDate.now().plusDays(10)).size());
   }
 
-  @Test void availableRoomsAllButOneBooked()
+  @Test void availableRoomsAllButOneBooked() throws SQLException
   {
     assertEquals(1, manager4Bookings.availableRooms(LocalDate.now(),
         LocalDate.now().plusDays(10)).size());
   }
 
   // Many
-  @Test void availableRooms2Available()
+  @Test void availableRooms2Available() throws SQLException
   {
     assertEquals(2, manager3Bookings.availableRooms(LocalDate.now(),
         LocalDate.now().plusDays(10)).size());
@@ -100,7 +100,7 @@ class ModelManagerTest
   // book testing \\
 
   // Zero
-  @Test void bookOnEmptyList()
+  @Test void bookOnEmptyList() throws SQLException
   {
     assertTrue(
         managerEmpty.book("1.01", LocalDate.now(), LocalDate.now().plusDays(10),

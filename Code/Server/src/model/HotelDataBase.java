@@ -42,11 +42,32 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.editRoomInfo(roomID,type,nrBeds);
     }
 
-    @Override
-    public void book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) throws SQLException {
-        MyDataBase dataBase = MyDataBase.getInstance();
-        dataBase.book(roomId,startDate,endDate,guest);
+    // TODO CHR
 
+    @Override public ArrayList<RoomBooking> getAllBookings() throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        return dataBase.getAllRoomBookings();
+    }
+
+    @Override public void processBooking(RoomBooking booking)
+        throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.processBooking(booking);
+    }
+
+    @Override public void cancelBooking(RoomBooking roomBooking)
+        throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.cancelBooking(roomBooking);
+    }
+
+    @Override
+    public void book(RoomBooking roomBooking) throws SQLException {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.book(roomBooking);
     }
 
 
