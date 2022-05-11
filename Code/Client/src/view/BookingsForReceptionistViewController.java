@@ -4,12 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import viewModel.BookingsForReceptionistViewModel;
 
 public class BookingsForReceptionistViewController extends ViewController
 {
 
-  @FXML private ListView bookingList;
+  @FXML private TableView bookingsTable;
+  @FXML private TableColumn bookingIdColumn;
+  @FXML private TableColumn startDateColumn;
+  @FXML private TableColumn endDateColumn;
+  @FXML private TableColumn guestColumn;
+  @FXML private TableColumn roomNumberColumn;
+  @FXML private TableColumn stateColumn;
   @FXML private Label errorLabel;
 
   private BookingsForReceptionistViewModel viewModel;

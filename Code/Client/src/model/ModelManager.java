@@ -20,6 +20,9 @@ public class ModelManager implements Model {
     private PropertyChangeSupport property;
     private HotelClient hotelClient;
 
+    // todo chr
+    private RoomBookingList bookings;
+
     /**
      * A constructor that is meant to initialize
      * the instance variables as a new array lists
@@ -82,6 +85,14 @@ public class ModelManager implements Model {
     @Override
     public RoomTransfer getAllRooms() {
         return hotelClient.getAllRooms();
+    }
+
+    //TODO CHR
+
+    @Override public RoomBookingList getAllBookings()
+    {
+
+        return hotelClient.getAllBookings();
     }
 
     /**

@@ -12,7 +12,7 @@ public class Room
   private RoomType roomType;
   private int numberOfBeds;
 
-  //todo change javadoc
+  //todo change javadoc + get exceptions to show in GUI
 
   /**
    * One-argument contructor
@@ -22,9 +22,6 @@ public class Room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
-    this.roomType =roomOfType;
-    this.roomId = roomId;
-    this.numberOfBeds = numberOfBeds;
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);

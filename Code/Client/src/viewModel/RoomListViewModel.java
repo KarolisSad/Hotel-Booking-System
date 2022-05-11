@@ -27,7 +27,7 @@ public class RoomListViewModel implements PropertyChangeListener
   public RoomListViewModel(Model model, ViewState state)
   {
     this.model = model;
-    // Uncomment this when server/client has been implemented.. Right now it gives errors because it is trying to remove the room twice.
+    // todo Uncomment this when server/client has been implemented.. Right now it gives errors because it is trying to remove the room twice.
     //model.addListener(this);
 
     this.state = state;

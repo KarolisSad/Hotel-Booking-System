@@ -2,6 +2,7 @@ package mediator;
 
 import model.Guest;
 import model.Room;
+import model.RoomBookingList;
 import model.RoomType;
 
 import java.time.LocalDate;
@@ -26,6 +27,9 @@ public class RoomTransfer {
     private Guest guest;
     private String message;
 
+    private RoomBookingList bookingList;
+
+    // Add Room
     public RoomTransfer(String type , String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList)
     {
         this.roomId = roomId;
@@ -45,6 +49,15 @@ public class RoomTransfer {
         this.guest = guest;
     }
 
+    // TODO CHR ADDED
+    // GET ALL BOOKINGS
+    public RoomTransfer(String type, RoomBookingList bookingList)
+    {
+        this.type = type;
+        this.bookingList = bookingList;
+    }
+
+    // Get available rooms
     public RoomTransfer(String type, LocalDate startDate, LocalDate endDate)
     {
         this.type = type;
@@ -58,6 +71,7 @@ public class RoomTransfer {
         this.message = message;
     }
 
+    // Edit room
     RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds)
     {
         this.roomType = roomType;
@@ -65,10 +79,13 @@ public class RoomTransfer {
         this.roomId = roomId;
         this.nrBeds = nrBeds;
     }
+
+    // Get all rooms??
     public RoomTransfer(String type)
     {
         this.type = type;
     }
+
 
     public RoomTransfer(String type, ArrayList<Room> rooms)
     {
@@ -113,6 +130,11 @@ public class RoomTransfer {
 
     public ArrayList<Room> getRoomList() {
         return roomList;
+    }
+
+    public RoomBookingList getBookingList()
+    {
+        return bookingList;
     }
 
     public String getMessage() {

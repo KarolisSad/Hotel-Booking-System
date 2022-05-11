@@ -19,7 +19,6 @@ public class RoomBooking
   //todo added this
   private int bookingID;
   private RoomBookingState state;
-  private HotelPersistence databaseAdapter;
 
 
 
@@ -36,20 +35,17 @@ public class RoomBooking
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
       Guest guest) throws SQLException
   {
-    databaseAdapter = new HotelDataBase();
     setStartAndEndDate(startDate, endDate);
     setRoom(room);
     setGuest(guest);
     bookingID = 0;
     state = new RoomBookingBookedState();
-    databaseAdapter.book(this);
   }
 
   //TODO COMMENT
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
       Guest guest, String state, int bookingID)
   {
-    databaseAdapter = new HotelDataBase();
     setStartAndEndDate(startDate, endDate);
     setRoom(room);
     setGuest(guest);
@@ -151,13 +147,11 @@ public class RoomBooking
   public void processBooking() throws SQLException
   {
     state.setState(this);
-    databaseAdapter.processBooking(this);
   }
 
   public void cancelBooking() throws SQLException
   {
     state.cancelBooking(this);
-    databaseAdapter.cancelBooking(this);
   }
 
   public String getState()
@@ -173,7 +167,7 @@ public class RoomBooking
   @Override public String toString()
   {
     return "RoomBooking{" + "startDate=" + startDate + ", endDate=" + endDate
-        + ", room=" + room + ", guest=" + guest + ", state=" + state +'}';
+        + ", room=" + room + ", guest=" + guest + '}';
   }
 
 

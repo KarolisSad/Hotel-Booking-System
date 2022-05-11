@@ -14,4 +14,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer removeRoom(String roomId);
   RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds);
   RoomTransfer getAllRooms();
+
+  // TODO CHR
+  RoomBookingList getAllBookings();
 }

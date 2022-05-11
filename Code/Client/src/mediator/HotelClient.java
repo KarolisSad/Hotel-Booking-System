@@ -1,10 +1,7 @@
 package mediator;
 
 import com.google.gson.Gson;
-import model.Guest;
-import model.Model;
-import model.Room;
-import model.RoomType;
+import model.*;
 
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
@@ -195,6 +192,26 @@ public class HotelClient implements Model {
         return json.fromJson(message,RoomTransfer.class);
     }
 
+    @Override public synchronized RoomBookingList getAllBookings()
+    {
+        sendToServerAsJson(new RoomTransfer("AllBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                System.out.println("Fuck :-(");
+                e.printStackTrace();
+            }
+        }
+       // RoomTransfer transferObject = json.fromJson(message, RoomTransfer.class);
+        RoomBookingList bookingList = json.fromJson(message, RoomBookingList.class);
+        return bookingList;
+    }
 
     /**
      * Makes received object into Json format and sends it to a server
@@ -205,6 +222,8 @@ public class HotelClient implements Model {
         String jsonString = json.toJson(roomTransfer);
         out.println(jsonString);
     }
+
+
 
     @Override
     public void addListener(PropertyChangeListener listener) {
