@@ -7,3 +7,4 @@ public class Client
     Application.launch(MyApplication.class);
   }
 }
+
