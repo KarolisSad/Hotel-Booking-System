@@ -5,6 +5,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import mediator.RoomTransfer;
 import viewModel.ReservationViewModel;
 import viewModel.ViewModelFactory;
 
@@ -22,14 +23,15 @@ public class ReservationController extends ViewController{
     @FXML private Label errorLabel;
     @FXML private ListView<String> availableRoom;
     private ReservationViewModel viewModel;
-    private Region root;
-    private ViewHandler viewHandler;
 
     /**
      * A none argument, void method initializing instance variables.
      */
     @Override
-    public void init() {
+    protected void init() {
+
+        viewModel = getViewModelFactory().getReservationViewModel();
+
         // Binding
         availableRoom.setItems(viewModel.getRooms());
         startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
@@ -37,35 +39,7 @@ public class ReservationController extends ViewController{
         errorLabel.textProperty().bind(viewModel.getErrorLabel());
     }
 
-    /**
-     * A void method initializing instance variables.
-     *
-     * @param viewHandler A ViewHandler object which will be used to set the instance variable.
-     * @param viewModelFactory  A ViewModelFactory object which will be used to set the instance variable.
-     * @param root        A Region object which will be used to set the instance variable.
-     */
 
-
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root)
-        throws RemoteException
-    {
-        this.root = root;
-        this.viewHandler = viewHandler;
-        this.viewModelFactory = viewModelFactory;
-        this.viewModel = viewModelFactory.getReservationViewModel();
-        init();
-    }
-
-
-
-    /**
-     * A getter method returning the Region object.
-     *
-     * @return A Region object called root.
-     */
-    public Region getRoot(){
-        return root;
-    }
 
     //todo
     @Override
@@ -88,7 +62,11 @@ public class ReservationController extends ViewController{
     public void reservationButton() throws IOException {
         String selectedRoomFromListView = availableRoom.getSelectionModel().getSelectedItem();
         viewModel.reserveRoom(selectedRoomFromListView);
-        viewHandler.openView("GuestInformationView.fxml");
+        getViewHandler().openView("GuestInformationView.fxml");
+    }
+
+    public void back() throws IOException {
+        getViewHandler().openView("LoginView.fxml");
     }
 
 }

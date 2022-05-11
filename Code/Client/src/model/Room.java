@@ -22,33 +22,13 @@ public class Room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
+    this.roomType =roomOfType;
+    this.roomId = roomId;
+    this.numberOfBeds = numberOfBeds;
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);
   }
-
-  /**
-   * Static method that converts from String to a Room type ENUM value.
-   * @param roomType a String corresponding to the room type enum.
-   * @return the room-type enum value of the string passed as arguments, or null.
-   */
-  public static RoomType convertRoomTypeFromString(String roomType)
-  {
-    switch (roomType)
-    {
-      case "single":
-        return RoomType.SINGLE;
-      case "double":
-        return RoomType.DOUBLE;
-      case "family":
-        return RoomType.FAMILY;
-      case "suite":
-        return RoomType.SUITE;
-      default:
-        return null;
-    }
-  }
-
 
   public void setRoomType(RoomType roomOfType)
   {
@@ -109,7 +89,6 @@ public class Room
   }
 
 
-
   public int getNumberOfBeds()
   {
     return numberOfBeds;
@@ -126,10 +105,12 @@ public class Room
     return other;
   }
 
-  @Override public String toString()
-  {
-    return "Room number: " + roomId + ", Type: " + roomType.toString()
-        + ", Number of beds: " + numberOfBeds;
+  @Override
+  public String toString() {
+    return "Room{" +
+            "roomId='" + roomId + '\'' +
+            ", roomType=" + roomType +
+            ", numberOfBeds=" + numberOfBeds +
+            '}';
   }
-
 }

@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import mediator.RoomTransfer;
 import model.Model;
 import model.Room;
 
@@ -47,8 +48,15 @@ public class ReservationViewModel {
      * calls displayRoomInListView method with received data.
      */
     public void getAllAvailableRooms() {
-        displayRoomsInListView(model.availableRooms(dateFromDatePicker(startDatePicker.getValue().toString()),
-            dateFromDatePicker(endDatePicker.getValue().toString())));
+        RoomTransfer roomTransfer = model.availableRooms(dateFromDatePicker(startDatePicker.getValue().toString()),
+            dateFromDatePicker(endDatePicker.getValue().toString()));
+        if (roomTransfer.getMessage() == null)
+        {
+            displayRoomsInListView(roomTransfer.getRoomList());
+        }
+        else {
+            errorLabel.setValue(roomTransfer.getMessage()+ " e");
+        }
     }
 
     /**

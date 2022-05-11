@@ -6,7 +6,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import mediator.RoomTransfer;
 import model.Model;
+import model.Room;
+import model.RoomType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -44,10 +47,19 @@ public class RoomListViewModel implements PropertyChangeListener
   {
     allRooms.clear();
 
-    for (int i = 0; i < model.getAllRooms().size(); i++)
+    RoomTransfer roomTransfer = model.getAllRooms();
+
+    if (roomTransfer.getMessage() == null)
     {
-      allRooms.add(new SimpleRoomViewModel(model.getAllRooms().get(i)));
+      for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
+      {
+        allRooms.add(new SimpleRoomViewModel(roomTransfer.getRoomList().get(i)));
+      }
     }
+    else {
+      errorLabel.setValue(roomTransfer.getMessage());
+    }
+
   }
 
   /**
@@ -59,16 +71,17 @@ public class RoomListViewModel implements PropertyChangeListener
    */
   public void removeRoom(String roomId)
   {
-    try
-    {
-      model.removeRoom(roomId);
-      errorLabel.setValue("Room: " + roomId + " deleted successfully");
-      updateRoomList();
-    }
-    catch (Exception e)
-    {
-      errorLabel.setValue(e.getMessage());
-    }
+
+      RoomTransfer roomTransfer = model.removeRoom(roomId);
+      if (roomTransfer.getMessage() != null)
+      {
+        errorLabel.setValue(roomTransfer.getMessage());
+      }
+      else
+      {
+        errorLabel.setValue("Room: " + roomId + " deleted successfully");
+        updateRoomList();
+      }
 
   }
 

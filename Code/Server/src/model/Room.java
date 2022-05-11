@@ -22,6 +22,9 @@ public class Room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
+    this.roomId = roomId;
+    this.roomType = roomOfType;
+    this.numberOfBeds = numberOfBeds;
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);
@@ -103,10 +106,12 @@ public class Room
     return roomId;
   }
 
-  public String getRoomType()
+  public RoomType getRoomType()
   {
-    return roomType.toString();
+    return roomType;
   }
+
+
 
   public int getNumberOfBeds()
   {

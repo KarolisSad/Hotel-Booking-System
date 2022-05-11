@@ -22,7 +22,7 @@ public abstract class ViewCreator {
      * A one argument constructor intializing Map<String, ViewController> object.
      */
     public ViewCreator(){
-        controllers = new HashMap<String, ViewController>();
+        controllers = new HashMap<>();
     }
 
     /**
@@ -38,9 +38,12 @@ public abstract class ViewCreator {
             controller = loadFromFXML(id);
             controllers.put(id, controller);
         }
+
+
         else{
             controller.reset();
         }
+
 
         return controller;
     }
@@ -76,6 +79,6 @@ public abstract class ViewCreator {
      * @param viewController A ViewController object which is being initialized
      * @param root A Region object which sets the Region object in ViewController
      */
-    protected abstract void initViewController(ViewController viewController, Region root) throws RemoteException;
+    protected abstract void initViewController(ViewController viewController, Region root);
 
 }
