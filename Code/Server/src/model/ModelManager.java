@@ -47,15 +47,8 @@ public class ModelManager implements Model {
      */
     @Override
     public ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
-        if (startDate.isAfter(endDate))
-        {
-            throw new IllegalArgumentException("End date must be later then start date!");
-        }
-        if(startDate.isBefore(LocalDate.now()))
-        {
-          throw new IllegalArgumentException("You cannot make bookings before today");
-        }
-      return dataBaseAdapter.availableRooms(startDate,endDate);
+        checkForLegalDates(startDate,endDate);
+        return dataBaseAdapter.availableRooms(startDate, endDate);
     }
 
 
@@ -70,11 +63,11 @@ public class ModelManager implements Model {
     @Override
     public void addRoom(String roomId, RoomType type, int nrBeds) throws SQLException {
 
-        if (roomId.equals(""))
-        {
-            throw new IllegalArgumentException("gd");
+        if (roomId.equals("")) {
+            // todo change it
+            throw new IllegalArgumentException("non");
         }
-        dataBaseAdapter.addRoom(roomId,type,nrBeds);
+        dataBaseAdapter.addRoom(roomId, type, nrBeds);
     }
 
     /**
@@ -89,7 +82,7 @@ public class ModelManager implements Model {
     @Override
     public void removeRoom(String roomId) throws SQLException {
         //            property.firePropertyChange("RoomRemove", roomList, roomId);
-       dataBaseAdapter.remove(roomId);
+        dataBaseAdapter.remove(roomId);
     }
 
     /**
@@ -113,7 +106,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void editRoomInfo(String roomId, RoomType type, int nrBeds) throws SQLException {
-            dataBaseAdapter.editRoomInfo(roomId,type,nrBeds);
+        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
 //        property.firePropertyChange("RoomEdit", roomId, roomToEdit);
     }
 
@@ -129,15 +122,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) throws SQLException {
-        if (startDate.isAfter(endDate))
-        {
-            throw new IllegalArgumentException("End date must be later then start date!");
-        }
-        if(startDate.isBefore(LocalDate.now()))
-        {
-            throw new IllegalArgumentException("You cannot make bookings before today");
-        }
-        dataBaseAdapter.book(roomId,startDate,endDate,guest);
+        checkForLegalDates(startDate, endDate);
+        dataBaseAdapter.book(roomId, startDate, endDate, guest);
     }
 
     @Override
@@ -149,4 +135,31 @@ public class ModelManager implements Model {
     public void removeListener(PropertyChangeListener listener) {
         property.removePropertyChangeListener(listener);
     }
+
+    /**
+     * Method setting the start and end date variables to the values passed as argument.
+     *
+     * @param startDate startDate
+     * @param endDate   endDate
+     * @throws IllegalArgumentException if any of the following are true:
+     *                                  - Start date is before current date.
+     *                                  - End date is the same as start date
+     *                                  - End date is before start date.
+     */
+
+    public void checkForLegalDates(LocalDate startDate, LocalDate endDate) {
+        if (startDate == null || endDate == null) {
+            throw new NullPointerException("Please enter a start date and an end date.");
+        } else if (startDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException(
+                    "Start date should not be before current date: " + LocalDate.now());
+        } else if (endDate.isEqual(startDate)) {
+            throw new IllegalArgumentException(
+                    "End date cannot be the same date as start-date.");
+        } else if (endDate.isBefore(startDate)) {
+            throw new IllegalArgumentException(
+                    "End date cannot be before start date.");
+        }
+    }
+
 }
