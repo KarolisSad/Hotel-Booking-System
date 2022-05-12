@@ -1,14 +1,10 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import viewModel.BookingViewModel;
-
 import java.io.IOException;
-import java.util.List;
-
 
 /**
  * A class creating BookingViewController object.
