@@ -3,22 +3,23 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import view.ViewController;
 import viewModel.BookingsForReceptionistViewModel;
+import viewModel.SimpleBookingViewModel;
+
+import java.time.LocalDate;
 
 public class BookingsForReceptionistViewController extends ViewController
 {
 
-  @FXML private TableView bookingsTable;
-  @FXML private TableColumn bookingIdColumn;
-  @FXML private TableColumn startDateColumn;
-  @FXML private TableColumn endDateColumn;
-  @FXML private TableColumn guestColumn;
-  @FXML private TableColumn roomNumberColumn;
-  @FXML private TableColumn stateColumn;
+  @FXML private TableView<SimpleBookingViewModel> bookingsTable;
+  @FXML private TableColumn<SimpleBookingViewModel, Integer> bookingIdColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, LocalDate> startDateColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, LocalDate> endDateColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, Integer> guestColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, String> roomNumberColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, String> stateColumn;
   @FXML private Label errorLabel;
 
   private BookingsForReceptionistViewModel viewModel;
@@ -27,12 +28,27 @@ public class BookingsForReceptionistViewController extends ViewController
   {
     viewModel = getViewModelFactory().getBookingsForReceptionistViewModel();
 
-//    bookingList.setItems(viewModel.getFutureBookings());
+    bookingIdColumn.setCellValueFactory(cellData -> cellData.getValue().bookingIdProperty().asObject());
+    startDateColumn.setCellValueFactory(cellData -> cellData.getValue().startDateProperty());
+    endDateColumn.setCellValueFactory(cellData -> cellData.getValue().endDateProperty());
+    guestColumn.setCellValueFactory(cellData -> cellData.getValue().guestIdProperty().asObject());
+    roomNumberColumn.setCellValueFactory(cellData -> cellData.getValue().roomIdProperty());
+    stateColumn.setCellValueFactory(cellData -> cellData.getValue().bookingStateProperty());
+
+    errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
+
+    bookingsTable.setItems(viewModel.getBookings());
+
+    bookingsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+      viewModel.setSelected(newValue);
+    });
+
+    reset();
   }
 
   @Override public void reset()
   {
-
+    viewModel.reset();
   }
 
   public void showInProgressButton(ActionEvent actionEvent)

@@ -55,6 +55,11 @@ public class RoomBookingTransfer
     this.message = message;
   }
 
+  public RoomBookingTransfer(String type)
+  {
+    this.type = type;
+  }
+
   public String getType()
   {
     return type;

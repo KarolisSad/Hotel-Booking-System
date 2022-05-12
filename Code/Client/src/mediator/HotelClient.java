@@ -49,6 +49,7 @@ public class HotelClient implements Model {
     private void startReader() {
         HotelClientReader hotelClientReader = new HotelClientReader(this, in);
         Thread thread = new Thread(hotelClientReader);
+        thread.setDaemon(true);
         thread.start();
     }
 
@@ -194,7 +195,8 @@ public class HotelClient implements Model {
 
     @Override public synchronized RoomBookingTransfer getAllBookings()
     {
-        sendToServerAsJson(new RoomTransfer("AllBookings"));
+        // sendToServer
+        sendToServerAsJsonBooking(new RoomBookingTransfer("AllBookings"));
         message = null;
         while (message == null)
         {
@@ -219,6 +221,11 @@ public class HotelClient implements Model {
      */
     public synchronized void sendToServerAsJson(RoomTransfer roomTransfer) {
         String jsonString = json.toJson(roomTransfer);
+        out.println(jsonString);
+    }
+
+    public synchronized void sendToServerAsJsonBooking(RoomBookingTransfer roomBookingTransfer) {
+        String jsonString = json.toJson(roomBookingTransfer);
         out.println(jsonString);
     }
 

@@ -23,31 +23,59 @@ public class BookingsForReceptionistViewModel
     this.model = model;
 
     this.bookings = FXCollections.observableArrayList();
+    updateBookingList();
 
     this.selectedBookingProperty = new SimpleObjectProperty<>();
 
     this.errorLabel = new SimpleStringProperty("");
   }
 
-
-  // todo get
   public void updateBookingList()
   {
     bookings.clear();
 
     RoomBookingTransfer bookingList = model.getAllBookings();
 
-    for (int i = 0; i < bookingList.getRoomBookings().size();i++)
+    if (bookingList.getMessage() == null)
     {
-      bookings.add(new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+      for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
+      {
+        bookings.add(
+            new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+      }
+    }
+
+    else
+    {
+      errorLabel.setValue(bookingList.getMessage());
     }
 
   }
 
   public void reset()
   {
-    //todo do something
+   errorLabel.setValue("");
+   updateBookingList();
   }
 
+  public void setSelected(SimpleBookingViewModel selectedBooking)
+  {
+    selectedBookingProperty.set(selectedBooking);
+    System.out.println("SELECTION CHANGED: " + selectedBooking.bookingIdProperty());
+  }
 
+  public SimpleBookingViewModel getSelectedBookingProperty()
+  {
+    return selectedBookingProperty.get();
+  }
+
+  public SimpleStringProperty getErrorLabel()
+  {
+    return errorLabel;
+  }
+
+  public ObservableList<SimpleBookingViewModel> getBookings()
+  {
+    return bookings;
+  }
 }
