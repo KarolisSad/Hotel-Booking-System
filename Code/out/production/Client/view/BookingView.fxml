@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-font-family: Arial" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingViewController">
    <children>
       <Label alignment="CENTER" prefHeight="72.0" prefWidth="602.0" text="Booking Overview">
          <font>
-            <Font size="30.0" />
+            <Font name="Arial" size="30.0" />
          </font>
       </Label>
       <HBox alignment="CENTER" prefHeight="326.0" prefWidth="600.0">
          <children>
-            <ListView prefHeight="313.0" prefWidth="324.0">
+            <ListView fx:id="listOfBookings" prefHeight="313.0" prefWidth="324.0">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
@@ -30,14 +30,23 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#menuButton" prefHeight="30.0" prefWidth="140.0" text="Menu">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
             </Button>
          </children>
       </HBox>
-      <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="610.0" text="Error Label" textFill="#f80000" />
+      <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="610.0" text="Error Label" textFill="#f80000">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Label>
    </children>
 </VBox>
