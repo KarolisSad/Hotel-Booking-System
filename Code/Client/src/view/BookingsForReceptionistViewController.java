@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import view.ViewController;
 import viewModel.BookingsForReceptionistViewModel;
 
 public class BookingsForReceptionistViewController extends ViewController

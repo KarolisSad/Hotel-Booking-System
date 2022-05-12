@@ -3,15 +3,12 @@ package mediator;
 import com.google.gson.Gson;
 import model.Model;
 import model.Room;
-import model.RoomBooking;
-import model.RoomBookingList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -158,19 +155,19 @@ public class HotelClientHandler implements Runnable
 
         case "AllBookings":
         {
-          RoomBookingTransferList allBookings = new RoomBookingTransferList();
+          ArrayList<RoomBookingTransferObject> allBookings = null;
           try
           {
-            allBookings.convertAndAdd(model.getAllBookings());
+            allBookings = model.getAllBookings().getConvertedList();
           }
           catch (Exception e)
           {
-            out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }
 
-          room = new RoomTransfer("AllBookings", allBookings);
+          RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("AllBookings", allBookings);
 
-          jsonString = json.toJson(room);
+          jsonString = json.toJson(roomBookingTransfer);
           out.println(jsonString);
           break;
 

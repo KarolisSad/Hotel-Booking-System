@@ -26,7 +26,6 @@ public class RoomTransfer {
     private Guest guest;
     private String message;
 
-    private RoomBookingTransferList transferList;
 
     // Add Room
     public RoomTransfer(String type , String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList)
@@ -48,13 +47,6 @@ public class RoomTransfer {
         this.guest = guest;
     }
 
-    // TODO CHR ADDED
-    // GET ALL BOOKINGS
-    public RoomTransfer(String type, RoomBookingTransferList bookingList)
-    {
-        this.type = type;
-        this.transferList = bookingList;
-    }
 
     // Get available rooms
     public RoomTransfer(String type, LocalDate startDate, LocalDate endDate)
@@ -138,10 +130,6 @@ public class RoomTransfer {
 
     //TODO CHR
 
-    public RoomBookingTransferList getTransferList()
-    {
-        return transferList;
-    }
 
     @Override
     public String toString() {

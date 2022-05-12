@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import view.ViewController;
 import viewModel.RoomListViewModel;
 import viewModel.SimpleRoomViewModel;
 import viewModel.ViewModelFactory;

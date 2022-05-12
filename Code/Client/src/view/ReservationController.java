@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import mediator.RoomTransfer;
+import view.ViewController;
 import viewModel.ReservationViewModel;
 import viewModel.ViewModelFactory;
 
@@ -17,7 +18,8 @@ import java.rmi.RemoteException;
  * @author Group 5
  * @version 04/05/2022
  */
-public class ReservationController extends ViewController{
+public class ReservationController extends ViewController
+{
     @FXML private DatePicker startDate;
     @FXML private DatePicker endDate;
     @FXML private Label errorLabel;

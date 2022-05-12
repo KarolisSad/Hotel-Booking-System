@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import view.ViewController;
 import viewModel.LogInViewModel;
 import viewModel.ViewModelFactory;
 
@@ -13,7 +14,8 @@ import java.io.IOException;
  * @author Group 5
  * @version 09/05/2022
  */
-public class LogInViewController extends ViewController {
+public class LogInViewController extends ViewController
+{
 
 
     @Override

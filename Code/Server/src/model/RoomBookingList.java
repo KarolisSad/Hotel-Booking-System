@@ -1,5 +1,7 @@
 package model;
 
+import mediator.RoomBookingTransferObject;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,7 +91,6 @@ public class RoomBookingList
     return null;
   }
 
-
   /**
    * A method that returns how many rooms are booked.
    *
@@ -111,6 +112,21 @@ public class RoomBookingList
       LocalDate endDate)
   {
     return null;
+  }
+
+  public ArrayList<RoomBookingTransferObject> getConvertedList()
+  {
+    ArrayList<RoomBookingTransferObject> allBookingsConverted = new ArrayList<>();
+    for (int i = 0; i < allBookings.size(); i++)
+    {
+      RoomBooking b = allBookings.get(i);
+      allBookingsConverted.add(
+          new RoomBookingTransferObject(b.getStartDate(), b.getEndDate(),
+              b.getRoom().getRoomId(), b.getGuest().getPhoneNr(),
+              b.getBookingID(), b.getState()));
+    }
+
+    return allBookingsConverted;
   }
 
   public void processBooking(int id) throws SQLException

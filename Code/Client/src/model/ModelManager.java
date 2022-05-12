@@ -1,14 +1,13 @@
 package model;
 
 import mediator.HotelClient;
-import mediator.RoomBookingTransferList;
+import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * A class that implements the Model interface and manages the bookings.
@@ -90,7 +89,7 @@ public class ModelManager implements Model {
 
     //TODO CHR
 
-    @Override public RoomBookingTransferList getAllBookings()
+    @Override public RoomBookingTransfer getAllBookings()
     {
 
         return hotelClient.getAllBookings();

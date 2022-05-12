@@ -25,8 +25,6 @@ public class RoomTransfer {
     private Guest guest;
     private String message;
 
-    //TODO CHR
-    private RoomBookingTransferList transferList;
 
     public RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList) {
         this.roomId = roomId;
@@ -45,13 +43,7 @@ public class RoomTransfer {
         this.guest = guest;
     }
 
-    // TODO CHR ADDED
-    // GET ALL BOOKINGS
-    public RoomTransfer(String type, RoomBookingTransferList roomBookingTransferList)
-    {
-       this.type = type;
-        this.transferList = roomBookingTransferList;
-    }
+
 
     public RoomTransfer(String type, LocalDate startDate, LocalDate endDate) {
         this.type = type;
@@ -119,10 +111,6 @@ public class RoomTransfer {
         return message;
     }
 
-    //TODO CHR
 
-    public RoomBookingTransferList getTransferList()
-    {
-        return transferList;
-    }
+
 }

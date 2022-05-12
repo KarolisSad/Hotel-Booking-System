@@ -192,7 +192,7 @@ public class HotelClient implements Model {
         return json.fromJson(message,RoomTransfer.class);
     }
 
-    @Override public synchronized RoomBookingTransferList getAllBookings()
+    @Override public synchronized RoomBookingTransfer getAllBookings()
     {
         sendToServerAsJson(new RoomTransfer("AllBookings"));
         message = null;
@@ -207,8 +207,9 @@ public class HotelClient implements Model {
                 e.printStackTrace();
             }
         }
-        RoomTransfer roomTransfer = json.fromJson(message, RoomTransfer.class);
-        return roomTransfer.getTransferList();
+
+        return json.fromJson(message, RoomBookingTransfer.class);
+
     }
 
     /**

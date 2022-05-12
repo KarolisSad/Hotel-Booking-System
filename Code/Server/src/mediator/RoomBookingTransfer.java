@@ -1,28 +1,68 @@
 package mediator;
 
+import model.Guest;
 import model.RoomBooking;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class RoomBookingTransfer
 {
+  private String type;
+
+  private int bookingNr;
   private LocalDate startDate;
   private LocalDate endDate;
-  private String roomID;
   private int guestID;
-  private int bookingID;
-  private String bookingState;
+  private String roomID;
+  private String stateString;
 
-  public RoomBookingTransfer(LocalDate startDate, LocalDate endDate,
-      String roomID, int guestID, int bookingID, String bookingState)
+  private ArrayList<RoomBookingTransferObject> roomBookings;
+
+  private String message;
+
+
+  // Might not be used
+  private RoomBooking booking;
+  private Guest guest;
+
+
+  //// CONSTRUCTORS
+
+  public RoomBookingTransfer(String type, int bookingNr, LocalDate startDate,
+      LocalDate endDate, int guestID, String roomID, String stateString)
   {
+    this.type = type;
+    this.bookingNr = bookingNr;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.roomID = roomID;
     this.guestID = guestID;
-    this.bookingID = bookingID;
-    this.bookingState = bookingState;
+    this.roomID = roomID;
+    this.stateString = stateString;
+  }
 
+
+  public RoomBookingTransfer(String type, ArrayList<RoomBookingTransferObject> roomBookings)
+  {
+    this.type = type;
+    this.roomBookings = roomBookings;
+  }
+
+  // For exceptions
+  public RoomBookingTransfer(String type, String message)
+  {
+    this.type = type;
+    this.message = message;
+  }
+
+  public String getType()
+  {
+    return type;
+  }
+
+  public int getBookingNr()
+  {
+    return bookingNr;
   }
 
   public LocalDate getStartDate()
@@ -35,31 +75,48 @@ public class RoomBookingTransfer
     return endDate;
   }
 
-  public String getRoomID()
-  {
-    return roomID;
-  }
-
   public int getGuestID()
   {
     return guestID;
   }
 
-  public int getBookingID()
+  public String getRoomID()
   {
-    return bookingID;
+    return roomID;
   }
 
-  public String getBookingState()
+  public String getStateString()
   {
-    return bookingState;
+    return stateString;
+  }
+
+  public ArrayList<RoomBookingTransferObject> getRoomBookings()
+  {
+    return roomBookings;
+  }
+
+  public String getMessage()
+  {
+    return message;
+  }
+
+  public RoomBooking getBooking()
+  {
+    return booking;
+  }
+
+  public Guest getGuest()
+  {
+    return guest;
   }
 
   @Override public String toString()
   {
-    return "RoomBookingTransfer{" + "startDate=" + startDate + ", endDate="
-        + endDate + ", roomID='" + roomID + '\'' + ", guestID=" + guestID
-        + ", bookingID=" + bookingID + ", bookingState='" + bookingState + '\''
-        + '}';
+    return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
+        + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", guestID=" + guestID + ", roomID='" + roomID + '\''
+        + ", stateString='" + stateString + '\'' + ", roomBookings="
+        + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
+        + ", guest=" + guest + '}';
   }
 }
