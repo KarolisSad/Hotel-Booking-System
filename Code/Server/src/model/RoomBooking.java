@@ -39,6 +39,7 @@ public class RoomBooking
     setRoom(room);
     setGuest(guest);
     bookingID = 0;
+    state = new RoomBookingBookedState();
   }
 
   /**
@@ -170,14 +171,18 @@ public class RoomBooking
     state.setState(this);
   }
 
+  /**
+   * Method used to cancel the current booking, by setting its state to Cancelled.
+   *
+   */
   public void cancelBooking()
   {
     state.cancelBooking(this);
   }
 
   /**
-   * Method used to cancel the current booking, by setting its state to Cancelled.
-   * @return
+   * Method returning the state as a string
+   * @return State
    */
   public String getState()
   {

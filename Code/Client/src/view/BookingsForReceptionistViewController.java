@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import viewModel.BookingsForReceptionistViewModel;
 import viewModel.SimpleBookingViewModel;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -71,7 +72,6 @@ public class BookingsForReceptionistViewController extends ViewController
               checkIn.setDisable(false);
             }
             viewModel.setSelected(newValue);
-            System.out.println(newValue.bookingStateProperty().getValue());
           }
         });
 
@@ -202,4 +202,15 @@ public class BookingsForReceptionistViewController extends ViewController
     }
   }
 
+  public void mainMenuButtonClicked()
+  {
+    try
+    {
+      getViewHandler().openView("LogInView.fxml");
+    }
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 }

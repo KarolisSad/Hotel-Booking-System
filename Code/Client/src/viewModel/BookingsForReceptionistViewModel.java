@@ -126,8 +126,6 @@ public class BookingsForReceptionistViewModel
   public void setSelected(SimpleBookingViewModel selectedBooking)
   {
     selectedBookingProperty.set(selectedBooking);
-    System.out.println(
-        "SELECTION CHANGED: " + selectedBooking.bookingIdProperty());
   }
 
 
