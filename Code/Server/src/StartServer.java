@@ -5,7 +5,7 @@ import model.ModelManager;
 import java.sql.SQLException;
 
 public class StartServer {
-    public static void main(String[] args) throws SQLException
+    public static void main(String[] args)
     {
         Model model = new ModelManager();
         HotelServer hotelServer = new HotelServer(model);
@@ -13,5 +13,3 @@ public class StartServer {
         serverThread.start();
     }
 }
-
-//TODO Fix modelmanager throws sqlexception

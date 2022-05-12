@@ -182,6 +182,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method used to add a RoomBooking to the database.
+   * @param roomBooking the RoomBooking to be added.
+   *
+   */
   public void book(RoomBooking roomBooking) throws SQLException
   {
 
@@ -208,7 +213,11 @@ public class MyDataBase
     }
   }
 
-  // Adding guest, if guest already exists, no exceptions will be thrown.
+  /**
+   * Method used to add a guest to the database. If the database already contains a guest with the same phone number, nothing will be added.
+   * @param guest the guest to be added.
+   *
+   */
   public void addGuest(Guest guest) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -230,6 +239,13 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method used for editing information about a room in
+   * @param roomID the ID of the room to be edited.
+   * @param type the new type to be assigned to the room.
+   * @param nrBeds The new number of beds to be assigned to the room.
+   * @throws IllegalArgumentException if room is able to be edited.
+   */
   public void editRoomInfo(String roomID, RoomType type, int nrBeds)
       throws SQLException
   {
@@ -256,6 +272,17 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method returning an ArrayList of RoomBooking objects whose contents depend on the argument.
+   * @param type What type of bookings to get. The following options are valid:
+   *           "" (an empty string) returns all bookings from the database.
+   *           "booked" returns all bookings that is currently in a booked state.
+   *           "inProgress" returns all bookings that is currently in an in progress state.
+   *           "cancelled" returns all bookings that have been cancelled.
+   *            "archived" returns all bookings that have been archived.
+   * @return  An arrayList of RoomBooking objects with state specified by the argument.
+   * @throws SQLException
+   */
   public ArrayList<RoomBooking> getAllRoomBookings(String type)
       throws SQLException
   {
@@ -362,11 +389,41 @@ public class MyDataBase
         }
         break;
       }
+
+      case "archived":
+      {
+        try (Connection connection = getConnection())
+        {
+          PreparedStatement statement = connection.prepareStatement(
+              "SELECT * FROM roombooking WHERE state = 'Archived';");
+          ResultSet resultSet = statement.executeQuery();
+
+          while (resultSet.next())
+          {
+            int bookingID = resultSet.getInt("bookingid");
+            LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
+            LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
+            Guest guest = getGuest(resultSet.getInt("guest"));
+            Room room = getRoom(resultSet.getString("roomid"));
+            String state = resultSet.getString("state");
+
+            RoomBooking roomBooking = new RoomBooking(startDate, endDate, room,
+                guest, state, bookingID);
+            roomBookings.add(roomBooking);
+          }
+        }
+        break;
+      }
     }
     return roomBookings;
   }
 
-  //TODO COMMENT
+  /**
+   * Method that tries to get a guest object from the database.
+   * @param guestId The identifier used for finding the guest.
+   * @return The guest object from the database.
+   * @throws IllegalArgumentException if Guest is not found.
+   */
   public Guest getGuest(int guestId) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -393,7 +450,12 @@ public class MyDataBase
     }
   }
 
-  //TODO COMMENT
+  /**
+   * Method returning a room from the database.
+   * @param roomId the ID of the room to be returned.
+   * @return A room object with the id given as argument.
+   * @throws IllegalArgumentException if room is not found.
+   */
   public Room getRoom(String roomId) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -419,6 +481,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method used for updating the state of a booking in the database.
+   * @param booking the booking update to perform the operation on.
+   * @throws IllegalArgumentException If room booking can not be edited.
+   */
   public void processBooking(RoomBooking booking) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -441,6 +508,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method used for cancelling a RoomBooking (setting the state to 'Cancelled')
+   * @param roomBooking the RoomBooking to be cancelled
+   * @throws IllegalArgumentException if Booking cannot be edited.
+   */
   public void cancelBooking(RoomBooking roomBooking) throws SQLException
   {
     try (Connection connection = getConnection())

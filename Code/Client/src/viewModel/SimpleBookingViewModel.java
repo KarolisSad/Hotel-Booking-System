@@ -3,6 +3,7 @@ package viewModel;
 import javafx.beans.property.*;
 import mediator.RoomBookingTransfer;
 import mediator.RoomBookingTransferObject;
+import model.Guest;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -16,6 +17,8 @@ public class SimpleBookingViewModel
   private IntegerProperty bookingIdProperty;
   private StringProperty bookingStateProperty;
 
+  private ObjectProperty<Guest> guestProperty;
+
   public SimpleBookingViewModel(RoomBookingTransferObject roomBookingTransfer)
   {
     startDateProperty = new SimpleObjectProperty<>(
@@ -23,12 +26,14 @@ public class SimpleBookingViewModel
     endDateProperty = new SimpleObjectProperty<>(
         roomBookingTransfer.getEndDate());
     roomIdProperty = new SimpleStringProperty(roomBookingTransfer.getRoomID());
+    guestProperty = new SimpleObjectProperty<>(roomBookingTransfer.getGuest());
     guestIdProperty = new SimpleIntegerProperty(
-        roomBookingTransfer.getGuestID());
+        guestProperty.get().getPhoneNr());
     bookingIdProperty = new SimpleIntegerProperty(
         roomBookingTransfer.getBookingID());
     bookingStateProperty = new SimpleStringProperty(
         roomBookingTransfer.getBookingState());
+
   }
 
   public ObjectProperty<LocalDate> startDateProperty()
@@ -59,6 +64,11 @@ public class SimpleBookingViewModel
   public IntegerProperty guestIdProperty()
   {
     return guestIdProperty;
+  }
+
+  public ObjectProperty<Guest> guestProperty()
+  {
+    return guestProperty;
   }
 
   public IntegerProperty bookingIdProperty()

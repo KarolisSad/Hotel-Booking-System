@@ -18,7 +18,7 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="326.0" prefWidth="600.0">
          <children>
-            <TableView fx:id="bookingsTable" prefHeight="278.0" prefWidth="556.0">
+            <TableView fx:id="bookingsTable" onMousePressed="#clickRow" prefHeight="278.0" prefWidth="556.0">
               <columns>
                 <TableColumn fx:id="bookingIdColumn" prefWidth="44.0" text="ID" />
                 <TableColumn fx:id="startDateColumn" prefWidth="92.0" text="Start Date" />
