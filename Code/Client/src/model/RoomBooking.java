@@ -22,7 +22,17 @@ public class RoomBooking
 
 
 
-  //TODO COMMENT
+  /**
+   * A 6 argument constructor meant to initialize all instance variables.
+   * This version of the constructor is used when retrieving a RoomBooking object from the database.
+   *
+   * @param startDate Start date
+   * @param endDate End date
+   * @param room The room
+   * @param guest Guest
+   * @param state The state of the booking
+   * @param bookingID The booking ID of the booking.
+   */
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
       Guest guest, String state, int bookingID)
   {
@@ -115,7 +125,10 @@ public class RoomBooking
   }
 
 
-
+  /**
+   * Method returning the Booking ID
+   * @return The booking ID associated with this Booking.
+   */
   public int getBookingID()
   {
     return bookingID;

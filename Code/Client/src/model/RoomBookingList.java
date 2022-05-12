@@ -74,22 +74,6 @@ public class RoomBookingList
     return null;
   }
 
-  /*
-  //TODO COMMENT
-  public RoomBooking getBookingById(int id)
-  {
-    for (int i = 0; i < allBookings.size(); i++)
-    {
-      if (allBookings.get(i).getBookingID() == id)
-      {
-        return allBookings.get(i);
-      }
-    }
-    return null;
-  }
-
-
-   */
 
   /**
    * A method that returns how many rooms are booked.

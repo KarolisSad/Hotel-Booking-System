@@ -9,6 +9,12 @@ import viewModel.SimpleBookingViewModel;
 import java.time.LocalDate;
 import java.util.Optional;
 
+/**
+ * A class creating an BookingsForReceptionistViewController object.
+ *
+ * @author Group 5
+ * @version 12/05/2022
+ */
 public class BookingsForReceptionistViewController extends ViewController
 {
 
@@ -26,6 +32,10 @@ public class BookingsForReceptionistViewController extends ViewController
 
   private BookingsForReceptionistViewModel viewModel;
 
+  /**
+   * A none argument, void method binding instance variables to
+   * ViewModel variables.
+   */
   @Override protected void init()
   {
     viewModel = getViewModelFactory().getBookingsForReceptionistViewModel();
@@ -68,11 +78,18 @@ public class BookingsForReceptionistViewController extends ViewController
     reset();
   }
 
+  /**
+   * Method calling the reset method in the ViewModel
+   */
   @Override public void reset()
   {
     viewModel.reset();
   }
 
+  /**
+   * Method called when pressing the showInProgress button in the GUI.
+   * Updates the booking list to show all booking In progress, disables the showInProgressButton, and changes the text on the check-in button to Check out.
+   */
   public void showInProgressButton()
   {
     viewModel.updateBookingList("InProgress");
@@ -82,6 +99,11 @@ public class BookingsForReceptionistViewController extends ViewController
     checkIn.setText("Check out");
   }
 
+
+  /**
+   * Method called when pressing the showBooked button in the GUI.
+   * Updates the booking list to show all booking In progress, disables the showBooked button, and changes the text on the check-in button to Check in.
+   */
   public void showBookedButton()
   {
     reset();
@@ -100,6 +122,11 @@ public class BookingsForReceptionistViewController extends ViewController
   {
   }
 
+  /**
+   * Method called when clicking the check in (or check out) button with a booking selected.
+   * creates a pop up window containing information about the costumer, and gives the ability to either confirm or go back.
+   * If confirm is choosen, the processBooking method in the viewModel is called.
+   */
   public void checkInButton()
   {
     Alert popUp = new Alert(Alert.AlertType.CONFIRMATION);

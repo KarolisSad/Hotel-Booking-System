@@ -16,10 +16,8 @@ public class RoomBooking
   private Room room;
   private Guest guest;
 
-  //todo added this
   private int bookingID;
   private RoomBookingState state;
-  private HotelPersistence databaseAdapter;
 
 
 
@@ -27,6 +25,7 @@ public class RoomBooking
    * A four-argument constructor
    * A constructor meant for initializing instance variables using set-methods.
    * It makes a copy of the guest object.
+   * This version of the constructor is used when creating a new RoomBooking.
    *
    * @param startDate start date
    * @param endDate   end date
@@ -42,7 +41,17 @@ public class RoomBooking
     bookingID = 0;
   }
 
-  //TODO COMMENT
+  /**
+   * A 6 argument constructor meant to initialize all instance variables.
+   * This version of the constructor is used when retrieving a RoomBooking object from the database.
+   *
+   * @param startDate Start date
+   * @param endDate End date
+   * @param room The room
+   * @param guest Guest
+   * @param state The state of the booking
+   * @param bookingID The booking ID of the booking.
+   */
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
       Guest guest, String state, int bookingID)
   {
@@ -134,20 +143,31 @@ public class RoomBooking
     return guest;
   }
 
+  /**
+   * A method used for changing the state of the booking by using the RoomBookingState and its subclasses.
+   * @param roomBookingState The state to be set.
+   */
   public void setState(RoomBookingState roomBookingState)
   {
     this.state = roomBookingState;
   }
 
+  /**
+   * Method returning the Booking ID
+   * @return The booking ID associated with this Booking.
+   */
   public int getBookingID()
   {
     return bookingID;
   }
 
+  /**
+   * Method used to process the Booking.
+   *    Eg. Changing the state in accordance with the RoomBookingState-oclass and its subclasses.
+   */
   public void processBooking()
   {
     state.setState(this);
-
   }
 
   public void cancelBooking()
@@ -155,6 +175,10 @@ public class RoomBooking
     state.cancelBooking(this);
   }
 
+  /**
+   * Method used to cancel the current booking, by setting its state to Cancelled.
+   * @return
+   */
   public String getState()
   {
     return state.getState();
@@ -171,8 +195,12 @@ public class RoomBooking
         + ", room=" + room + ", guest=" + guest + ", state=" + getState() +'}';
   }
 
-
-  // TODO COMMENT
+  /**
+   * Method used to convert a String version of the RoomBookingState to an actual implementation of this.
+   * This method is used when retrieving a RoomBooking from a client, as these are sent with the State being a String-value.
+   * @param state The string to convert.
+   * @return The RoomBookingState corresponding to the string value passed as argument.
+   */
   private RoomBookingState getStateFromString(String state)
   {
     switch (state)

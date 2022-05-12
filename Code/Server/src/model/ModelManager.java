@@ -26,6 +26,7 @@ public class ModelManager implements Model
    * A constructor that is meant to initialize
    * the instance variables as a new array lists
    * that will store a list of all rooms and a list of booked rooms.
+   * This constructor also initializes the adapter used for communication with the database.
    */
   public ModelManager()
   {
@@ -36,6 +37,8 @@ public class ModelManager implements Model
     createDummyData();
   }
 
+
+  //todo delete?
   private void createDummyData()
   {
     //        roomList.addRoom(new Room("1.01", RoomType.SINGLE, 1));
@@ -104,6 +107,12 @@ public class ModelManager implements Model
     return dataBaseAdapter.getAllRooms();
   }
 
+  /**
+   * A method calling the database and filling the bookingList with all bookings corresponding to the type given as argument.
+   * @param type The type of bookings to get.
+   * @return the bookinglist variable, filled with bookings corresponding to the type given as argument.
+   *
+   */
   @Override public RoomBookingList getAllBookings(String type)
       throws SQLException
   {
@@ -111,12 +120,19 @@ public class ModelManager implements Model
     return bookingList;
   }
 
+  /**
+   * A method calling the processBooking methods in the bookinglist, and in the database.
+   * By doing this, the state of the booking is changed according to the RoomBookingState-class and it's subclasses, and the booking is updated accordingly in the database.
+   * @param id The id of the booking to process
+   * @throws SQLException
+   */
   @Override public void processBooking(int id) throws SQLException
   {
     bookingList.processBooking(id);
     dataBaseAdapter.processBooking(bookingList.getBookingById(id));
   }
 
+  // TODO should probably be changed - we need to decide what to do when cancelling a booking. @Karolis??
   @Override public void cancelBooking(int id) throws SQLException
   {
     bookingList.cancelBooking(id);
@@ -136,7 +152,6 @@ public class ModelManager implements Model
       throws SQLException
   {
     dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
-    //        property.firePropertyChange("RoomEdit", roomId, roomToEdit);
   }
 
   /**
@@ -162,14 +177,15 @@ public class ModelManager implements Model
     }
     RoomBooking booking = new RoomBooking(startDate, endDate, room, guest);
     dataBaseAdapter.book(booking);
-
   }
 
+  //todo delete??
   @Override public void addListener(PropertyChangeListener listener)
   {
     property.addPropertyChangeListener(listener);
   }
 
+  //todo delete??
   @Override public void removeListener(PropertyChangeListener listener)
   {
     property.removePropertyChangeListener(listener);

@@ -42,8 +42,12 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.editRoomInfo(roomID,type,nrBeds);
     }
 
-    // TODO CHR
-
+    /**
+     * Method used for getting all bookings of a specific type from the database.
+     * @param type the type of rooms to get
+     * @return An ArrayList of bookings of the type corresponding to the String passed as argument.
+     *
+     */
     @Override public ArrayList<RoomBooking> getAllBookings(String type)
         throws SQLException
     {
@@ -51,8 +55,11 @@ public class HotelDataBase implements HotelPersistence {
         return dataBase.getAllRoomBookings(type);
     }
 
-
-
+    /**
+     * Method used for updating the state of a room in the database.
+     * @param booking the booking to be updated
+     *
+     */
     @Override public void processBooking(RoomBooking booking)
         throws SQLException
     {
@@ -60,6 +67,7 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.processBooking(booking);
     }
 
+    //TODO What should this do??
     @Override public void cancelBooking(RoomBooking roomBooking)
         throws SQLException
     {
@@ -67,6 +75,11 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.cancelBooking(roomBooking);
     }
 
+    /**
+     * Method used for adding a booking to the database.
+     * @param roomBooking The booking to add.
+     *
+     */
     @Override
     public void book(RoomBooking roomBooking) throws SQLException {
         MyDataBase dataBase = MyDataBase.getInstance();

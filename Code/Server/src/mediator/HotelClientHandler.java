@@ -43,7 +43,7 @@ public class HotelClientHandler implements Runnable
   }
 
   /**
-   * Receives messages from client in Json string then converts it to a RoomTransfer Object,
+   * Receives messages from client in Json string then converts it to a Transfer Object,
    * checks value of type and chooses right method to call on server side.
    * Takes returned value and converts it to Json and sends back to the client.
    */

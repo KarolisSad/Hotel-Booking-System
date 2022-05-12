@@ -117,28 +117,47 @@ public class ModelManager implements Model {
         return hotelClient.book(roomId, startDate, endDate, guest);
     }
 
-    //TODO CHR
-
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings
+     * @return RoomBookingTransfer object containing a list of all bookings
+     */
     @Override public RoomBookingTransfer getAllBookings()
     {
         return hotelClient.getAllBookings();
     }
 
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of In progress
+     * @return RoomBookingTransfer object containing a list of all bookings with a state of In progress
+     */
     @Override public RoomBookingTransfer getInProgressBookings()
     {
         return hotelClient.getInProgressBookings();
     }
 
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of Cancelled
+     * @return RoomBookingTransfer object containing a list of all bookings with a state of Cancelled
+     */
     @Override public RoomBookingTransfer getCancelledBookings()
     {
         return hotelClient.getCancelledBookings();
     }
 
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of Booked
+     * @return RoomBookingTransfer object containing a list of all bookings with a state of Booked
+     */
     @Override public RoomBookingTransfer getBookedBookings()
     {
         return hotelClient.getBookedBookings();
     }
 
+    /**
+     * Method for requesting a change in RoomBookingState from the server
+     * @param bookingNumber The bookingNumber of the booking to be changed
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
     @Override public RoomBookingTransfer processBooking(int bookingNumber)
     {
         return hotelClient.processBooking(bookingNumber);

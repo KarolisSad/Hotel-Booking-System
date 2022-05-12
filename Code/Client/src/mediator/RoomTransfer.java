@@ -128,7 +128,6 @@ public class RoomTransfer {
         return message;
     }
 
-    //TODO CHR
 
 
     @Override
