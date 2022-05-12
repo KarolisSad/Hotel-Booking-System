@@ -146,8 +146,9 @@ public class Guest
    */
   @Override public String toString()
   {
-    return "Guest: " + '\'' + "First Name: '" + fName + '\'' + "Last Name: " + lName + '\''
-        + "Email address: " + email + '\'' + "Phone Nr: " + phoneNr;
+    return phoneNr+"";
+//    return "Guest: " + '\'' + "First Name: '" + fName + '\'' + "Last Name: " + lName + '\''
+//        + "Email address: " + email + '\'' + "Phone Nr: " + phoneNr;
   }
 
   /**
