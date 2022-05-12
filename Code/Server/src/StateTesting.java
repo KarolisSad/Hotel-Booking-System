@@ -1,3 +1,5 @@
+import mediator.RoomBookingTransfer;
+import mediator.RoomBookingTransferList;
 import model.*;
 
 import java.sql.SQLException;
@@ -10,10 +12,11 @@ public class StateTesting
     try
     {
       Model model = new ModelManager();
-      //model.addRoom("1.01", RoomType.SINGLE, 1);
-      // model.book("1.01", LocalDate.now().plusDays(9), LocalDate.now().plusDays(15), new Guest("Christian", "Pedersen", "315269@via.dk", 52198082));
 
       System.out.println(model.getAllBookings().getBooking(0));
+      RoomBookingTransferList test = new RoomBookingTransferList();
+      test.convertAndAdd(model.getAllBookings());
+      System.out.println(test.getBookingsTransferList());
 
     }
     catch (SQLException e)

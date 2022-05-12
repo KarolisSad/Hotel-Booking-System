@@ -74,6 +74,7 @@ public class RoomBookingList
     return null;
   }
 
+  /*
   //TODO COMMENT
   public RoomBooking getBookingById(int id)
   {
@@ -87,6 +88,8 @@ public class RoomBookingList
     return null;
   }
 
+
+   */
 
   /**
    * A method that returns how many rooms are booked.
@@ -110,6 +113,6 @@ public class RoomBookingList
   {
     return null;
   }
-  
+
 }
 

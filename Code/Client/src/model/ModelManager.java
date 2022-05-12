@@ -1,6 +1,7 @@
 package model;
 
 import mediator.HotelClient;
+import mediator.RoomBookingTransferList;
 import mediator.RoomTransfer;
 
 import java.beans.PropertyChangeListener;
@@ -89,7 +90,7 @@ public class ModelManager implements Model {
 
     //TODO CHR
 
-    @Override public RoomBookingList getAllBookings()
+    @Override public RoomBookingTransferList getAllBookings()
     {
 
         return hotelClient.getAllBookings();

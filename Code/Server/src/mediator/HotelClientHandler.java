@@ -158,21 +158,19 @@ public class HotelClientHandler implements Runnable
 
         case "AllBookings":
         {
-          RoomBookingList allBookings = null;
+          RoomBookingTransferList allBookings = new RoomBookingTransferList();
           try
           {
-            allBookings = model.getAllBookings();
+            allBookings.convertAndAdd(model.getAllBookings());
           }
           catch (Exception e)
           {
             out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
           }
-          //room = new RoomTransfer("AllBookings", allBookings);
 
+          room = new RoomTransfer("AllBookings", allBookings);
 
-
-          jsonString = json.toJson(allBookings);
-          System.out.println(jsonString);
+          jsonString = json.toJson(room);
           out.println(jsonString);
           break;
 

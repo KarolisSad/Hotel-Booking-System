@@ -192,7 +192,7 @@ public class HotelClient implements Model {
         return json.fromJson(message,RoomTransfer.class);
     }
 
-    @Override public synchronized RoomBookingList getAllBookings()
+    @Override public synchronized RoomBookingTransferList getAllBookings()
     {
         sendToServerAsJson(new RoomTransfer("AllBookings"));
         message = null;
@@ -204,13 +204,11 @@ public class HotelClient implements Model {
             }
             catch (InterruptedException e)
             {
-                System.out.println("Fuck :-(");
                 e.printStackTrace();
             }
         }
-       // RoomTransfer transferObject = json.fromJson(message, RoomTransfer.class);
-        RoomBookingList bookingList = json.fromJson(message, RoomBookingList.class);
-        return bookingList;
+        RoomTransfer roomTransfer = json.fromJson(message, RoomTransfer.class);
+        return roomTransfer.getTransferList();
     }
 
     /**

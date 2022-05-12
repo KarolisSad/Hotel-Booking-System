@@ -18,29 +18,9 @@ public class RoomBooking
 
   //todo added this
   private int bookingID;
-  private RoomBookingState state;
+  private String state;
 
 
-
-  /**
-   * A four-argument constructor
-   * A constructor meant for initializing instance variables using set-methods.
-   * It makes a copy of the guest object.
-   *
-   * @param startDate start date
-   * @param endDate   end date
-   * @param room      room
-   * @param guest     guest
-   */
-  public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
-      Guest guest) throws SQLException
-  {
-    setStartAndEndDate(startDate, endDate);
-    setRoom(room);
-    setGuest(guest);
-    bookingID = 0;
-    state = new RoomBookingBookedState();
-  }
 
   //TODO COMMENT
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
@@ -50,7 +30,7 @@ public class RoomBooking
     setRoom(room);
     setGuest(guest);
     this.bookingID = bookingID;
-    this.state = getStateFromString(state);
+    this.state = state;
   }
 
 
@@ -134,53 +114,12 @@ public class RoomBooking
     return guest;
   }
 
-  public void setState(RoomBookingState roomBookingState)
-  {
-    this.state = roomBookingState;
-  }
+
 
   public int getBookingID()
   {
     return bookingID;
   }
 
-  public void processBooking() throws SQLException
-  {
-    state.setState(this);
-  }
 
-  public void cancelBooking() throws SQLException
-  {
-    state.cancelBooking(this);
-  }
-
-  public String getState()
-  {
-    return state.getState();
-  }
-
-  /**
-   * A method is meant for getting room booking information.
-   *
-   * @return Organized output of room booking
-   */
-  @Override public String toString()
-  {
-    return "RoomBooking{" + "startDate=" + startDate + ", endDate=" + endDate
-        + ", room=" + room + ", guest=" + guest + '}';
-  }
-
-
-  // TODO COMMENT
-  private RoomBookingState getStateFromString(String state)
-  {
-    switch (state)
-    {
-      case "Archived": return new RoomBookingArchivedState();
-      case "Booked": return new RoomBookingBookedState();
-      case "Cancelled": return new RoomBookingCancelledState();
-      case "In progress": return new RoomBookingInProgressState();
-      default: return null;
-    }
-  }
 }

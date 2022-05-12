@@ -1,5 +1,6 @@
 package model;
 
+import mediator.RoomBookingTransferList;
 import mediator.RoomTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
@@ -16,5 +17,5 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer getAllRooms();
 
   // TODO CHR
-  RoomBookingList getAllBookings();
+  RoomBookingTransferList getAllBookings();
 }
