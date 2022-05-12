@@ -60,6 +60,13 @@ public class RoomBookingTransfer
     this.type = type;
   }
 
+  // For check in / out
+  public RoomBookingTransfer(String type, int bookingNr)
+  {
+    this.type = type;
+    this.bookingNr = bookingNr;
+  }
+
   public String getType()
   {
     return type;

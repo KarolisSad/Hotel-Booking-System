@@ -18,6 +18,8 @@ public class BookingsForReceptionistViewModel
 
   private ObjectProperty<SimpleBookingViewModel> selectedBookingProperty;
 
+  private boolean isCheckIn;
+
   public BookingsForReceptionistViewModel(Model model)
   {
     this.model = model;
@@ -39,6 +41,7 @@ public class BookingsForReceptionistViewModel
       case "booked":
       {
         RoomBookingTransfer bookingList = model.getBookedBookings();
+        isCheckIn = true;
 
         if (bookingList.getMessage() == null)
         {
@@ -56,9 +59,9 @@ public class BookingsForReceptionistViewModel
         break;
       }
 
-      case "inProgress":
+      case "InProgress":
       {
-
+        isCheckIn = false;
         RoomBookingTransfer bookingList = model.getInProgressBookings();
 
         if (bookingList.getMessage() == null)
@@ -77,9 +80,11 @@ public class BookingsForReceptionistViewModel
         break;
       }
     }
+  }
 
-
-
+  public boolean isCheckIn()
+  {
+    return isCheckIn;
   }
 
   public void reset()
@@ -110,8 +115,9 @@ public class BookingsForReceptionistViewModel
     return bookings;
   }
 
-  public void checkIn(SimpleBookingViewModel bookingViewModel)
+  public void processBooking(SimpleBookingViewModel bookingViewModel)
   {
-
+    model.processBooking(bookingViewModel.bookingIdProperty().get());
+    updateBookingList("booked");
   }
 }

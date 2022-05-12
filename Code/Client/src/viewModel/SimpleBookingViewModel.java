@@ -5,6 +5,7 @@ import mediator.RoomBookingTransfer;
 import mediator.RoomBookingTransferObject;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class SimpleBookingViewModel
 {
@@ -35,9 +36,19 @@ public class SimpleBookingViewModel
     return startDateProperty;
   }
 
+  public LocalDate getStartDate()
+  {
+    return startDateProperty.get();
+  }
+
   public ObjectProperty<LocalDate> endDateProperty()
   {
     return endDateProperty;
+  }
+
+  public LocalDate getEndDate()
+  {
+    return endDateProperty.get();
   }
 
   public StringProperty roomIdProperty()

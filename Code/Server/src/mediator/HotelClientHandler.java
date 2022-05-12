@@ -3,12 +3,14 @@ package mediator;
 import com.google.gson.Gson;
 import model.Model;
 import model.Room;
+import model.RoomBooking;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -226,6 +228,22 @@ public class HotelClientHandler implements Runnable
 
           jsonString = json.toJson(roomBookingTransfer);
           out.println(jsonString);
+          break;
+        }
+
+        case "ProcessBooking":
+        {
+          RoomBookingTransfer roomBooking = json.fromJson(message, RoomBookingTransfer.class);
+          try
+          {
+            System.out.println(roomBooking.getBookingNr());
+            model.processBooking(roomBooking.getBookingNr());
+            out.println(successMessage);
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
           break;
         }
 

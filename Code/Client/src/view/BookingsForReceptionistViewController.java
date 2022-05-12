@@ -2,14 +2,12 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import viewModel.BookingsForReceptionistViewModel;
 import viewModel.SimpleBookingViewModel;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class BookingsForReceptionistViewController extends ViewController
 {
@@ -25,6 +23,7 @@ public class BookingsForReceptionistViewController extends ViewController
   @FXML private TableColumn<SimpleBookingViewModel, String> roomNumberColumn;
   @FXML private TableColumn<SimpleBookingViewModel, String> stateColumn;
   @FXML private Label errorLabel;
+
 
   private BookingsForReceptionistViewModel viewModel;
 
@@ -51,7 +50,7 @@ public class BookingsForReceptionistViewController extends ViewController
     bookingsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
       if (newValue != null)
       {
-        if (newValue.bookingStateProperty().getValue().equalsIgnoreCase("Booked"))
+        if (newValue.bookingStateProperty().getValue().equalsIgnoreCase("Booked") || newValue.bookingStateProperty().getValue().equalsIgnoreCase("in progress"))
         {
           checkIn.setDisable(false);
         }
@@ -74,14 +73,17 @@ public class BookingsForReceptionistViewController extends ViewController
     inProgressButton.setDisable(true);
     bookedButton.setDisable(false);
     checkIn.setDisable(true);
+    checkIn.setText("Check out");
   }
 
   public void showBookedButton()
   {
+    reset();
     viewModel.updateBookingList("booked");
     bookedButton.setDisable(true);
     inProgressButton.setDisable(false);
     checkIn.setDisable(true);
+    checkIn.setText("Check out");
   }
 
   public void guestInformationButton(ActionEvent actionEvent)
@@ -94,6 +96,56 @@ public class BookingsForReceptionistViewController extends ViewController
 
   public void checkInButton()
   {
+    Alert popUp = new Alert(Alert.AlertType.CONFIRMATION);
+
+    if (viewModel.isCheckIn())
+    {
+      popUp.setHeaderText("Confirm Check in: booking nr: " + viewModel.getSelectedBookingProperty().bookingIdProperty().get());
+      popUp.setContentText("Customer: " + viewModel.getSelectedBookingProperty()
+          .guestIdProperty().get() + "\nRoom: " + viewModel.getSelectedBookingProperty().roomIdProperty().getValue()
+          + "\nStart date: " + viewModel.getSelectedBookingProperty().getStartDate()
+          + "\nEnd date: " + viewModel.getSelectedBookingProperty().getEndDate());
+
+      ButtonType checkIn = new ButtonType("Check in");
+      ButtonType cancel = new ButtonType("Back", ButtonBar.ButtonData.CANCEL_CLOSE);
+      popUp.getButtonTypes().setAll(checkIn, cancel);
+
+      Optional<ButtonType> result = popUp.showAndWait();
+      if (result.get() == checkIn)
+      {
+        viewModel.processBooking(viewModel.getSelectedBookingProperty());
+        reset();
+      }
+      else
+      {
+        popUp.close();
+      }
+    }
+    else
+    {
+      popUp.setHeaderText("Confirm Check out: Booking nr: " + viewModel.getSelectedBookingProperty().bookingIdProperty().get());
+      popUp.setContentText("Customer: " + viewModel.getSelectedBookingProperty()
+          .guestIdProperty().get() + "\nRoom: " + viewModel.getSelectedBookingProperty().roomIdProperty().getValue()
+          + "\nStart date: " + viewModel.getSelectedBookingProperty().getStartDate()
+          + "\nEnd date: " + viewModel.getSelectedBookingProperty().getEndDate());
+
+      ButtonType checkIn = new ButtonType("Check out");
+      ButtonType cancel = new ButtonType("Back", ButtonBar.ButtonData.CANCEL_CLOSE);
+      popUp.getButtonTypes().setAll(checkIn, cancel);
+
+      Optional<ButtonType> result = popUp.showAndWait();
+      if (result.get() == checkIn)
+      {
+        viewModel.processBooking(viewModel.getSelectedBookingProperty());
+        showBookedButton();
+        reset();
+      }
+      else
+      {
+        popUp.close();
+      }
+    }
+
   }
 
 }

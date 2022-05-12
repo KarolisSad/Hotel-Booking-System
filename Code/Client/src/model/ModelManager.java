@@ -87,27 +87,6 @@ public class ModelManager implements Model {
         return hotelClient.getAllRooms();
     }
 
-    //TODO CHR
-
-    @Override public RoomBookingTransfer getAllBookings()
-    {
-        return hotelClient.getAllBookings();
-    }
-
-    @Override public RoomBookingTransfer getInProgressBookings()
-    {
-        return hotelClient.getInProgressBookings();
-    }
-
-    @Override public RoomBookingTransfer getCancelledBookings()
-    {
-        return hotelClient.getCancelledBookings();
-    }
-
-    @Override public RoomBookingTransfer getBookedBookings()
-    {
-        return hotelClient.getBookedBookings();
-    }
 
     /**
      * Method used for editing a room already added to the system.
@@ -136,6 +115,33 @@ public class ModelManager implements Model {
     @Override
     public RoomTransfer book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) {
         return hotelClient.book(roomId, startDate, endDate, guest);
+    }
+
+    //TODO CHR
+
+    @Override public RoomBookingTransfer getAllBookings()
+    {
+        return hotelClient.getAllBookings();
+    }
+
+    @Override public RoomBookingTransfer getInProgressBookings()
+    {
+        return hotelClient.getInProgressBookings();
+    }
+
+    @Override public RoomBookingTransfer getCancelledBookings()
+    {
+        return hotelClient.getCancelledBookings();
+    }
+
+    @Override public RoomBookingTransfer getBookedBookings()
+    {
+        return hotelClient.getBookedBookings();
+    }
+
+    @Override public RoomBookingTransfer processBooking(int bookingNumber)
+    {
+        return hotelClient.processBooking(bookingNumber);
     }
 
     @Override

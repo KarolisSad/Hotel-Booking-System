@@ -232,7 +232,7 @@ public class HotelClient implements Model {
 
     @Override public synchronized RoomBookingTransfer getInProgressBookings()
     {
-        sendToServerAsJsonBooking(new RoomBookingTransfer("InProgress"));
+        sendToServerAsJsonBooking(new RoomBookingTransfer("InProgressBookings"));
         message = null;
         while (message == null)
         {
@@ -263,6 +263,22 @@ public class HotelClient implements Model {
                 e.printStackTrace();
             }
         }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    @Override public synchronized RoomBookingTransfer processBooking(int bookingNumber)
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("ProcessBooking", bookingNumber));
+        message = null;
+        try
+        {
+            wait();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
