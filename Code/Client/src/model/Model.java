@@ -17,5 +17,9 @@ public interface Model extends UnnamedPropertyChangeSubject
 
   // TODO CHR
   RoomBookingTransfer getAllBookings();
+  RoomBookingTransfer getBookedBookings();
+  RoomBookingTransfer getInProgressBookings();
+  RoomBookingTransfer getCancelledBookings();
+
   RoomTransfer getAllRooms();
 }

@@ -13,7 +13,8 @@ import java.util.ArrayList;
  * @version 04/05/2022
  */
 
-public class ModelManager implements Model {
+public class ModelManager implements Model
+{
   private RoomList roomList;
 
   // todo CHR
@@ -26,7 +27,7 @@ public class ModelManager implements Model {
    * the instance variables as a new array lists
    * that will store a list of all rooms and a list of booked rooms.
    */
-  public ModelManager() throws SQLException
+  public ModelManager()
   {
     bookingList = new RoomBookingList();
     roomList = new RoomList();
@@ -35,7 +36,8 @@ public class ModelManager implements Model {
     createDummyData();
   }
 
-  private void createDummyData() {
+  private void createDummyData()
+  {
     //        roomList.addRoom(new Room("1.01", RoomType.SINGLE, 1));
     //        roomList.addRoom(new Room("1.02", RoomType.DOUBLE, 1));
     //        roomList.addRoom(new Room("1.03", RoomType.FAMILY, 3));
@@ -50,12 +52,12 @@ public class ModelManager implements Model {
    * @param endDate   end date
    * @return available rooms
    */
-  @Override
-  public ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
-    checkForLegalDates(startDate,endDate);
+  @Override public ArrayList<Room> availableRooms(LocalDate startDate,
+      LocalDate endDate) throws SQLException
+  {
+    checkForLegalDates(startDate, endDate);
     return dataBaseAdapter.availableRooms(startDate, endDate);
   }
-
 
   /**
    * Method creating a new Room object and adding it to a RoomList array.
@@ -65,10 +67,12 @@ public class ModelManager implements Model {
    * @param nrBeds the number of beds in the room to be added
    * @return true if room is added successfully
    */
-  @Override
-  public void addRoom(String roomId, RoomType type, int nrBeds) throws SQLException {
+  @Override public void addRoom(String roomId, RoomType type, int nrBeds)
+      throws SQLException
+  {
 
-    if (roomId.equals("")) {
+    if (roomId.equals(""))
+    {
       // todo change it
       throw new IllegalArgumentException("non");
     }
@@ -84,8 +88,8 @@ public class ModelManager implements Model {
    * @return true if room is removed successfully
    * @throws IllegalArgumentException if room to be removed has any current or future bookings.
    */
-  @Override
-  public void removeRoom(String roomId) throws SQLException {
+  @Override public void removeRoom(String roomId) throws SQLException
+  {
     //            property.firePropertyChange("RoomRemove", roomList, roomId);
     dataBaseAdapter.remove(roomId);
   }
@@ -95,24 +99,28 @@ public class ModelManager implements Model {
    *
    * @return list of all rooms.
    */
-  @Override
-  public ArrayList<Room> getAllRooms() throws SQLException {
+  @Override public ArrayList<Room> getAllRooms() throws SQLException
+  {
     return dataBaseAdapter.getAllRooms();
   }
 
-  @Override public RoomBookingList getAllBookings() throws SQLException
+  @Override public RoomBookingList getAllBookings(String type)
+      throws SQLException
   {
-    return new RoomBookingList();
+    bookingList.setAllBookings(dataBaseAdapter.getAllBookings(type));
+    return bookingList;
   }
 
   @Override public void processBooking(int id) throws SQLException
   {
-   bookingList.processBooking(id);
+    bookingList.processBooking(id);
+    dataBaseAdapter.processBooking(bookingList.getBookingById(id));
   }
 
   @Override public void cancelBooking(int id) throws SQLException
   {
     bookingList.cancelBooking(id);
+    dataBaseAdapter.cancelBooking(bookingList.getBookingById(id));
   }
 
   /**
@@ -124,12 +132,12 @@ public class ModelManager implements Model {
    * @param nrBeds The (new) number of beds in the room.
    * @return true if editing succeeds
    */
-  @Override
-  public void editRoomInfo(String roomId, RoomType type, int nrBeds) throws SQLException {
+  @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
+      throws SQLException
+  {
     dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
     //        property.firePropertyChange("RoomEdit", roomId, roomToEdit);
   }
-
 
   /**
    * A method that is meant for booking a room.
@@ -140,8 +148,9 @@ public class ModelManager implements Model {
    * @param guest     guest
    * @return true if the room is booked and false if the room is not booked
    */
-  @Override
-  public void book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) throws SQLException {
+  @Override public void book(String roomId, LocalDate startDate,
+      LocalDate endDate, Guest guest) throws SQLException
+  {
     checkForLegalDates(startDate, endDate);
     Room room = null;
     for (Room i : getAllRooms())
@@ -151,16 +160,18 @@ public class ModelManager implements Model {
         room = i;
       }
     }
-    new RoomBooking(startDate, endDate, room, guest);
+    RoomBooking booking = new RoomBooking(startDate, endDate, room, guest);
+    dataBaseAdapter.book(booking);
+
   }
 
-  @Override
-  public void addListener(PropertyChangeListener listener) {
+  @Override public void addListener(PropertyChangeListener listener)
+  {
     property.addPropertyChangeListener(listener);
   }
 
-  @Override
-  public void removeListener(PropertyChangeListener listener) {
+  @Override public void removeListener(PropertyChangeListener listener)
+  {
     property.removePropertyChangeListener(listener);
   }
 
@@ -175,16 +186,25 @@ public class ModelManager implements Model {
    *                                  - End date is before start date.
    */
 
-  public void checkForLegalDates(LocalDate startDate, LocalDate endDate) {
-    if (startDate == null || endDate == null) {
-      throw new NullPointerException("Please enter a start date and an end date.");
-    } else if (startDate.isBefore(LocalDate.now())) {
+  public void checkForLegalDates(LocalDate startDate, LocalDate endDate)
+  {
+    if (startDate == null || endDate == null)
+    {
+      throw new NullPointerException(
+          "Please enter a start date and an end date.");
+    }
+    else if (startDate.isBefore(LocalDate.now()))
+    {
       throw new IllegalArgumentException(
           "Start date should not be before current date: " + LocalDate.now());
-    } else if (endDate.isEqual(startDate)) {
+    }
+    else if (endDate.isEqual(startDate))
+    {
       throw new IllegalArgumentException(
           "End date cannot be the same date as start-date.");
-    } else if (endDate.isBefore(startDate)) {
+    }
+    else if (endDate.isBefore(startDate))
+    {
       throw new IllegalArgumentException(
           "End date cannot be before start date.");
     }

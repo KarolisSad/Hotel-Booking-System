@@ -6,9 +6,8 @@ public class ClientTestingChr
   public static void main(String[] args)
   {
     Model model = new ModelManager();
-    System.out.println("LIST CLIENT: " + model.getAllBookings().getRoomBookings()
-    );
 
-    System.out.println("OBJECT: " + model.getAllBookings());
+    System.out.println("OBJECT: " + model.getAllBookings().getRoomBookings());
+
   }
 }

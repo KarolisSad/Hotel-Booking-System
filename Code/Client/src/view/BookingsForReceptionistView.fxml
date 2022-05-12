@@ -33,12 +33,12 @@
             </TableView>
             <VBox alignment="CENTER" prefHeight="291.0" prefWidth="258.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#showInProgressButton" prefHeight="30.0" prefWidth="140.0" text="Show in Progress">
+                  <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#showInProgressButton" prefHeight="30.0" prefWidth="140.0" text="Show in Progress">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showBookedButton" prefHeight="30.0" prefWidth="140.0" text="Show Booked">
+                  <Button fx:id="bookedButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showBookedButton" prefHeight="30.0" prefWidth="140.0" text="Show Booked">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -59,7 +59,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#checkInButton" prefHeight="30.0" prefWidth="140.0" text="Check in">
+            <Button fx:id="checkIn" mnemonicParsing="false" onAction="#checkInButton" prefHeight="30.0" prefWidth="140.0" text="Check in">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>

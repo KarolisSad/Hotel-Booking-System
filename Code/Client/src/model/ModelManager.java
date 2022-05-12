@@ -91,8 +91,22 @@ public class ModelManager implements Model {
 
     @Override public RoomBookingTransfer getAllBookings()
     {
-
         return hotelClient.getAllBookings();
+    }
+
+    @Override public RoomBookingTransfer getInProgressBookings()
+    {
+        return hotelClient.getInProgressBookings();
+    }
+
+    @Override public RoomBookingTransfer getCancelledBookings()
+    {
+        return hotelClient.getCancelledBookings();
+    }
+
+    @Override public RoomBookingTransfer getBookedBookings()
+    {
+        return hotelClient.getBookedBookings();
     }
 
     /**

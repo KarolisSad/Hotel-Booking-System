@@ -158,7 +158,7 @@ public class HotelClientHandler implements Runnable
           ArrayList<RoomBookingTransferObject> allBookings = null;
           try
           {
-            allBookings = model.getAllBookings().getConvertedList();
+            allBookings = model.getAllBookings("").getConvertedList();
           }
           catch (Exception e)
           {
@@ -170,9 +170,65 @@ public class HotelClientHandler implements Runnable
           jsonString = json.toJson(roomBookingTransfer);
           out.println(jsonString);
           break;
-
-
         }
+
+        case "BookedBookings":
+        {
+          ArrayList<RoomBookingTransferObject> bookedBookings = null;
+          try
+          {
+            bookedBookings = model.getAllBookings("booked").getConvertedList();
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+
+          RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("BookedBookings", bookedBookings);
+
+          jsonString = json.toJson(roomBookingTransfer);
+          out.println(jsonString);
+          break;
+        }
+
+        case "InProgressBookings":
+        {
+          ArrayList<RoomBookingTransferObject> inProgressBookings = null;
+          try
+          {
+            inProgressBookings = model.getAllBookings("inProgress").getConvertedList();
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+
+          RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("InProgressBookings", inProgressBookings);
+
+          jsonString = json.toJson(roomBookingTransfer);
+          out.println(jsonString);
+          break;
+        }
+
+        case "CancelledBookings":
+        {
+          ArrayList<RoomBookingTransferObject> cancelledBookings = null;
+          try
+          {
+            cancelledBookings = model.getAllBookings("cancelled").getConvertedList();
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+
+          RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("CancelledBookings", cancelledBookings);
+
+          jsonString = json.toJson(roomBookingTransfer);
+          out.println(jsonString);
+          break;
+        }
+
 
       }
 

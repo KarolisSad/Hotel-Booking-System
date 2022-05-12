@@ -182,7 +182,6 @@ public class MyDataBase
     }
   }
 
-
   public void book(RoomBooking roomBooking) throws SQLException
   {
 
@@ -257,35 +256,114 @@ public class MyDataBase
     }
   }
 
-  public ArrayList<RoomBooking> getAllRoomBookings() throws SQLException
+  public ArrayList<RoomBooking> getAllRoomBookings(String type)
+      throws SQLException
   {
-    try (Connection connection = getConnection())
+    ArrayList<RoomBooking> roomBookings = new ArrayList<>();
+
+    switch (type)
     {
-      PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM roombooking;");
-      ResultSet resultSet = statement.executeQuery();
-      ArrayList<RoomBooking> roomBookings = new ArrayList<>();
-
-      while (resultSet.next())
+      case "":
       {
-        int bookingID = resultSet.getInt("bookingid");
-        LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
-        LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
-        Guest guest = getGuest(resultSet.getInt("guest"));
-        Room room = getRoom(resultSet.getString("roomid"));
-        String state = resultSet.getString("state");
+        try (Connection connection = getConnection())
+        {
+          PreparedStatement statement = connection.prepareStatement(
+              "SELECT * FROM roombooking;");
+          ResultSet resultSet = statement.executeQuery();
 
+          while (resultSet.next())
+          {
+            int bookingID = resultSet.getInt("bookingid");
+            LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
+            LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
+            Guest guest = getGuest(resultSet.getInt("guest"));
+            Room room = getRoom(resultSet.getString("roomid"));
+            String state = resultSet.getString("state");
 
-
-        RoomBooking roomBooking = new RoomBooking(startDate, endDate, room, guest, state, bookingID);
-        roomBookings.add(roomBooking);
+            RoomBooking roomBooking = new RoomBooking(startDate, endDate, room,
+                guest, state, bookingID);
+            roomBookings.add(roomBooking);
+          }
+        }
+        break;
       }
-      if (roomBookings == null)
+
+      case "booked":
       {
-        throw new IllegalArgumentException("No rooms were added yet.");
+        try (Connection connection = getConnection())
+        {
+          PreparedStatement statement = connection.prepareStatement(
+              "SELECT * FROM roombooking WHERE state = 'Booked';");
+          ResultSet resultSet = statement.executeQuery();
+
+          while (resultSet.next())
+          {
+            int bookingID = resultSet.getInt("bookingid");
+            LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
+            LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
+            Guest guest = getGuest(resultSet.getInt("guest"));
+            Room room = getRoom(resultSet.getString("roomid"));
+            String state = resultSet.getString("state");
+
+            RoomBooking roomBooking = new RoomBooking(startDate, endDate, room,
+                guest, state, bookingID);
+            roomBookings.add(roomBooking);
+          }
+        }
+        break;
       }
-      return roomBookings;
+
+      case "inProgress":
+      {
+        try (Connection connection = getConnection())
+        {
+          PreparedStatement statement = connection.prepareStatement(
+              "SELECT * FROM roombooking WHERE state = 'In progress';");
+          ResultSet resultSet = statement.executeQuery();
+
+          while (resultSet.next())
+          {
+            int bookingID = resultSet.getInt("bookingid");
+            LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
+            LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
+            Guest guest = getGuest(resultSet.getInt("guest"));
+            Room room = getRoom(resultSet.getString("roomid"));
+            String state = resultSet.getString("state");
+
+            RoomBooking roomBooking = new RoomBooking(startDate, endDate, room,
+                guest, state, bookingID);
+            roomBookings.add(roomBooking);
+          }
+        }
+        break;
+      }
+
+      case "cancelled":
+      {
+        try (Connection connection = getConnection())
+        {
+          PreparedStatement statement = connection.prepareStatement(
+              "SELECT * FROM roombooking WHERE state = 'Cancelled';");
+          ResultSet resultSet = statement.executeQuery();
+
+          while (resultSet.next())
+          {
+            int bookingID = resultSet.getInt("bookingid");
+            LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
+            LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
+            Guest guest = getGuest(resultSet.getInt("guest"));
+            Room room = getRoom(resultSet.getString("roomid"));
+            String state = resultSet.getString("state");
+
+            RoomBooking roomBooking = new RoomBooking(startDate, endDate, room,
+                guest, state, bookingID);
+            roomBookings.add(roomBooking);
+          }
+        }
+        break;
+      }
     }
+    return roomBookings;
   }
 
   //TODO COMMENT
@@ -340,7 +418,6 @@ public class MyDataBase
 
     }
   }
-
 
   public void processBooking(RoomBooking booking) throws SQLException
   {

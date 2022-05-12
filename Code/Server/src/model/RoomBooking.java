@@ -34,27 +34,23 @@ public class RoomBooking
    * @param guest     guest
    */
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
-      Guest guest) throws SQLException
+      Guest guest)
   {
-    databaseAdapter = new HotelDataBase();
     setStartAndEndDate(startDate, endDate);
     setRoom(room);
     setGuest(guest);
     bookingID = 0;
-    state = new RoomBookingBookedState();
-    databaseAdapter.book(this);
   }
 
   //TODO COMMENT
   public RoomBooking(LocalDate startDate, LocalDate endDate, Room room,
       Guest guest, String state, int bookingID)
   {
-    databaseAdapter = new HotelDataBase();
     setStartAndEndDate(startDate, endDate);
     setRoom(room);
     setGuest(guest);
-    this.bookingID = bookingID;
     this.state = getStateFromString(state);
+    this.bookingID = bookingID;
   }
 
 
@@ -148,16 +144,15 @@ public class RoomBooking
     return bookingID;
   }
 
-  public void processBooking() throws SQLException
+  public void processBooking()
   {
     state.setState(this);
-    databaseAdapter.processBooking(this);
+
   }
 
-  public void cancelBooking() throws SQLException
+  public void cancelBooking()
   {
     state.cancelBooking(this);
-    databaseAdapter.cancelBooking(this);
   }
 
   public String getState()
@@ -172,8 +167,8 @@ public class RoomBooking
    */
   @Override public String toString()
   {
-    return "RoomBooking{" + "startDate=" + startDate + ", endDate=" + endDate
-        + ", room=" + room + ", guest=" + guest + ", state=" + state +'}';
+    return "RoomBooking{ ID: " + bookingID + "startDate=" + startDate + ", endDate=" + endDate
+        + ", room=" + room + ", guest=" + guest + ", state=" + getState() +'}';
   }
 
 

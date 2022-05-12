@@ -2,6 +2,7 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,6 +14,9 @@ import java.time.LocalDate;
 public class BookingsForReceptionistViewController extends ViewController
 {
 
+  @FXML private Button checkIn;
+  @FXML private Button bookedButton;
+  @FXML private Button inProgressButton;
   @FXML private TableView<SimpleBookingViewModel> bookingsTable;
   @FXML private TableColumn<SimpleBookingViewModel, Integer> bookingIdColumn;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> startDateColumn;
@@ -39,8 +43,21 @@ public class BookingsForReceptionistViewController extends ViewController
 
     bookingsTable.setItems(viewModel.getBookings());
 
+   checkIn.setDisable(true);
+    bookedButton.setDisable(true);
+
+
+
     bookingsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
-      viewModel.setSelected(newValue);
+      if (newValue != null)
+      {
+        if (newValue.bookingStateProperty().getValue().equalsIgnoreCase("Booked"))
+        {
+          checkIn.setDisable(false);
+        }
+        viewModel.setSelected(newValue);
+        System.out.println(newValue.bookingStateProperty().getValue());
+      }
     });
 
     reset();
@@ -51,12 +68,20 @@ public class BookingsForReceptionistViewController extends ViewController
     viewModel.reset();
   }
 
-  public void showInProgressButton(ActionEvent actionEvent)
+  public void showInProgressButton()
   {
+    viewModel.updateBookingList("InProgress");
+    inProgressButton.setDisable(true);
+    bookedButton.setDisable(false);
+    checkIn.setDisable(true);
   }
 
-  public void showBookedButton(ActionEvent actionEvent)
+  public void showBookedButton()
   {
+    viewModel.updateBookingList("booked");
+    bookedButton.setDisable(true);
+    inProgressButton.setDisable(false);
+    checkIn.setDisable(true);
   }
 
   public void guestInformationButton(ActionEvent actionEvent)
@@ -67,7 +92,8 @@ public class BookingsForReceptionistViewController extends ViewController
   {
   }
 
-  public void checkInButton(ActionEvent actionEvent)
+  public void checkInButton()
   {
   }
+
 }

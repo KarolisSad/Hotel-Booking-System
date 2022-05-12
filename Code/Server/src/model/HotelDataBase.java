@@ -44,11 +44,14 @@ public class HotelDataBase implements HotelPersistence {
 
     // TODO CHR
 
-    @Override public ArrayList<RoomBooking> getAllBookings() throws SQLException
+    @Override public ArrayList<RoomBooking> getAllBookings(String type)
+        throws SQLException
     {
         MyDataBase dataBase = MyDataBase.getInstance();
-        return dataBase.getAllRoomBookings();
+        return dataBase.getAllRoomBookings(type);
     }
+
+
 
     @Override public void processBooking(RoomBooking booking)
         throws SQLException

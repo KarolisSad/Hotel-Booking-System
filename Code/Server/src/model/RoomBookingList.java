@@ -17,14 +17,14 @@ public class RoomBookingList
   private ArrayList<RoomBooking> allBookings;
   private HotelPersistence dataBaseManager;
 
+
   /**
    * A constructor meant for initializing instance variable as a new array list
    * that stores all bookings.
    */
-  public RoomBookingList() throws SQLException
+  public RoomBookingList()
   {
-    dataBaseManager = new HotelDataBase();
-    this.allBookings = new ArrayList<>(dataBaseManager.getAllBookings());
+    allBookings = new ArrayList<>();
   }
 
   /**
@@ -35,6 +35,13 @@ public class RoomBookingList
   public ArrayList<RoomBooking> getAllBookings()
   {
     return allBookings;
+  }
+
+  //TODO CHR
+  public void setAllBookings(ArrayList<RoomBooking> bookingList)
+  {
+    allBookings.clear();
+    allBookings.addAll(bookingList);
   }
 
   /**
@@ -129,30 +136,15 @@ public class RoomBookingList
     return allBookingsConverted;
   }
 
-  public void processBooking(int id) throws SQLException
+  public void processBooking(int id)
   {
-    updateList();
     getBookingById(id).processBooking();
   }
 
-  public void cancelBooking(int id) throws SQLException
+  public void cancelBooking(int id)
   {
-    updateList();
     getBookingById(id).cancelBooking();
   }
 
-  private void updateList()
-  {
-    try
-    {
-      allBookings.clear();
-      allBookings.addAll(dataBaseManager.getAllBookings());
-    }
-    catch (SQLException e)
-    {
-      throw new RuntimeException(e);
-    }
-
-  }
 }
 

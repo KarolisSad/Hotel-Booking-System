@@ -23,45 +23,76 @@ public class BookingsForReceptionistViewModel
     this.model = model;
 
     this.bookings = FXCollections.observableArrayList();
-    updateBookingList();
+    updateBookingList("booked");
 
     this.selectedBookingProperty = new SimpleObjectProperty<>();
 
     this.errorLabel = new SimpleStringProperty("");
   }
 
-  public void updateBookingList()
+  public void updateBookingList(String type)
   {
+
     bookings.clear();
-
-    RoomBookingTransfer bookingList = model.getAllBookings();
-
-    if (bookingList.getMessage() == null)
+    switch (type)
     {
-      for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
+      case "booked":
       {
-        bookings.add(
-            new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+        RoomBookingTransfer bookingList = model.getBookedBookings();
+
+        if (bookingList.getMessage() == null)
+        {
+          for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
+          {
+            bookings.add(
+                new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+          }
+        }
+        else
+        {
+          errorLabel.setValue(bookingList.getMessage());
+        }
+
+        break;
+      }
+
+      case "inProgress":
+      {
+
+        RoomBookingTransfer bookingList = model.getInProgressBookings();
+
+        if (bookingList.getMessage() == null)
+        {
+          for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
+          {
+            bookings.add(
+                new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+          }
+        }
+        else
+        {
+          errorLabel.setValue(bookingList.getMessage());
+        }
+
+        break;
       }
     }
 
-    else
-    {
-      errorLabel.setValue(bookingList.getMessage());
-    }
+
 
   }
 
   public void reset()
   {
-   errorLabel.setValue("");
-   updateBookingList();
+    errorLabel.setValue("");
+    updateBookingList("booked");
   }
 
   public void setSelected(SimpleBookingViewModel selectedBooking)
   {
     selectedBookingProperty.set(selectedBooking);
-    System.out.println("SELECTION CHANGED: " + selectedBooking.bookingIdProperty());
+    System.out.println(
+        "SELECTION CHANGED: " + selectedBooking.bookingIdProperty());
   }
 
   public SimpleBookingViewModel getSelectedBookingProperty()
@@ -77,5 +108,10 @@ public class BookingsForReceptionistViewModel
   public ObservableList<SimpleBookingViewModel> getBookings()
   {
     return bookings;
+  }
+
+  public void checkIn(SimpleBookingViewModel bookingViewModel)
+  {
+
   }
 }

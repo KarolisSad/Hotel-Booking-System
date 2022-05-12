@@ -16,7 +16,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   ArrayList<Room> getAllRooms() throws SQLException;
 
   // Christian added:
-  RoomBookingList getAllBookings() throws SQLException;
+  RoomBookingList getAllBookings(String type) throws SQLException;
   void processBooking(int id) throws SQLException;
   void cancelBooking(int id) throws SQLException;
 

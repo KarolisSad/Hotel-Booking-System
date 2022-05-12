@@ -12,6 +12,7 @@ public class ViewModelFactory {
     private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
 
     public ViewModelFactory(Model model){
+
         TemporaryInformation tempInfo = new TemporaryInformation();
         ViewState state = new ViewState();
 
@@ -20,7 +21,9 @@ public class ViewModelFactory {
         this.roomListViewModel = new RoomListViewModel(model, state);
         this.addEditViewModel = new AddEditViewModel(model, state);
         this.logInViewModel = new LogInViewModel(model);
+
         this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(model);
+
     }
 
     public GuestInformationViewModel getGuestInformationViewModel(){

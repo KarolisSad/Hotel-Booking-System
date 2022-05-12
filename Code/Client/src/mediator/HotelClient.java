@@ -209,9 +209,61 @@ public class HotelClient implements Model {
                 e.printStackTrace();
             }
         }
-
         return json.fromJson(message, RoomBookingTransfer.class);
+    }
 
+    @Override public synchronized RoomBookingTransfer getBookedBookings()
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("BookedBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    @Override public synchronized RoomBookingTransfer getInProgressBookings()
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("InProgress"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    @Override public synchronized RoomBookingTransfer getCancelledBookings()
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("CancelledBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
     }
 
     /**
