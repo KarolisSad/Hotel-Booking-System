@@ -1,5 +1,6 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
@@ -14,6 +15,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer removeRoom(String roomId);
   RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds);
 
+  GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr);
 
   // TODO CHR
   RoomBookingTransfer getAllBookings();
