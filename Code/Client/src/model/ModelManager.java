@@ -1,5 +1,6 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.HotelClient;
 import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
@@ -100,6 +101,11 @@ public class ModelManager implements Model {
     @Override
     public RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds) {
         return hotelClient.editRoomInfo(roomId, type, nrBeds);
+    }
+
+    @Override
+    public GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr) {
+        return hotelClient.editGuest(type, bookingID, fName, lName, email, phoneNr);
     }
 
 

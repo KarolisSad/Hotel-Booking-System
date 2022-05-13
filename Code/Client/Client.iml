@@ -14,5 +14,6 @@
     <orderEntry type="library" name="JavaFX11" level="application" />
     <orderEntry type="library" name="gson-2.9.0" level="application" />
     <orderEntry type="library" name="gson-2.8.5" level="application" />
+    <orderEntry type="library" name="XmlJsonParser-1.41" level="application" />
   </component>
 </module>

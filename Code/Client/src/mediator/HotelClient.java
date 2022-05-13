@@ -107,6 +107,21 @@ public class HotelClient implements Model {
         return json.fromJson(message, RoomTransfer.class);
     }
 
+    @Override
+    public synchronized GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr) {
+        sendToServerAsJson(new GuestTransfer(type, bookingID, fName, lName, email, phoneNr));
+        message = null;
+        while (message == null) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message,GuestTransfer.class);
+    }
+
+
     /**
      * Creates RoomTransfer object, transfer it to Json format and sends it to server
      * while putting itself to wait until message is received from a server
@@ -323,6 +338,15 @@ public class HotelClient implements Model {
         out.println(jsonString);
     }
 
+    /**
+     * Makes received object into Json format and sends it to a server
+     *
+     * @param guestTransfer object which is used to transfer information to server
+     */
+    private void sendToServerAsJson(GuestTransfer guestTransfer) {
+        String jsonString = json.toJson(guestTransfer);
+        out.println(jsonString);
+    }
 
 
     @Override
