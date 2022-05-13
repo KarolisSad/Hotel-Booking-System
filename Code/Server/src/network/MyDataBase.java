@@ -40,7 +40,7 @@ public class MyDataBase
     // Christian
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel",
-        "postgres", "123456789");
+        "postgres", "Milit@ria2003");
   }
 
   public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
@@ -310,6 +310,7 @@ public class MyDataBase
             RoomBooking roomBooking = new RoomBooking(startDate, endDate, room,
                 guest, state, bookingID);
             roomBookings.add(roomBooking);
+            System.out.println(roomBooking);
           }
         }
         break;

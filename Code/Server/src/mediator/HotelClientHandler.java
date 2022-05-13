@@ -52,7 +52,7 @@ public class HotelClientHandler implements Runnable
     while (true)
     {
 
-        //String successMessage = json.toJson(new RoomTransfer("Success"));
+        String successMessage = json.toJson(new RoomTransfer("Success"));
         //String successMessage = json.toJson(new GuestTransfer("Success"));
 
       try
@@ -68,7 +68,6 @@ public class HotelClientHandler implements Runnable
       switch (type)
       {
         case "addOneRoom":
-          String successMessage = json.toJson(new RoomTransfer("Success"));
           RoomTransfer room = json.fromJson(message, RoomTransfer.class);
           try
           {
@@ -86,7 +85,6 @@ public class HotelClientHandler implements Runnable
           break;
 
         case "removeOneRoom":
-          successMessage = json.toJson(new RoomTransfer("Success"));
           room = json.fromJson(message, RoomTransfer.class);
           try
           {
@@ -130,7 +128,6 @@ public class HotelClientHandler implements Runnable
           break;
 
         case "bookOneRoom":
-          successMessage = json.toJson(new RoomTransfer("Success"));
           room = json.fromJson(message, RoomTransfer.class);
           try
           {
@@ -145,7 +142,6 @@ public class HotelClientHandler implements Runnable
           break;
 
         case "edit":
-          successMessage = json.toJson(new RoomTransfer("Success"));
           room = json.fromJson(message, RoomTransfer.class);
           try
           {
@@ -193,7 +189,6 @@ public class HotelClientHandler implements Runnable
           }
 
           RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("BookedBookings", bookedBookings);
-
           jsonString = json.toJson(roomBookingTransfer);
           out.println(jsonString);
           break;

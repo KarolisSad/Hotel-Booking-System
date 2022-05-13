@@ -46,7 +46,7 @@ public class RoomListViewModel implements PropertyChangeListener
     allRooms.clear();
 
     RoomTransfer roomTransfer = model.getAllRooms();
-
+    System.out.println(roomTransfer.toString());
     if (roomTransfer.getMessage() == null)
     {
       for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
