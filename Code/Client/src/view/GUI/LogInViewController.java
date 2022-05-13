@@ -44,6 +44,10 @@ public class LogInViewController extends ViewController
         getViewHandler().openView("ReservationView.fxml");
     }
 
+    public void receptionist() throws IOException {
+        getViewHandler().openView("GuestDetailsForReceptionist.fxml");
+    }
+
     /**
      * A getter method returning the Region object.
      *
