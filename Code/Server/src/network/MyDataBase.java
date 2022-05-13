@@ -546,7 +546,7 @@ public class MyDataBase
       statement.setInt(1, bookingID);
       ResultSet resultSet = statement.executeQuery();
       System.out.println("before: ");
-      System.out.println(resultSet.next());
+      //System.out.println(resultSet.next());
       int phoneNR = resultSet.getInt("guest");
       System.out.println(phoneNR + ": phonrNR");
 

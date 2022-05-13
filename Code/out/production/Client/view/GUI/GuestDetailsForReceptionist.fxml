@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="view.GUI.GuestDetailsForReceptionistController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label prefHeight="50.0" prefWidth="603.0" text="Guest details">
          <font>
@@ -22,7 +22,7 @@
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField1" prefHeight="25.0" prefWidth="83.0" />
+            <TextField fx:id="bookingIDField" prefHeight="25.0" prefWidth="83.0" editable="false"/>
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -80,7 +80,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="200.0" />
+            <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="200.0"  editable="false"/>
          </children>
       </HBox>
       <HBox alignment="BOTTOM_CENTER" prefHeight="75.0" prefWidth="600.0">

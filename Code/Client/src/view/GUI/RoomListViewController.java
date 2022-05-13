@@ -1,4 +1,4 @@
-package view.controllers;
+package view.GUI;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
