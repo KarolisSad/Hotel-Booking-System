@@ -174,6 +174,7 @@ public class ModelManager implements Model
       {
         room = i;
       }
+
     }
     RoomBooking booking = new RoomBooking(startDate, endDate, room, guest);
     dataBaseAdapter.book(booking);
@@ -209,6 +210,7 @@ public class ModelManager implements Model
       throw new NullPointerException(
           "Please enter a start date and an end date.");
     }
+
     else if (startDate.isBefore(LocalDate.now()))
     {
       throw new IllegalArgumentException(
@@ -218,6 +220,7 @@ public class ModelManager implements Model
     {
       throw new IllegalArgumentException(
           "End date cannot be the same date as start-date.");
+
     }
     else if (endDate.isBefore(startDate))
     {
@@ -225,5 +228,5 @@ public class ModelManager implements Model
           "End date cannot be before start date.");
     }
   }
-
 }
+

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+
 import java.time.LocalDate;
 
 /**
@@ -19,13 +20,12 @@ public class RoomBooking
   private int bookingID;
   private RoomBookingState state;
 
-
-
   /**
    * A four-argument constructor
    * A constructor meant for initializing instance variables using set-methods.
    * It makes a copy of the guest object.
    * This version of the constructor is used when creating a new RoomBooking.
+
    *
    * @param startDate start date
    * @param endDate   end date
@@ -61,6 +61,7 @@ public class RoomBooking
     setGuest(guest);
     this.state = getStateFromString(state);
     this.bookingID = bookingID;
+
   }
 
 
@@ -74,6 +75,7 @@ public class RoomBooking
     this.startDate = startDate;
     this.endDate = endDate;
   }
+
 
   /**
    * Method setting the room variable to a copy of the room passed as an argument.
@@ -113,6 +115,7 @@ public class RoomBooking
    * @return endDate
    */
   public LocalDate getEndDate() {
+
     return endDate;
   }
 
@@ -122,6 +125,7 @@ public class RoomBooking
    * @return startDate
    */
   public LocalDate getStartDate() {
+
     return startDate;
   }
 
@@ -190,6 +194,7 @@ public class RoomBooking
   }
 
   /**
+
    * A method is meant for getting room booking information.
    *
    * @return Organized output of room booking
@@ -218,3 +223,4 @@ public class RoomBooking
     }
   }
 }
+

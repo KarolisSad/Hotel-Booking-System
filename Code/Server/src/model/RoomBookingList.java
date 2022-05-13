@@ -3,6 +3,7 @@ package model;
 import mediator.RoomBookingTransferObject;
 
 import java.sql.SQLException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,7 +17,6 @@ public class RoomBookingList
 {
   private ArrayList<RoomBooking> allBookings;
 
-
   /**
    * A constructor meant for initializing instance variable as a new array list
    * that stores all bookings.
@@ -24,6 +24,7 @@ public class RoomBookingList
   public RoomBookingList()
   {
     allBookings = new ArrayList<>();
+
   }
 
   /**
@@ -47,6 +48,7 @@ public class RoomBookingList
   }
 
   /**
+
    * A method meant for added a new room booking to the list
    * and printing out that it was added.
    *
@@ -55,7 +57,6 @@ public class RoomBookingList
    */
   public void addBooking(RoomBooking booking)
   {
-
     if (booking == null)
     {
       throw new NullPointerException("No booking passed as argument.");
@@ -105,6 +106,7 @@ public class RoomBookingList
   }
 
   /**
+
    * A method that returns how many rooms are booked.
    *
    * @return size of AllBooking array list.
@@ -168,4 +170,5 @@ public class RoomBookingList
   }
 
 }
+
 
