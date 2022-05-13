@@ -42,11 +42,48 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.editRoomInfo(roomID,type,nrBeds);
     }
 
-    @Override
-    public void book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) throws SQLException {
+    /**
+     * Method used for getting all bookings of a specific type from the database.
+     * @param type the type of rooms to get
+     * @return An ArrayList of bookings of the type corresponding to the String passed as argument.
+     *
+     */
+    @Override public ArrayList<RoomBooking> getAllBookings(String type)
+        throws SQLException
+    {
         MyDataBase dataBase = MyDataBase.getInstance();
-        dataBase.book(roomId,startDate,endDate,guest);
+        return dataBase.getAllRoomBookings(type);
+    }
 
+    /**
+     * Method used for updating the state of a room in the database.
+     * @param booking the booking to be updated
+     *
+     */
+    @Override public void processBooking(RoomBooking booking)
+        throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.processBooking(booking);
+    }
+
+    //TODO What should this do??
+    @Override public void cancelBooking(RoomBooking roomBooking)
+        throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.cancelBooking(roomBooking);
+    }
+
+    /**
+     * Method used for adding a booking to the database.
+     * @param roomBooking The booking to add.
+     *
+     */
+    @Override
+    public void book(RoomBooking roomBooking) throws SQLException {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.book(roomBooking);
     }
 
 

@@ -31,10 +31,10 @@ public class GuestInformationViewModel {
      */
     public GuestInformationViewModel(Model model, TemporaryInformation tempInfo) {
         this.model = model;
-        this.firstNameField = new SimpleStringProperty("Bob");
-        this.lastNameField = new SimpleStringProperty("Builder");
-        this.emailField = new SimpleStringProperty("Bob@Builder.build");
-        this.phoneNumberField = new SimpleStringProperty("20202020");
+        this.firstNameField = new SimpleStringProperty("");
+        this.lastNameField = new SimpleStringProperty("");
+        this.emailField = new SimpleStringProperty("");
+        this.phoneNumberField = new SimpleStringProperty("");
         this.errorLabel = new SimpleStringProperty();
         this.temp = tempInfo;
     }

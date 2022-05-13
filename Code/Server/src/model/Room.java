@@ -15,10 +15,12 @@ public class Room
   //todo change javadoc
 
   /**
-   * One-argument contructor
-   * A constructor that initializes instance variable using the setRoomId method.
+   * Four-argument contructor
+   * A constructor that initializes instance variable using the set methods.
    *
    * @param roomId room number
+   * @param roomOfType The type of room
+   * @param numberOfBeds the number of beds to be assigned to the room.
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
@@ -37,19 +39,26 @@ public class Room
     switch (roomType)
     {
       case "single":
+      case "Single":
         return RoomType.SINGLE;
       case "double":
+      case "Double":
         return RoomType.DOUBLE;
       case "family":
+      case "Family":
         return RoomType.FAMILY;
       case "suite":
+      case "Suite":
         return RoomType.SUITE;
       default:
         return null;
     }
   }
 
-
+  /**
+   * Method used for setting the type of the room.
+   * @param roomOfType The type to be set.
+   */
   public void setRoomType(RoomType roomOfType)
   {
     if (roomOfType == null)
@@ -63,6 +72,10 @@ public class Room
     }
   }
 
+  /**
+   * Method used to set the numberOfBeds variable.
+   * @param numberOfBeds The number of beds to be assigned.
+   */
   public void setNumberOfBeds(int numberOfBeds)
   {
     if (numberOfBeds == 0)
@@ -78,11 +91,12 @@ public class Room
 
   /**
    * Private method setting the roomId variable to the string given as argument.
+   * This method is private as it is only used in the constructor, and as the roomID serves as the primary key in the database, once a room is created the number should never change.
    *
-   * @param roomId
+   * @param roomId the roomId
    * @throws IllegalArgumentException if argument is null or an empty String.
    */
-  public void setRoomId(String roomId)
+  private void setRoomId(String roomId)
   {
     if (roomId == null || roomId.isBlank())
     {
@@ -103,13 +117,15 @@ public class Room
     return roomId;
   }
 
+
+  //TODO delete??
   public RoomType getRoomType()
   {
     return roomType;
   }
 
 
-
+  //TODO delete??
   public int getNumberOfBeds()
   {
     return numberOfBeds;
@@ -126,6 +142,10 @@ public class Room
     return other;
   }
 
+  /**
+   * Method returning a string representation of the room object.
+   * @return A string containing all variables and their values.
+   */
   @Override public String toString()
   {
     return "Room number: " + roomId + ", Type: " + roomType.toString()

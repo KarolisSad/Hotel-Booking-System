@@ -12,24 +12,26 @@ public class Room
   private RoomType roomType;
   private int numberOfBeds;
 
-  //todo change javadoc
 
   /**
-   * One-argument contructor
-   * A constructor that initializes instance variable using the setRoomId method.
+   * Four-argument contructor
+   * A constructor that initializes instance variable using the set methods.
    *
    * @param roomId room number
+   * @param roomOfType The type of room
+   * @param numberOfBeds the number of beds to be assigned to the room.
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds)
   {
-    this.roomType =roomOfType;
-    this.roomId = roomId;
-    this.numberOfBeds = numberOfBeds;
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);
   }
 
+  /**
+   * Method used for setting the type of the room.
+   * @param roomOfType The type to be set.
+   */
   public void setRoomType(RoomType roomOfType)
   {
     if (roomOfType == null)
@@ -43,6 +45,10 @@ public class Room
     }
   }
 
+  /**
+   * Method used to set the numberOfBeds variable.
+   * @param numberOfBeds The number of beds to be assigned.
+   */
   public void setNumberOfBeds(int numberOfBeds)
   {
     if (numberOfBeds == 0)
@@ -83,12 +89,19 @@ public class Room
     return roomId;
   }
 
+  /**
+   * A method returning the RoomType of a room.
+   * @return
+   */
   public RoomType getRoomType()
   {
     return roomType;
   }
 
-
+  /**
+   * A method returning the number of beds of a room.
+   * @return
+   */
   public int getNumberOfBeds()
   {
     return numberOfBeds;
@@ -105,6 +118,10 @@ public class Room
     return other;
   }
 
+  /**
+   * Method returning a string representation of the room object.
+   * @return A string containing all variables and their values.
+   */
   @Override
   public String toString() {
     return "Room{" +

@@ -1,10 +1,10 @@
 package model;
 
+import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public interface Model extends UnnamedPropertyChangeSubject
 {
@@ -13,5 +13,14 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer addRoom(String roomId, RoomType type, int nrBeds);
   RoomTransfer removeRoom(String roomId);
   RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds);
+
+
+  // TODO CHR
+  RoomBookingTransfer getAllBookings();
+  RoomBookingTransfer getBookedBookings();
+  RoomBookingTransfer getInProgressBookings();
+  RoomBookingTransfer getCancelledBookings();
+  RoomBookingTransfer processBooking(int bookingNumber);
+
   RoomTransfer getAllRooms();
 }

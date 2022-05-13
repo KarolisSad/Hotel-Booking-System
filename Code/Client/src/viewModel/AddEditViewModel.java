@@ -153,7 +153,6 @@ public class AddEditViewModel
    */
   public void editRoomInfo()
   {
-    // TODO add Observer!
     RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
     if (roomTransfer.getMessage() == null)
     {

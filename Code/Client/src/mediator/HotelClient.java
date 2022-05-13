@@ -1,10 +1,7 @@
 package mediator;
 
 import com.google.gson.Gson;
-import model.Guest;
-import model.Model;
-import model.Room;
-import model.RoomType;
+import model.*;
 
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
@@ -52,6 +49,7 @@ public class HotelClient implements Model {
     private void startReader() {
         HotelClientReader hotelClientReader = new HotelClientReader(this, in);
         Thread thread = new Thread(hotelClientReader);
+        thread.setDaemon(true);
         thread.start();
     }
 
@@ -195,6 +193,115 @@ public class HotelClient implements Model {
         return json.fromJson(message,RoomTransfer.class);
     }
 
+    /**
+     * Method used for getting a list of all bookings in the database.
+     * @return RoomBookingTransfer object containing an ArrayList of all RoomBookings.
+     */
+    @Override public synchronized RoomBookingTransfer getAllBookings()
+    {
+        // sendToServer
+        sendToServerAsJsonBooking(new RoomBookingTransfer("AllBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    /**
+     * Method used for getting a list of all bookings in the database that have a state of Booked.
+     * @return RoomBookingTransfer object containing an ArrayList of all RoomBookings with a state of Booked.
+     */
+    @Override public synchronized RoomBookingTransfer getBookedBookings()
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("BookedBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    /**
+     * Method used for getting a list of all bookings in the database that have a state of In progress.
+     * @return RoomBookingTransfer object containing an ArrayList of all RoomBookings with a state of In progress.
+     */
+    @Override public synchronized RoomBookingTransfer getInProgressBookings()
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("InProgressBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    /**
+     * Method used for getting a list of all bookings in the database that have a state of Cancelled.
+     * @return RoomBookingTransfer object containing an ArrayList of all RoomBookings with a state of Cancelled.
+     */
+    @Override public synchronized RoomBookingTransfer getCancelledBookings()
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("CancelledBookings"));
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    /**
+     * Method used to send a request for an update of BookingState for a specific booking.
+     * @param bookingNumber The bookingID of the booking to be processed
+     * @return A RoomBookingTransfer object containing a Success message if the operation succeeded, or an exception-message if not.
+     */
+    @Override public synchronized RoomBookingTransfer processBooking(int bookingNumber)
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("ProcessBooking", bookingNumber));
+        message = null;
+        try
+        {
+            wait();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
 
     /**
      * Makes received object into Json format and sends it to a server
@@ -205,6 +312,18 @@ public class HotelClient implements Model {
         String jsonString = json.toJson(roomTransfer);
         out.println(jsonString);
     }
+
+    /**
+     * Makes received object into Json format and sends it to a server
+     *
+     * @param roomBookingTransfer object which is used to transfer information to server
+     */
+    public synchronized void sendToServerAsJsonBooking(RoomBookingTransfer roomBookingTransfer) {
+        String jsonString = json.toJson(roomBookingTransfer);
+        out.println(jsonString);
+    }
+
+
 
     @Override
     public void addListener(PropertyChangeListener listener) {
