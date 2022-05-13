@@ -534,4 +534,36 @@ public class MyDataBase
       }
     }
   }
+
+  public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException{
+    System.out.println("Edit guest values" + bookingID + fName + lName + email + phoneNr);
+
+    try (Connection connection = getConnection()) {
+
+      //searching for a quest in bookingGuest
+      PreparedStatement statement = connection.prepareStatement("select distinct roomBooking.guest from roomBooking where bookingid = ?;");
+      statement.setInt(1, bookingID);
+      ResultSet resultSet = statement.executeQuery();
+      System.out.println("before: ");
+      System.out.println(resultSet.next());
+      int phoneNR = resultSet.getInt("guest");
+      System.out.println(phoneNR + ": phonrNR");
+
+      //updating info about the guest
+      PreparedStatement statement3 = connection.prepareStatement("update guest\n" +
+              "set fname = ?,\n" +
+              "    lname =?,\n" +
+              "    email =?\n" +
+              "where phonenr = ?;");
+
+      statement3.setInt(4, phoneNR);
+      statement3.setString(3, email);
+      statement3.setString(2, lName);
+      statement3.setString(1, fName);
+      statement3.executeUpdate();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+  }
 }

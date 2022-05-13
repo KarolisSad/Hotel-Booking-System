@@ -42,6 +42,12 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.editRoomInfo(roomID,type,nrBeds);
     }
 
+    @Override
+    public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.editGuest(bookingID, fName, lName, email,  phoneNr);
+    }
+
     /**
      * Method used for getting all bookings of a specific type from the database.
      * @param type the type of rooms to get
