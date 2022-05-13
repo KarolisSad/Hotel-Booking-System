@@ -1,9 +1,10 @@
-package view;
+package view.controllers;
 
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import view.ViewController;
 import viewModel.GuestDetailsForReceptionistViewModel;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class GuestDetailsForReceptionistController extends ViewController {
 
     @Override
     protected void init() {
-            viewModel = viewModelFactory.getGuestDetailsForReceptionistViewModel();
+            viewModel = getViewModelFactory().getGuestDetailsForReceptionistViewModel();
         try {
             emailField.textProperty().bindBidirectional(viewModel.getEmailProperty());
             firstNameField.textProperty().bindBidirectional(viewModel.getfNameProperty());

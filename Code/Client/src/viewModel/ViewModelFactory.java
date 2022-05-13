@@ -10,6 +10,7 @@ public class ViewModelFactory {
     private AddEditViewModel addEditViewModel;
     private LogInViewModel logInViewModel;
     private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
+    private GuestDetailsForReceptionistViewModel guestDetailsForReceptionistViewModel;
 
     public ViewModelFactory(Model model){
 
@@ -23,6 +24,7 @@ public class ViewModelFactory {
         this.logInViewModel = new LogInViewModel(model);
 
         this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(model);
+        this.guestDetailsForReceptionistViewModel = new GuestDetailsForReceptionistViewModel(model);
 
     }
 
@@ -50,5 +52,9 @@ public class ViewModelFactory {
     public BookingsForReceptionistViewModel getBookingsForReceptionistViewModel()
     {
         return bookingsForReceptionistViewModel;
+    }
+
+    public GuestDetailsForReceptionistViewModel getGuestDetailsForReceptionistViewModel() {
+        return guestDetailsForReceptionistViewModel;
     }
 }

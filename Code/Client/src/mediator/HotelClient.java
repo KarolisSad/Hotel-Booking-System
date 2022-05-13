@@ -35,7 +35,7 @@ public class HotelClient implements Model {
 
     public HotelClient(Model model) throws IOException {
         this.model = model;
-        socket = new Socket("localhost", 2915);
+        socket = new Socket("localhost", 2916);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(new PrintWriter(socket.getOutputStream()), true);
         json = new Gson();

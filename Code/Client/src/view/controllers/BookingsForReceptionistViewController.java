@@ -1,8 +1,9 @@
-package view;
+package view.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import view.ViewController;
 import viewModel.BookingsForReceptionistViewModel;
 import viewModel.SimpleBookingViewModel;
 
