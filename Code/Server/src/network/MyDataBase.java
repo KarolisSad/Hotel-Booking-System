@@ -492,4 +492,23 @@ public class MyDataBase {
 
     }
 
+    public ArrayList<Guest> getAllGuests() throws SQLException {
+        try (Connection connection = getConnection()) {
+            ArrayList<Guest> allGuests = new ArrayList<>();
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * from guest;");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String fName = resultSet.getString("fname");
+                String lName = resultSet.getString("lname");
+                String email = resultSet.getString("email");
+                int phonenr = resultSet.getInt("phonenr");
+                allGuests.add(new Guest(fName,lName,email,phonenr));
+                return allGuests;
+            } else {
+                throw new IllegalArgumentException("Room not found");
+            }
+
+        }
+    }
 }

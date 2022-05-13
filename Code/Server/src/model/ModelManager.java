@@ -233,5 +233,10 @@ public class ModelManager implements Model
   public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
     dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
   }
+
+  @Override
+  public ArrayList<Guest> getAllGuests() throws SQLException {
+    return dataBaseAdapter.getAllGuests();
+  }
 }
 
