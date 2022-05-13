@@ -39,7 +39,7 @@ public class GuestDetailsForReceptionistViewModel {
      */
 
     public void dummyData() {
-        bookingID.setValue("5");
+        bookingID.setValue("3");
         email.setValue("ninawrona@gmail.com");
         fName.setValue("Nina");
         lName.setValue("Wrona");
