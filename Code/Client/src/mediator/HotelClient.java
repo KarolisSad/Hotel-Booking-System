@@ -236,10 +236,8 @@ public class HotelClient implements Model {
      * @return RoomBookingTransfer object containing an ArrayList of all RoomBookings with a state of Booked.
      */
     @Override public synchronized RoomBookingTransfer getBookedBookings()
-    {RoomBookingTransfer test = new RoomBookingTransfer("BookedBookings");
-        System.out.println(test);
+    {
         sendToServerAsJsonBooking(new RoomBookingTransfer("BookedBookings"));
-      //  System.out.println("sending " + message);
         message = null;
         while (message == null)
         {
@@ -252,7 +250,6 @@ public class HotelClient implements Model {
                 e.printStackTrace();
             }
         }
-        System.out.println("back "+message);
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
@@ -318,6 +315,7 @@ public class HotelClient implements Model {
             e.printStackTrace();
         }
 
+        RoomBookingTransfer response = json.fromJson(message, RoomBookingTransfer.class);
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 

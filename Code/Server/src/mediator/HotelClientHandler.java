@@ -238,13 +238,14 @@ public class HotelClientHandler implements Runnable
           RoomBookingTransfer roomBooking = json.fromJson(message, RoomBookingTransfer.class);
           try
           {
-            System.out.println(roomBooking.getBookingNr());
             model.processBooking(roomBooking.getBookingNr());
+            out.println(successMessage);
           }
           catch (Exception e)
           {
             out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }
+
           break;
         }
         case "editGuest":
