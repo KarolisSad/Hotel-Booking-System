@@ -10,5 +10,6 @@
     <orderEntry type="library" name="java-fx" level="application" />
     <orderEntry type="library" name="MyObserver-1.4" level="application" />
     <orderEntry type="library" name="postgresql-42.2.11" level="application" />
+    <orderEntry type="library" name="XmlJsonParser-1.41" level="application" />
   </component>
 </module>

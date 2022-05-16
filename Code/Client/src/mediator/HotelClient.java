@@ -323,6 +323,27 @@ public class HotelClient implements Model {
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
+    @Override
+    public RoomBookingTransfer cancelBooking(int bookingNumber) {
+        return null;
+    }
+
+    @Override
+    public synchronized GuestTransfer getAllGuests() {
+        sendToServerAsJson(new GuestTransfer("getAllGuests"));
+        message = null;
+        while (message == null)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return json.fromJson(message, GuestTransfer.class);
+    }
+
 
     /**
      * Makes received object into Json format and sends it to a server
@@ -380,9 +401,9 @@ public class HotelClient implements Model {
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
-    @Override public RoomBookingTransfer removeBooking(int bookingId)
+    @Override public RoomBookingTransfer removeBooking(int bookingId, int guestID)
     {
-        sendToServerAsJsonBooking(new RoomBookingTransfer("removeBooking", bookingId, null, null, null, null));
+        sendToServerAsJsonBooking(new RoomBookingTransfer("removeBooking", bookingId, null,null, guestID  , null, null));
         message = null;
 
         try
