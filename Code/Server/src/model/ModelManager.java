@@ -1,5 +1,7 @@
 package model;
 
+import mediator.RoomBookingTransfer;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
@@ -15,9 +17,8 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
-    private RoomList roomList;
 
-    // todo CHR
+    private RoomList roomList;
     private RoomBookingList bookingList;
     private PropertyChangeSupport property;
     private HotelPersistence dataBaseAdapter;
@@ -138,6 +139,16 @@ public class ModelManager implements Model
         bookingList.cancelBooking(id);
         dataBaseAdapter.cancelBooking(bookingList.getBookingById(id));
     }
+    
+    
+   @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr)
+      throws SQLException
+   {
+       System.out.println("CALLED!");
+
+      return dataBaseAdapter.getBookingWithGuest(bookingNr, phoneNr);
+   }
+    
 
     /**
      * Method used for editing a room already added to the system.
@@ -253,5 +264,10 @@ public class ModelManager implements Model
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
         dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
     }
+    
+     @Override
+  public ArrayList<Guest> getAllGuests() throws SQLException {
+    return dataBaseAdapter.getAllGuests();
+  }
 
 }

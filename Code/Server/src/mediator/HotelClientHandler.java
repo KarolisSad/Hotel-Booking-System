@@ -20,6 +20,7 @@ import java.util.Map;
  * @author Group5
  */
 
+
 public class HotelClientHandler implements Runnable {
 
     private Socket socket;
@@ -37,6 +38,7 @@ public class HotelClientHandler implements Runnable {
         json = new Gson();
         message = null;
     }
+
 
     /**
      * Receives messages from client in Json string then converts it to a RoomTransfer Object,
@@ -204,6 +206,7 @@ public class HotelClientHandler implements Runnable {
                     {
                         System.out.println(roomBooking.getBookingNr());
                         model.processBooking(roomBooking.getBookingNr());
+                        out.println(json.toJson(new RoomBookingTransfer("Success","Success")));
                     }
                     catch (Exception e)
                     {
@@ -211,6 +214,7 @@ public class HotelClientHandler implements Runnable {
                     }
                     break;
                 }
+              
                 case "editGuest":
                     GuestTransfer guest = json.fromJson(message, GuestTransfer.class);
                     try{
@@ -221,7 +225,38 @@ public class HotelClientHandler implements Runnable {
                     }
                     out.println(new RoomTransfer("Success", "Success"));
                     break;
+ 
+        case "getAllGuests":
+           try {
+             ArrayList<Guest> guests = model.getAllGuests();
+             GuestTransfer guestTransfer = new GuestTransfer("Success",guests);
+             out.println(json.toJson(new GuestTransfer("Success",guests)));
+           }
+           catch (Exception e)
+           {
+             out.println(json.toJson(new GuestTransfer("error",e.getMessage())));
+           }
+          break;
+          
+            case "getBookingWithGuest":
+        {
+          RoomBookingTransfer receivedRoomBookingTransfer = json.fromJson(message, RoomBookingTransfer.class);
+          System.out.println("Client Handler start!");
+          try
+          {
+            RoomBookingTransfer toSend = model.getBookingWithGuest(
+                receivedRoomBookingTransfer.getBookingNr(),
+                receivedRoomBookingTransfer.getGuestID());
+            System.out.println("SENDING: " + toSend);
+            out.println(json.toJson(toSend));
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
 
+          break;
+        }
 
                 case "editBooking":
                     RoomBookingTransfer bookingEdit = json.fromJson(message, RoomBookingTransfer.class);
@@ -258,6 +293,5 @@ public class HotelClientHandler implements Runnable {
             }
         }
     }
-
 
 }

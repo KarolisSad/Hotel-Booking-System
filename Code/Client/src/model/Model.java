@@ -27,6 +27,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingTransfer getCancelledBookings();
   RoomBookingTransfer processBooking(int bookingNumber);
   RoomBookingTransfer cancelBooking(int bookingNumber);
+  RoomBookingTransfer getBookingWithGuest(int bookingNumber, int phoneNumber);
 
   GuestTransfer getAllGuests();
     RoomBookingTransfer getABooking(int bookingID);

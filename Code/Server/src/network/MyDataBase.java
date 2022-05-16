@@ -1,6 +1,6 @@
 package network;
 
-import mediator.RoomTransfer;
+import mediator.RoomBookingTransfer;
 import model.Guest;
 import model.Room;
 import model.RoomBooking;
@@ -11,64 +11,82 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MyDataBase {
+public class MyDataBase
+{
 
-    private static MyDataBase instance;
+  private static MyDataBase instance;
 
-    private MyDataBase() throws SQLException {
-        DriverManager.registerDriver(new org.postgresql.Driver());
+  private MyDataBase() throws SQLException
+  {
+    DriverManager.registerDriver(new org.postgresql.Driver());
+  }
+
+  public static synchronized MyDataBase getInstance() throws SQLException
+  {
+    if (instance == null)
+    {
+      instance = new MyDataBase();
     }
+    return instance;
+  }
 
-    public static synchronized MyDataBase getInstance() throws SQLException {
-        if (instance == null) {
-            instance = new MyDataBase();
+  private Connection getConnection() throws SQLException
+  {
+
+    // TODO - My password is different, so needed to change this.
+
+    // Karolis
+    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
+    // Nina
+    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+    // Christian
+    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123456789");
+    
+    // Juste
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "JUSTESPASSWORD");
+  }
+
+  public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      try
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO room(roomID, roomType, nrBeds) VALUES (?, ?, ?);");
+
+        statement.setString(1, roomID);
+        statement.setString(2, roomType.toString());
+        statement.setInt(3, nrBeds);
+        statement.executeUpdate();
+      }
+      catch (Exception e)
+      {
+        String error = e.toString();
+        // else if because you are not able to use .contains in switch :)
+        if (error.contains("room_pkey"))
+        {
+          throw new IllegalArgumentException(
+              "Room with ID: " + roomID + " already exists!");
         }
-        return instance;
-    }
-
-    private Connection getConnection() throws SQLException {
-
-        // TODO - My password is different, so needed to change this.
-
-        // Karolis
-        // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
-        // Nina
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
-        // Christian
-        // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
-        // Juste
-        //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
-    }
-
-    public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
-        throws SQLException {
-        try (Connection connection = getConnection()) {
-            try {
-                PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO room(roomID, roomType, nrBeds) VALUES (?, ?, ?);");
-
-                statement.setString(1, roomID);
-                statement.setString(2, roomType.toString());
-                statement.setInt(3, nrBeds);
-                statement.executeUpdate();
-            } catch (Exception e) {
-                String error = e.toString();
-                // else if because you are not able to use .contains in switch :)
-                if (error.contains("room_pkey")) {
-                    throw new IllegalArgumentException(
-                        "Room with ID: " + roomID + " already exists!");
-                } else if (error.contains("room_roomtype_check")) {
-                    throw new IllegalArgumentException(
-                        "Room must be one of the fallowing: Family, Single, Double, Suite.");
-                } else if (error.contains("room_nrbeds_check")) {
-                    throw new IllegalArgumentException(
-                        "Number of beds must be between 1 and 20");
-                }
-                throw new IllegalArgumentException("Room wasn't added!");
-            }
+        else if (error.contains("room_roomtype_check"))
+        {
+          throw new IllegalArgumentException(
+              "Room must be one of the fallowing: Family, Single, Double, Suite.");
         }
+        else if (error.contains("room_nrbeds_check"))
+        {
+          throw new IllegalArgumentException(
+              "Number of beds must be between 1 and 20");
+        }
+        throw new IllegalArgumentException("Room wasn't added!");
+      }
     }
+  }
 
+
+    
     // Return true if room exits.
     // PURPOSE: being able to throw exception. Otherwise it would try to remove not existent room. (Might be better solution)
     public boolean doesRoomExist(String roomID) throws SQLException {
@@ -419,22 +437,27 @@ public class MyDataBase {
      * @param booking the booking update to perform the operation on.
      * @throws IllegalArgumentException If room booking can not be edited.
      */
-    public void processBooking(RoomBooking booking) throws SQLException {
-        try (Connection connection = getConnection()) {
-            try {
-                PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE roombooking SET state = (?) WHERE bookingid = (?)");
+   public void processBooking(RoomBooking booking) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      try
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "UPDATE roombooking SET state = (?) WHERE bookingid = (?)");
 
-                statement.setInt(2, booking.getBookingID());
-                statement.setString(1, booking.getState());
-                statement.executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new IllegalArgumentException(
-                    "Unable to edit booking: " + booking.getBookingID());
-            }
-        }
+        statement.setInt(2, booking.getBookingID());
+        statement.setString(1, booking.getState());
+        statement.executeUpdate();
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+        throw new IllegalArgumentException(
+            "Unable to edit booking: " + booking.getBookingID());
+      }
     }
+  }
 
     /**
      * A method used for cancelling a RoomBooking (setting the state to 'Cancelled')
@@ -442,22 +465,28 @@ public class MyDataBase {
      * @param roomBooking the RoomBooking to be cancelled
      * @throws IllegalArgumentException if Booking cannot be edited.
      */
-    public void cancelBooking(RoomBooking roomBooking) throws SQLException {
-        try (Connection connection = getConnection()) {
-            try {
+    public void cancelBooking(RoomBooking roomBooking) throws SQLException 
+    {
+        try (Connection connection = getConnection()) 
+        {
+            try 
+            {
                 PreparedStatement statement = connection.prepareStatement(
                     "UPDATE roombooking SET state = (?) WHERE bookingid = (?)");
 
                 statement.setInt(2, roomBooking.getBookingID());
                 statement.setString(1, roomBooking.getState());
                 statement.executeUpdate();
-            } catch (Exception e) {
+            } catch (Exception e) 
+            {
                 e.printStackTrace();
                 throw new IllegalArgumentException(
                     "Unable to edit booking: " + roomBooking.getBookingID());
             }
         }
     }
+  
+
 
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
         System.out.println("Edit guest values" + bookingID + fName + lName + email + phoneNr);
@@ -491,6 +520,8 @@ public class MyDataBase {
         }
 
     }
+  
+  
 
     public void editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException
     {
@@ -513,6 +544,31 @@ public class MyDataBase {
             }
     }
 
+   public ArrayList<Guest> getAllGuests() throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      ArrayList<Guest> allGuests = new ArrayList<>();
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * from guest;");
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
+      {
+        String fName = resultSet.getString("fname");
+        String lName = resultSet.getString("lname");
+        String email = resultSet.getString("email");
+        int phonenr = resultSet.getInt("phonenr");
+        allGuests.add(new Guest(fName, lName, email, phonenr));
+        return allGuests;
+      }
+      else
+      {
+        throw new IllegalArgumentException("Room not found");
+      }
+
+    }
+  }
+  
     public void removeBooking(int bookingId) throws SQLException
     {
         try (Connection connection = getConnection())
@@ -528,6 +584,43 @@ public class MyDataBase {
             }
         }
     }
+  
+  
+    public RoomBookingTransfer getRoomWithGuest(int bookingNr, int phoneNr)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT fName, lName, phoneNr, startDate, endDate, r.roomID, nrBeds\n"
+              + "FROM roomBooking rb,\n" + "     room r,\n" + "     guest g\n"
+              + "WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID AND rb.bookingID = (?) AND phoneNr = (?);");
+
+      statement.setInt(1, bookingNr);
+      statement.setInt(2, phoneNr);
+
+      ResultSet result = statement.executeQuery();
+      if (result.next())
+      {
+        Guest guest = getGuest(phoneNr);
+        //TODO DEBUG!
+        LocalDate startDate = result.getDate("startdate").toLocalDate();
+        LocalDate endDate = result.getDate("enddate").toLocalDate();
+        Room room = getRoom(result.getString("roomid"));
+
+        RoomBookingTransfer test = new RoomBookingTransfer("Success", guest,
+            startDate, endDate, room);
+        System.out.println(test);
+        return test;
+      }
+
+      else
+      {
+        throw new IllegalArgumentException("No such booking found");
+      }
+    }
+  }
+
 
 
 }

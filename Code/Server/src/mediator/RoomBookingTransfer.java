@@ -1,6 +1,7 @@
 package mediator;
 
 import model.Guest;
+import model.Room;
 import model.RoomBooking;
 
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class RoomBookingTransfer
   private String roomID;
   private String stateString;
 
+
   private ArrayList<RoomBookingTransferObject> roomBookings;
 
   private String message;
@@ -31,6 +33,7 @@ public class RoomBookingTransfer
   // Might not be used
   private RoomBookingTransferObject booking;
   private Guest guest;
+  private Room room;
 
   /**
    * 2 argument constructor used for transferring an ArrayList containing RoomBookingTransferObjects
@@ -171,10 +174,6 @@ public class RoomBookingTransfer
     return guest;
   }
 
-  /**
-   * Method for returning the object as a string
-   * @return All instance variables and their values as a String.
-   */
   @Override public String toString()
   {
     return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
@@ -182,7 +181,34 @@ public class RoomBookingTransfer
         + ", guestID=" + guestID + ", roomID='" + roomID + '\''
         + ", stateString='" + stateString + '\'' + ", roomBookings="
         + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
-        + ", guest=" + guest + '}';
+        + ", guest=" + guest + ", room=" + room + '}';
+  }
+
+  /**
+   * Method for returning the object as a string
+   * @return All instance variables and their values as a String.
+   */
+
+
+  public Room getRoom()
+  {
+    return room;
+  }
+
+  public RoomBookingTransfer(String type, int bookingNr, int guestID)
+  {
+    this.type = type;
+    this.bookingNr = bookingNr;
+    this.guestID = guestID;
+  }
+
+  public RoomBookingTransfer(String type, Guest guest, LocalDate startDate, LocalDate endDate, Room room)
+  {
+    this.type = type;
+    this.guest = guest;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.room = room;
   }
 
   public static void main(String[] args) {
