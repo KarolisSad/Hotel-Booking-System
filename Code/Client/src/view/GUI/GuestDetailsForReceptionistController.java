@@ -29,7 +29,11 @@ public class GuestDetailsForReceptionistController extends ViewController {
     }
 
     public void saveDetailsButton() {
-        viewModel.updateGuest();
+        try {
+            viewModel.updateGuest();
+        }catch(Exception e){
+           errorLabel.setText(e.getMessage());
+        }
     }
 
     public void exitButton() throws IOException {
