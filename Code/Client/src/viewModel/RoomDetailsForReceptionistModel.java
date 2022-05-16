@@ -3,14 +3,12 @@ package viewModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import mediator.RoomTransfer;
+import javafx.util.converter.IntegerStringConverter;
 import model.Model;
-import model.RoomList;
 import model.RoomType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -49,13 +47,13 @@ public class RoomDetailsForReceptionistModel
   {
     this.model = model;
 
-    bookingId = new SimpleStringProperty(temp.getSelectedBooking());
-    status = new SimpleStringProperty(temp.getSelectedBooking());
+    bookingId = new SimpleStringProperty();
+    status = new SimpleStringProperty();
     roomNumbers = FXCollections.observableArrayList();
-    types.addAll(List.of(RoomType.values()));
-    startDatePicker = new SimpleObjectProperty<>(temp.getSelectedBooking());
-    endDatePicker = new SimpleObjectProperty<>(temp.getSelectedBooking());
-    nrOfBeds = new SimpleIntegerProperty(temp.getSelectedBooking());
+//    types.addAll(List.of(RoomType.values()));
+    startDatePicker = new SimpleObjectProperty<>();
+    endDatePicker = new SimpleObjectProperty<>();
+    nrOfBeds = new SimpleIntegerProperty();
     errorLabel = new SimpleStringProperty("");
     this.temp = temp;
   }
@@ -109,9 +107,9 @@ public class RoomDetailsForReceptionistModel
    * A getter that return number of beds
    * @return nrOfBeds
    */
-  public IntegerProperty getNrOfBeds()
+  public Property<String> getNrOfBeds()
   {
-    return nrOfBeds;
+    return null;
   }
 
   /**
@@ -129,18 +127,19 @@ public class RoomDetailsForReceptionistModel
    */
   public ObservableList getAvailableRoomNumbers()
   {
-    model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate);
+    //model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate);
+    return null;
   }
 
   public void saveBookingChanged()
   {
     //todo
-    model.editBooking();
+    //model.editBooking();
   }
 
   public void removeBooking()
   {
     //todo
-    model.removeBooking();
+    //model.removeBooking();
   };
 }

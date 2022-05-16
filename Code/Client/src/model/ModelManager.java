@@ -91,19 +91,19 @@ public class ModelManager implements Model {
      *
      * @param bookingId booking ID
      * @param startDate start date
-     * @param endDate end date
-     * @param roomid room number
-     * @param status status of the booking (In progress or Booked)
+     * @param endDate   end date
+     * @param roomid    room number
+     * @param status    status of the booking (In progress or Booked)
      * @return RoomBookingTransfer object
      */
-    @Override public RoomBookingTransfer editBooking(int bookingId,
-        LocalDate startDate, LocalDate endDate, String roomid, String status)
-    {
-        return hotelClient.editBooking(bookingId, startDate, endDate,roomid, status);
+    @Override
+    public RoomBookingTransfer editBooking(int bookingId,
+                                           LocalDate startDate, LocalDate endDate, String roomid, String status) {
+        return hotelClient.editBooking(bookingId, startDate, endDate, roomid, status);
     }
 
-    @Override public RoomBookingTransfer removeBooking(int bookingId, int guestID)
-    {
+    @Override
+    public RoomBookingTransfer removeBooking(int bookingId, int guestID) {
         return hotelClient.removeBooking(bookingId, guestID);
     }
 
@@ -128,10 +128,11 @@ public class ModelManager implements Model {
 
     /**
      * Method for getting a RoomBookingTransfer object containing a list of all bookings
+     *
      * @return RoomBookingTransfer object containing a list of all bookings
      */
-    @Override public RoomBookingTransfer getAllBookings()
-    {
+    @Override
+    public RoomBookingTransfer getAllBookings() {
         return hotelClient.getAllBookings();
     }
 
@@ -151,40 +152,55 @@ public class ModelManager implements Model {
 
     /**
      * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of In progress
+     *
      * @return RoomBookingTransfer object containing a list of all bookings with a state of In progress
      */
-    @Override public RoomBookingTransfer getInProgressBookings()
-    {
+    @Override
+    public RoomBookingTransfer getInProgressBookings() {
         return hotelClient.getInProgressBookings();
     }
 
     /**
      * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of Cancelled
+     *
      * @return RoomBookingTransfer object containing a list of all bookings with a state of Cancelled
      */
-    @Override public RoomBookingTransfer getCancelledBookings()
-    {
+    @Override
+    public RoomBookingTransfer getCancelledBookings() {
         return hotelClient.getCancelledBookings();
     }
 
     /**
      * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of Booked
+     *
      * @return RoomBookingTransfer object containing a list of all bookings with a state of Booked
      */
-    @Override public RoomBookingTransfer getBookedBookings()
-    {
+    @Override
+    public RoomBookingTransfer getBookedBookings() {
         return hotelClient.getBookedBookings();
     }
 
     /**
      * Method for requesting a change in RoomBookingState from the server
+     *
      * @param bookingNumber The bookingNumber of the booking to be changed
      * @return RoomBookingTransfer object containing either a success message, or an exception message.
      */
-    @Override public RoomBookingTransfer processBooking(int bookingNumber)
-    {
+    @Override
+    public RoomBookingTransfer processBooking(int bookingNumber) {
         return hotelClient.processBooking(bookingNumber);
     }
+
+    @Override
+    public RoomBookingTransfer cancelBooking(int bookingNumber) {
+        return null;
+    }
+
+    @Override
+    public GuestTransfer getAllGuests() {
+        return hotelClient.getAllGuests();
+    }
+
 
     @Override
     public void addListener(PropertyChangeListener listener) {

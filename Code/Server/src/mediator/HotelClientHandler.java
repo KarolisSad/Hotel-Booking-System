@@ -219,7 +219,9 @@ public class HotelClientHandler implements Runnable {
                     } catch (Exception throwables) {
                         out.println(json.toJson(new RoomTransfer("error",throwables.getMessage())));
                     }
+                    out.println(new RoomTransfer("Success", "Success"));
                     break;
+
 
                 case "editBooking":
                     RoomBookingTransfer bookingEdit = json.fromJson(message, RoomBookingTransfer.class);
@@ -230,6 +232,7 @@ public class HotelClientHandler implements Runnable {
                     catch (Exception e){
                         out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
                     }
+                    out.println(new RoomTransfer("Success", "Success"));
 
                 case "removeBooking":
                     RoomBookingTransfer bookingRemove = json.fromJson(message, RoomBookingTransfer.class);
@@ -240,6 +243,7 @@ public class HotelClientHandler implements Runnable {
                     catch (Exception e){
                         out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
                     }
+                    out.println(new RoomTransfer("Success", "Success"));
             }
 
         }
