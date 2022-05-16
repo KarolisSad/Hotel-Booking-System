@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.converter.IntegerStringConverter;
+import mediator.RoomBookingTransfer;
+import mediator.RoomBookingTransferObject;
 import model.Model;
 import model.RoomType;
 
@@ -142,4 +144,20 @@ public class RoomDetailsForReceptionistModel
     //todo
     //model.removeBooking();
   };
+
+  public void setBooking(IntegerProperty bookingIdProperty, StringProperty roomIdProperty) {
+    RoomBookingTransfer object = model.getABooking(bookingIdProperty.get());
+    roomIdProperty.setValue(object.getBooking().getRoom().getRoomId());
+    bookingIdProperty.setValue(object.getBooking().getBookingID());
+    status.setValue("");
+    types.set(0, object.getBooking().getRoom().getRoomType());
+    startDatePicker.setValue(object.getBooking().getStartDate());
+    endDatePicker.setValue(object.getBooking().getEndDate());
+    nrOfBeds.setValue(object.getBooking().getRoom().getNumberOfBeds());
+
+//    roomNumbers.set(0, String.valueOf(roomIdProperty));
+//    startDatePicker.setValue("" + );
+//    model.getAllRooms().getRoomId()
+//    status.set("");
+  }
 }

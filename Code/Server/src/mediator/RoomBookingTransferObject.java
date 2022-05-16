@@ -1,6 +1,7 @@
 package mediator;
 
 import model.Guest;
+import model.Room;
 
 import java.time.LocalDate;
 
@@ -13,7 +14,7 @@ public class RoomBookingTransferObject
 {
   private LocalDate startDate;
   private LocalDate endDate;
-  private String roomID;
+  private Room roomID;
   private Guest guest;
   private int bookingID;
   private String bookingState;
@@ -28,7 +29,7 @@ public class RoomBookingTransferObject
    * @param bookingState Booking state as a String
    */
   public RoomBookingTransferObject(LocalDate startDate, LocalDate endDate,
-      String roomID, Guest guest, int bookingID, String bookingState)
+      Room roomID, Guest guest, int bookingID, String bookingState)
   {
     this.startDate = startDate;
     this.endDate = endDate;
@@ -60,7 +61,7 @@ public class RoomBookingTransferObject
    * Method returning the Room ID
    * @return Room ID
    */
-  public String getRoomID()
+  public Room getRoomID()
   {
     return roomID;
   }

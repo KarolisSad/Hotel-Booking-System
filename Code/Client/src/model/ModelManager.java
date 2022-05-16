@@ -9,7 +9,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * A class that implements the Model interface and manages the bookings.
@@ -199,6 +198,11 @@ public class ModelManager implements Model {
     @Override
     public GuestTransfer getAllGuests() {
         return hotelClient.getAllGuests();
+    }
+
+    @Override
+    public RoomBookingTransfer getABooking(int bookingID) {
+        return hotelClient.getABooking(bookingID);
     }
 
 
