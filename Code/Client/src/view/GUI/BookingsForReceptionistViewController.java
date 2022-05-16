@@ -120,10 +120,8 @@ public class BookingsForReceptionistViewController extends ViewController
     getViewModelFactory().getGuestDetailsForReceptionistViewModel().setGuest(viewModel.getSelectedBookingProperty().bookingIdProperty(), viewModel.getSelectedBookingProperty().guestProperty());
   }
 
-  public void roomInformationButton() throws IOException
+  public void roomInformationButton(ActionEvent actionEvent)
   {
-    getViewHandler().openView("RoomDetailsForReceptionist.fxml");
-   getViewModelFactory().getRoomDetailsForReceptionistModel().setBooking(viewModel.getSelectedBookingProperty().bookingIdProperty(),viewModel.getSelectedBookingProperty().roomIdProperty());
   }
 
   /**

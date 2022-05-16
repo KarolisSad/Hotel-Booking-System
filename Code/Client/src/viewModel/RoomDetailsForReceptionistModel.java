@@ -3,19 +3,16 @@ package viewModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import mediator.RoomTransfer;
+import javafx.util.converter.IntegerStringConverter;
 import model.Model;
-import model.Room;
-import model.RoomList;
 import model.RoomType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
- * A class for creating functionality for RooDetailsForReceptionistController
+ * A class for crearting functionality for RooDetailsForReceptionistController
  *
  * @author Group 5
  * @version 13-05-2022
@@ -53,17 +50,12 @@ public class RoomDetailsForReceptionistModel
     bookingId = new SimpleStringProperty();
     status = new SimpleStringProperty();
     roomNumbers = FXCollections.observableArrayList();
-    types.addAll(List.of(RoomType.values()));
+//    types.addAll(List.of(RoomType.values()));
     startDatePicker = new SimpleObjectProperty<>();
     endDatePicker = new SimpleObjectProperty<>();
     nrOfBeds = new SimpleIntegerProperty();
     errorLabel = new SimpleStringProperty("");
     this.temp = temp;
-  }
-
-  public void setBooking(IntegerProperty boo)
-  {
-    bookingId.setValue("", bookin);
   }
 
   /**
@@ -115,9 +107,9 @@ public class RoomDetailsForReceptionistModel
    * A getter that return number of beds
    * @return nrOfBeds
    */
-  public IntegerProperty getNrOfBeds()
+  public Property<String> getNrOfBeds()
   {
-    return nrOfBeds;
+    return null;
   }
 
   /**
@@ -133,20 +125,21 @@ public class RoomDetailsForReceptionistModel
    * getter that return available room numbers for chosen dates
    * @return roomNumbers
    */
-  public ObservableList<Room> getAvailableRoomNumbers()
+  public ObservableList getAvailableRoomNumbers()
   {
-    return FXCollections.observableArrayList(model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate()).getRoomList());
+    //model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate);
+    return null;
   }
 
   public void saveBookingChanged()
   {
     //todo
-    model.editBooking();
+    //model.editBooking();
   }
 
   public void removeBooking()
   {
     //todo
-    model.removeBooking();
+    //model.removeBooking();
   };
 }
