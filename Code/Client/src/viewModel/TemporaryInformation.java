@@ -9,6 +9,8 @@ public class TemporaryInformation
   private String roomID;
   private String roomType;
   private int numberOfBeds;
+  private int bookingNr;
+  private SimpleBookingViewModel simpleBookingViewModel;
 
   public TemporaryInformation()
   {
@@ -17,8 +19,13 @@ public class TemporaryInformation
     this.roomID = null;
     this.roomType = null;
     this.numberOfBeds = -1;
+    this.simpleBookingViewModel = null;
   }
 
+  public SimpleBookingViewModel getSelectedBooking()
+  {
+    return simpleBookingViewModel;
+  }
   public void setEndDate(LocalDate endDate)
   {
     this.endDate = endDate;
