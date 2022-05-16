@@ -76,6 +76,16 @@ public class RoomBookingTransfer
     this.bookingNr = bookingNr;
   }
 
+  public RoomBookingTransfer(String editBooking, int bookingId, LocalDate startDate, LocalDate endDate, int guestID, String roomid, String status) {
+    this.type = editBooking;
+    this.bookingNr = bookingId;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.guestID = guestID;
+    this.roomID = roomid;
+    this.stateString = status;
+  }
+
   /**
    * Getter for the type of transfer
    * @return type
@@ -183,6 +193,7 @@ public class RoomBookingTransfer
   @Override public String toString()
   {
     return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
+
         + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
         + ", guestID=" + guestID + ", roomID='" + roomID + '\''
         + ", stateString='" + stateString + '\'' + ", roomBookings="
@@ -209,5 +220,6 @@ public class RoomBookingTransfer
     this.startDate = startDate;
     this.endDate = endDate;
     this.room = room;
+
   }
 }

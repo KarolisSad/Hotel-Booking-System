@@ -49,12 +49,6 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.editGuest(bookingID, fName, lName, email,  phoneNr);
     }
 
-    @Override
-    public ArrayList<Guest> getAllGuests() throws SQLException {
-        MyDataBase dataBase = MyDataBase.getInstance();
-        return dataBase.getAllGuests();
-    }
-
     /**
      * Method used for getting all bookings of a specific type from the database.
      * @param type the type of rooms to get
@@ -93,6 +87,19 @@ public class HotelDataBase implements HotelPersistence {
     {
         MyDataBase dataBase = MyDataBase.getInstance();
         return dataBase.getRoomWithGuest(bookingNr, phoneNr);
+
+    @Override public void editBooking(int bookingId, LocalDate startDate,
+        LocalDate endDate, String roomId) throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.editBooking(bookingId, startDate, endDate, roomId);
+    }
+
+    @Override public void removeBooking(int bookingId) throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.removeBooking(bookingId);
+
     }
 
     /**

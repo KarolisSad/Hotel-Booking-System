@@ -1,6 +1,7 @@
 package model;
 
-import mediator.GuestTransfer;
+
+
 import mediator.RoomBookingTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
@@ -25,6 +26,7 @@ public interface Model extends UnnamedPropertyChangeSubject
 
   //Nina:
   void editGuest(int bookingID, String getfName, String getlName, String email, int phoneNr) throws SQLException;
-  ArrayList<Guest> getAllGuests() throws SQLException;
 
+  void editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
+  void removeBooking(int bookingId) throws SQLException;
 }

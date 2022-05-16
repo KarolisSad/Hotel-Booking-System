@@ -20,14 +20,14 @@
       <HBox alignment="CENTER" prefHeight="326.0" prefWidth="600.0">
          <children>
             <TableView fx:id="bookingsTable" prefHeight="278.0" prefWidth="556.0">
-              <columns>
-                <TableColumn fx:id="bookingIdColumn" prefWidth="44.0" text="ID" />
-                <TableColumn fx:id="startDateColumn" prefWidth="92.0" text="Start Date" />
+               <columns>
+                  <TableColumn fx:id="bookingIdColumn" prefWidth="44.0" text="ID" />
+                  <TableColumn fx:id="startDateColumn" prefWidth="92.0" text="Start Date" />
                   <TableColumn fx:id="endDateColumn" prefWidth="89.0" text="End Date" />
                   <TableColumn fx:id="guestColumn" prefWidth="75.0" text="Guest" />
                   <TableColumn fx:id="roomNumberColumn" prefWidth="75.0" text="Room" />
                   <TableColumn fx:id="stateColumn" prefWidth="73.0" text="Status" />
-              </columns>
+               </columns>
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

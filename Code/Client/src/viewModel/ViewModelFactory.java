@@ -11,9 +11,13 @@ public class ViewModelFactory {
     private LogInViewModel logInViewModel;
     private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
     private GuestDetailsForReceptionistViewModel guestDetailsForReceptionistViewModel;
-    private GuestOverViewForHotelManagerModel GuestOverViewForHotelManagerModel;
+    private RoomDetailsForReceptionistModel roomDetailsForReceptionistModel;
     private BookingViewModel bookingViewModel;
+
     private ShowBookingViewModel showBookingViewModel;
+
+    private GuestOverViewForHotelManagerModel guestOverViewForHotelManagerModel;
+
 
     public ViewModelFactory(Model model){
 
@@ -28,10 +32,11 @@ public class ViewModelFactory {
 
         this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(model);
         this.guestDetailsForReceptionistViewModel = new GuestDetailsForReceptionistViewModel(model);
-
-        this.GuestOverViewForHotelManagerModel = new GuestOverViewForHotelManagerModel(model);
+        this.roomDetailsForReceptionistModel = new RoomDetailsForReceptionistModel(model,tempInfo);
         this.bookingViewModel = new BookingViewModel(model);
         this.showBookingViewModel = new ShowBookingViewModel(model);
+
+        this.guestOverViewForHotelManagerModel = new GuestOverViewForHotelManagerModel(model);
 
     }
 
@@ -65,16 +70,22 @@ public class ViewModelFactory {
         return guestDetailsForReceptionistViewModel;
     }
 
-    public viewModel.GuestOverViewForHotelManagerModel getGuestOverViewForHotelManagerModel() {
-        return GuestOverViewForHotelManagerModel;
+    public RoomDetailsForReceptionistModel getRoomDetailsForReceptionistModel()
+    {
+        return roomDetailsForReceptionistModel;
     }
 
     public BookingViewModel getBookingViewModel() {
         return bookingViewModel;
     }
 
+
     public ShowBookingViewModel getShowBookingViewModel()
     {
         return showBookingViewModel;
+    }
+
+    public GuestOverViewForHotelManagerModel getGuestOverViewForHotelManagerModel() {
+        return guestOverViewForHotelManagerModel;
     }
 }

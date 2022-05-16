@@ -31,7 +31,7 @@ public class RoomBookingTransfer
 
 
   // Might not be used
-  private RoomBooking booking;
+  private RoomBookingTransferObject booking;
   private Guest guest;
   private Room room;
 
@@ -46,7 +46,6 @@ public class RoomBookingTransfer
     this.roomBookings = roomBookings;
   }
 
-
   /**
    * 2 argument constructor used to transfer exception messages.
    * @param type The type of transfer
@@ -56,6 +55,22 @@ public class RoomBookingTransfer
   {
     this.type = type;
     this.message = message;
+  }
+  /**
+   * 2 argument constructor used to transfer exception messages.
+   * @param type The type of transfer
+   * @param bookingNr The booking number
+   */
+  public RoomBookingTransfer(String type, int bookingNr)
+  {
+    this.type = type;
+    this.bookingNr = bookingNr;
+  }
+
+  public RoomBookingTransfer(String getABooking, RoomBooking booking) {
+    System.out.println("getting in RoomBookingTransfer.");
+    this.type = getABooking;
+    this.booking = new RoomBookingTransferObject(booking.getStartDate(), booking.getEndDate(), booking.getRoom(), booking.getGuest(), booking.getBookingID(), booking.getState());
   }
 
   /**
@@ -145,7 +160,7 @@ public class RoomBookingTransfer
    * Getter for booking
    * @return booking
    */
-  public RoomBooking getBooking()
+  public RoomBookingTransferObject getBooking()
   {
     return booking;
   }
@@ -194,5 +209,9 @@ public class RoomBookingTransfer
     this.startDate = startDate;
     this.endDate = endDate;
     this.room = room;
+  }
+
+  public static void main(String[] args) {
+    //System.out.println(new RoomBookingTransferObject(11));
   }
 }

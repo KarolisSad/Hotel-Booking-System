@@ -2,10 +2,3 @@
 *.class
 out/*
 .idea/workspace.xml
-Code/lib/kotlin-reflect.jar
-Code/lib/kotlin-stdlib-jdk7.jar
-Code/lib/kotlin-stdlib-jdk8.jar
-Code/lib/kotlin-stdlib.jar
-Code/lib/kotlin-test.jar
-.idea/runConfigurations.xml
-Code/.idea/runConfigurations.xml

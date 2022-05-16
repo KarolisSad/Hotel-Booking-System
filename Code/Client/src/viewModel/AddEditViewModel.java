@@ -136,14 +136,14 @@ public class AddEditViewModel
   //todo error label
   public void addRoom()
   {
-   RoomTransfer roomTransfer= model.addRoom(roomId.get(), type, nrOfBeds.get());
-   if (roomTransfer.getMessage() == null)
-   {
-     errorProperty.set("Room was successfully added!");
-   }
-   else {
-     errorProperty.set(roomTransfer.getMessage());
-   }
+    RoomTransfer roomTransfer= model.addRoom(roomId.get(), type, nrOfBeds.get());
+    if (roomTransfer.getMessage() == null)
+    {
+      errorProperty.set("Room was successfully added!");
+    }
+    else {
+      errorProperty.set(roomTransfer.getMessage());
+    }
     reset();
   }
 

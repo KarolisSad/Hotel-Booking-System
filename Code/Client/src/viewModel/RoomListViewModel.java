@@ -69,16 +69,16 @@ public class RoomListViewModel implements PropertyChangeListener
   public void removeRoom(String roomId)
   {
 
-      RoomTransfer roomTransfer = model.removeRoom(roomId);
-      if (roomTransfer.getMessage() != null)
-      {
-        errorLabel.setValue(roomTransfer.getMessage());
-      }
-      else
-      {
-        errorLabel.setValue("Room: " + roomId + " deleted successfully");
-        updateRoomList();
-      }
+    RoomTransfer roomTransfer = model.removeRoom(roomId);
+    if (roomTransfer.getMessage() != null)
+    {
+      errorLabel.setValue(roomTransfer.getMessage());
+    }
+    else
+    {
+      errorLabel.setValue("Room: " + roomId + " deleted successfully");
+      updateRoomList();
+    }
 
   }
 

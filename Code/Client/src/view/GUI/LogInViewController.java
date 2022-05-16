@@ -46,7 +46,7 @@ public class LogInViewController extends ViewController
     }
 
     public void receptionist() throws IOException {
-        getViewHandler().openView("GuestDetailsForReceptionist.fxml");
+        getViewHandler().openView("BookingsForReceptionistView.fxml");
     }
 
     // TODO JavaDoc
@@ -64,7 +64,7 @@ public class LogInViewController extends ViewController
 
     @Override
     public void reset() {
-
+//
     }
 
 
