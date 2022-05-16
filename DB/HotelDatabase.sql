@@ -128,11 +128,4 @@ set nrBeds = 11,
 where roomID = '1';
 
 insert into roombooking
-values ('2025-05-01','2025-05-05',20202022,1);
-
-
-SELECT fName, lName, phoneNr, startDate, endDate, r.roomID, nrBeds
-FROM roomBooking rb,
-     room r,
-     guest g
-WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID;
+values ('2025-05-01','2025-05-05',20202022,1)

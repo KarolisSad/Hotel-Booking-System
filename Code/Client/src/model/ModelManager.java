@@ -195,12 +195,6 @@ public class ModelManager implements Model {
         return null;
     }
 
-    @Override public RoomBookingTransfer getBookingWithGuest(
-        int bookingNumber, int phoneNumber)
-    {
-        return hotelClient.getBookingWithGuest(bookingNumber, phoneNumber);
-    }
-
     @Override
     public GuestTransfer getAllGuests() {
         return hotelClient.getAllGuests();

@@ -61,6 +61,7 @@ public class BookingsForReceptionistViewModel
         RoomBookingTransfer bookingList = model.getBookedBookings();
         isCheckIn = true;
 
+        System.out.println("HAellsdfn" + model.getBookedBookings());
         if (bookingList.getMessage() == null)
         {
           for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
@@ -71,6 +72,7 @@ public class BookingsForReceptionistViewModel
         }
         else
         {
+          System.out.println(bookingList.getBooking());
           errorLabel.setValue(bookingList.getMessage());
         }
 

@@ -1,6 +1,5 @@
 package model;
 
-import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import network.MyDataBase;
 
@@ -82,12 +81,6 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.cancelBooking(roomBooking);
     }
 
-    @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr)
-        throws SQLException
-    {
-        MyDataBase dataBase = MyDataBase.getInstance();
-        return dataBase.getRoomWithGuest(bookingNr, phoneNr);
-
     @Override public void editBooking(int bookingId, LocalDate startDate,
         LocalDate endDate, String roomId) throws SQLException
     {
@@ -99,7 +92,6 @@ public class HotelDataBase implements HotelPersistence {
     {
         MyDataBase dataBase = MyDataBase.getInstance();
         dataBase.removeBooking(bookingId);
-
     }
 
     /**

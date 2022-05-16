@@ -1,7 +1,6 @@
 package mediator;
 
 import model.Guest;
-import model.Room;
 import model.RoomBooking;
 
 import java.time.LocalDate;
@@ -32,7 +31,7 @@ public class RoomBookingTransfer
   // Might not be used
   private RoomBooking booking;
   private Guest guest;
-  private Room room;
+
 
   /**
    * 2 argument constructor used for transferring an ArrayList containing RoomBookingTransferObjects
@@ -193,33 +192,10 @@ public class RoomBookingTransfer
   @Override public String toString()
   {
     return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
-
-        + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", guestID=" + guestID + ", roomID='" + roomID + '\''
-        + ", stateString='" + stateString + '\'' + ", roomBookings="
-        + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
-        + ", guest=" + guest + ", room=" + room + '}';
-  }
-
-  public Room getRoom()
-  {
-    return room;
-  }
-
-  public RoomBookingTransfer(String type, int bookingNr, int guestID)
-  {
-    this.type = type;
-    this.bookingNr = bookingNr;
-    this.guestID = guestID;
-  }
-
-  public RoomBookingTransfer(String type, Guest guest, LocalDate startDate, LocalDate endDate, Room room)
-  {
-    this.type = type;
-    this.guest = guest;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.room = room;
-
+            + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
+            + ", guestID=" + guestID + ", roomID='" + roomID + '\''
+            + ", stateString='" + stateString + '\'' + ", roomBookings="
+            + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
+            + ", guest=" + guest + '}';
   }
 }
