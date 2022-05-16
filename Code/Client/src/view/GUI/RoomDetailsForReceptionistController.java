@@ -42,7 +42,8 @@ public class RoomDetailsForReceptionistController extends ViewController
 
     try
     {
-      bookingIDtextField.textProperty().bindBidirectional(viewModel.getBookingId());
+      bookingIDtextField.textProperty()
+          .bindBidirectional(viewModel.getBookingId());
       statusTextField.textProperty().bindBidirectional(viewModel.getStatus());
       typesDropdown.setItems(viewModel.getAvailableRoomNumbers());
       nrOfBedsField.textProperty().bindBidirectional(viewModel.getNrOfBeds());
@@ -70,12 +71,11 @@ public class RoomDetailsForReceptionistController extends ViewController
   /**
    * A method that provides functionality for save details button.
    * The the button is click a confirmation window will pop up.
+   *
    * @throws IOException
    */
   public void saveDetailsButton() throws IOException
   {
-    //todo save the details
-
     //Confirmation box
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     //Style
@@ -108,12 +108,11 @@ public class RoomDetailsForReceptionistController extends ViewController
   /**
    * A method that provides functionality for the cancel button.
    * The the button is click a confirmation window will pop up.
+   *
    * @throws IOException
    */
   public void cancelBookingButton() throws IOException
   {
-    //todo delete the booking
-
     //Confirmation box
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     //Style
@@ -146,6 +145,7 @@ public class RoomDetailsForReceptionistController extends ViewController
   /**
    * A method that provides functionality for the exit button.
    * When pressed the program goes back to BookingForReceptionistView
+   *
    * @throws IOException
    */
   public void exitButton() throws IOException

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mediator.RoomTransfer;
 import model.Model;
+import model.Room;
 import model.RoomList;
 import model.RoomType;
 
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * A class for crearting functionality for RooDetailsForReceptionistController
+ * A class for creating functionality for RooDetailsForReceptionistController
  *
  * @author Group 5
  * @version 13-05-2022
@@ -49,15 +50,20 @@ public class RoomDetailsForReceptionistModel
   {
     this.model = model;
 
-    bookingId = new SimpleStringProperty(temp.getSelectedBooking());
-    status = new SimpleStringProperty(temp.getSelectedBooking());
+    bookingId = new SimpleStringProperty();
+    status = new SimpleStringProperty();
     roomNumbers = FXCollections.observableArrayList();
     types.addAll(List.of(RoomType.values()));
-    startDatePicker = new SimpleObjectProperty<>(temp.getSelectedBooking());
-    endDatePicker = new SimpleObjectProperty<>(temp.getSelectedBooking());
-    nrOfBeds = new SimpleIntegerProperty(temp.getSelectedBooking());
+    startDatePicker = new SimpleObjectProperty<>();
+    endDatePicker = new SimpleObjectProperty<>();
+    nrOfBeds = new SimpleIntegerProperty();
     errorLabel = new SimpleStringProperty("");
     this.temp = temp;
+  }
+
+  public void setBooking(IntegerProperty boo)
+  {
+    bookingId.setValue("", bookin);
   }
 
   /**
@@ -127,9 +133,9 @@ public class RoomDetailsForReceptionistModel
    * getter that return available room numbers for chosen dates
    * @return roomNumbers
    */
-  public ObservableList getAvailableRoomNumbers()
+  public ObservableList<Room> getAvailableRoomNumbers()
   {
-    model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate);
+    return FXCollections.observableArrayList(model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate()).getRoomList());
   }
 
   public void saveBookingChanged()
