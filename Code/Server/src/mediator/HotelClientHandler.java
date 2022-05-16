@@ -255,6 +255,8 @@ public class HotelClientHandler implements Runnable
           } catch (Exception throwables) {
             out.println(json.toJson(new RoomTransfer("error",throwables.getMessage())));
           }
+          out.println(new RoomTransfer("Success", "Success"));
+
           break;
 
 
