@@ -143,12 +143,12 @@ public class ModelManager implements Model
 
 
   // TODO CHR
-  @Override public void getBookingWithGuest(int bookingNr, int phoneNr)
+  @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr)
       throws SQLException
   {
     System.out.println("CALLED!");
 
-    dataBaseAdapter.getBookingWithGuest(bookingNr, phoneNr);
+    return dataBaseAdapter.getBookingWithGuest(bookingNr, phoneNr);
   }
 
   /**

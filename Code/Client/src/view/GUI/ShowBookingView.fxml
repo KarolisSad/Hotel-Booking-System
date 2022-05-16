@@ -167,7 +167,7 @@
       <AnchorPane prefHeight="7.0" prefWidth="600.0">
          <children>
             <Button layoutX="451.0" layoutY="8.0" mnemonicParsing="false" onAction="#mainMenuButtonClicked" prefHeight="38.0" prefWidth="120.0" text="Main Menu" />
-            <Label fx:id="errorLabel" layoutX="27.0" layoutY="15.0" prefHeight="25.0" prefWidth="260.0" text="ErrorLabel" textFill="RED">
+            <Label fx:id="errorLabel" layoutX="27.0" layoutY="15.0" prefHeight="25.0" prefWidth="417.0" text="ErrorLabel" textFill="RED">
                <font>
                   <Font size="16.0" />
                </font>

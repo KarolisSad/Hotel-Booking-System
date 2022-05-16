@@ -293,7 +293,9 @@ public class HotelClientHandler implements Runnable
           System.out.println("Client Handler start!");
           try
           {
-            
+            RoomBookingTransfer toSend = model.getBookingWithGuest(
+                receivedRoomBookingTransfer.getBookingNr(),
+                receivedRoomBookingTransfer.getGuestID());
             System.out.println("SENDING: " + toSend);
             out.println(json.toJson(toSend));
           }

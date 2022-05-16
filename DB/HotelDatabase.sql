@@ -135,4 +135,4 @@ SELECT fName, lName, phoneNr, startDate, endDate, r.roomID, nrBeds
 FROM roomBooking rb,
      room r,
      guest g
-WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID AND rb.bookingID = 1 AND phoneNr = 52198082;
+WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID;

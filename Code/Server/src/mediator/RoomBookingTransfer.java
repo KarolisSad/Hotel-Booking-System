@@ -159,10 +159,6 @@ public class RoomBookingTransfer
     return guest;
   }
 
-  /**
-   * Method for returning the object as a string
-   * @return All instance variables and their values as a String.
-   */
   @Override public String toString()
   {
     return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
@@ -170,8 +166,14 @@ public class RoomBookingTransfer
         + ", guestID=" + guestID + ", roomID='" + roomID + '\''
         + ", stateString='" + stateString + '\'' + ", roomBookings="
         + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
-        + ", guest=" + guest + '}';
+        + ", guest=" + guest + ", room=" + room + '}';
   }
+
+  /**
+   * Method for returning the object as a string
+   * @return All instance variables and their values as a String.
+   */
+
 
   public Room getRoom()
   {

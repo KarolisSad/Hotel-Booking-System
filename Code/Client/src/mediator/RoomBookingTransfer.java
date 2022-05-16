@@ -187,7 +187,7 @@ public class RoomBookingTransfer
         + ", guestID=" + guestID + ", roomID='" + roomID + '\''
         + ", stateString='" + stateString + '\'' + ", roomBookings="
         + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
-        + ", guest=" + guest + '}';
+        + ", guest=" + guest + ", room=" + room + '}';
   }
 
   public Room getRoom()

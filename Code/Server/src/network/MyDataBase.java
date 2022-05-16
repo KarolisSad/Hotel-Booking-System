@@ -40,9 +40,8 @@ public class MyDataBase
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-    return DriverManager.getConnection(
-        "jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel",
-        "postgres", "123456789");
+    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123456789");
+    
     // Juste
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "JUSTESPASSWORD");
   }
@@ -607,7 +606,8 @@ public class MyDataBase
     }
   }
 
-  public void getRoomWithGuest(int bookingNr, int phoneNr) throws SQLException
+  public RoomBookingTransfer getRoomWithGuest(int bookingNr, int phoneNr)
+      throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -622,14 +622,16 @@ public class MyDataBase
       ResultSet result = statement.executeQuery();
       if (result.next())
       {
-       Guest guest = getGuest(phoneNr);
-       //TODO DEBUG!
+        Guest guest = getGuest(phoneNr);
+        //TODO DEBUG!
         LocalDate startDate = result.getDate("startdate").toLocalDate();
         LocalDate endDate = result.getDate("enddate").toLocalDate();
         Room room = getRoom(result.getString("roomid"));
 
-        RoomBookingTransfer test = new RoomBookingTransfer("Success", guest, startDate, endDate, room);
+        RoomBookingTransfer test = new RoomBookingTransfer("Success", guest,
+            startDate, endDate, room);
         System.out.println(test);
+        return test;
       }
 
       else

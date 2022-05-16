@@ -21,7 +21,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingList getAllBookings(String type) throws SQLException;
   void processBooking(int id) throws SQLException;
   void cancelBooking(int id) throws SQLException;
-  void getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
+  RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
 
   //Nina:
   void editGuest(int bookingID, String getfName, String getlName, String email, int phoneNr) throws SQLException;

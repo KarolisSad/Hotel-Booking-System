@@ -104,13 +104,13 @@ public class ShowBookingViewModel
   {
     if (!inputBookingNr.get().isEmpty() && !inputPhoneNr.get().isEmpty())
     {
-      errorLabel.set("THERE IS CONTENTS!");
       setInformation();
     }
 
     else
     {
-      throw new IllegalArgumentException("NO CONTENTS!");
+      reset();
+      throw new IllegalArgumentException("Please fill in a valid booking- and phone nr.");
     }
   }
 
@@ -134,14 +134,20 @@ public class ShowBookingViewModel
     {
       throw new IllegalArgumentException("The entered phone number should be a 8-digit number.");
     }
-    RoomBookingTransfer getBookingWithCustomer = model.getBookingWithGuest(bookingNr, phoneNr);
-    outPutName.set(getBookingWithCustomer.getGuest().getfName() + " " + getBookingWithCustomer.getGuest().getlName());
-    outPutPhone.set(
-        String.valueOf(getBookingWithCustomer.getGuest().getPhoneNr()));
-    outPutStartDate.set(getBookingWithCustomer.getStartDate());
-    outPutEndDate.set(getBookingWithCustomer.getEndDate());
-    outPutRoomNr.set(getBookingWithCustomer.getRoom().getRoomId());
-    outPutNrBeds.set(
-        String.valueOf(getBookingWithCustomer.getRoom().getNumberOfBeds()));
+    RoomBookingTransfer getBookingWithGuest = model.getBookingWithGuest(bookingNr, phoneNr);
+
+    if (!getBookingWithGuest.getType().equalsIgnoreCase("error"))
+    {
+      outPutName.set(getBookingWithGuest.getGuest().getfName() + " " + getBookingWithGuest.getGuest().getlName());
+      outPutPhone.set(String.valueOf(getBookingWithGuest.getGuest().getPhoneNr()));
+      outPutStartDate.set(getBookingWithGuest.getStartDate());
+      outPutEndDate.set(getBookingWithGuest.getEndDate());
+      outPutRoomNr.set(getBookingWithGuest.getRoom().getRoomId());
+      outPutNrBeds.set(String.valueOf(getBookingWithGuest.getRoom().getNumberOfBeds()));
+    }
+    else
+    {
+      throw new IllegalArgumentException(getBookingWithGuest.getMessage());
+    }
   }
 }
