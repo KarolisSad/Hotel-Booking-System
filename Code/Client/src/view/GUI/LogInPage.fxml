@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.LogInViewController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -64,8 +64,8 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="272.0" layoutY="101.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="57.0" text="Guest" />
-            <Button layoutX="246.0" layoutY="169.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Hotel Manager" />
+            <Button layoutX="272.0" layoutY="101.0" mnemonicParsing="false" onAction="#guestButton" prefHeight="38.0" prefWidth="57.0" text="Guest" />
+            <Button layoutX="246.0" layoutY="169.0" mnemonicParsing="false" onAction="#hotelManagerButton" prefHeight="38.0" prefWidth="109.0" text="Hotel Manager" />
             <Button layoutX="246.0" layoutY="246.0" mnemonicParsing="false" onAction="#receptionistButton" prefHeight="38.0" prefWidth="109.0" text="Receptionist" />
       </children>
     </AnchorPane>

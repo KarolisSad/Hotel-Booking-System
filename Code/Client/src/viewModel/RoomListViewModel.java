@@ -27,8 +27,6 @@ public class RoomListViewModel implements PropertyChangeListener
   public RoomListViewModel(Model model, ViewState state)
   {
     this.model = model;
-    // Uncomment this when server/client has been implemented.. Right now it gives errors because it is trying to remove the room twice.
-    //model.addListener(this);
 
     this.state = state;
 
@@ -48,7 +46,7 @@ public class RoomListViewModel implements PropertyChangeListener
     allRooms.clear();
 
     RoomTransfer roomTransfer = model.getAllRooms();
-
+    System.out.println(roomTransfer.toString());
     if (roomTransfer.getMessage() == null)
     {
       for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
@@ -72,16 +70,16 @@ public class RoomListViewModel implements PropertyChangeListener
   public void removeRoom(String roomId)
   {
 
-      RoomTransfer roomTransfer = model.removeRoom(roomId);
-      if (roomTransfer.getMessage() != null)
-      {
-        errorLabel.setValue(roomTransfer.getMessage());
-      }
-      else
-      {
-        errorLabel.setValue("Room: " + roomId + " deleted successfully");
-        updateRoomList();
-      }
+    RoomTransfer roomTransfer = model.removeRoom(roomId);
+    if (roomTransfer.getMessage() != null)
+    {
+      errorLabel.setValue(roomTransfer.getMessage());
+    }
+    else
+    {
+      errorLabel.setValue("Room: " + roomId + " deleted successfully");
+      updateRoomList();
+    }
 
   }
 

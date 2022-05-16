@@ -1,7 +1,8 @@
-package view;
+package view.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import view.ViewController;
 import viewModel.LogInViewModel;
 import viewModel.ViewModelFactory;
 
@@ -13,14 +14,21 @@ import java.io.IOException;
  * @author Group 5
  * @version 09/05/2022
  */
-public class LogInViewController extends ViewController {
-
+public class LogInViewController extends ViewController
+{
 
     @Override
-    protected void init() {
+    protected void init() {}
 
+    /**
+     * A method that provides functionality to the Hotel Manager Button
+     * When the button is pressed the program goes back to BookingForReceptionistView.
+     *
+     * @throws IOException
+     */
+    public void receptionistButton() throws IOException {
+        getViewHandler().openView("BookingForReceptionistView.fxml");
     }
-
 
     /**
      * A method that provides functionality to the Hotel Manager button.

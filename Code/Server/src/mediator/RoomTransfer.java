@@ -1,8 +1,6 @@
 package mediator;
 
-import model.Guest;
-import model.Room;
-import model.RoomType;
+import model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,6 +25,7 @@ public class RoomTransfer {
     private Guest guest;
     private String message;
 
+
     public RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList) {
         this.roomId = roomId;
         this.roomType = roomType;
@@ -43,6 +42,8 @@ public class RoomTransfer {
         this.endDate = endDate;
         this.guest = guest;
     }
+
+
 
     public RoomTransfer(String type, LocalDate startDate, LocalDate endDate) {
         this.type = type;
@@ -105,11 +106,11 @@ public class RoomTransfer {
         return nrBeds;
     }
 
-    public ArrayList<Room> getRoomList() {
-        return roomList;
-    }
 
     public String getMessage() {
         return message;
     }
+
+
+
 }

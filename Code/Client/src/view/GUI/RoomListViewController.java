@@ -1,10 +1,11 @@
-package view;
+package view.GUI;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import view.ViewController;
 import viewModel.RoomListViewModel;
 import viewModel.SimpleRoomViewModel;
 import viewModel.ViewModelFactory;
@@ -30,28 +31,28 @@ public class RoomListViewController extends ViewController
     viewModel = getViewModelFactory().getRoomListViewModel();
     // Bindings
     numberColumn.setCellValueFactory(
-            cellData -> cellData.getValue().roomNumberProperty());
+        cellData -> cellData.getValue().roomNumberProperty());
     typeColumn.setCellValueFactory(
-            cellData -> cellData.getValue().roomTypeProperty().asString());
+        cellData -> cellData.getValue().roomTypeProperty().asString());
     numberOfBedsColumn.setCellValueFactory(
-            cellData -> cellData.getValue().numberOfBedsProperty().asObject());
+        cellData -> cellData.getValue().numberOfBedsProperty().asObject());
     errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
 
     roomTable.setItems(viewModel.getAllRooms());
 
     editButton.setDisable(true);
     editButton.setTooltip(new Tooltip(
-            "Click this button to edit the room selected in the table above"));
+        "Click this button to edit the room selected in the table above"));
     removeButton.setDisable(true);
     removeButton.setTooltip(new Tooltip(
-            "Click this button to remove the room selected from the table above."));
+        "Click this button to remove the room selected from the table above."));
 
     roomTable.getSelectionModel().selectedItemProperty()
-            .addListener((obs, oldValue, newValue) -> {
-              viewModel.setSelected(newValue);
-              editButton.setDisable(newValue == null);
-              removeButton.setDisable(newValue == null);
-            });
+        .addListener((obs, oldValue, newValue) -> {
+          viewModel.setSelected(newValue);
+          editButton.setDisable(newValue == null);
+          removeButton.setDisable(newValue == null);
+        });
 
 
     reset();
@@ -88,7 +89,7 @@ public class RoomListViewController extends ViewController
 
     errorLabel.setTextFill(Color.GREEN);
     errorLabel.textProperty().set("Room: " + roomTable.getSelectionModel()
-            .getSelectedItem().roomNumberProperty().get()  + " changed successfully");
+        .getSelectedItem().roomNumberProperty().get()  + " changed successfully");
   }
 
   /**
@@ -101,12 +102,12 @@ public class RoomListViewController extends ViewController
   {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setHeaderText(
-            "Confirm deletion of room: " + roomTable.getSelectionModel()
-                    .getSelectedItem().roomNumberProperty().get());
+        "Confirm deletion of room: " + roomTable.getSelectionModel()
+            .getSelectedItem().roomNumberProperty().get());
 
     ButtonType confirm = new ButtonType("Confirm");
     ButtonType cancel = new ButtonType("Cancel",
-            ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonBar.ButtonData.CANCEL_CLOSE);
     alert.getButtonTypes().setAll(confirm, cancel);
     // Style
     DialogPane dialogPane = alert.getDialogPane();
@@ -120,8 +121,8 @@ public class RoomListViewController extends ViewController
     {
       errorLabel.setTextFill(Color.GREEN);
       viewModel.removeRoom(
-              roomTable.getSelectionModel().getSelectedItem().roomNumberProperty()
-                      .get());
+          roomTable.getSelectionModel().getSelectedItem().roomNumberProperty()
+              .get());
       viewModel.updateRoomList();
     }
     else

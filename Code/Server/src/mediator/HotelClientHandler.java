@@ -3,6 +3,7 @@ package mediator;
 import com.google.gson.Gson;
 import model.Model;
 import model.Room;
+import model.RoomBooking;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -120,9 +121,129 @@ public class HotelClientHandler implements Runnable {
                         out.println(json.toJson(new RoomTransfer("error",e.getMessage())));
                     }
 
+                case "AllBookings":
+                {
+                    ArrayList<RoomBookingTransferObject> allBookings = null;
+                    try
+                    {
+                        allBookings = model.getAllBookings("").getConvertedList();
+                    }
+                    catch (Exception e)
+                    {
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
 
+                    RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("AllBookings", allBookings);
+
+                    jsonString = json.toJson(roomBookingTransfer);
+                    out.println(jsonString);
+                    break;
+                }
+
+                case "BookedBookings":
+                {
+                    ArrayList<RoomBookingTransferObject> bookedBookings = null;
+                    try
+                    {
+                        bookedBookings = model.getAllBookings("booked").getConvertedList();
+                    }
+                    catch (Exception e)
+                    {
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
+
+                    RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("BookedBookings", bookedBookings);
+                    jsonString = json.toJson(roomBookingTransfer);
+                    out.println(jsonString);
+                    break;
+                }
+
+                case "InProgressBookings":
+                {
+                    ArrayList<RoomBookingTransferObject> inProgressBookings = null;
+                    try
+                    {
+                        inProgressBookings = model.getAllBookings("inProgress").getConvertedList();
+                    }
+                    catch (Exception e)
+                    {
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
+
+                    RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("InProgressBookings", inProgressBookings);
+
+                    jsonString = json.toJson(roomBookingTransfer);
+                    out.println(jsonString);
+                    break;
+                }
+
+                case "CancelledBookings":
+                {
+                    ArrayList<RoomBookingTransferObject> cancelledBookings = null;
+                    try
+                    {
+                        cancelledBookings = model.getAllBookings("cancelled").getConvertedList();
+                    }
+                    catch (Exception e)
+                    {
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
+
+                    RoomBookingTransfer roomBookingTransfer = new RoomBookingTransfer("CancelledBookings", cancelledBookings);
+
+                    jsonString = json.toJson(roomBookingTransfer);
+                    out.println(jsonString);
+                    break;
+                }
+
+                case "ProcessBooking":
+                {
+
+                    RoomBookingTransfer roomBooking = json.fromJson(message, RoomBookingTransfer.class);
+                    try
+                    {
+                        System.out.println(roomBooking.getBookingNr());
+                        model.processBooking(roomBooking.getBookingNr());
+                    }
+                    catch (Exception e)
+                    {
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
+                    break;
+                }
+                case "editGuest":
+                    GuestTransfer guest = json.fromJson(message, GuestTransfer.class);
+                    try{
+                        System.out.println(guest.getFullName());
+                        model.editGuest(guest.getBookingID(), guest.getfName(), guest.getlName(), guest.getEmail(), guest.getPhoneNr());
+                    } catch (Exception throwables) {
+                        out.println(json.toJson(new RoomTransfer("error",throwables.getMessage())));
+                    }
+                    break;
+
+                case "editBooking":
+                    RoomBookingTransfer bookingEdit = json.fromJson(message, RoomBookingTransfer.class);
+                    try{
+                        model.editBooking(bookingEdit.getBookingNr(), bookingEdit.getStartDate(), bookingEdit.getEndDate(), bookingEdit.getRoomID());
+                        out.println(successMessage);
+                    }
+                    catch (Exception e){
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
+
+                case "removeBooking":
+                    RoomBookingTransfer bookingRemove = json.fromJson(message, RoomBookingTransfer.class);
+                    try{
+                        model.removeBooking(bookingRemove.getBookingNr());
+                        out.println(successMessage);
+                    }
+                    catch (Exception e){
+                        out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+                    }
             }
 
         }
     }
+
+
 }

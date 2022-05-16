@@ -1,5 +1,6 @@
 package model;
 
+import mediator.RoomBookingTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.sql.SQLException;
@@ -14,4 +15,15 @@ public interface Model extends UnnamedPropertyChangeSubject
   void removeRoom(String roomId) throws SQLException;
   void editRoomInfo(String roomId, RoomType type, int nrBeds) throws SQLException;
   ArrayList<Room> getAllRooms() throws SQLException;
+
+  // Christian added:
+  RoomBookingList getAllBookings(String type) throws SQLException;
+  void processBooking(int id) throws SQLException;
+  void cancelBooking(int id) throws SQLException;
+
+  //Nina:
+  void editGuest(int bookingID, String getfName, String getlName, String email, int phoneNr) throws SQLException;
+
+  void editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
+  void removeBooking(int bookingId) throws SQLException;
 }

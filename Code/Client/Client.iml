@@ -13,5 +13,8 @@
     <orderEntry type="library" name="javafx-swt" level="application" />
     <orderEntry type="library" name="JavaFX11" level="application" />
     <orderEntry type="library" name="gson-2.8.5" level="application" />
+    <orderEntry type="library" name="lib" level="application" />
+    <orderEntry type="library" name="gson-2.9.0" level="application" />
+    <orderEntry type="library" name="postgresql-42.2.11" level="application" />
   </component>
 </module>

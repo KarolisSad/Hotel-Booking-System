@@ -1,6 +1,8 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.HotelClient;
+import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 
 import java.beans.PropertyChangeListener;
@@ -85,6 +87,27 @@ public class ModelManager implements Model {
     }
 
     /**
+     * A method editing a booking that is already in the system
+     *
+     * @param bookingId booking ID
+     * @param startDate start date
+     * @param endDate end date
+     * @param roomid room number
+     * @param status status of the booking (In progress or Booked)
+     * @return RoomBookingTransfer object
+     */
+    @Override public RoomBookingTransfer editBooking(int bookingId,
+        LocalDate startDate, LocalDate endDate, String roomid, String status)
+    {
+        return hotelClient.editBooking(bookingId, startDate, endDate,roomid, status);
+    }
+
+    @Override public RoomBookingTransfer removeBooking(int bookingId)
+    {
+        return hotelClient.removeBooking(bookingId);
+    }
+
+    /**
      * Method used for editing a room already added to the system.
      * Firstly, the room is received from the roomList and then the roomtype and number of beds variables are changed according to the values passed as arguments.
      *
@@ -98,6 +121,19 @@ public class ModelManager implements Model {
         return hotelClient.editRoomInfo(roomId, type, nrBeds);
     }
 
+    @Override
+    public GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr) {
+        return hotelClient.editGuest(type, bookingID, fName, lName, email, phoneNr);
+    }
+
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings
+     * @return RoomBookingTransfer object containing a list of all bookings
+     */
+    @Override public RoomBookingTransfer getAllBookings()
+    {
+        return hotelClient.getAllBookings();
+    }
 
     /**
      * A method that is meant for booking a room.
@@ -111,6 +147,43 @@ public class ModelManager implements Model {
     @Override
     public RoomTransfer book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) {
         return hotelClient.book(roomId, startDate, endDate, guest);
+    }
+
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of In progress
+     * @return RoomBookingTransfer object containing a list of all bookings with a state of In progress
+     */
+    @Override public RoomBookingTransfer getInProgressBookings()
+    {
+        return hotelClient.getInProgressBookings();
+    }
+
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of Cancelled
+     * @return RoomBookingTransfer object containing a list of all bookings with a state of Cancelled
+     */
+    @Override public RoomBookingTransfer getCancelledBookings()
+    {
+        return hotelClient.getCancelledBookings();
+    }
+
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings with a state of Booked
+     * @return RoomBookingTransfer object containing a list of all bookings with a state of Booked
+     */
+    @Override public RoomBookingTransfer getBookedBookings()
+    {
+        return hotelClient.getBookedBookings();
+    }
+
+    /**
+     * Method for requesting a change in RoomBookingState from the server
+     * @param bookingNumber The bookingNumber of the booking to be changed
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
+    @Override public RoomBookingTransfer processBooking(int bookingNumber)
+    {
+        return hotelClient.processBooking(bookingNumber);
     }
 
     @Override

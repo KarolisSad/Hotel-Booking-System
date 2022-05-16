@@ -1,9 +1,10 @@
-package view;
+package view.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import view.ViewController;
 import viewModel.GuestInformationViewModel;
 import viewModel.ViewModelFactory;
 

@@ -16,7 +16,7 @@ import java.net.Socket;
 public class HotelServer implements Runnable{
 
     private Model model;
-    private int PORT = 2915;
+    private int PORT = 2916;
     private ServerSocket welcomeSocket;
 
     public HotelServer(Model model)

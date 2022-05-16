@@ -1,4 +1,4 @@
-package view;
+package view.GUI;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -107,7 +107,7 @@ public class AddEditViewController extends ViewController {
 
             ButtonType confirm = new ButtonType("Confirm");
             ButtonType cancel = new ButtonType("Cancel",
-                    ButtonBar.ButtonData.CANCEL_CLOSE);
+                ButtonBar.ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().setAll(confirm, cancel);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == confirm) {
@@ -130,12 +130,12 @@ public class AddEditViewController extends ViewController {
             dialogPane.getStyleClass().add("box.css");
             //
             alert.setHeaderText(
-                    "Confirm edit of room: " + viewModel.getRoomId());
+                "Confirm edit of room: " + viewModel.getRoomId());
             alert.setContentText("Type: " + getType() + "\nNumber of beds: " + viewModel.getNumberOfBeds());
 
             ButtonType confirm = new ButtonType("Confirm");
             ButtonType cancel = new ButtonType("Cancel",
-                    ButtonBar.ButtonData.CANCEL_CLOSE);
+                ButtonBar.ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().setAll(confirm, cancel);
 
             Optional<ButtonType> result = alert.showAndWait();
