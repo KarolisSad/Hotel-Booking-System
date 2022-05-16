@@ -246,6 +246,7 @@ public class HotelClientHandler implements Runnable
           {
             out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }
+          out.println(new RoomTransfer("Success", "Success"));
           break;
         }
 
@@ -285,6 +286,24 @@ public class HotelClientHandler implements Runnable
              out.println(json.toJson(new GuestTransfer("error",e.getMessage())));
            }
           break;
+
+        case "getBookingWithGuest":
+        {
+          RoomBookingTransfer receivedRoomBookingTransfer = json.fromJson(message, RoomBookingTransfer.class);
+          System.out.println("Client Handler start!");
+          try
+          {
+            
+            System.out.println("SENDING: " + toSend);
+            out.println(json.toJson(toSend));
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+
+          break;
+        }
 
       }
 

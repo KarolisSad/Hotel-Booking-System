@@ -179,6 +179,12 @@ public class ModelManager implements Model {
         return hotelClient.cancelBooking(bookingNumber);
     }
 
+    @Override public RoomBookingTransfer getBookingWithGuest(
+        int bookingNumber, int phoneNumber)
+    {
+        return hotelClient.getBookingWithGuest(bookingNumber, phoneNumber);
+    }
+
     @Override
     public void addListener(PropertyChangeListener listener) {
         property.addPropertyChangeListener(listener);

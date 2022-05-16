@@ -1,5 +1,6 @@
 package view.GUI;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import view.ViewController;
@@ -48,6 +49,12 @@ public class LogInViewController extends ViewController
         getViewHandler().openView("GuestDetailsForReceptionist.fxml");
     }
 
+    // TODO JavaDoc
+    public void showBookingButton() throws IOException
+    {
+        getViewHandler().openView("ShowBookingView.fxml");
+    }
+
     /**
      * A getter method returning the Region object.
      *
@@ -59,4 +66,6 @@ public class LogInViewController extends ViewController
     public void reset() {
 
     }
+
+
 }

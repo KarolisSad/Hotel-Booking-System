@@ -42,7 +42,6 @@ public class ViewHandler extends ViewCreator{
 
 
         openView("LogInView.fxml");
-//       openView("GuestDetailsForReceptionist.fxml");
 
     }
 

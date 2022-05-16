@@ -20,6 +20,7 @@ public interface HotelPersistence {
     ArrayList<RoomBooking> getAllBookings(String type) throws SQLException;
     void processBooking(RoomBooking booking) throws SQLException;
     void cancelBooking(RoomBooking roomBooking) throws SQLException;
+    void getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
 
 
 }

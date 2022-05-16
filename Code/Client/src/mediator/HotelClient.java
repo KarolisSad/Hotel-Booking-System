@@ -351,6 +351,23 @@ public class HotelClient implements Model {
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
+    @Override public RoomBookingTransfer getBookingWithGuest(
+        int bookingNumber, int phoneNumber)
+    {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("getBookingWithGuest", bookingNumber, phoneNumber));
+        try
+        {
+            wait();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        System.out.println(json.fromJson(message, RoomBookingTransfer.class));
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
     /**
      * Makes received object into Json format and sends it to a server
      *

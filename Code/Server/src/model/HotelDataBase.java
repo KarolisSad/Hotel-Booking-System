@@ -87,6 +87,14 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.cancelBooking(roomBooking);
     }
 
+    @Override public void getBookingWithGuest(int bookingNr, int phoneNr)
+        throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        dataBase.getRoomWithGuest(bookingNr, phoneNr);
+        System.out.println("DONE CALLING DATABASE!");
+    }
+
     /**
      * Method used for adding a booking to the database.
      * @param roomBooking The booking to add.
@@ -97,6 +105,8 @@ public class HotelDataBase implements HotelPersistence {
         MyDataBase dataBase = MyDataBase.getInstance();
         dataBase.book(roomBooking);
     }
+
+
 
 
 }
