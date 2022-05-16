@@ -31,7 +31,7 @@ public class LogInViewController extends ViewController
      * @throws IOException
      */
     public void hotelManagerButton() throws IOException {
-        getViewHandler().openView("RoomListView.fxml");
+        getViewHandler().openView("MenuForHotelManager.fxml");
     }
 
     /**
@@ -42,6 +42,10 @@ public class LogInViewController extends ViewController
      */
     public void guestButton() throws IOException {
         getViewHandler().openView("ReservationView.fxml");
+    }
+
+    public void receptionist() throws IOException {
+        getViewHandler().openView("GuestDetailsForReceptionist.fxml");
     }
 
     /**

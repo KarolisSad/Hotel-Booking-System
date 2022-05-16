@@ -121,6 +121,22 @@ public class HotelClient implements Model {
         return json.fromJson(message,GuestTransfer.class);
     }
 
+    @Override
+    public synchronized GuestTransfer getAllGuests() {
+        sendToServerAsJson(new GuestTransfer("getAllGuests"));
+        message = null;
+        while (message == null)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return json.fromJson(message, GuestTransfer.class);
+    }
+
 
     /**
      * Creates RoomTransfer object, transfer it to Json format and sends it to server
@@ -318,6 +334,20 @@ public class HotelClient implements Model {
             e.printStackTrace();
         }
 
+        return json.fromJson(message, RoomBookingTransfer.class);
+    }
+
+    @Override
+    public synchronized RoomBookingTransfer cancelBooking(int bookingNumber) {
+        sendToServerAsJsonBooking(new RoomBookingTransfer("CancelBooking", bookingNumber));
+        message = null;
+        try {
+            wait();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
