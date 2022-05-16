@@ -102,9 +102,9 @@ public class ModelManager implements Model {
         return hotelClient.editBooking(bookingId, startDate, endDate,roomid, status);
     }
 
-    @Override public RoomBookingTransfer removeBooking(int bookingId)
+    @Override public RoomBookingTransfer removeBooking(int bookingId, int guestID)
     {
-        return hotelClient.removeBooking(bookingId);
+        return hotelClient.removeBooking(bookingId, guestID);
     }
 
     /**

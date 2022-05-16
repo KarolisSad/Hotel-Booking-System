@@ -115,8 +115,8 @@ public class BookingsForReceptionistViewController extends ViewController
     checkIn.setText("Check in");
   }
 
-  public void guestInformationButton(ActionEvent actionEvent)
-  {
+  public void guestInformationButton() throws IOException { getViewHandler().openView("GuestDetailsForReceptionist.fxml");
+    getViewModelFactory().getGuestDetailsForReceptionistViewModel().setGuest(viewModel.getSelectedBookingProperty().bookingIdProperty(), viewModel.getSelectedBookingProperty().guestProperty());
   }
 
   public void roomInformationButton(ActionEvent actionEvent)

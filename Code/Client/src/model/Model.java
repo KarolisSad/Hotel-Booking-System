@@ -17,7 +17,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds);
   RoomTransfer getAllRooms();
   RoomBookingTransfer editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomid, String status);
-  RoomBookingTransfer removeBooking(int bookingId);
+  RoomBookingTransfer removeBooking(int bookingId, int guestID);
 
   GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr);
 
@@ -27,5 +27,8 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingTransfer getInProgressBookings();
   RoomBookingTransfer getCancelledBookings();
   RoomBookingTransfer processBooking(int bookingNumber);
+  RoomBookingTransfer cancelBooking(int bookingNumber);
+
+  GuestTransfer getAllGuests();
 
 }

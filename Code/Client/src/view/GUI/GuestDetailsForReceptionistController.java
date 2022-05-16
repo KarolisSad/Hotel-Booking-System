@@ -9,6 +9,13 @@ import viewModel.GuestDetailsForReceptionistViewModel;
 
 import java.io.IOException;
 
+/**
+ * A class creating an GuestDetailsForReceptionistController object.
+ *
+ * @author Group 5
+ * @version 12/05/2022
+ */
+
 public class GuestDetailsForReceptionistController extends ViewController {
   @FXML
   private TextField emailField;
@@ -25,18 +32,17 @@ public class GuestDetailsForReceptionistController extends ViewController {
 
   private GuestDetailsForReceptionistViewModel viewModel;
 
+  /**
+   * An empty constructor.
+   */
+
   public GuestDetailsForReceptionistController(){
   }
 
-  public void saveDetailsButton() {
-    viewModel.updateGuest();
-  }
-
-  public void exitButton() throws IOException {
-    reset();
-    getViewHandler().openView("BookingsForReceptionistView.fxml");
-  }
-
+  /**
+   * A none argument, void method binding instance variables to
+   * ViewModel variables.
+   */
   @Override
   protected void init() {
     viewModel = getViewModelFactory().getGuestDetailsForReceptionistViewModel();
@@ -52,11 +58,31 @@ public class GuestDetailsForReceptionistController extends ViewController {
     }
 
     reset();
-    viewModel.dummyData();
   }
 
+  /**
+   * A method that refers to updateGuest() method in ViewModel
+   */
 
+  public void saveDetailsButton() {
+    try {
+      viewModel.updateGuest();
+    }catch(Exception e){
+      errorLabel.setText(e.getMessage());
+    }
+  }
 
+  /**
+   * A method that opens the BookingsForReceptionistView.fxml
+   */
+  public void exitButton() throws IOException {
+    reset();
+    getViewHandler().openView("BookingsForReceptionistView.fxml");
+  }
+
+  /**
+   * A method that refers to reset() method in ViewModel
+   */
   @Override
   public void reset() {
     viewModel.reset();
