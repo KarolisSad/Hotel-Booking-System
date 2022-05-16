@@ -56,7 +56,6 @@ public class GuestDetailsForReceptionistController extends ViewController {
         }
 
         reset();
-        viewModel.dummyData();
     }
 
 
