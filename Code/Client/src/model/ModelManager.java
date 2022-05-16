@@ -108,6 +108,11 @@ public class ModelManager implements Model {
         return hotelClient.editGuest(type, bookingID, fName, lName, email, phoneNr);
     }
 
+    @Override
+    public GuestTransfer getAllGuests() {
+        return hotelClient.getAllGuests();
+    }
+
 
     /**
      * A method that is meant for booking a room.
@@ -167,6 +172,11 @@ public class ModelManager implements Model {
     @Override public RoomBookingTransfer processBooking(int bookingNumber)
     {
         return hotelClient.processBooking(bookingNumber);
+    }
+
+    @Override
+    public RoomBookingTransfer cancelBooking(int bookingNumber) {
+        return hotelClient.cancelBooking(bookingNumber);
     }
 
     @Override

@@ -15,8 +15,11 @@ public interface HotelPersistence {
     void editRoomInfo(String roomID, RoomType type, int nrBeds) throws SQLException;
 
     void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException;
+    ArrayList<Guest> getAllGuests() throws SQLException;
     // TODO CHR ADDED
     ArrayList<RoomBooking> getAllBookings(String type) throws SQLException;
     void processBooking(RoomBooking booking) throws SQLException;
     void cancelBooking(RoomBooking roomBooking) throws SQLException;
+
+
 }

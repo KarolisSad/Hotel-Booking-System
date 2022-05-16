@@ -1,5 +1,9 @@
 package mediator;
 
+import model.Guest;
+
+import java.util.ArrayList;
+
 public class GuestTransfer {
     private String fName;
     private String lName;
@@ -7,6 +11,8 @@ public class GuestTransfer {
     private int phoneNr;
     private int bookingID;
     private String type;
+    private String errorMessage;
+    private ArrayList<Guest> guests;
 
     public GuestTransfer(String type, String fName, String lName, String email, int phoneNr){
         this.type = type;
@@ -24,6 +30,23 @@ public class GuestTransfer {
         this.phoneNr = phoneNr;
         this.fName = fName;
         this.lName = lName;
+    }
+
+    public GuestTransfer(String type, String errorMessage)
+    {
+        this.type = type;
+        this.errorMessage = errorMessage;
+    }
+
+    public GuestTransfer(String type, ArrayList<Guest> guests)
+    {
+        this.guests = guests;
+        this.type = type;
+    }
+
+    public GuestTransfer(String type)
+    {
+        this.type = type;
     }
 
     public String getFullName() {
@@ -48,5 +71,17 @@ public class GuestTransfer {
 
     public int getBookingID() {
         return bookingID;
+    }
+
+    public ArrayList<Guest> getGuests() {
+        return guests;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

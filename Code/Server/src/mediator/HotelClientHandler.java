@@ -1,6 +1,7 @@
 package mediator;
 
 import com.google.gson.Gson;
+import model.Guest;
 import model.Model;
 import model.Room;
 import model.RoomBooking;
@@ -247,6 +248,20 @@ public class HotelClientHandler implements Runnable
           }
           break;
         }
+
+        case "CancelBooking":
+        {
+          System.out.println("Cancel booking");
+          RoomBookingTransfer roomBookingTransfer = json.fromJson(message, RoomBookingTransfer.class);
+          try {
+            model.cancelBooking(roomBookingTransfer.getBookingNr());
+            out.println(json.toJson(new RoomBookingTransfer("Success","Success")));
+          } catch (SQLException e) {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+          break;
+        }
+
         case "editGuest":
           GuestTransfer guest = json.fromJson(message, GuestTransfer.class);
           try{
@@ -257,6 +272,17 @@ public class HotelClientHandler implements Runnable
           }
           break;
 
+        case "getAllGuests":
+           try {
+             ArrayList<Guest> guests = model.getAllGuests();
+             GuestTransfer guestTransfer = new GuestTransfer("Success",guests);
+             out.println(json.toJson(new GuestTransfer("Success",guests)));
+           }
+           catch (Exception e)
+           {
+             out.println(json.toJson(new GuestTransfer("error",e.getMessage())));
+           }
+          break;
 
       }
 

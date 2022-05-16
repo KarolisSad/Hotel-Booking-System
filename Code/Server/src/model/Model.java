@@ -23,4 +23,6 @@ public interface Model extends UnnamedPropertyChangeSubject
 
   //Nina:
   void editGuest(int bookingID, String getfName, String getlName, String email, int phoneNr) throws SQLException;
+  ArrayList<Guest> getAllGuests() throws SQLException;
+
 }
