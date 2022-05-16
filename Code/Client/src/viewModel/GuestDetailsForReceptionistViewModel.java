@@ -1,6 +1,8 @@
 package viewModel;
 
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.util.converter.IntegerStringConverter;
 import model.Guest;
@@ -25,7 +27,25 @@ public class GuestDetailsForReceptionistViewModel {
         this.lName = new SimpleStringProperty();
         this.phoneNr = new SimpleStringProperty();
         this.errorLabel = new SimpleStringProperty();
+
+       // getGuest();
     }
+
+    /*
+    private Guest getAGuest() {
+        Guest guest = model.getGuest("getGuest", getBookingID(), getPhoneNr());
+        return guest;
+    }
+     */
+
+    public void dummyData() {
+        bookingID.setValue("3");
+        email.setValue("ninawrona@gmail.com");
+        fName.setValue("Nina");
+        lName.setValue("Wrona");
+        phoneNr.setValue("13332222");
+    }
+
 
     public SimpleStringProperty getEmailProperty(){
         return email;
@@ -93,14 +113,6 @@ public class GuestDetailsForReceptionistViewModel {
         fName.setValue("");
         lName.setValue("");
         phoneNr.setValue("");
-    }
-
-    public void setGuest(IntegerProperty bookingIdProperty, ObjectProperty<Guest> guestProperty) {
-        bookingID.setValue("" + bookingIdProperty.get());
-        email.setValue("" + guestProperty.get().getEmail());
-        fName.setValue("" + guestProperty.get().getfName());
-        lName.setValue("" + guestProperty.get().getlName());
-        phoneNr.setValue("" + guestProperty.get().getPhoneNr());
     }
 }
 
