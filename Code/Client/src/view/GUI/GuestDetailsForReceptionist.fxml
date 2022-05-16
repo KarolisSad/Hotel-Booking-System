@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-font-family: Arial" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.GuestDetailsForReceptionistController">
    <children>
       <Label prefHeight="50.0" prefWidth="603.0" text="Guest details">
          <font>
-            <Font name="Bell MT" size="30.0" />
+            <Font name="Arial" size="30.0" />
          </font>
       </Label>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label prefHeight="82.0" prefWidth="129.0" text="Booking ID">
                <font>
-                  <Font name="Bell MT" size="20.0" />
+                  <Font name="Arial" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField1" prefHeight="25.0" prefWidth="83.0" />
+            <TextField fx:id="bookingIDField" editable="false" prefHeight="25.0" prefWidth="83.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -32,7 +32,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
                <font>
-                  <Font name="Bell MT" size="15.0" />
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
             <TextField fx:id="firstNameField" prefHeight="25.0" prefWidth="200.0" />
@@ -41,7 +41,7 @@
                   <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
                </HBox.margin>
                <font>
-                  <Font name="Bell MT" size="15.0" />
+                  <Font name="Arial" size="15.0" />
                </font>
             </Label>
             <TextField fx:id="lastNameField" prefHeight="20.0" prefWidth="200.0" />
@@ -57,7 +57,7 @@
          <children>
             <Label text="email">
                <font>
-                  <Font name="Bell MT" size="15.0" />
+                  <Font name="Arial" size="15.0" />
                </font>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -74,26 +74,35 @@
          <children>
             <Label text="phone number">
                <font>
-                  <Font name="Bell MT" size="15.0" />
+                  <Font name="Arial" size="15.0" />
                </font>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="200.0" />
+            <TextField fx:id="phoneNumberField" editable="false" prefHeight="25.0" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox alignment="BOTTOM_CENTER" prefHeight="75.0" prefWidth="600.0">
          <children>
-            <Label fx:id="errorLabel" prefHeight="35.0" prefWidth="352.0" text="Error Label" textFill="#d70b0b" wrapText="true" />
+            <Label fx:id="errorLabel" prefHeight="35.0" prefWidth="352.0" text="Error Label" textFill="#d70b0b" wrapText="true">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Label>
             <Button mnemonicParsing="false" onAction="#saveDetailsButton" prefHeight="30.0" prefWidth="160.0" text="Save details">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin></Button>
+               </HBox.margin>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Button>
             <Button layoutX="500.0" layoutY="27.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="30.0" prefWidth="160.0" text="Exit">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
             </Button>
          </children>
       </HBox>

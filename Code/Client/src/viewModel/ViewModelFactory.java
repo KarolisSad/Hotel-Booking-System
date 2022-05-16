@@ -11,7 +11,8 @@ public class ViewModelFactory {
     private LogInViewModel logInViewModel;
     private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
     private GuestDetailsForReceptionistViewModel guestDetailsForReceptionistViewModel;
-    private RoomDetailsForReceptionistModel roomDetailsForReceptionistModel;
+    private GuestOverViewForHotelManagerModel GuestOverViewForHotelManagerModel;
+    private BookingViewModel bookingViewModel;
 
     public ViewModelFactory(Model model){
 
@@ -26,7 +27,9 @@ public class ViewModelFactory {
 
         this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(model);
         this.guestDetailsForReceptionistViewModel = new GuestDetailsForReceptionistViewModel(model);
-        this.roomDetailsForReceptionistModel = new RoomDetailsForReceptionistModel(model,tempInfo);
+
+        this.GuestOverViewForHotelManagerModel = new GuestOverViewForHotelManagerModel(model);
+        this.bookingViewModel = new BookingViewModel(model);
 
     }
 
@@ -60,8 +63,11 @@ public class ViewModelFactory {
         return guestDetailsForReceptionistViewModel;
     }
 
-    public RoomDetailsForReceptionistModel getRoomDetailsForReceptionistModel()
-    {
-        return roomDetailsForReceptionistModel;
+    public viewModel.GuestOverViewForHotelManagerModel getGuestOverViewForHotelManagerModel() {
+        return GuestOverViewForHotelManagerModel;
+    }
+
+    public BookingViewModel getBookingViewModel() {
+        return bookingViewModel;
     }
 }
