@@ -17,12 +17,18 @@ import java.io.IOException;
 public class LogInViewController extends ViewController
 {
 
-
     @Override
-    protected void init() {
+    protected void init() {}
 
+    /**
+     * A method that provides functionality to the Hotel Manager Button
+     * When the button is pressed the program goes back to BookingForReceptionistView.
+     *
+     * @throws IOException
+     */
+    public void receptionistButton() throws IOException {
+        getViewHandler().openView("BookingForReceptionistView.fxml");
     }
-
 
     /**
      * A method that provides functionality to the Hotel Manager button.
@@ -31,7 +37,7 @@ public class LogInViewController extends ViewController
      * @throws IOException
      */
     public void hotelManagerButton() throws IOException {
-        getViewHandler().openView("MenuForHotelManager.fxml");
+        getViewHandler().openView("RoomListView.fxml");
     }
 
     /**
@@ -42,10 +48,6 @@ public class LogInViewController extends ViewController
      */
     public void guestButton() throws IOException {
         getViewHandler().openView("ReservationView.fxml");
-    }
-
-    public void receptionist() throws IOException {
-        getViewHandler().openView("GuestDetailsForReceptionist.fxml");
     }
 
     /**

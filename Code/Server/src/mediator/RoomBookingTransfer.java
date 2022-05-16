@@ -43,7 +43,6 @@ public class RoomBookingTransfer
     this.roomBookings = roomBookings;
   }
 
-
   /**
    * 2 argument constructor used to transfer exception messages.
    * @param type The type of transfer

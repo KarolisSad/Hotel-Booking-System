@@ -9,6 +9,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * A class that implements the Model interface and manages the bookings.
@@ -20,9 +21,6 @@ import java.time.LocalDate;
 public class ModelManager implements Model {
     private PropertyChangeSupport property;
     private HotelClient hotelClient;
-
-    // todo chr
-    private RoomBookingList bookings;
 
     /**
      * A constructor that is meant to initialize
@@ -88,6 +86,26 @@ public class ModelManager implements Model {
         return hotelClient.getAllRooms();
     }
 
+    /**
+     * A method editing a booking that is already in the system
+     *
+     * @param bookingId booking ID
+     * @param startDate start date
+     * @param endDate end date
+     * @param roomid room number
+     * @param status status of the booking (In progress or Booked)
+     * @return RoomBookingTransfer object
+     */
+    @Override public RoomBookingTransfer editBooking(int bookingId,
+        LocalDate startDate, LocalDate endDate, String roomid, String status)
+    {
+        return hotelClient.editBooking(bookingId, startDate, endDate,roomid, status);
+    }
+
+    @Override public RoomBookingTransfer removeBooking(int bookingId)
+    {
+        return hotelClient.removeBooking(bookingId);
+    }
 
     /**
      * Method used for editing a room already added to the system.
@@ -108,11 +126,14 @@ public class ModelManager implements Model {
         return hotelClient.editGuest(type, bookingID, fName, lName, email, phoneNr);
     }
 
-    @Override
-    public GuestTransfer getAllGuests() {
-        return hotelClient.getAllGuests();
+    /**
+     * Method for getting a RoomBookingTransfer object containing a list of all bookings
+     * @return RoomBookingTransfer object containing a list of all bookings
+     */
+    @Override public RoomBookingTransfer getAllBookings()
+    {
+        return hotelClient.getAllBookings();
     }
-
 
     /**
      * A method that is meant for booking a room.
@@ -126,15 +147,6 @@ public class ModelManager implements Model {
     @Override
     public RoomTransfer book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest) {
         return hotelClient.book(roomId, startDate, endDate, guest);
-    }
-
-    /**
-     * Method for getting a RoomBookingTransfer object containing a list of all bookings
-     * @return RoomBookingTransfer object containing a list of all bookings
-     */
-    @Override public RoomBookingTransfer getAllBookings()
-    {
-        return hotelClient.getAllBookings();
     }
 
     /**
@@ -172,11 +184,6 @@ public class ModelManager implements Model {
     @Override public RoomBookingTransfer processBooking(int bookingNumber)
     {
         return hotelClient.processBooking(bookingNumber);
-    }
-
-    @Override
-    public RoomBookingTransfer cancelBooking(int bookingNumber) {
-        return hotelClient.cancelBooking(bookingNumber);
     }
 
     @Override

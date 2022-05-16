@@ -58,7 +58,7 @@ public abstract class ViewCreator {
         ViewController controller = null;
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("GUI/"+txtFile));
+            loader.setLocation(getClass().getResource(txtFile));
             Region root = loader.load();
             controller = loader.getController();
             initViewController(controller, root);
