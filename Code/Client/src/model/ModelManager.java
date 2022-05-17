@@ -191,7 +191,7 @@ public class ModelManager implements Model {
 
     @Override
     public RoomBookingTransfer cancelBooking(int bookingNumber) {
-        return null;
+        return hotelClient.cancelBooking(bookingNumber);
     }
 
     @Override
@@ -202,6 +202,12 @@ public class ModelManager implements Model {
     @Override public RoomTransfer getRoom(String roomId)
     {
         return hotelClient.getRoom(roomId);
+    }
+
+    @Override public RoomBookingTransfer getBookingWithGuest(int bookingNumber,
+        int phoneNumber)
+    {
+        return hotelClient.getBookingWithGuest(bookingNumber, phoneNumber);
     }
 
     @Override

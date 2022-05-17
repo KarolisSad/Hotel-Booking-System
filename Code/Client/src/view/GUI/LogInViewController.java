@@ -17,46 +17,45 @@ import java.io.IOException;
 public class LogInViewController extends ViewController
 {
 
+  @Override protected void init()
+  {
 
-    @Override
-    protected void init() {
+  }
 
-    }
+  /**
+   * A method that provides functionality to the Hotel Manager button.
+   * When the button is clicked a new window opens that contains Room List View.
+   *
+   * @throws IOException
+   */
+  public void hotelManagerButton() throws IOException
+  {
+    getViewHandler().openView("MenuForHotelManager.fxml");
+  }
 
+  public void showBookingButton() throws IOException
+  {
+    getViewHandler().openView("ShowBookingView.fxml");
+  }
 
-    /**
-     * A method that provides functionality to the Hotel Manager button.
-     * When the button is clicked a new window opens that contains Room List View.
-     *
-     * @throws IOException
-     */
-    public void hotelManagerButton() throws IOException {
-        getViewHandler().openView("MenuForHotelManager.fxml");
-    }
+  /**
+   * A method that provides functionality to Guest button.
+   * When the button is clicked a new window that is reservation view opens.
+   *
+   * @throws IOException
+   */
+  public void guestButton() throws IOException
+  {
+    getViewHandler().openView("ReservationView.fxml");
+  }
 
-    /**
-     * A method that provides functionality to Guest button.
-     * When the button is clicked a new window that is reservation view opens.
-     *
-     * @throws IOException
-     */
-    public void guestButton() throws IOException {
-        getViewHandler().openView("ReservationView.fxml");
-    }
+  public void receptionist() throws IOException
+  {
+    getViewHandler().openView("BookingsForReceptionistView.fxml");
+  }
 
-    public void receptionist() throws IOException {
-        getViewHandler().openView("BookingsForReceptionistView.fxml");
-    }
-
-    /**
-     * A getter method returning the Region object.
-     *
-     * @return A Region object called root.
-     */
-
-
-    @Override
-    public void reset() {
-//
-    }
+  @Override public void reset()
+  {
+    //
+  }
 }

@@ -16,19 +16,14 @@ import java.io.IOException;
  * @version 12/05/2022
  */
 
-public class GuestDetailsForReceptionistController extends ViewController {
-  @FXML
-  private TextField emailField;
-  @FXML
-  private TextField firstNameField;
-  @FXML
-  private TextField bookingIDField;
-  @FXML
-  private TextField lastNameField;
-  @FXML
-  private TextField phoneNumberField;
-  @FXML
-  private Label errorLabel;
+public class GuestDetailsForReceptionistController extends ViewController
+{
+  @FXML private TextField emailField;
+  @FXML private TextField firstNameField;
+  @FXML private TextField bookingIDField;
+  @FXML private TextField lastNameField;
+  @FXML private TextField phoneNumberField;
+  @FXML private Label errorLabel;
 
   private GuestDetailsForReceptionistViewModel viewModel;
 
@@ -36,24 +31,33 @@ public class GuestDetailsForReceptionistController extends ViewController {
    * An empty constructor.
    */
 
-  public GuestDetailsForReceptionistController(){
+  public GuestDetailsForReceptionistController()
+  {
   }
 
   /**
    * A none argument, void method binding instance variables to
    * ViewModel variables.
    */
-  @Override
-  protected void init() {
+  @Override protected void init()
+  {
     viewModel = getViewModelFactory().getGuestDetailsForReceptionistViewModel();
-    try {
+    try
+    {
       emailField.textProperty().bindBidirectional(viewModel.getEmailProperty());
-      firstNameField.textProperty().bindBidirectional(viewModel.getfNameProperty());
-      lastNameField.textProperty().bindBidirectional(viewModel.getlNameProperty());
-      bookingIDField.textProperty().bindBidirectional(viewModel.getBookingIDProperty());
-      phoneNumberField.textProperty().bindBidirectional(viewModel.getPhoneNrProperty());
-      errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabelProperty());
-    }catch (NullPointerException e){
+      firstNameField.textProperty()
+          .bindBidirectional(viewModel.getfNameProperty());
+      lastNameField.textProperty()
+          .bindBidirectional(viewModel.getlNameProperty());
+      bookingIDField.textProperty()
+          .bindBidirectional(viewModel.getBookingIDProperty());
+      phoneNumberField.textProperty()
+          .bindBidirectional(viewModel.getPhoneNrProperty());
+      errorLabel.textProperty()
+          .bindBidirectional(viewModel.getErrorLabelProperty());
+    }
+    catch (NullPointerException e)
+    {
       //can be null
     }
 
@@ -64,10 +68,14 @@ public class GuestDetailsForReceptionistController extends ViewController {
    * A method that refers to updateGuest() method in ViewModel
    */
 
-  public void saveDetailsButton() {
-    try {
+  public void saveDetailsButton()
+  {
+    try
+    {
       viewModel.updateGuest();
-    }catch(Exception e){
+    }
+    catch (Exception e)
+    {
       errorLabel.setText(e.getMessage());
     }
   }
@@ -75,7 +83,8 @@ public class GuestDetailsForReceptionistController extends ViewController {
   /**
    * A method that opens the BookingsForReceptionistView.fxml
    */
-  public void exitButton() throws IOException {
+  public void exitButton() throws IOException
+  {
     reset();
     getViewHandler().openView("BookingsForReceptionistView.fxml");
   }
@@ -83,8 +92,8 @@ public class GuestDetailsForReceptionistController extends ViewController {
   /**
    * A method that refers to reset() method in ViewModel
    */
-  @Override
-  public void reset() {
+  @Override public void reset()
+  {
     viewModel.reset();
   }
 }

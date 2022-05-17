@@ -39,9 +39,9 @@ public class RoomDetailsForReceptionistModel
 
   private TemporaryInformation temp;
 
-
   /**
    * Constructor initializing instance variables
+   *
    * @param model model interface
    */
   public RoomDetailsForReceptionistModel(Model model, TemporaryInformation temp)
@@ -60,6 +60,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A getter returning the start date of the date picker
+   *
    * @return startDatePicket
    */
   public ObjectProperty<LocalDate> getStartDatePicker()
@@ -69,6 +70,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A getter returning the end date of the date picker
+   *
    * @return endDatePicker
    */
   public ObjectProperty<LocalDate> getEndDatePicker()
@@ -78,6 +80,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A getter returning the error label encapsulated in String property object
+   *
    * @return errorLabel
    */
   public StringProperty getErrorLabelProperty()
@@ -87,6 +90,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A setter to give a value to a error label
+   *
    * @param errorLabel
    */
   public void setErrorLabel(String errorLabel)
@@ -96,6 +100,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A getter that returns a booking ID.
+   *
    * @return bookingId
    */
   public StringProperty getBookingId()
@@ -105,6 +110,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A getter that return number of beds
+   *
    * @return nrOfBeds
    */
   public StringProperty getNrOfBeds()
@@ -114,6 +120,7 @@ public class RoomDetailsForReceptionistModel
 
   /**
    * A getter that return the status of the booking
+   *
    * @return status
    */
   public StringProperty getStatus()
@@ -122,7 +129,8 @@ public class RoomDetailsForReceptionistModel
   }
 
   /**
-   * getter that return available room numbers for chosen dates
+   * getter that returns the selected room number
+   *
    * @return roomNumbers
    */
   public StringProperty getRoomNumber()
@@ -137,7 +145,8 @@ public class RoomDetailsForReceptionistModel
 
   public void saveBookingChanged()
   {
-    model.editBooking(Integer.parseInt(bookingId.get()), startDatePicker.get(), endDatePicker.get(), roomNumber.get());
+    model.editBooking(Integer.parseInt(bookingId.get()), startDatePicker.get(),
+        endDatePicker.get(), roomNumber.get());
   }
 
   public void removeBooking()

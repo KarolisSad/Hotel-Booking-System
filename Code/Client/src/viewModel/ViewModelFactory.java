@@ -2,79 +2,101 @@ package viewModel;
 
 import model.Model;
 
-public class ViewModelFactory {
+public class ViewModelFactory
+{
 
-    private GuestInformationViewModel guestInformationViewModel;
-    private ReservationViewModel reservationViewModel;
-    private RoomListViewModel roomListViewModel;
-    private AddEditViewModel addEditViewModel;
-    private LogInViewModel logInViewModel;
-    private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
-    private GuestDetailsForReceptionistViewModel guestDetailsForReceptionistViewModel;
-    private RoomDetailsForReceptionistModel roomDetailsForReceptionistModel;
-    private BookingViewModel bookingViewModel;
-    private GuestOverViewForHotelManagerModel guestOverViewForHotelManagerModel;
+  private GuestInformationViewModel guestInformationViewModel;
+  private ReservationViewModel reservationViewModel;
+  private RoomListViewModel roomListViewModel;
+  private AddEditViewModel addEditViewModel;
+  private LogInViewModel logInViewModel;
+  private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
+  private GuestDetailsForReceptionistViewModel guestDetailsForReceptionistViewModel;
+  private RoomDetailsForReceptionistModel roomDetailsForReceptionistModel;
+  private BookingViewModel bookingViewModel;
+  private GuestOverViewForHotelManagerModel guestOverViewForHotelManagerModel;
+  private ShowBookingViewModel showBookingViewModel;
 
-    public ViewModelFactory(Model model){
+  public ViewModelFactory(Model model)
+  {
 
-        TemporaryInformation tempInfo = new TemporaryInformation();
-        ViewState state = new ViewState();
+    TemporaryInformation tempInfo = new TemporaryInformation();
+    ViewState state = new ViewState();
 
-        this.reservationViewModel = new ReservationViewModel(model,tempInfo);
-        this.guestInformationViewModel = new GuestInformationViewModel(model,tempInfo);
-        this.roomListViewModel = new RoomListViewModel(model, state);
-        this.addEditViewModel = new AddEditViewModel(model, state);
-        this.logInViewModel = new LogInViewModel(model);
+    this.reservationViewModel = new ReservationViewModel(model, tempInfo);
+    this.guestInformationViewModel = new GuestInformationViewModel(model,
+        tempInfo);
+    this.roomListViewModel = new RoomListViewModel(model, state);
+    this.addEditViewModel = new AddEditViewModel(model, state);
+    this.logInViewModel = new LogInViewModel(model);
 
-        this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(model);
-        this.guestDetailsForReceptionistViewModel = new GuestDetailsForReceptionistViewModel(model);
-        this.roomDetailsForReceptionistModel = new RoomDetailsForReceptionistModel(model,tempInfo);
-        this.bookingViewModel = new BookingViewModel(model);
+    this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(
+        model);
+    this.guestDetailsForReceptionistViewModel = new GuestDetailsForReceptionistViewModel(
+        model);
+    this.roomDetailsForReceptionistModel = new RoomDetailsForReceptionistModel(
+        model, tempInfo);
+    this.bookingViewModel = new BookingViewModel(model);
 
-        this.guestOverViewForHotelManagerModel = new GuestOverViewForHotelManagerModel(model);
+    this.guestOverViewForHotelManagerModel = new GuestOverViewForHotelManagerModel(
+        model);
 
-    }
+    this.showBookingViewModel = new ShowBookingViewModel(model);
 
-    public GuestInformationViewModel getGuestInformationViewModel(){
-        return guestInformationViewModel;
-    }
+  }
 
-    public ReservationViewModel getReservationViewModel() {
-        return reservationViewModel;
-    }
+  public GuestInformationViewModel getGuestInformationViewModel()
+  {
+    return guestInformationViewModel;
+  }
 
-    public RoomListViewModel getRoomListViewModel() {
-        return roomListViewModel;
-    }
+  public ReservationViewModel getReservationViewModel()
+  {
+    return reservationViewModel;
+  }
 
-    public AddEditViewModel getAddEditViewModel() {
-        return addEditViewModel;
-    }
+  public RoomListViewModel getRoomListViewModel()
+  {
+    return roomListViewModel;
+  }
 
-    public LogInViewModel getLogInViewModel()
-    {
-        return logInViewModel;
-    }
+  public AddEditViewModel getAddEditViewModel()
+  {
+    return addEditViewModel;
+  }
 
-    public BookingsForReceptionistViewModel getBookingsForReceptionistViewModel()
-    {
-        return bookingsForReceptionistViewModel;
-    }
+  public LogInViewModel getLogInViewModel()
+  {
+    return logInViewModel;
+  }
 
-    public GuestDetailsForReceptionistViewModel getGuestDetailsForReceptionistViewModel() {
-        return guestDetailsForReceptionistViewModel;
-    }
+  public BookingsForReceptionistViewModel getBookingsForReceptionistViewModel()
+  {
+    return bookingsForReceptionistViewModel;
+  }
 
-    public RoomDetailsForReceptionistModel getRoomDetailsForReceptionistModel()
-    {
-        return roomDetailsForReceptionistModel;
-    }
+  public GuestDetailsForReceptionistViewModel getGuestDetailsForReceptionistViewModel()
+  {
+    return guestDetailsForReceptionistViewModel;
+  }
 
-    public BookingViewModel getBookingViewModel() {
-        return bookingViewModel;
-    }
+  public RoomDetailsForReceptionistModel getRoomDetailsForReceptionistModel()
+  {
+    return roomDetailsForReceptionistModel;
+  }
 
-    public GuestOverViewForHotelManagerModel getGuestOverViewForHotelManagerModel() {
-        return guestOverViewForHotelManagerModel;
-    }
+  public BookingViewModel getBookingViewModel()
+  {
+    return bookingViewModel;
+  }
+
+  public GuestOverViewForHotelManagerModel getGuestOverViewForHotelManagerModel()
+  {
+    return guestOverViewForHotelManagerModel;
+  }
+
+  public ShowBookingViewModel getShowBookingViewModel()
+  {
+    return showBookingViewModel;
+  }
 }

@@ -4,12 +4,14 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
 import mediator.RoomTransfer;
 import model.Model;
 import model.RoomType;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * A class providing functionality for AddEditViewController.
  *
@@ -28,10 +30,10 @@ public class AddEditViewModel
   /**
    * Constructor initializing instance variables.
    *
-   * @param model    model interface
-   * @param state    shared object with a ReservationViewModel
-   *                 that checks if the view needs to be filled with information
-   *                 of the selected view or empty.
+   * @param model model interface
+   * @param state shared object with a ReservationViewModel
+   *              that checks if the view needs to be filled with information
+   *              of the selected view or empty.
    */
   public AddEditViewModel(Model model, ViewState state)
   {
@@ -85,6 +87,7 @@ public class AddEditViewModel
   /**
    * A getter method that returns a String object
    * taken from a StringProperty.
+   *
    * @return a String object
    */
   public String getRoomId()
@@ -94,6 +97,7 @@ public class AddEditViewModel
 
   /**
    * A getter method that returns a StringProperty object
+   *
    * @return a StringProperty object called roomId
    */
   public StringProperty getRoomIdProperty()
@@ -103,6 +107,7 @@ public class AddEditViewModel
 
   /**
    * A getter method that returns a ViewState object
+   *
    * @return a ViewState object called viewState
    */
   public ViewState getViewState()
@@ -112,6 +117,7 @@ public class AddEditViewModel
 
   /**
    * A getter method that returns a Integer object
+   *
    * @return an Integer object
    */
   public int getNumberOfBeds()
@@ -121,6 +127,7 @@ public class AddEditViewModel
 
   /**
    * A getter method that returns a IntegerProperty object
+   *
    * @return a IntegerProperty object called nrOfBeds
    */
   public IntegerProperty numberOfBedsProperty()
@@ -133,15 +140,20 @@ public class AddEditViewModel
    * from the model
    */
 
-  //todo error label
   public void addRoom()
   {
-    RoomTransfer roomTransfer= model.addRoom(roomId.get(), type, nrOfBeds.get());
+    RoomTransfer roomTransfer = model.addRoom(roomId.get(), type,
+        nrOfBeds.get());
     if (roomTransfer.getMessage() == null)
     {
-      errorProperty.set("Room was successfully added!");
-    }
-    else {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Information");
+      alert.setHeaderText(null);
+      alert.setContentText("Room successfully added!");
+
+      alert.showAndWait();    }
+    else
+    {
       errorProperty.set(roomTransfer.getMessage());
     }
     reset();
@@ -153,12 +165,18 @@ public class AddEditViewModel
    */
   public void editRoomInfo()
   {
-    RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type, nrOfBeds.get());
+    RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type,
+        nrOfBeds.get());
     if (roomTransfer.getMessage() == null)
     {
-      errorProperty.set("Room was successfully edited!");
-    }
-    else {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Information");
+      alert.setHeaderText(null);
+      alert.setContentText("Room edited successfully!");
+
+      alert.showAndWait();    }
+    else
+    {
       errorProperty.set(roomTransfer.getMessage());
     }
   }
@@ -171,9 +189,9 @@ public class AddEditViewModel
     this.type = type;
   }
 
-
   /**
    * A getter method that returns a String object
+   *
    * @return a String object
    */
   public String getErrorProperty()
@@ -183,6 +201,7 @@ public class AddEditViewModel
 
   /**
    * A getter method that returns a StringProperty object
+   *
    * @return a StringProperty object called nrOfBeds
    */
   public StringProperty errorPropertyProperty()
@@ -192,6 +211,7 @@ public class AddEditViewModel
 
   /**
    * A getter method for getting the type of the selected room.
+   *
    * @return the type of the selected room, or null if no room is selected.
    */
   public RoomType getType()

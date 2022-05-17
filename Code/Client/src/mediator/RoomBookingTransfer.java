@@ -1,6 +1,7 @@
 package mediator;
 
 import model.Guest;
+import model.Room;
 import model.RoomBooking;
 
 import java.time.LocalDate;
@@ -27,18 +28,18 @@ public class RoomBookingTransfer
 
   private String message;
 
-
-  // Might not be used
   private RoomBooking booking;
   private Guest guest;
-
+  private Room room;
 
   /**
    * 2 argument constructor used for transferring an ArrayList containing RoomBookingTransferObjects
-   * @param type The type of transfer
+   *
+   * @param type         The type of transfer
    * @param roomBookings List of bookings
    */
-  public RoomBookingTransfer(String type, ArrayList<RoomBookingTransferObject> roomBookings)
+  public RoomBookingTransfer(String type,
+      ArrayList<RoomBookingTransferObject> roomBookings)
   {
     this.type = type;
     this.roomBookings = roomBookings;
@@ -46,7 +47,8 @@ public class RoomBookingTransfer
 
   /**
    * 2 argument constructor used to transfer exception messages.
-   * @param type The type of transfer
+   *
+   * @param type    The type of transfer
    * @param message The exception message.
    */
   public RoomBookingTransfer(String type, String message)
@@ -57,6 +59,7 @@ public class RoomBookingTransfer
 
   /**
    * 1 argument constructor initializing the type variable.
+   *
    * @param type the type to be set.
    */
   public RoomBookingTransfer(String type)
@@ -66,7 +69,8 @@ public class RoomBookingTransfer
 
   /**
    * 2 argument constructor used to request RoomBookingState updates.
-   * @param type The type of transfer
+   *
+   * @param type      The type of transfer
    * @param bookingNr the bookingNr of the booking to be changed.
    */
   public RoomBookingTransfer(String type, int bookingNr)
@@ -75,7 +79,10 @@ public class RoomBookingTransfer
     this.bookingNr = bookingNr;
   }
 
-  public RoomBookingTransfer(String editBooking, int bookingId, LocalDate startDate, LocalDate endDate, int guestID, String roomid, String status) {
+  public RoomBookingTransfer(String editBooking, int bookingId,
+      LocalDate startDate, LocalDate endDate, int guestID, String roomid,
+      String status)
+  {
     this.type = editBooking;
     this.bookingNr = bookingId;
     this.startDate = startDate;
@@ -85,7 +92,8 @@ public class RoomBookingTransfer
     this.stateString = status;
   }
 
-  public RoomBookingTransfer(String editBooking, int bookingId, LocalDate startDate, LocalDate endDate, String roomid)
+  public RoomBookingTransfer(String editBooking, int bookingId,
+      LocalDate startDate, LocalDate endDate, String roomid)
   {
     this.type = editBooking;
     this.bookingNr = bookingId;
@@ -94,8 +102,26 @@ public class RoomBookingTransfer
     this.roomID = roomid;
   }
 
+  public RoomBookingTransfer(String type, int bookingNr, int guestID)
+  {
+    this.type = type;
+    this.bookingNr = bookingNr;
+    this.guestID = guestID;
+  }
+
+  public RoomBookingTransfer(String type, Guest guest, LocalDate startDate,
+      LocalDate endDate, Room room)
+  {
+    this.type = type;
+    this.guest = guest;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.room = room;
+  }
+
   /**
    * Getter for the type of transfer
+   *
    * @return type
    */
   public String getType()
@@ -105,6 +131,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the booking nr
+   *
    * @return booking nr
    */
   public int getBookingNr()
@@ -114,6 +141,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the startDate
+   *
    * @return startDate
    */
   public LocalDate getStartDate()
@@ -123,6 +151,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the endDate
+   *
    * @return endDate
    */
   public LocalDate getEndDate()
@@ -132,6 +161,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the Guest ID
+   *
    * @return guest id
    */
   public int getGuestID()
@@ -141,6 +171,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the Room ID
+   *
    * @return room id
    */
   public String getRoomID()
@@ -150,6 +181,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the Booking state
+   *
    * @return Booking state as a String
    */
   public String getStateString()
@@ -159,6 +191,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the ArrayList of bookings
+   *
    * @return roomBookings ArrayList of RoomBookingTransferObjects
    */
   public ArrayList<RoomBookingTransferObject> getRoomBookings()
@@ -168,6 +201,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for the message
+   *
    * @return message
    */
   public String getMessage()
@@ -175,9 +209,10 @@ public class RoomBookingTransfer
     return message;
   }
 
-  //TODO maybe delete??
+
   /**
    * Getter for booking
+   *
    * @return booking
    */
   public RoomBooking getBooking()
@@ -187,6 +222,7 @@ public class RoomBookingTransfer
 
   /**
    * Getter for Guest
+   *
    * @return Guest
    */
   public Guest getGuest()
@@ -194,17 +230,24 @@ public class RoomBookingTransfer
     return guest;
   }
 
+
+  public Room getRoom()
+  {
+    return room;
+  }
+
   /**
    * Method for returning the object as a string
+   *
    * @return All instance variables and their values as a String.
    */
   @Override public String toString()
   {
     return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
-            + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
-            + ", guestID=" + guestID + ", roomID='" + roomID + '\''
-            + ", stateString='" + stateString + '\'' + ", roomBookings="
-            + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
-            + ", guest=" + guest + '}';
+        + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", guestID=" + guestID + ", roomID='" + roomID + '\''
+        + ", stateString='" + stateString + '\'' + ", roomBookings="
+        + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
+        + ", guest=" + guest + '}';
   }
 }

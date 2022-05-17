@@ -43,17 +43,17 @@ public class BookingsForReceptionistViewController extends ViewController
     viewModel = getViewModelFactory().getBookingsForReceptionistViewModel();
 
     bookingIdColumn.setCellValueFactory(
-            cellData -> cellData.getValue().bookingIdProperty().asObject());
+        cellData -> cellData.getValue().bookingIdProperty().asObject());
     startDateColumn.setCellValueFactory(
-            cellData -> cellData.getValue().startDateProperty());
+        cellData -> cellData.getValue().startDateProperty());
     endDateColumn.setCellValueFactory(
-            cellData -> cellData.getValue().endDateProperty());
+        cellData -> cellData.getValue().endDateProperty());
     guestColumn.setCellValueFactory(
-            cellData -> cellData.getValue().guestIdProperty().asObject());
+        cellData -> cellData.getValue().guestIdProperty().asObject());
     roomNumberColumn.setCellValueFactory(
-            cellData -> cellData.getValue().roomIdProperty());
+        cellData -> cellData.getValue().roomIdProperty());
     stateColumn.setCellValueFactory(
-            cellData -> cellData.getValue().bookingStateProperty());
+        cellData -> cellData.getValue().bookingStateProperty());
 
     errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
 
@@ -63,18 +63,18 @@ public class BookingsForReceptionistViewController extends ViewController
     bookedButton.setDisable(true);
 
     bookingsTable.getSelectionModel().selectedItemProperty()
-            .addListener((obs, oldValue, newValue) -> {
-              if (newValue != null)
-              {
-                if (newValue.bookingStateProperty().getValue()
-                        .equalsIgnoreCase("Booked") || newValue.bookingStateProperty()
-                        .getValue().equalsIgnoreCase("in progress"))
-                {
-                  checkIn.setDisable(false);
-                }
-                viewModel.setSelected(newValue);
-              }
-            });
+        .addListener((obs, oldValue, newValue) -> {
+          if (newValue != null)
+          {
+            if (newValue.bookingStateProperty().getValue()
+                .equalsIgnoreCase("Booked") || newValue.bookingStateProperty()
+                .getValue().equalsIgnoreCase("in progress"))
+            {
+              checkIn.setDisable(false);
+            }
+            viewModel.setSelected(newValue);
+          }
+        });
 
     reset();
   }
@@ -84,6 +84,8 @@ public class BookingsForReceptionistViewController extends ViewController
    */
   @Override public void reset()
   {
+    inProgressButton.setDisable(false);
+    bookedButton.setDisable(true);
     viewModel.reset();
   }
 
@@ -100,7 +102,6 @@ public class BookingsForReceptionistViewController extends ViewController
     checkIn.setText("Check out");
   }
 
-
   /**
    * Method called when pressing the showBooked button in the GUI.
    * Updates the booking list to show all booking In progress, disables the showBooked button, and changes the text on the check-in button to Check in.
@@ -115,16 +116,22 @@ public class BookingsForReceptionistViewController extends ViewController
     checkIn.setText("Check in");
   }
 
-  public void guestInformationButton() throws IOException {
+  public void guestInformationButton() throws IOException
+  {
     getViewHandler().openView("GuestDetailsForReceptionist.fxml");
-    getViewModelFactory().getGuestDetailsForReceptionistViewModel().setGuest(viewModel.getSelectedBookingProperty().bookingIdProperty(), viewModel.getSelectedBookingProperty().guestProperty());
+    getViewModelFactory().getGuestDetailsForReceptionistViewModel()
+        .setGuest(viewModel.getSelectedBookingProperty().bookingIdProperty(),
+            viewModel.getSelectedBookingProperty().guestProperty());
   }
 
   public void roomInformationButton() throws IOException
   {
-    System.out.println(viewModel.getSelectedBookingProperty().roomIdProperty().get());
+    System.out.println(
+        viewModel.getSelectedBookingProperty().roomIdProperty().get());
     getViewHandler().openView("RoomDetailsForReceptionist.fxml");
-    getViewModelFactory().getRoomDetailsForReceptionistModel().setRoomBookingDetails(viewModel.getSelectedBookingProperty());
+    getViewModelFactory().getRoomDetailsForReceptionistModel()
+        .setRoomBookingDetails(viewModel.getSelectedBookingProperty());
+
   }
 
   /**
@@ -139,24 +146,24 @@ public class BookingsForReceptionistViewController extends ViewController
     if (viewModel.isCheckIn())
     {
       popUp.setHeaderText("Confirm Check in: booking nr: "
-              + viewModel.getSelectedBookingProperty().bookingIdProperty().get());
+          + viewModel.getSelectedBookingProperty().bookingIdProperty().get());
       popUp.setContentText(
-              "Guest:\n" + "Name: " + viewModel.getSelectedBookingProperty()
-                      .guestProperty().get().getfName() + " "
-                      + viewModel.getSelectedBookingProperty().guestProperty().get()
-                      .getlName() + "\nEmail: " + viewModel.getSelectedBookingProperty()
-                      .guestProperty().get().getEmail() + "\nPhone: "
-                      + viewModel.getSelectedBookingProperty().guestProperty().get()
-                      .getPhoneNr() + "\nRoom: "
-                      + viewModel.getSelectedBookingProperty().roomIdProperty()
-                      .getValue() + "\nStart date: "
-                      + viewModel.getSelectedBookingProperty().getStartDate()
-                      + "\nEnd date: " + viewModel.getSelectedBookingProperty()
-                      .getEndDate());
+          "Guest:\n" + "Name: " + viewModel.getSelectedBookingProperty()
+              .guestProperty().get().getfName() + " "
+              + viewModel.getSelectedBookingProperty().guestProperty().get()
+              .getlName() + "\nEmail: " + viewModel.getSelectedBookingProperty()
+              .guestProperty().get().getEmail() + "\nPhone: "
+              + viewModel.getSelectedBookingProperty().guestProperty().get()
+              .getPhoneNr() + "\nRoom: "
+              + viewModel.getSelectedBookingProperty().roomIdProperty()
+              .getValue() + "\nStart date: "
+              + viewModel.getSelectedBookingProperty().getStartDate()
+              + "\nEnd date: " + viewModel.getSelectedBookingProperty()
+              .getEndDate());
 
       ButtonType checkIn = new ButtonType("Check in");
       ButtonType cancel = new ButtonType("Back",
-              ButtonBar.ButtonData.CANCEL_CLOSE);
+          ButtonBar.ButtonData.CANCEL_CLOSE);
       popUp.getButtonTypes().setAll(checkIn, cancel);
 
       Optional<ButtonType> result = popUp.showAndWait();
@@ -173,24 +180,24 @@ public class BookingsForReceptionistViewController extends ViewController
     else
     {
       popUp.setHeaderText("Confirm Check out: Booking nr: "
-              + viewModel.getSelectedBookingProperty().bookingIdProperty().get());
+          + viewModel.getSelectedBookingProperty().bookingIdProperty().get());
       popUp.setContentText(
-              "Guest:\n" + "Name: " + viewModel.getSelectedBookingProperty()
-                      .guestProperty().get().getfName() + " "
-                      + viewModel.getSelectedBookingProperty().guestProperty().get()
-                      .getlName() + "\nEmail: " + viewModel.getSelectedBookingProperty()
-                      .guestProperty().get().getEmail() + "\nPhone: "
-                      + viewModel.getSelectedBookingProperty().guestProperty().get()
-                      .getPhoneNr() + "\nRoom: "
-                      + viewModel.getSelectedBookingProperty().roomIdProperty()
-                      .getValue() + "\nStart date: "
-                      + viewModel.getSelectedBookingProperty().getStartDate()
-                      + "\nEnd date: " + viewModel.getSelectedBookingProperty()
-                      .getEndDate());
+          "Guest:\n" + "Name: " + viewModel.getSelectedBookingProperty()
+              .guestProperty().get().getfName() + " "
+              + viewModel.getSelectedBookingProperty().guestProperty().get()
+              .getlName() + "\nEmail: " + viewModel.getSelectedBookingProperty()
+              .guestProperty().get().getEmail() + "\nPhone: "
+              + viewModel.getSelectedBookingProperty().guestProperty().get()
+              .getPhoneNr() + "\nRoom: "
+              + viewModel.getSelectedBookingProperty().roomIdProperty()
+              .getValue() + "\nStart date: "
+              + viewModel.getSelectedBookingProperty().getStartDate()
+              + "\nEnd date: " + viewModel.getSelectedBookingProperty()
+              .getEndDate());
 
       ButtonType checkIn = new ButtonType("Check out");
       ButtonType cancel = new ButtonType("Back",
-              ButtonBar.ButtonData.CANCEL_CLOSE);
+          ButtonBar.ButtonData.CANCEL_CLOSE);
       popUp.getButtonTypes().setAll(checkIn, cancel);
 
       Optional<ButtonType> result = popUp.showAndWait();

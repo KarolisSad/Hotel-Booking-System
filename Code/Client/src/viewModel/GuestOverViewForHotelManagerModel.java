@@ -13,38 +13,45 @@ import model.Model;
  * @author Group 5
  * @version 12/05/2022
  */
-public class GuestOverViewForHotelManagerModel {
+public class GuestOverViewForHotelManagerModel
+{
 
-    private Model model;
-    private ObservableList<String> guests;
+  private Model model;
+  private ObservableList<String> guests;
+
+  /**
+   * Constructor initializing instance variables.
+   *
+   * @param model interface
+   */
+  public GuestOverViewForHotelManagerModel(Model model)
+  {
+    this.guests = FXCollections.observableArrayList();
+    this.model = model;
 
 
-    /**
-     * Constructor initializing instance variables.
-     *
-     * @param model interface
-     */
-    public GuestOverViewForHotelManagerModel(Model model)
+    guests.add("TODO:  change to listView");
+  }
+
+  public void getAllGuests()
+  {
+    guests.clear();
+    GuestTransfer guest = model.getAllGuests();
+    System.out.println(guest.getGuests());
+    for (int i = 0; i < guest.getGuests().size(); i++)
     {
-        this.guests = FXCollections.observableArrayList();
-        this.model = model;
-        guests.add("TODO:  change to listView");
+      guests.add(
+          "FirstName: " + guest.getGuests().get(i).getfName() + "    LastName "
+              + guest.getGuests().get(i).getlName() + "    Phone Number: "
+              + guest.getGuests().get(i).getPhoneNr());
     }
+  }
 
-    public void getAllGuests()
-    {
-        guests.clear();
-        GuestTransfer guest = model.getAllGuests();
-        for (int i = 0 ; i < guest.getGuests().size(); i ++)
-        {
-            guests.add("FirstName: "+guest.getGuests().get(i).getfName() +"    LastName " + guest.getGuests().get(i).getlName() + "    Phone Number: "+ guest.getGuests().get(i).getPhoneNr());
-        }
-    }
+  // for loop to add all guests :)
 
-    // for loop to add all guests :)
-
-    public ObservableList<String> getGuests() {
-        getAllGuests();
-        return guests;
-    }
+  public ObservableList<String> getGuests()
+  {
+    getAllGuests();
+    return guests;
+  }
 }

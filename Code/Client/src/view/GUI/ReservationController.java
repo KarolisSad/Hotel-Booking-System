@@ -12,6 +12,7 @@ import viewModel.ViewModelFactory;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+
 /**
  * A class creating an ReservationController object.
  *
@@ -20,55 +21,57 @@ import java.rmi.RemoteException;
  */
 public class ReservationController extends ViewController
 {
-    @FXML private DatePicker startDate;
-    @FXML private DatePicker endDate;
-    @FXML private Label errorLabel;
-    @FXML private ListView<String> availableRoom;
-    private ReservationViewModel viewModel;
+  @FXML private DatePicker startDate;
+  @FXML private DatePicker endDate;
+  @FXML private Label errorLabel;
+  @FXML private ListView<String> availableRoom;
+  private ReservationViewModel viewModel;
 
-    /**
-     * A none argument, void method initializing instance variables.
-     */
-    @Override
-    protected void init() {
+  /**
+   * A none argument, void method initializing instance variables.
+   */
+  @Override protected void init()
+  {
 
-        viewModel = getViewModelFactory().getReservationViewModel();
+    viewModel = getViewModelFactory().getReservationViewModel();
 
-        // Binding
-        availableRoom.setItems(viewModel.getRooms());
-        startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
-        endDate.valueProperty().bindBidirectional(viewModel.getEndDatePicker());
-        errorLabel.textProperty().bind(viewModel.getErrorLabel());
-    }
+    // Binding
+    availableRoom.setItems(viewModel.getRooms());
+    startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
+    endDate.valueProperty().bindBidirectional(viewModel.getEndDatePicker());
+    errorLabel.textProperty().bind(viewModel.getErrorLabel());
+  }
 
+  //todo
+  @Override public void reset()
+  {
+    //viewModel.clear();
+  }
 
+  /**
+   * A void method that looks for available rooms.
+   */
 
-    //todo
-    @Override
-    public void reset() {
-        //viewModel.clear();
-    }
+  public void lookForAvailableRooms()
+  {
+    viewModel.getAllAvailableRooms();
+  }
 
-    /**
-     * A void method that looks for available rooms.
-     */
+  /**
+   * A void method closing opening the GuestInformation view.
+   */
 
-    public void lookForAvailableRooms() {
-        viewModel.getAllAvailableRooms();
-    }
+  public void reservationButton() throws IOException
+  {
+    String selectedRoomFromListView = availableRoom.getSelectionModel()
+        .getSelectedItem();
+    viewModel.reserveRoom(selectedRoomFromListView);
+    getViewHandler().openView("GuestInformationView.fxml");
+  }
 
-    /**
-     * A void method closing opening the GuestInformation view.
-     */
-
-    public void reservationButton() throws IOException {
-        String selectedRoomFromListView = availableRoom.getSelectionModel().getSelectedItem();
-        viewModel.reserveRoom(selectedRoomFromListView);
-        getViewHandler().openView("GuestInformationView.fxml");
-    }
-
-    public void back() throws IOException {
-        getViewHandler().openView("LoginView.fxml");
-    }
+  public void back() throws IOException
+  {
+    getViewHandler().openView("LoginView.fxml");
+  }
 
 }

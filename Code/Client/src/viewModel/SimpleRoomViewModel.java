@@ -10,7 +10,6 @@ public class SimpleRoomViewModel
   private ObjectProperty<RoomType> roomTypeProperty;
   private IntegerProperty numberOfBedsProperty;
 
-
   public SimpleRoomViewModel(Room room)
   {
     roomNumberProperty = new SimpleStringProperty(room.getRoomId());
@@ -18,18 +17,15 @@ public class SimpleRoomViewModel
     numberOfBedsProperty = new SimpleIntegerProperty(room.getNumberOfBeds());
   }
 
-
   public StringProperty roomNumberProperty()
   {
     return roomNumberProperty;
   }
 
-
   public ObjectProperty<RoomType> roomTypeProperty()
   {
     return roomTypeProperty;
   }
-
 
   public IntegerProperty numberOfBedsProperty()
   {

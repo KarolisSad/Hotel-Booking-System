@@ -54,32 +54,23 @@ public class RoomListViewController extends ViewController
           removeButton.setDisable(newValue == null);
         });
 
-
     reset();
   }
-
-
-
-
 
   @Override public void reset()
   {
     viewModel.updateRoomList();
-
-
   }
 
   public void addButton() throws IOException
   {
     viewModel.setAdd();
     getViewHandler().openView("AddEditView.fxml");
-
   }
 
   /**
    * Method called when clicking the edit button when a room is selected.
    * If a room is not selected, button will be inactive - and thus, unable to be clicked
-   *
    * After successfully editing a room, a confirmation message is shown.
    */
   public void editButton() throws IOException
@@ -87,9 +78,6 @@ public class RoomListViewController extends ViewController
     viewModel.setEdit();
     getViewHandler().openView("AddEditView.fxml");
 
-    errorLabel.setTextFill(Color.GREEN);
-    errorLabel.textProperty().set("Room: " + roomTable.getSelectionModel()
-        .getSelectedItem().roomNumberProperty().get()  + " changed successfully");
   }
 
   /**
@@ -112,14 +100,14 @@ public class RoomListViewController extends ViewController
     // Style
     DialogPane dialogPane = alert.getDialogPane();
     dialogPane.getStylesheets().add("");
-    dialogPane.getStylesheets().add(getClass().getResource("box.css").toExternalForm());
+    dialogPane.getStylesheets()
+        .add(getClass().getResource("box.css").toExternalForm());
     dialogPane.getStyleClass().add("box.css");
     //
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == confirm)
     {
-      errorLabel.setTextFill(Color.GREEN);
       viewModel.removeRoom(
           roomTable.getSelectionModel().getSelectedItem().roomNumberProperty()
               .get());
@@ -132,7 +120,8 @@ public class RoomListViewController extends ViewController
 
   }
 
-  public void back() throws IOException {
+  public void back() throws IOException
+  {
     getViewHandler().openView("LoginView.fxml");
   }
 }

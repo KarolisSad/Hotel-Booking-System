@@ -29,7 +29,7 @@ public class BookingsForReceptionistViewModel
   /**
    * Constructor initializing instance variables.
    *
-   * @param model    model interface
+   * @param model model interface
    */
   public BookingsForReceptionistViewModel(Model model)
   {
@@ -48,7 +48,6 @@ public class BookingsForReceptionistViewModel
    * It clears the current list, and then gets all Bookings from the model that fit the type given as argument and adds them.
    *
    * @param type The type of bookings to get for the table, can be either booked or in progress.
-   *
    */
   public void updateBookingList(String type)
   {
@@ -61,18 +60,16 @@ public class BookingsForReceptionistViewModel
         RoomBookingTransfer bookingList = model.getBookedBookings();
         isCheckIn = true;
 
-        System.out.println("HAellsdfn" + model.getBookedBookings());
         if (bookingList.getMessage() == null)
         {
           for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
           {
-            bookings.add(
-                new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+            bookings.add(new SimpleBookingViewModel(
+                bookingList.getRoomBookings().get(i)));
           }
         }
         else
         {
-          System.out.println(bookingList.getBooking());
           errorLabel.setValue(bookingList.getMessage());
         }
 
@@ -88,8 +85,8 @@ public class BookingsForReceptionistViewModel
         {
           for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
           {
-            bookings.add(
-                new SimpleBookingViewModel(bookingList.getRoomBookings().get(i)));
+            bookings.add(new SimpleBookingViewModel(
+                bookingList.getRoomBookings().get(i)));
           }
         }
         else
@@ -104,6 +101,7 @@ public class BookingsForReceptionistViewModel
 
   /**
    * Simple method checking if the table currently is showing booked or in progress bookings.
+   *
    * @return true if the table currently shows booked bookings, false if In progress.
    */
   public boolean isCheckIn()
@@ -124,9 +122,8 @@ public class BookingsForReceptionistViewModel
     }
     catch (NullPointerException e)
     {
-      System.out.println("setted a selected item to null");
+      // Intentionally empty - Exception should not be handled
     }
-
   }
 
   /**
@@ -138,7 +135,6 @@ public class BookingsForReceptionistViewModel
   {
     selectedBookingProperty.set(selectedBooking);
   }
-
 
   /**
    * Method used for getting the selectedBookingProperty
@@ -162,6 +158,7 @@ public class BookingsForReceptionistViewModel
 
   /**
    * Method for getting the Observable list containing bookings.
+   *
    * @return bookings.
    */
   public ObservableList<SimpleBookingViewModel> getBookings()
@@ -171,6 +168,7 @@ public class BookingsForReceptionistViewModel
 
   /**
    * Method calling the processBooking in the model, and updating the BookingList.
+   *
    * @param bookingViewModel The booking to be updated.
    */
   public void processBooking(SimpleBookingViewModel bookingViewModel)
@@ -178,6 +176,4 @@ public class BookingsForReceptionistViewModel
     model.processBooking(bookingViewModel.bookingIdProperty().get());
     updateBookingList("booked");
   }
-
-
 }

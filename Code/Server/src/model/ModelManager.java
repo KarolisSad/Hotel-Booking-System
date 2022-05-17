@@ -1,5 +1,7 @@
 package model;
 
+import mediator.RoomBookingTransfer;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
@@ -174,6 +176,12 @@ public class ModelManager implements Model
         return dataBaseAdapter.getRoom(roomId);
     }
 
+    @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr,
+        int phoneNr) throws SQLException
+    {
+        return dataBaseAdapter.getBookingWithGuest(bookingNr, phoneNr);
+    }
+
     /**
      * A method that is meant for booking a room.
      *
@@ -251,6 +259,11 @@ public class ModelManager implements Model
     @Override
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
         dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
+    }
+
+    @Override public ArrayList<Guest> getAllGuests() throws SQLException
+    {
+        return dataBaseAdapter.getAllGuests();
     }
 
 }

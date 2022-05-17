@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import mediator.RoomTransfer;
 import model.Model;
 import model.Room;
@@ -46,15 +47,16 @@ public class RoomListViewModel implements PropertyChangeListener
     allRooms.clear();
 
     RoomTransfer roomTransfer = model.getAllRooms();
-    System.out.println(roomTransfer.toString());
     if (roomTransfer.getMessage() == null)
     {
       for (int i = 0; i < roomTransfer.getRoomList().size(); i++)
       {
-        allRooms.add(new SimpleRoomViewModel(roomTransfer.getRoomList().get(i)));
+        allRooms.add(
+            new SimpleRoomViewModel(roomTransfer.getRoomList().get(i)));
       }
     }
-    else {
+    else
+    {
       errorLabel.setValue(roomTransfer.getMessage());
     }
 
@@ -77,7 +79,12 @@ public class RoomListViewModel implements PropertyChangeListener
     }
     else
     {
-      errorLabel.setValue("Room: " + roomId + " deleted successfully");
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Information");
+      alert.setHeaderText(null);
+      alert.setContentText("Room: " + roomId + " deleted successfully");
+
+      alert.showAndWait();
       updateRoomList();
     }
 
@@ -144,6 +151,11 @@ public class RoomListViewModel implements PropertyChangeListener
   public void setAdd()
   {
     state.setAdd(true);
+  }
+
+  public void reset()
+  {
+    errorLabel.setValue("");
   }
 }
 

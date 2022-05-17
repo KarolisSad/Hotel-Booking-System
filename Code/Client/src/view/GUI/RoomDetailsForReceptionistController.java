@@ -10,6 +10,7 @@ import view.ViewController;
 import viewModel.RoomDetailsForReceptionistModel;
 
 import java.awt.*;
+import java.awt.Button;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class RoomDetailsForReceptionistController extends ViewController
   @FXML private DatePicker startDatePicker;
   @FXML private DatePicker endDatePicker;
   @FXML private Label errorLabel;
+
   private RoomDetailsForReceptionistModel viewModel;
 
   /**
@@ -59,6 +61,8 @@ public class RoomDetailsForReceptionistController extends ViewController
     {
       viewModel.setErrorLabel("Please fill in all empty fields");
     }
+
+    reset();
   }
 
   /**
@@ -104,35 +108,38 @@ public class RoomDetailsForReceptionistController extends ViewController
    */
   public void cancelBookingButton() throws IOException
   {
-    //Confirmation box
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    //Style
-    DialogPane dialogPane = alert.getDialogPane();
-    dialogPane.getStylesheets().add("");
-    dialogPane.getStylesheets()
-        .add(getClass().getResource("box.css").toExternalForm());
-    dialogPane.getStyleClass().add("box.css");
-    //
-    alert.setHeaderText("Are you sure you want to cancel the booking");
-
-    ButtonType confirm = new ButtonType("Confirm");
-    ButtonType cancel = new ButtonType("Cancel",
-        ButtonBar.ButtonData.CANCEL_CLOSE);
-    alert.getButtonTypes().setAll(confirm, cancel);
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == confirm)
+    if (statusTextField.textProperty().get().equalsIgnoreCase("booked"))
     {
+      //Confirmation box
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      //Style
+      DialogPane dialogPane = alert.getDialogPane();
+      dialogPane.getStylesheets().add("");
+      dialogPane.getStylesheets().add(getClass().getResource("box.css").toExternalForm());
+      dialogPane.getStyleClass().add("box.css");
+      //
+      alert.setHeaderText("Are you sure you want to cancel the booking");
 
-      viewModel.removeBooking();
-      getViewModelFactory().getBookingsForReceptionistViewModel().reset();
-      getViewHandler().openView("BookingsForReceptionistView.fxml");
-      System.out.println("The booking is canceled.");
+      ButtonType confirm = new ButtonType("Confirm");
+      ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+      alert.getButtonTypes().setAll(confirm, cancel);
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == confirm)
+      {
+
+        viewModel.removeBooking();
+        getViewModelFactory().getBookingsForReceptionistViewModel().reset();
+        getViewHandler().openView("BookingsForReceptionistView.fxml");
+        System.out.println("The booking is canceled.");
+      }
+      else
+      {
+        System.out.println("You pressed NO");
+        alert.close();
+      }
     }
-    else
-    {
-      System.out.println("You pressed NO");
-      alert.close();
-    }
+
+    else {errorLabel.textProperty().set("You cannot cancel a booking in progress. Check guest out instead.");}
   }
 
   /**
@@ -147,5 +154,6 @@ public class RoomDetailsForReceptionistController extends ViewController
 
   @Override public void reset()
   {
+    errorLabel.setText("");
   }
 }
