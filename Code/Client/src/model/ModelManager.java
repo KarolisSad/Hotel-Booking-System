@@ -92,18 +92,17 @@ public class ModelManager implements Model {
      * @param startDate start date
      * @param endDate   end date
      * @param roomid    room number
-     * @param status    status of the booking (In progress or Booked)
      * @return RoomBookingTransfer object
      */
     @Override
     public RoomBookingTransfer editBooking(int bookingId,
-                                           LocalDate startDate, LocalDate endDate, String roomid, String status) {
-        return hotelClient.editBooking(bookingId, startDate, endDate, roomid, status);
+                                           LocalDate startDate, LocalDate endDate, String roomid) {
+        return hotelClient.editBooking(bookingId, startDate, endDate, roomid);
     }
 
     @Override
-    public RoomBookingTransfer removeBooking(int bookingId, int guestID) {
-        return hotelClient.removeBooking(bookingId, guestID);
+    public RoomBookingTransfer removeBooking(int bookingId) {
+        return hotelClient.removeBooking(bookingId);
     }
 
     /**

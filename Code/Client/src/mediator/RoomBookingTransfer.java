@@ -85,6 +85,15 @@ public class RoomBookingTransfer
     this.stateString = status;
   }
 
+  public RoomBookingTransfer(String editBooking, int bookingId, LocalDate startDate, LocalDate endDate, String roomid)
+  {
+    this.type = editBooking;
+    this.bookingNr = bookingId;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.roomID = roomid;
+  }
+
   /**
    * Getter for the type of transfer
    * @return type

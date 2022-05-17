@@ -240,7 +240,7 @@ public class HotelClientHandler implements Runnable {
                 case "removeBooking":
                     RoomBookingTransfer bookingRemove = json.fromJson(message, RoomBookingTransfer.class);
                     try{
-                        model.removeBooking(bookingRemove.getBookingNr());
+                        model.cancelBooking(bookingRemove.getBookingNr());
                         out.println(successMessage);
                     }
                     catch (Exception e){

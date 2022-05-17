@@ -42,17 +42,17 @@ public class RoomDetailsForReceptionistController extends ViewController
 
     try
     {
-//      bookingIDtextField.textProperty().bindBidirectional(viewModel.getBookingId());
-//      statusTextField.textProperty().bindBidirectional(viewModel.getStatus());
+      bookingIDtextField.textProperty().bindBidirectional(viewModel.getBookingId());
+      statusTextField.textProperty().bindBidirectional(viewModel.getStatus());
       typeField.textProperty().bindBidirectional(viewModel.getType());
       nrOfBedsField.textProperty().bindBidirectional(viewModel.getNrOfBeds());
       roomNumberField.textProperty().bindBidirectional(viewModel.getRoomNumber());
-//      startDatePicker.valueProperty()
-//          .bindBidirectional(viewModel.getStartDatePicker());
-//      endDatePicker.valueProperty()
-//          .bindBidirectional(viewModel.getEndDatePicker());
-//      errorLabel.textProperty()
-//          .bindBidirectional(viewModel.getErrorLabelProperty());
+      startDatePicker.valueProperty()
+          .bindBidirectional(viewModel.getStartDatePicker());
+      endDatePicker.valueProperty()
+          .bindBidirectional(viewModel.getEndDatePicker());
+      errorLabel.textProperty()
+          .bindBidirectional(viewModel.getErrorLabelProperty());
 
     }
     catch (NullPointerException e)
@@ -68,8 +68,6 @@ public class RoomDetailsForReceptionistController extends ViewController
    */
   public void saveDetailsButton() throws IOException
   {
-    //todo save the details
-
     //Confirmation box
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     //Style
@@ -90,7 +88,7 @@ public class RoomDetailsForReceptionistController extends ViewController
     {
       viewModel.saveBookingChanged();
       System.out.println("You confirmed.");
-      getViewHandler().openView("BookingForReceptionistView.fxml");
+      getViewHandler().openView("BookingsForReceptionistView.fxml");
     }
     else
     {
@@ -106,8 +104,6 @@ public class RoomDetailsForReceptionistController extends ViewController
    */
   public void cancelBookingButton() throws IOException
   {
-    //todo delete the booking
-
     //Confirmation box
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     //Style
@@ -126,9 +122,11 @@ public class RoomDetailsForReceptionistController extends ViewController
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == confirm)
     {
+
       viewModel.removeBooking();
+      getViewModelFactory().getBookingsForReceptionistViewModel().reset();
+      getViewHandler().openView("BookingsForReceptionistView.fxml");
       System.out.println("The booking is canceled.");
-      getViewHandler().openView("BookingForReceptionistView.fxml");
     }
     else
     {

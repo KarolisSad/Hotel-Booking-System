@@ -167,12 +167,6 @@ public class ModelManager implements Model
         LocalDate endDate, String roomId) throws SQLException
     {
         dataBaseAdapter.editBooking(bookingId, startDate, endDate, roomId);
-        // todo RoomBooking booking = new RoomBooking(startDate, endDate, room, guest);
-    }
-
-    @Override public void removeBooking(int bookingId) throws SQLException
-    {
-        dataBaseAdapter.removeBooking(bookingId);
     }
 
     @Override public Room getRoom(String roomId) throws SQLException

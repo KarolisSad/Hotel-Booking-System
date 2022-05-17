@@ -399,13 +399,12 @@ public class HotelClient implements Model {
      * @param startDate start date
      * @param endDate end date
      * @param roomid room number
-     * @param status status (In progress or booked)
      * @return RoomBookingTransfer object in json format
      */
     @Override public synchronized RoomBookingTransfer editBooking(int bookingId,
-        LocalDate startDate, LocalDate endDate, String roomid, String status)
+        LocalDate startDate, LocalDate endDate, String roomid)
     {
-        sendToServerAsJsonBooking(new RoomBookingTransfer("editBooking", bookingId, startDate, endDate, 0, roomid, status));
+        sendToServerAsJsonBooking(new RoomBookingTransfer("editBooking", bookingId, startDate, endDate, roomid));
         message = null;
 
         try
@@ -419,9 +418,9 @@ public class HotelClient implements Model {
         return json.fromJson(message, RoomBookingTransfer.class);
     }
 
-    @Override public RoomBookingTransfer removeBooking(int bookingId, int guestID)
+    @Override public synchronized RoomBookingTransfer removeBooking(int bookingId)
     {
-        sendToServerAsJsonBooking(new RoomBookingTransfer("removeBooking", bookingId, null,null, guestID  , null, null));
+        sendToServerAsJsonBooking(new RoomBookingTransfer("removeBooking", bookingId));
         message = null;
 
         try

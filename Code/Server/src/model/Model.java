@@ -20,11 +20,10 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingList getAllBookings(String type) throws SQLException;
   void processBooking(int id) throws SQLException;
   void cancelBooking(int id) throws SQLException;
+  void editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
 
   //Nina:
   void editGuest(int bookingID, String getfName, String getlName, String email, int phoneNr) throws SQLException;
 
-  void editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
-  void removeBooking(int bookingId) throws SQLException;
   Room getRoom(String roomId) throws SQLException;
 }

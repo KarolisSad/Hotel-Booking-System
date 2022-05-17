@@ -118,6 +118,15 @@ public class BookingsForReceptionistViewModel
   {
     errorLabel.setValue("");
     updateBookingList("booked");
+    try
+    {
+      setSelected(null);
+    }
+    catch (NullPointerException e)
+    {
+      System.out.println("setted a selected item to null");
+    }
+
   }
 
   /**
@@ -170,8 +179,5 @@ public class BookingsForReceptionistViewModel
     updateBookingList("booked");
   }
 
-  public void setRoomDetails()
-  {
 
-  }
 }

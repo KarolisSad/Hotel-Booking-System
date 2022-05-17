@@ -88,12 +88,6 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.editBooking(bookingId, startDate, endDate, roomId);
     }
 
-    @Override public void removeBooking(int bookingId) throws SQLException
-    {
-        MyDataBase dataBase = MyDataBase.getInstance();
-        dataBase.removeBooking(bookingId);
-    }
-
     @Override public Room getRoom(String roomId) throws SQLException
     {
         MyDataBase dataBase = MyDataBase.getInstance();

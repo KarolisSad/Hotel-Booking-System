@@ -137,22 +137,25 @@ public class RoomDetailsForReceptionistModel
 
   public void saveBookingChanged()
   {
-    //todo
-    //model.editBooking();
+    model.editBooking(Integer.parseInt(bookingId.get()), startDatePicker.get(), endDatePicker.get(), roomNumber.get());
   }
 
   public void removeBooking()
   {
-    //todo
-    //model.removeBooking();
+    model.removeBooking(Integer.parseInt(bookingId.get()));
   }
 
-  public void setRoomBookingDetails(String roomId)
+  public void setRoomBookingDetails(SimpleBookingViewModel selectedBooking)
   {
-    Room room = model.getRoom(roomId).getRoom();
+    Room room = model.getRoom(selectedBooking.roomIdProperty().get()).getRoom();
     System.out.println(room.toString());
     roomNumber.setValue(room.getRoomId());
     nrOfBeds.setValue(String.valueOf(room.getNumberOfBeds()));
     type.setValue(room.getRoomType().toString());
+    bookingId.setValue(
+        String.valueOf(selectedBooking.bookingIdProperty().get()));
+    status.setValue(selectedBooking.bookingStateProperty().get());
+    startDatePicker.setValue(selectedBooking.getStartDate());
+    endDatePicker.setValue(selectedBooking.getEndDate());
   }
 }

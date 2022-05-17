@@ -496,13 +496,16 @@ public class MyDataBase {
     {
         try (Connection connection = getConnection())
             {
-                try{
-                    PreparedStatement statement = connection.prepareStatement("");
+                try
+                {
+                    PreparedStatement statement = connection.prepareStatement("update roombooking set startdate = (?), enddate = (?), roomid = (?) where bookingid = (?);");
 
-                    statement.setInt(1, bookingId);
-                    statement.setObject(2, startDate);
-                    statement.setObject(3, endDate);
-                    statement.setString(4, roomId);
+                    statement.setObject(1, startDate);
+                    statement.setObject(2, endDate);
+                    statement.setString(3, roomId);
+                    statement.setInt(4, bookingId);
+
+                    statement.executeUpdate();
                 }
                 catch (Exception e)
                 {
@@ -511,22 +514,6 @@ public class MyDataBase {
                         "Unable to edit the booking");
                 }
             }
-    }
-
-    public void removeBooking(int bookingId) throws SQLException
-    {
-        try (Connection connection = getConnection())
-        {
-            try
-            {
-                PreparedStatement statement = connection.prepareStatement("");
-
-                statement.setInt(1, bookingId);
-                statement.executeUpdate();
-            }
-            catch (Exception e) {
-            }
-        }
     }
 
 

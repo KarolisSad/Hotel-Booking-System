@@ -15,8 +15,8 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer removeRoom(String roomId);
   RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds);
   RoomTransfer getAllRooms();
-  RoomBookingTransfer editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomid, String status);
-  RoomBookingTransfer removeBooking(int bookingId, int guestID);
+  RoomBookingTransfer editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomid);
+  RoomBookingTransfer removeBooking(int bookingId);
 
   GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr);
 

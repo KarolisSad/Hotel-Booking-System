@@ -124,7 +124,7 @@ public class BookingsForReceptionistViewController extends ViewController
   {
     System.out.println(viewModel.getSelectedBookingProperty().roomIdProperty().get());
     getViewHandler().openView("RoomDetailsForReceptionist.fxml");
-    getViewModelFactory().getRoomDetailsForReceptionistModel().setRoomBookingDetails(viewModel.getSelectedBookingProperty().roomIdProperty().get());
+    getViewModelFactory().getRoomDetailsForReceptionistModel().setRoomBookingDetails(viewModel.getSelectedBookingProperty());
   }
 
   /**
