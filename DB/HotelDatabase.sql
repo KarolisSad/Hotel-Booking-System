@@ -70,6 +70,8 @@ values ('2022-02-10','2022-02-20',11112222,1);
 insert into roomBooking
 values ('2022-03-10', '2000-03-20',11112222,1);
 
+
+
 ------All-Available-Rooms------>
 
 select * from room where roomID in (select roomID from room
@@ -114,6 +116,11 @@ DROP TRIGGER IF EXISTS BookingDate
 -- attaching trigger to roomBooking
 CREATE TRIGGER BookingDate
 BEFORE INSERT ON roomBooking
+FOR EACH ROW
+EXECUTE PROCEDURE double_booking();
+
+CREATE TRIGGER BookingDateUpdate
+BEFORE UPDATE ON roomBooking
 FOR EACH ROW
 EXECUTE PROCEDURE double_booking();
 -------------------------------<
