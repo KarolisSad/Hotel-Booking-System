@@ -22,13 +22,13 @@ public class RoomDetailsForReceptionistModel
 {
   private Model model;
 
-  private RoomType type; // String type
+  private StringProperty type; // String type
 
   private StringProperty bookingId;
   private StringProperty status;
 
-  private ObservableList<String> roomNumbers;
-  private IntegerProperty nrOfBeds;
+  private StringProperty roomNumber;
+  private StringProperty nrOfBeds;
 
   private ArrayList<RoomType> types;
 
@@ -50,13 +50,12 @@ public class RoomDetailsForReceptionistModel
 
     bookingId = new SimpleStringProperty();
     status = new SimpleStringProperty();
-    roomNumbers = FXCollections.observableArrayList();
-//    types.addAll(List.of(RoomType.values()));
+    roomNumber = new SimpleStringProperty();
+    type = new SimpleStringProperty();
     startDatePicker = new SimpleObjectProperty<>();
     endDatePicker = new SimpleObjectProperty<>();
-    nrOfBeds = new SimpleIntegerProperty();
+    nrOfBeds = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty("");
-    this.temp = temp;
   }
 
   /**
@@ -108,9 +107,9 @@ public class RoomDetailsForReceptionistModel
    * A getter that return number of beds
    * @return nrOfBeds
    */
-  public Property<String> getNrOfBeds()
+  public StringProperty getNrOfBeds()
   {
-    return null;
+    return nrOfBeds;
   }
 
   /**
@@ -126,10 +125,14 @@ public class RoomDetailsForReceptionistModel
    * getter that return available room numbers for chosen dates
    * @return roomNumbers
    */
-  public ObservableList getAvailableRoomNumbers()
+  public StringProperty getRoomNumber()
   {
-    //model.availableRooms(temp.getSelectedBooking().getStartDate(), temp.getSelectedBooking().getEndDate);
-    return null;
+    return roomNumber;
+  }
+
+  public StringProperty getType()
+  {
+    return type;
   }
 
   public void saveBookingChanged()
@@ -148,5 +151,8 @@ public class RoomDetailsForReceptionistModel
   {
     Room room = model.getRoom(roomId).getRoom();
     System.out.println(room.toString());
+    roomNumber.setValue(room.getRoomId());
+    nrOfBeds.setValue(String.valueOf(room.getNumberOfBeds()));
+    type.setValue(room.getRoomType().toString());
   }
 }

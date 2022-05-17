@@ -22,14 +22,14 @@ import java.util.Optional;
 public class RoomDetailsForReceptionistController extends ViewController
 {
 
-  public TextField bookingIDtextField;
-  public TextField statusTextField;
-  public ComboBox typeDropdown;
-  public TextField nrOfBedsField;
-  public ComboBox typesDropdown;
-  public DatePicker startDatePicker;
-  public DatePicker endDatePicker;
-  public Label errorLabel;
+  @FXML private TextField bookingIDtextField;
+  @FXML private TextField statusTextField;
+  @FXML private TextField roomNumberField;
+  @FXML private TextField nrOfBedsField;
+  @FXML private TextField typeField;
+  @FXML private DatePicker startDatePicker;
+  @FXML private DatePicker endDatePicker;
+  @FXML private Label errorLabel;
   private RoomDetailsForReceptionistModel viewModel;
 
   /**
@@ -42,23 +42,17 @@ public class RoomDetailsForReceptionistController extends ViewController
 
     try
     {
-      bookingIDtextField.textProperty().bindBidirectional(viewModel.getBookingId());
-      statusTextField.textProperty().bindBidirectional(viewModel.getStatus());
-      typesDropdown.setItems(viewModel.getAvailableRoomNumbers());
+//      bookingIDtextField.textProperty().bindBidirectional(viewModel.getBookingId());
+//      statusTextField.textProperty().bindBidirectional(viewModel.getStatus());
+      typeField.textProperty().bindBidirectional(viewModel.getType());
       nrOfBedsField.textProperty().bindBidirectional(viewModel.getNrOfBeds());
-      startDatePicker.valueProperty()
-          .bindBidirectional(viewModel.getStartDatePicker());
-      endDatePicker.valueProperty()
-          .bindBidirectional(viewModel.getEndDatePicker());
-
-      typeDropdown.getItems().removeAll(typeDropdown.getItems());
-      typeDropdown.getItems().add(RoomType.FAMILY);
-      typeDropdown.getItems().add(RoomType.DOUBLE);
-      typeDropdown.getItems().add(RoomType.SINGLE);
-      typeDropdown.getItems().add(RoomType.SUITE);
-
-      errorLabel.textProperty()
-          .bindBidirectional(viewModel.getErrorLabelProperty());
+      roomNumberField.textProperty().bindBidirectional(viewModel.getRoomNumber());
+//      startDatePicker.valueProperty()
+//          .bindBidirectional(viewModel.getStartDatePicker());
+//      endDatePicker.valueProperty()
+//          .bindBidirectional(viewModel.getEndDatePicker());
+//      errorLabel.textProperty()
+//          .bindBidirectional(viewModel.getErrorLabelProperty());
 
     }
     catch (NullPointerException e)
