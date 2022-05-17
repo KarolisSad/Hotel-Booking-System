@@ -344,6 +344,24 @@ public class HotelClient implements Model {
         return json.fromJson(message, GuestTransfer.class);
     }
 
+    @Override public synchronized RoomTransfer getRoom(String roomId)
+    {
+        RoomTransfer roomTransfer = new RoomTransfer("getRoom", roomId);
+        sendToServerAsJson(roomTransfer);
+        message = null;
+        while (message == null)
+        {
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return json.fromJson(message, RoomTransfer.class);
+    }
 
     /**
      * Makes received object into Json format and sends it to a server

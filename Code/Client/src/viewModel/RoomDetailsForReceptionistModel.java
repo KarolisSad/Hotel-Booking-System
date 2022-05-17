@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.converter.IntegerStringConverter;
 import model.Model;
+import model.Room;
 import model.RoomType;
 
 import java.time.LocalDate;
@@ -141,5 +142,11 @@ public class RoomDetailsForReceptionistModel
   {
     //todo
     //model.removeBooking();
-  };
+  }
+
+  public void setRoomBookingDetails(String roomId)
+  {
+    Room room = model.getRoom(roomId).getRoom();
+    System.out.println(room.toString());
+  }
 }

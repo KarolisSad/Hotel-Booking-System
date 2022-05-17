@@ -33,11 +33,11 @@ public class MyDataBase {
         // Karolis
         // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
         // Nina
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+        //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
         // Christian
         // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
         // Juste
-        //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
     }
 
     public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
@@ -397,7 +397,7 @@ public class MyDataBase {
     public Room getRoom(String roomId) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * from room where roomID = (?);");
+                "SELECT * from room where roomid = (?);");
             statement.setString(1, roomId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -407,9 +407,9 @@ public class MyDataBase {
 
                 return new Room(id, Room.convertRoomTypeFromString(roomtype), nrBeds);
             } else {
+
                 throw new IllegalArgumentException("Room not found");
             }
-
         }
     }
 

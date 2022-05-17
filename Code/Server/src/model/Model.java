@@ -26,4 +26,5 @@ public interface Model extends UnnamedPropertyChangeSubject
 
   void editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
   void removeBooking(int bookingId) throws SQLException;
+  Room getRoom(String roomId) throws SQLException;
 }

@@ -120,6 +120,7 @@ public class HotelClientHandler implements Runnable {
                     } catch (Exception e) {
                         out.println(json.toJson(new RoomTransfer("error",e.getMessage())));
                     }
+                    break;
 
                 case "AllBookings":
                 {
@@ -209,6 +210,7 @@ public class HotelClientHandler implements Runnable {
                     {
                         out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
                     }
+                    out.println(json.toJson(new RoomBookingTransfer("Success", "Success")));
                     break;
                 }
                 case "editGuest":
@@ -233,6 +235,7 @@ public class HotelClientHandler implements Runnable {
                         out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
                     }
                     out.println(new RoomTransfer("Success", "Success"));
+                    break;
 
                 case "removeBooking":
                     RoomBookingTransfer bookingRemove = json.fromJson(message, RoomBookingTransfer.class);
@@ -244,6 +247,26 @@ public class HotelClientHandler implements Runnable {
                         out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
                     }
                     out.println(new RoomTransfer("Success", "Success"));
+                    break;
+
+                case "getRoom":
+                {
+                    RoomTransfer getRoom = json.fromJson(message, RoomTransfer.class);
+                    System.out.println(getRoom);
+                    try
+                    {
+                        Room roomie = model.getRoom(getRoom.getMessage());
+                        RoomTransfer roomieTransfer = new RoomTransfer("getRoom", roomie);
+
+                        out.println(json.toJson(roomieTransfer));
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                        out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
+                    }
+                    break;
+                }
             }
 
         }

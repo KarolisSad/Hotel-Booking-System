@@ -169,4 +169,9 @@ public class BookingsForReceptionistViewModel
     model.processBooking(bookingViewModel.bookingIdProperty().get());
     updateBookingList("booked");
   }
+
+  public void setRoomDetails()
+  {
+
+  }
 }

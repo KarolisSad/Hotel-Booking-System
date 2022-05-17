@@ -94,6 +94,13 @@ public class HotelDataBase implements HotelPersistence {
         dataBase.removeBooking(bookingId);
     }
 
+    @Override public Room getRoom(String roomId) throws SQLException
+    {
+        MyDataBase dataBase = MyDataBase.getInstance();
+        return dataBase.getRoom(roomId);
+
+    }
+
     /**
      * Method used for adding a booking to the database.
      * @param roomBooking The booking to add.

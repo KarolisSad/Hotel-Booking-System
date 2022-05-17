@@ -175,6 +175,11 @@ public class ModelManager implements Model
         dataBaseAdapter.removeBooking(bookingId);
     }
 
+    @Override public Room getRoom(String roomId) throws SQLException
+    {
+        return dataBaseAdapter.getRoom(roomId);
+    }
+
     /**
      * A method that is meant for booking a room.
      *

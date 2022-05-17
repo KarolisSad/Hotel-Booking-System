@@ -6,7 +6,6 @@ import mediator.RoomTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public interface Model extends UnnamedPropertyChangeSubject
 {
@@ -30,5 +29,6 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingTransfer cancelBooking(int bookingNumber);
 
   GuestTransfer getAllGuests();
+  RoomTransfer getRoom(String roomId);
 
 }

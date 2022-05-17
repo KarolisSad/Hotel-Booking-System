@@ -150,7 +150,7 @@ public class RoomDetailsForReceptionistController extends ViewController
    */
   public void exitButton() throws IOException
   {
-    getViewHandler().openView("BookingForReceptionistView.fxml");
+    getViewHandler().openView("BookingsForReceptionistView.fxml");
   }
 
   @Override public void reset()

@@ -128,4 +128,6 @@ set nrBeds = 11,
 where roomID = '1';
 
 insert into roombooking
-values ('2025-05-01','2025-05-05',20202022,1)
+values ('2025-05-01','2025-05-05',20202022,1);
+
+SELECT * from room where roomid = '4';

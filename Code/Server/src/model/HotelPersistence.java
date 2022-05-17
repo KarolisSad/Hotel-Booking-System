@@ -21,4 +21,5 @@ public interface HotelPersistence {
     void editRoomInfo(String roomID, RoomType type, int nrBeds) throws SQLException;
     void editBooking (int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
     void removeBooking(int bookingId) throws SQLException;
+    Room getRoom(String roomId) throws SQLException;
 }

@@ -24,6 +24,7 @@ public class RoomTransfer {
     private LocalDate endDate;
     private Guest guest;
     private String message;
+    private Room room;
 
 
     public RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds, ArrayList<Room> roomList) {
@@ -78,6 +79,17 @@ public class RoomTransfer {
         this.message = message;
     }
 
+    public RoomTransfer(String type, Room room)
+    {
+        this.type = type;
+        this.room = room;
+    }
+
+    public Room getRoom()
+    {
+        return room;
+    }
+
     public Guest getGuest() {
         return guest;
     }
@@ -111,6 +123,12 @@ public class RoomTransfer {
         return message;
     }
 
-
-
+    @Override public String toString()
+    {
+        return "RoomTransfer{" + "roomId='" + roomId + '\'' + ", roomType="
+            + roomType + ", nrBeds=" + nrBeds + ", type='" + type + '\''
+            + ", roomList=" + roomList + ", startDate=" + startDate
+            + ", endDate=" + endDate + ", guest=" + guest + ", message='"
+            + message + '\'' + ", room=" + room + '}';
+    }
 }
