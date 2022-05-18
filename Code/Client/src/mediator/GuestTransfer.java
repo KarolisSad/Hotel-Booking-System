@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Purpose of this object is to store different values when sending to a server
  *
- * 2020-05-18
+ * @version 2022-05-18
  * @author Group5
  */
 public class GuestTransfer {
@@ -21,7 +21,7 @@ public class GuestTransfer {
   private ArrayList<Guest> guests;
 
   /**
-   * 5 argument constructor used for transferring guest information and a booking identification.
+   * 6 argument constructor used for transferring guest information and a booking identification.
    * @param type The type of transfer
    * @param bookingID The booking identification
    * @param fName First name of the guest

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Purpose of this object is to store different values when sending to a server
- * 2020-05-08
+ * @version 2022-05-08
  *
  * @author Group5
  */

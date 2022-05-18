@@ -135,6 +135,14 @@ public class ModelManager implements Model
     }
 
     // TODO should probably be changed - we need to decide what to do when cancelling a booking. @Karolis??
+
+    /**
+     * Method calling the cancelBooking() method in the bookingList on the booking with a ID matching the one passed as argument,
+     * setting the RoomBooking state of the booking to "cancelled".
+     * After this, calls the cancelBooking() method in the databaseAdapter, to update the database accordingly.
+     * @param id The Booking ID of the booking to be cancelled.
+     * @throws SQLException
+     */
     @Override public void cancelBooking(int id) throws SQLException
     {
         bookingList.cancelBooking(id);
@@ -171,11 +179,24 @@ public class ModelManager implements Model
         dataBaseAdapter.editBooking(bookingId, startDate, endDate, roomId);
     }
 
+    /**
+     * Method used for getting a room object with a specific room ID from the database, using the ID passed as argument.
+     * @param roomId The RoomID of the room to get from the databse.
+     * @return A Room object with a Room ID matching the one passed as an argument.
+     * @throws SQLException
+     */
     @Override public Room getRoom(String roomId) throws SQLException
     {
         return dataBaseAdapter.getRoom(roomId);
     }
 
+    /**
+     * Method used for getting a RoomBookingTransfer object containing information about the booking and the guest associated with it.
+     * @param bookingNr The Booking ID of the booking to get.
+     * @param phoneNr The phone number of the customer associated with the booking.
+     * @return A RoomBookingTransfer object containing information about the booking and the guest associated with it.
+     * @throws SQLException
+     */
     @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr,
         int phoneNr) throws SQLException
     {
@@ -256,11 +277,27 @@ public class ModelManager implements Model
         }
     }
 
+    /**
+     * Method used to edit information about a customer in the database.
+     * Calls the editGuest method in the dataBaseAdapter passing along the arguments given.
+     * @param bookingID The Booking ID of the booking that was selected client-side.
+     * @param fName The value that the first name should be changed to as a String.
+     * @param lName The value that the last name should be changed to as a String.
+     * @param email The value that the email should be changed to as a String.
+     * @param phoneNr The phone number of the customer.
+     * @throws SQLException
+     */
     @Override
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
         dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
     }
 
+    /**
+     * Method used for getting an ArrayList containing all guest in the system.
+     * Calls the getAllGuests method in dataBaseAdapter.
+     * @return An ArrayList containing all the guests currently in the system.
+     * @throws SQLException
+     */
     @Override public ArrayList<Guest> getAllGuests() throws SQLException
     {
         return dataBaseAdapter.getAllGuests();

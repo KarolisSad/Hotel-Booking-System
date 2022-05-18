@@ -59,6 +59,13 @@ public class RoomBookingTransfer
     this.message = message;
   }
 
+  /**
+   * 3 argument constructor used to request RoomBookingState updates.
+   *
+   * @param type      The type of transfer
+   * @param bookingNr the bookingNr of the booking.
+   * @param guestID guest identification.
+   */
   public RoomBookingTransfer(String type, int bookingNr, int guestID)
   {
     this.type = type;
@@ -66,6 +73,15 @@ public class RoomBookingTransfer
     this.guestID = guestID;
   }
 
+  /**
+   * 5 argument constructor used to transfer booking details to the client.
+   *
+   * @param type the type of transfer
+   * @param guest The Guest object
+   * @param startDate the start date of the booking.
+   * @param endDate The end date of the booking.
+   * @param room The room of the booking.
+   */
   public RoomBookingTransfer(String type, Guest guest, LocalDate startDate,
       LocalDate endDate, Room room)
   {
@@ -186,6 +202,10 @@ public class RoomBookingTransfer
     return guest;
   }
 
+  /**
+   * Getter for the room
+   * @return Room
+   */
   public Room getRoom()
   {
     return room;
