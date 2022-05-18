@@ -154,6 +154,12 @@ public class BookingsForReceptionistViewController extends ViewController
   public void checkInButton()
   {
     Alert popUp = new Alert(Alert.AlertType.CONFIRMATION);
+    //Style
+    DialogPane dialogPane = popUp.getDialogPane();
+    dialogPane.getStylesheets().add("");
+    dialogPane.getStylesheets()
+            .add(getClass().getResource("box.css").toExternalForm());
+    dialogPane.getStyleClass().add("box.css");
 
     if (viewModel.isCheckIn())
     {
