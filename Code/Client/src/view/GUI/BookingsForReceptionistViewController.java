@@ -116,6 +116,12 @@ public class BookingsForReceptionistViewController extends ViewController
     checkIn.setText("Check in");
   }
 
+  /**
+   * Method called when pressing the guest information button in the GUI.
+   * Opens a window containing the guest information for the selected booking,
+   * which will allow the receptionist to make changes to the personal information of the guest.
+   * @throws IOException
+   */
   public void guestInformationButton() throws IOException
   {
     getViewHandler().openView("GuestDetailsForReceptionist.fxml");
@@ -124,6 +130,12 @@ public class BookingsForReceptionistViewController extends ViewController
             viewModel.getSelectedBookingProperty().guestProperty());
   }
 
+  /**
+   * Method called when pressing the room information button in the GUI.
+   * Opens a window containing the booking information for the selected booking,
+   * which will allow the receptionist to make changes to the booking or cancel it.
+   * @throws IOException
+   */
   public void roomInformationButton() throws IOException
   {
     System.out.println(

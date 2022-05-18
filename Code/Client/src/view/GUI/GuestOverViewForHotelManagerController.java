@@ -29,6 +29,9 @@ public class GuestOverViewForHotelManagerController extends ViewController
     listOfGuests.setItems(viewModel.getGuests());
   }
 
+  /**
+   * Reset method. Meant for calling reset method in viewModel.
+   */
   @Override public void reset()
   {
 

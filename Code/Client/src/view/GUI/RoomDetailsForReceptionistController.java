@@ -152,6 +152,10 @@ public class RoomDetailsForReceptionistController extends ViewController
     getViewHandler().openView("BookingsForReceptionistView.fxml");
   }
 
+  /**
+   * Void method resetting the view.
+   * This is done by setting the errorlabel to show an empty string.
+   */
   @Override public void reset()
   {
     errorLabel.setText("");
