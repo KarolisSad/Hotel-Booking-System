@@ -30,6 +30,7 @@ public class HotelClient implements Model
   private Gson json;
   private Model model;
   private String message;
+  private String username;
 
   /**
    * @param model modelManager
@@ -44,6 +45,7 @@ public class HotelClient implements Model
     out = new PrintWriter(new PrintWriter(socket.getOutputStream()), true);
     json = new Gson();
     message = null;
+    username = null;
     startReader();
   }
 
@@ -470,6 +472,8 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+
+
   /**
    * Makes received object into Json format and sends it to a server
    *
@@ -552,6 +556,51 @@ public class HotelClient implements Model
       e.printStackTrace();
     }
     return json.fromJson(message, RoomBookingTransfer.class);
+  }
+
+  @Override
+  public synchronized void logout() {
+    this.username = null;
+  }
+
+  @Override
+  public synchronized GuestTransfer login(String username, String password) throws InterruptedException {
+    sendToServerAsJson(new GuestTransfer("login",username,password));
+    message = null;
+    while (message == null)
+    {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    GuestTransfer guestTransfer = json.fromJson(message,GuestTransfer.class);
+    if (guestTransfer.getType().equals("Success"))
+    {
+      this.username = username;
+    }
+    return json.fromJson(message,GuestTransfer.class);
+  }
+
+  @Override
+  public synchronized GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password) {
+    sendToServerAsJson(new GuestTransfer("addNewGuest",fName,lName,email,phoneNumber,login));
+    message = null;
+    while (message == null)
+    {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
+    if (guestTransfer.getErrorMessage() == null)
+    {
+      this.username = login.getUsername();
+    }
+    return guestTransfer;
   }
 
   @Override public void addListener(PropertyChangeListener listener)

@@ -19,6 +19,8 @@ public class GuestTransfer {
   private String type;
   private String errorMessage;
   private ArrayList<Guest> guests;
+  private String password;
+  private String username;
 
   /**
    * 6 argument constructor used for transferring guest information and a booking identification.
@@ -36,6 +38,13 @@ public class GuestTransfer {
     this.phoneNr = phoneNr;
     this.fName = fName;
     this.lName = lName;
+  }
+
+  public GuestTransfer(String type, String username, String password)
+  {
+    this.type = type;
+    this.username = username;
+    this.password = password;
   }
 
   /**

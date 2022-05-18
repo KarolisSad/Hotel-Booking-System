@@ -23,6 +23,9 @@ public class ViewModelFactory
   private BookingViewModel bookingViewModel;
   private GuestOverViewForHotelManagerModel guestOverViewForHotelManagerModel;
   private ShowBookingViewModel showBookingViewModel;
+  private UserLoginMainModel userLoginMainModel;
+  private UserLoginModel userLoginModel;
+  private UserRegisterModel userRegisterModel;
 
   /**
    * A ViewModelFactory constructor initializing all instance variables.
@@ -52,7 +55,9 @@ public class ViewModelFactory
         model);
 
     this.showBookingViewModel = new ShowBookingViewModel(model);
-
+    this.userLoginMainModel = new UserLoginMainModel(model);
+    this.userLoginModel = new UserLoginModel(model);
+    this.userRegisterModel = new UserRegisterModel(model);
   }
 
   /**
@@ -152,5 +157,17 @@ public class ViewModelFactory
   public ShowBookingViewModel getShowBookingViewModel()
   {
     return showBookingViewModel;
+  }
+
+  public UserRegisterModel getUserRegisterModel() {
+    return userRegisterModel;
+  }
+
+  public UserLoginMainModel getUserLoginMainModel() {
+    return userLoginMainModel;
+  }
+
+  public UserLoginModel getUserLoginModel() {
+    return userLoginModel;
   }
 }

@@ -255,6 +255,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void logout() {
+        hotelClient.logout();
+    }
+
+    @Override
+    public GuestTransfer login(String username, String password) throws InterruptedException {
+        return hotelClient.login(username,password);
+    }
+
+    @Override
+    public GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password) {
+        return hotelClient.register(fName,lName,email,phoneNumber,username,password);
+    }
+
+    @Override
     public void addListener(PropertyChangeListener listener) {
         property.addPropertyChangeListener(listener);
     }

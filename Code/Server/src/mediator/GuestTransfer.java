@@ -19,6 +19,8 @@ public class GuestTransfer {
   private String type;
   private String errorMessage;
   private ArrayList<Guest> guests;
+  private String password;
+  private String username;
 
   /**
    * 5 argument constructor used for transferring guest information and a booking identification.
@@ -157,5 +159,13 @@ public class GuestTransfer {
    */
   public String getErrorMessage() {
     return errorMessage;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public String getPassword() {
+    return password;
   }
 }

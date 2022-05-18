@@ -28,5 +28,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer getRoom(String roomId);
   RoomBookingTransfer getBookingWithGuest(int bookingNumber, int phoneNumber);
 
-
+  void logout();
+  GuestTransfer login(String username, String password) throws InterruptedException;
+  GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password);
 }
