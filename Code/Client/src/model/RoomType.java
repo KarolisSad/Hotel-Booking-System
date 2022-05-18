@@ -1,5 +1,11 @@
 package model;
-
+/**
+ * A class that is used to store list of room types
+ * as enum.
+ *
+ * @author Group 5
+ * @version 04/18/2022
+ */
 public enum RoomType
 {
   SINGLE, DOUBLE, FAMILY, SUITE;
