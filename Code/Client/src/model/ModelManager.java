@@ -101,6 +101,13 @@ public class ModelManager implements Model {
         return hotelClient.editBooking(bookingId, startDate, endDate, roomid, status);
     }
 
+    /**
+     * A method removing a booking from the system
+     *
+     * @param bookingId booking ID
+     * @param guestID guest identification
+     * @return RoomBookingTransfer object
+     */
     @Override
     public RoomBookingTransfer removeBooking(int bookingId, int guestID) {
         return hotelClient.removeBooking(bookingId, guestID);
@@ -120,6 +127,17 @@ public class ModelManager implements Model {
         return hotelClient.editRoomInfo(roomId, type, nrBeds);
     }
 
+    /**
+     * A method editing a guest that is already in the system
+     *
+     * @param type type of the GuestTransferObject
+     * @param bookingID booking identification
+     * @param fName  guest's first name
+     * @param lName    guest's last name
+     * @param email    guest's email
+     * @param phoneNr guest's phone number
+     * @return GuestTransfer object
+     */
     @Override
     public GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr) {
         return hotelClient.editGuest(type, bookingID, fName, lName, email, phoneNr);
@@ -190,16 +208,34 @@ public class ModelManager implements Model {
         return hotelClient.processBooking(bookingNumber);
     }
 
+    /**
+     * Method for requesting a canceling of the booking from the server
+     *
+     * @param bookingNumber The bookingNumber of the booking to be changed
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
     @Override
     public RoomBookingTransfer cancelBooking(int bookingNumber) {
         return null;
     }
 
+    /**
+     * Method for requesting getting a list of all guests from te server.
+     *
+     * @return GuestTransfer object containing either a success message with a list of guests
+     * or an exception message.
+     */
     @Override
     public GuestTransfer getAllGuests() {
         return hotelClient.getAllGuests();
     }
 
+    /**
+     * Method for requesting getting a specific booking from the server.
+     *
+     * @param bookingID The booking identification
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
     @Override
     public RoomBookingTransfer getABooking(int bookingID) {
         return hotelClient.getABooking(bookingID);
