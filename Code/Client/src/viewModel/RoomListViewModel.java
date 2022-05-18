@@ -15,6 +15,12 @@ import model.RoomType;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * A class meant for creating functionality for RoomListViewController
+ *
+ * @author Group 5
+ * @version 18-05-22
+ */
 public class RoomListViewModel implements PropertyChangeListener
 {
   private Model model;
@@ -25,6 +31,11 @@ public class RoomListViewModel implements PropertyChangeListener
   private ObjectProperty<SimpleRoomViewModel> selectedRoomProperty;
   private SimpleStringProperty errorLabel;
 
+  /**
+   * Constructor initializing instance variables
+   * @param model the model interface
+   * @param state the ViewState object
+   */
   public RoomListViewModel(Model model, ViewState state)
   {
     this.model = model;
@@ -142,17 +153,26 @@ public class RoomListViewModel implements PropertyChangeListener
     });
   }
 
+  /**
+   * A method meant to set initial room values when the editing is suppose to be done.
+   */
   public void setEdit()
   {
     state.setNumber(selectedRoomProperty.get().roomNumberProperty().get());
     state.setAdd(false);
   }
 
+  /**
+   * A method meant to call setAdd method on the state.
+   */
   public void setAdd()
   {
     state.setAdd(true);
   }
 
+  /**
+   * A method meant to reset the error label to an empty string.
+   */
   public void reset()
   {
     errorLabel.setValue("");

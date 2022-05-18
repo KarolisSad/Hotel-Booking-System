@@ -64,26 +64,46 @@ public class GuestInformationViewModel
 
   }
 
+  /**
+   * A getter used to call the value of the first name field
+   * @return firstNameField
+   */
   public StringProperty getFirstNameField()
   {
     return firstNameField;
   }
 
+  /**
+   * A getter used to call the value of the last name field
+   * @return LastNameField
+   */
   public StringProperty getLastNameField()
   {
     return lastNameField;
   }
 
+  /**
+   * A getter used to call the value of the email field
+   * @return emailField
+   */
   public StringProperty getEmailField()
   {
     return emailField;
   }
 
+  /**
+   * A getter used to call the value of the phone number field
+   * @return phoneNumberField
+   */
   public StringProperty getPhoneNumberField()
   {
     return phoneNumberField;
   }
 
+  /**
+   * A getter used to call the value of the error label
+   * @return errorLabel
+   */
   public StringProperty getErrorLabel()
   {
     return errorLabel;

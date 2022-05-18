@@ -29,10 +29,12 @@ public class GuestOverViewForHotelManagerModel
     this.guests = FXCollections.observableArrayList();
     this.model = model;
 
-
     guests.add("TODO:  change to listView");
   }
 
+  /**
+   * A method is used put guests into Guest transfer object.
+   */
   public void getAllGuests()
   {
     guests.clear();
@@ -47,8 +49,10 @@ public class GuestOverViewForHotelManagerModel
     }
   }
 
-  // for loop to add all guests :)
-
+  /**
+   * A method used to call all guests.
+   * @return guests
+   */
   public ObservableList<String> getGuests()
   {
     getAllGuests();

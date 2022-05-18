@@ -7,6 +7,12 @@ import model.Model;
 
 import java.time.LocalDate;
 
+/**
+ * A class that provides functionality to ShowBookingViewController
+ *
+ * @author Group 5
+ * @version 18-05-22
+ */
 public class ShowBookingViewModel
 {
   private Model model;
@@ -20,6 +26,10 @@ public class ShowBookingViewModel
   private SimpleStringProperty outPutNrBeds;
   private SimpleStringProperty errorLabel;
 
+  /**
+   * Constructor initializing instance variables
+   * @param model model interface
+   */
   public ShowBookingViewModel(Model model)
   {
     this.model = model;
@@ -35,11 +45,13 @@ public class ShowBookingViewModel
     errorLabel = new SimpleStringProperty("");
   }
 
+  /**
+   * A method used to reset all the field to an empty Strings.
+   */
   public void reset()
   {
     clearInput();
 
-    // FIX
     outPutName.set("");
     outPutPhone.set("");
     outPutStartDate.set(null);
@@ -49,57 +61,100 @@ public class ShowBookingViewModel
     errorLabel.set("");
   }
 
+  /**
+   * A method to used to clear inputs for phone number and bookingNr.
+   */
   public void clearInput()
   {
     inputPhoneNr.set("");
     inputBookingNr.set("");
   }
 
+  /**
+   * A method that calls inputPhoneNr that is encapsulated into SimpleStringProperty
+   * @return inputPhoneNr
+   */
   public SimpleStringProperty inputPhoneNrProperty()
   {
     return inputPhoneNr;
   }
 
+  /**
+   * A method that calls inputBookingNr that is encapsulated into SimpleStringProperty
+   * @return inputBookingNr
+   */
   public SimpleStringProperty inputBookingNrProperty()
   {
     return inputBookingNr;
   }
 
+  /**
+   * A method that calls guest full name that is encapsulated into SimpleStringProperty
+   * @return outPutName
+   */
   public SimpleStringProperty outPutNameProperty()
   {
     return outPutName;
   }
 
+  /**
+   * A method that calls guest phone number that is encapsulated into SimpleStringProperty
+   * @return outPutPhone
+   */
   public SimpleStringProperty outPutPhoneProperty()
   {
     return outPutPhone;
   }
 
+  /**
+   * A method that calls start date of the booking that is encapsulated into SimpleObjectProperty
+   * @return outPutStartDate
+   */
   public SimpleObjectProperty<LocalDate> outPutStartDateProperty()
   {
     return outPutStartDate;
   }
 
+  /**
+   * A method that calls end date of the booking that is encapsulated into SimpleObjectProperty
+   * @return outPutEndDate
+   */
   public SimpleObjectProperty<LocalDate> outPutEndDateProperty()
   {
     return outPutEndDate;
   }
 
+  /**
+   * A method that calls room number that is encapsulated into SimpleStringProperty
+   * @return outPutRoomNr
+   */
   public SimpleStringProperty outPutRoomNrProperty()
   {
     return outPutRoomNr;
   }
 
+  /**
+   * A method that calls number of beds that is encapsulated into SimpleStringProperty
+   * @return outPutNrBeds
+   */
   public SimpleStringProperty outPutNrBedsProperty()
   {
     return outPutNrBeds;
   }
 
+  /**
+   * A method that calls errorLabel that is encapsulated into errorLabelProperty
+   * @return errorLabel
+   */
   public SimpleStringProperty errorLabelProperty()
   {
     return errorLabel;
   }
 
+  /**
+   * A method is used to find the booking according to the input fields given in the GUI.
+   * If the input fields are empty it will clear the field and output an error message
+   */
   public void findBooking()
   {
     if (!inputBookingNr.get().isEmpty() && !inputPhoneNr.get().isEmpty())
@@ -115,6 +170,10 @@ public class ShowBookingViewModel
     }
   }
 
+  /**
+   * A method used to set information of the given booking nr and phone number.
+   * If the given booking nr or phone number formats are incorrect an error message will appear.
+   */
   private void setInformation()
   {
     int bookingNr = -1;

@@ -116,21 +116,37 @@ public class ReservationViewModel
     return LocalDate.of(year, month, day);
   }
 
+  /**
+   * A method meant to call available rooms in the system
+   * @return availableRooms as an Observable list
+   */
   public ObservableList<String> getRooms()
   {
     return availableRooms;
   }
 
+  /**
+   * A method meant for getting an error label
+   * @return errorLabel as SimpleStringProperty
+   */
   public SimpleStringProperty getErrorLabel()
   {
     return errorLabel;
   }
 
+  /**
+   * A method meant to call start date objectProperty from the date piker
+   * @return startDatePicker
+   */
   public ObjectProperty<LocalDate> getStartDatePicker()
   {
     return startDatePicker;
   }
 
+  /**
+   * A method meant to call end date objectProperty from the date piker
+   * @return endDatePicker
+   */
   public ObjectProperty<LocalDate> getEndDatePicker()
   {
     return endDatePicker;

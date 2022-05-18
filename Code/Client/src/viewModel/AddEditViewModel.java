@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * A class providing functionality for AddEditViewController.
  *
+ * @author Group 5
  * @version 09/05/2022
  */
 public class AddEditViewModel
@@ -139,7 +140,6 @@ public class AddEditViewModel
    * A non argument method calls an addRoom(String roomId, RoomTypes type, int nrBeds)
    * from the model
    */
-
   public void addRoom()
   {
     RoomTransfer roomTransfer = model.addRoom(roomId.get(), type,

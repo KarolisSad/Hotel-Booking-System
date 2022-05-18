@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A class for crearting functionality for RooDetailsForReceptionistController
+ * A class meant for creating functionality for RooDetailsForReceptionistController
  *
  * @author Group 5
  * @version 13-05-2022
@@ -138,22 +138,36 @@ public class RoomDetailsForReceptionistModel
     return roomNumber;
   }
 
+  /**
+   * Getter for room type
+   * @return type
+   */
   public StringProperty getType()
   {
     return type;
   }
 
+  /**
+   * A method that return void and calls the editBooking method from the model in order to edit the chosen booking.
+   */
   public void saveBookingChanged()
   {
     model.editBooking(Integer.parseInt(bookingId.get()), startDatePicker.get(),
         endDatePicker.get(), roomNumber.get());
   }
 
+  /**
+   * A method that calls a removeBooking method from the model in order to remove a chosen room.
+   */
   public void removeBooking()
   {
     model.removeBooking(Integer.parseInt(bookingId.get()));
   }
 
+  /**
+   * A setter method used to set the room booking details in the room booking details window for receptionist
+   * @param selectedBooking selected booking.
+   */
   public void setRoomBookingDetails(SimpleBookingViewModel selectedBooking)
   {
     Room room = model.getRoom(selectedBooking.roomIdProperty().get()).getRoom();
