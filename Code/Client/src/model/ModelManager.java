@@ -14,7 +14,7 @@ import java.time.LocalDate;
  * A class that implements the Model interface and manages the bookings.
  *
  * @author Group 5
- * @version 04/05/2022
+ * @version 04/18/2022
  */
 
 public class ModelManager implements Model {
@@ -100,6 +100,12 @@ public class ModelManager implements Model {
         return hotelClient.editBooking(bookingId, startDate, endDate, roomid);
     }
 
+    /**
+     * A method calling the removeBooking() method from the HotelClient.
+     *
+     * @param bookingId booking ID
+     * @return RoomBookingTransfer object
+     */
     @Override
     public RoomBookingTransfer removeBooking(int bookingId) {
         return hotelClient.removeBooking(bookingId);
@@ -119,6 +125,17 @@ public class ModelManager implements Model {
         return hotelClient.editRoomInfo(roomId, type, nrBeds);
     }
 
+    /**
+     * A method calling the editGuest() method from the HotelClient.
+     *
+     * @param type type of the GuestTransferObject
+     * @param bookingID booking identification
+     * @param fName  guest's first name
+     * @param lName    guest's last name
+     * @param email    guest's email
+     * @param phoneNr guest's phone number
+     * @return GuestTransfer object
+     */
     @Override
     public GuestTransfer editGuest(String type, int bookingID, String fName, String lName, String email, int phoneNr) {
         return hotelClient.editGuest(type, bookingID, fName, lName, email, phoneNr);
@@ -189,24 +206,51 @@ public class ModelManager implements Model {
         return hotelClient.processBooking(bookingNumber);
     }
 
+
+    /**
+     * Method for requesting a canceling of the booking from the server
+     *
+     * @param bookingNumber The bookingNumber of the booking to be changed
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
     @Override
     public RoomBookingTransfer cancelBooking(int bookingNumber) {
         return hotelClient.cancelBooking(bookingNumber);
     }
 
+    /**
+     * Method for requesting getting a list of all guests from te server.
+     *
+     * @return GuestTransfer object containing either a success message with a list of guests
+     * or an exception message.
+     */
     @Override
     public GuestTransfer getAllGuests() {
         return hotelClient.getAllGuests();
     }
 
-    @Override public RoomTransfer getRoom(String roomId)
-    {
+    /**
+     * Method used for getting a specific room from the system.
+     * Firstly, the room is received from the roomList and send to the client.
+     *
+     * @param roomId the room id of the room to be edited (The room id of the room is intentionally not possible to change with this method)
+     * @return RoomTransfer object.
+     */
+    @Override
+    public RoomTransfer getRoom(String roomId) {
         return hotelClient.getRoom(roomId);
     }
 
-    @Override public RoomBookingTransfer getBookingWithGuest(int bookingNumber,
-        int phoneNumber)
-    {
+    /**
+     * Method for requesting getting a specific booking from the server.
+     *
+     * @param bookingNumber The booking identification
+     * @param phoneNumber The guest identification
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
+    @Override
+    public RoomBookingTransfer getBookingWithGuest(int bookingNumber,
+                                                   int phoneNumber) {
         return hotelClient.getBookingWithGuest(bookingNumber, phoneNumber);
     }
 

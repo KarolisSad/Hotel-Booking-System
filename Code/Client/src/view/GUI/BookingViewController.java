@@ -70,11 +70,19 @@ public class BookingViewController extends ViewController
     reset();
   }
 
+  /**
+   * Override of abstract method reset.
+   * Updates the list of bookings shown in the table.
+   */
   @Override public void reset()
   {
     viewModel.updateBookingList();
   }
 
+  /**
+   * Method called when pressing the cancel booking button with a booking selected.
+   * Calls the cancel booking method in the viewModel.
+   */
   public void cancelTheBookingButton()
   {
 
@@ -89,12 +97,20 @@ public class BookingViewController extends ViewController
     getViewHandler().openView("MenuForHotelManager.fxml");
   }
 
+  /**
+   * Method used for hiding cancelled bookings from the list.
+   * Calls the removeCanceledBookings method from the viewModel.
+   */
   public void hideCancelledBookings()
   {
     viewModel.removeCanceledBookings();
     viewModel.removeCanceledBookings();
   }
 
+  /**
+   * Method used for showing cancelled bookings in the list.
+   * Calls the showCancelledBookings method in the viewModel.
+   */
   public void showCancelledBookings()
   {
     viewModel.showCancelledBookings();

@@ -2,6 +2,13 @@ package viewModel;
 
 import model.Model;
 
+/**
+ * A class that is used to create all ViewModel objects and
+ * gives access to them.
+ *
+ * @author Group 5
+ * @version 04/18/2022
+ */
 public class ViewModelFactory
 {
 
@@ -17,6 +24,9 @@ public class ViewModelFactory
   private GuestOverViewForHotelManagerModel guestOverViewForHotelManagerModel;
   private ShowBookingViewModel showBookingViewModel;
 
+  /**
+   * A ViewModelFactory constructor initializing all instance variables.
+   */
   public ViewModelFactory(Model model)
   {
 
@@ -45,56 +55,100 @@ public class ViewModelFactory
 
   }
 
+  /**
+   * A getter for guestInformationViewModel.
+   * @return GuestInformationViewModel object.
+   */
   public GuestInformationViewModel getGuestInformationViewModel()
   {
     return guestInformationViewModel;
   }
 
+  /**
+   * A getter for reservationViewModel.
+   * @return ReservationViewModel object.
+   */
   public ReservationViewModel getReservationViewModel()
   {
     return reservationViewModel;
   }
 
+  /**
+   * A getter for roomListViewModel.
+   * @return RoomListViewModel object.
+   */
   public RoomListViewModel getRoomListViewModel()
   {
     return roomListViewModel;
   }
 
+  /**
+   * A getter for addEditViewModel.
+   * @return AddEditViewModel object.
+   */
   public AddEditViewModel getAddEditViewModel()
   {
     return addEditViewModel;
   }
 
+  /**
+   * A getter for logInViewModel.
+   * @return LogInViewModel object.
+   */
   public LogInViewModel getLogInViewModel()
   {
     return logInViewModel;
   }
 
+  /**
+   * A getter for bookingsForReceptionistViewModel.
+   * @return BookingsForReceptionistViewModel object.
+   */
   public BookingsForReceptionistViewModel getBookingsForReceptionistViewModel()
   {
     return bookingsForReceptionistViewModel;
   }
 
+  /**
+   * A getter for guestDetailsForReceptionistViewModel.
+   * @return GuestDetailsForReceptionistViewModel object.
+   */
   public GuestDetailsForReceptionistViewModel getGuestDetailsForReceptionistViewModel()
   {
     return guestDetailsForReceptionistViewModel;
   }
 
+  /**
+   * A getter for roomDetailsForReceptionistModel.
+   * @return RoomDetailsForReceptionistModel object.
+   */
   public RoomDetailsForReceptionistModel getRoomDetailsForReceptionistModel()
   {
     return roomDetailsForReceptionistModel;
   }
 
+  /**
+   * A getter for bookingViewModel.
+   * @return BookingViewModel object.
+   */
   public BookingViewModel getBookingViewModel()
   {
     return bookingViewModel;
   }
 
+  /**
+   * A getter for guestOverViewForHotelManagerModel.
+   * @return GuestOverViewForHotelManagerModel object.
+   */
   public GuestOverViewForHotelManagerModel getGuestOverViewForHotelManagerModel()
   {
     return guestOverViewForHotelManagerModel;
   }
 
+  /**
+   * A getter for showBookingViewModel.
+   * @return ShowBookingViewModel object.
+   */
   public ShowBookingViewModel getShowBookingViewModel()
   {
     return showBookingViewModel;

@@ -14,10 +14,16 @@ import java.io.IOException;
 public class MenuForHotelManagerController extends ViewController
 {
 
+  /**
+   * Method intentionally empty, as there is nothing to initialize.
+   */
   @Override protected void init()
   {
   }
 
+  /**
+   * Method intentionally empty, as there is nothing to reset.
+   */
   @Override public void reset()
   {
 

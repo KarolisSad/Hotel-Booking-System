@@ -17,6 +17,10 @@ import java.io.IOException;
 public class LogInViewController extends ViewController
 {
 
+  /**
+   * Implementation of abstract init method from ViewController-class.
+   * Intentionally left empty, as this view only contains buttons opening other views.
+   */
   @Override protected void init()
   {
 
@@ -33,6 +37,10 @@ public class LogInViewController extends ViewController
     getViewHandler().openView("MenuForHotelManager.fxml");
   }
 
+  /**
+   * Method called when clicking the show booking button in the GUI.
+   * @throws IOException
+   */
   public void showBookingButton() throws IOException
   {
     getViewHandler().openView("ShowBookingView.fxml");
@@ -49,11 +57,19 @@ public class LogInViewController extends ViewController
     getViewHandler().openView("ReservationView.fxml");
   }
 
+  /**
+   * Method that provides functionality to the receptionist button.
+   * When the button is pressed, the BookingsForReceptionistView window opens.
+   * @throws IOException
+   */
   public void receptionist() throws IOException
   {
     getViewHandler().openView("BookingsForReceptionistView.fxml");
   }
 
+  /**
+   * Method left empty intentionally, as there is nothing to reset.
+   */
   @Override public void reset()
   {
     //

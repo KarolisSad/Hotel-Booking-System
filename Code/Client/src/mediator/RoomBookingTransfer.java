@@ -33,31 +33,6 @@ public class RoomBookingTransfer
   private Room room;
 
   /**
-   * 2 argument constructor used for transferring an ArrayList containing RoomBookingTransferObjects
-   *
-   * @param type         The type of transfer
-   * @param roomBookings List of bookings
-   */
-  public RoomBookingTransfer(String type,
-      ArrayList<RoomBookingTransferObject> roomBookings)
-  {
-    this.type = type;
-    this.roomBookings = roomBookings;
-  }
-
-  /**
-   * 2 argument constructor used to transfer exception messages.
-   *
-   * @param type    The type of transfer
-   * @param message The exception message.
-   */
-  public RoomBookingTransfer(String type, String message)
-  {
-    this.type = type;
-    this.message = message;
-  }
-
-  /**
    * 1 argument constructor initializing the type variable.
    *
    * @param type the type to be set.
@@ -79,44 +54,36 @@ public class RoomBookingTransfer
     this.bookingNr = bookingNr;
   }
 
-  public RoomBookingTransfer(String editBooking, int bookingId,
-      LocalDate startDate, LocalDate endDate, int guestID, String roomid,
-      String status)
-  {
-    this.type = editBooking;
-    this.bookingNr = bookingId;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.guestID = guestID;
-    this.roomID = roomid;
-    this.stateString = status;
-  }
-
-  public RoomBookingTransfer(String editBooking, int bookingId,
+  /**
+   * 5 argument constructor used to transfer booking details to the server.
+   * @param type The type of transfer
+   * @param bookingId the booking identification of the booking to be changed.
+   * @param startDate the start date of the booking.
+   * @param endDate the end date of the booking.
+   * @param roomid the room identification.
+   */
+  public RoomBookingTransfer(String type, int bookingId,
       LocalDate startDate, LocalDate endDate, String roomid)
   {
-    this.type = editBooking;
+    this.type = type;
     this.bookingNr = bookingId;
     this.startDate = startDate;
     this.endDate = endDate;
     this.roomID = roomid;
   }
 
+  /**
+   * 3 argument constructor used to request RoomBookingState updates.
+   *
+   * @param type      The type of transfer
+   * @param bookingNr the bookingNr of the booking.
+   * @param guestID guest identification.
+   */
   public RoomBookingTransfer(String type, int bookingNr, int guestID)
   {
     this.type = type;
     this.bookingNr = bookingNr;
     this.guestID = guestID;
-  }
-
-  public RoomBookingTransfer(String type, Guest guest, LocalDate startDate,
-      LocalDate endDate, Room room)
-  {
-    this.type = type;
-    this.guest = guest;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.room = room;
   }
 
   /**
@@ -230,7 +197,11 @@ public class RoomBookingTransfer
     return guest;
   }
 
-
+  /**
+   * Getter for room
+   *
+   * @return Room object
+   */
   public Room getRoom()
   {
     return room;

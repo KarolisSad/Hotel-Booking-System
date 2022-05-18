@@ -1,22 +1,22 @@
 package view.GUI;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import view.ViewController;
 import viewModel.RoomListViewModel;
 import viewModel.SimpleRoomViewModel;
-import viewModel.ViewModelFactory;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.Optional;
 
+/**
+ * Class representation of the RoomList view
+ *
+ * @author Group 5
+ * @version 18-05-2022
+ */
 public class RoomListViewController extends ViewController
 {
-
   @FXML private Button editButton;
   @FXML private Button removeButton;
   @FXML private TableView<SimpleRoomViewModel> roomTable;
@@ -26,6 +26,10 @@ public class RoomListViewController extends ViewController
   @FXML private Label errorLabel;
   private RoomListViewModel viewModel;
 
+  /**
+   * Implementation of abstract init method.
+   * Takes no arguments and initializes all instance variables.
+   */
   @Override protected void init()
   {
     viewModel = getViewModelFactory().getRoomListViewModel();
@@ -57,11 +61,19 @@ public class RoomListViewController extends ViewController
     reset();
   }
 
+  /**
+   * Reset method calling the updateRoomList() method from viewModel.
+   */
   @Override public void reset()
   {
     viewModel.updateRoomList();
   }
 
+  /**
+   * Method called when the add button is pressed.
+   * Calls the setAdd() method in the viewModel, and opens the AddEditView window.
+   * @throws IOException
+   */
   public void addButton() throws IOException
   {
     viewModel.setAdd();
@@ -120,6 +132,11 @@ public class RoomListViewController extends ViewController
 
   }
 
+  /**
+   * Method called when the back button is pressed.
+   * Opens the LogInView window.
+   * @throws IOException
+   */
   public void back() throws IOException
   {
     getViewHandler().openView("LoginView.fxml");
