@@ -123,6 +123,18 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomTransfer.class);
   }
 
+  /**
+   * Creates GuestTransfer object, transfers it to Json format and sends it to server
+   *  while putting itself to wait until message is received from a server
+   * @param type  room type
+   * @param bookingID booking identification
+   * @param fName  guest's first name
+   * @param lName  guest's last name
+   * @param email guest's email
+   * @param phoneNr  guest's phone number
+   *
+   * @return message containing information if room was successfully edited
+   */
   @Override public synchronized GuestTransfer editGuest(String type,
       int bookingID, String fName, String lName, String email, int phoneNr)
   {
@@ -369,6 +381,10 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+  /**
+   * Method used to send a request to get a list of all guests.
+   * @return A success message with a list of guests if succeeded.
+   */
   @Override public synchronized RoomBookingTransfer cancelBooking(int bookingNumber)
   {
     sendToServerAsJsonBooking(
@@ -384,6 +400,10 @@ public class HotelClient implements Model
     }
     return json.fromJson(message, RoomBookingTransfer.class);  }
 
+  /**
+   * Method used to send a request to get a booking information.
+   * @return A success message with booking information.
+   */
   @Override public synchronized GuestTransfer getAllGuests()
   {
     sendToServerAsJson(new GuestTransfer("getAllGuests"));
@@ -403,6 +423,11 @@ public class HotelClient implements Model
     return json.fromJson(message, GuestTransfer.class);
   }
 
+  /**
+   * A method meant for getting a room from the server.
+   * @param roomId booking ID.
+   * @return RoomTransfer object.
+   */
   @Override public synchronized RoomTransfer getRoom(String roomId)
   {
     RoomTransfer roomTransfer = new RoomTransfer("getRoom", roomId);
@@ -422,6 +447,12 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomTransfer.class);
   }
 
+  /**
+   * Method used to send a request to get a booking information and a guest object.
+   * @param bookingNumber a booking identification
+   * @param phoneNumber guest's phone number
+   * @return A success message with booking and guest information.
+   */
   @Override public synchronized RoomBookingTransfer getBookingWithGuest(int bookingNumber,
       int phoneNumber)
   {
@@ -501,6 +532,11 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+  /**
+   * A method meant for making RoomBookingTransfer object into a json format and sends it to a server.
+   * It request to remove the specified booking.
+   * @param bookingId booking ID
+   */
   @Override public synchronized RoomBookingTransfer removeBooking(int bookingId)
   {
     sendToServerAsJsonBooking(
