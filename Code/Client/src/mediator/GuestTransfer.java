@@ -4,6 +4,13 @@ import model.Guest;
 
 import java.util.ArrayList;
 
+/**
+ * Purpose of this object is to store different values when sending to a server
+ *
+ * 2020-05-18
+ * @author Group5
+ */
+
 public class GuestTransfer {
   private String fName;
   private String lName;
@@ -14,6 +21,14 @@ public class GuestTransfer {
   private String errorMessage;
   private ArrayList<Guest> guests;
 
+  /**
+   * 5 argument constructor used for transferring guest information.
+   * @param type The type of transfer
+   * @param fName First name of the guest
+   * @param lName Last name of the guest
+   * @param email Guest's email
+   * @param phoneNr Guest's phone number
+   */
   public GuestTransfer(String type, String fName, String lName, String email, int phoneNr){
     this.type = type;
     this.bookingID = 0;
@@ -23,6 +38,15 @@ public class GuestTransfer {
     this.phoneNr = phoneNr;
   }
 
+  /**
+   * 5 argument constructor used for transferring guest information and a booking identification.
+   * @param type The type of transfer
+   * @param bookingID The booking identification
+   * @param fName First name of the guest
+   * @param lName Last name of the guest
+   * @param email Guest's email
+   * @param phoneNr Guest's phone number
+   */
   public GuestTransfer(String type, int bookingID, String fName, String lName, String email, int phoneNr){
     this.type = type;
     this.bookingID = bookingID;
@@ -32,59 +56,37 @@ public class GuestTransfer {
     this.lName = lName;
   }
 
-  public GuestTransfer(String type, ArrayList<Guest> guests)
-  {
-    this.guests = new ArrayList<>();
-    this.type = type;
-  }
+  /**
+   * 1 argument constructor used for transferring type information.
+   * @param type The type of transfer
+   */
 
   public GuestTransfer(String type)
   {
     this.type = type;
   }
 
-  public GuestTransfer(String type, String errorMessage)
-  {
-    this.type = type;
-    this.errorMessage = errorMessage;
-  }
-
-  public String getFullName() {
-    return fName + " " + lName;
-  }
-
-  public String getfName() {
-    return fName;
-  }
-
-  public String getlName() {
-    return lName;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public int getPhoneNr() {
-    return phoneNr;
-  }
-
-  public int getBookingID() {
-    return bookingID;
-  }
+  /**
+  * A getter method that returns ArrayList of Guest.
+   * @return ArrayList of Guest called guests.
+   */
 
   public ArrayList<Guest> getGuests() {
     return guests;
   }
 
+  /**
+   * A getter method that returns a type of the GuestTransfer.
+   * @return String called type.
+   */
   public String getType() {
     return type;
   }
 
-  public String getErrorMessage() {
-    return errorMessage;
-  }
-
+  /**
+   * A getter method that returns a String of all the information from the GuestTransfer.
+   * @return String object.
+   */
   @Override
   public String toString() {
     return "GuestTransfer{" +
