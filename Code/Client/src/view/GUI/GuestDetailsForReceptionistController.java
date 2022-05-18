@@ -27,13 +27,6 @@ public class GuestDetailsForReceptionistController extends ViewController
 
   private GuestDetailsForReceptionistViewModel viewModel;
 
-  /**
-   * An empty constructor.
-   */
-
-  public GuestDetailsForReceptionistController()
-  {
-  }
 
   /**
    * A none argument, void method binding instance variables to

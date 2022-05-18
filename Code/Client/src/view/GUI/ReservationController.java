@@ -42,7 +42,10 @@ public class ReservationController extends ViewController
     errorLabel.textProperty().bind(viewModel.getErrorLabel());
   }
 
-  //todo
+  /**
+   * Method used for resetting the view.
+   * This is done by calling the clear() method in the viewModel.
+   */
   @Override public void reset()
   {
     //viewModel.clear();
@@ -58,7 +61,7 @@ public class ReservationController extends ViewController
   }
 
   /**
-   * A void method closing opening the GuestInformation view.
+   * A void method  opening the GuestInformation view.
    */
 
   public void reservationButton() throws IOException
@@ -69,6 +72,11 @@ public class ReservationController extends ViewController
     getViewHandler().openView("GuestInformationView.fxml");
   }
 
+  /**
+   * Method called when clicking the back button in the GUI.
+   * Opens the LogInView view.
+   * @throws IOException
+   */
   public void back() throws IOException
   {
     getViewHandler().openView("LoginView.fxml");
