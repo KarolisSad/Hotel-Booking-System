@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
 class RoomTest
 {
   Room testRoom = new Room("TestRoom", RoomType.SINGLE, 1);
@@ -59,4 +60,10 @@ class RoomTest
 
   // Exception
   // Exception already tested in Zero-case.
+
+
+
 }
+
+
+ */

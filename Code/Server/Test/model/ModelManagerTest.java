@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ModelManagerTest
 {
+  /*
   Model managerEmpty;
   Model manager1Booking;
   Model manager3Bookings;
@@ -105,7 +106,11 @@ class ModelManagerTest
     assertTrue(
         managerEmpty.book("1.01", LocalDate.now(), LocalDate.now().plusDays(10),
             guest));
+
+
   }
+
+
 
   @Test void bookOnFullList()
   {
@@ -116,19 +121,22 @@ class ModelManagerTest
 
   // One
   @Test void bookOnListWith1Booking()
-  {
-    assertTrue(manager1Booking.book("1.02", LocalDate.now(), LocalDate.now().plusDays(10), guest));
-  }
+{
+  assertTrue(manager1Booking.book("1.02", LocalDate.now(), LocalDate.now().plusDays(10), guest));
+}
 
 
   // Many
   @Test void bookManyOnSameList()
   {
+
     assertTrue(managerEmpty.book("1.01", LocalDate.now(), LocalDate.now().plusDays(10), guest));
     assertTrue(managerEmpty.book("1.02", LocalDate.now(), LocalDate.now().plusDays(10), guest));
     assertTrue(managerEmpty.book("1.03", LocalDate.now(), LocalDate.now().plusDays(10), guest));
     assertTrue(managerEmpty.book("1.04", LocalDate.now(), LocalDate.now().plusDays(10), guest));
     assertTrue(managerEmpty.book("1.05", LocalDate.now(), LocalDate.now().plusDays(10), guest));
+
+
   }
 
   // Boundary
@@ -136,5 +144,8 @@ class ModelManagerTest
 
   // Exception
   // Exception already checked in Zero-case
+
+
+   */
 
 }
