@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import model.Model;
 import model.Room;
@@ -93,12 +94,29 @@ public class ReservationViewModel
    *
    * @param roomName selected room ID
    */
-  public void reserveRoom(String roomName)
+  //OLD
+//  public void reserveRoom(String roomName)
+//  {
+//    temp.setStartDate(
+//        dateFromDatePicker(startDatePicker.getValue().toString()));
+//    temp.setEndDate(dateFromDatePicker(endDatePicker.getValue().toString()));
+//    temp.setRoomID(roomName);
+//  }
+  // NEW
+  public void bookARoom(String roomName)
   {
-    temp.setStartDate(
-        dateFromDatePicker(startDatePicker.getValue().toString()));
-    temp.setEndDate(dateFromDatePicker(endDatePicker.getValue().toString()));
-    temp.setRoomID(roomName);
+    RoomBookingTransfer roomBookingTransfer = model.bookARoomWhenLoggedIn
+            (roomName,dateFromDatePicker(startDatePicker.getValue().toString())
+            ,dateFromDatePicker(endDatePicker.getValue().toString()));
+
+    if (!(roomBookingTransfer.getMessage().equals("null")))
+    {
+      errorLabel.setValue("Room wasn't added.."+roomBookingTransfer.getMessage());
+    }
+    else {
+      errorLabel.setValue("Booking was successfully made!");
+
+    }
   }
 
   /**

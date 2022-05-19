@@ -47,13 +47,30 @@ public class GuestTransfer {
     this.password = password;
   }
 
-  /**
-   * 1 argument constructor used for transferring type information.
-   * @param type The type of transfer
-   */
   public GuestTransfer(String type)
   {
     this.type = type;
+  }
+
+  /**
+   * 1 argument constructor used for transferring type information.
+   * @param addNewGuest
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNumber
+   * @param username
+   * @param type The type of transfer
+   */
+  public GuestTransfer(String type, String fName, String lName, String email, int phoneNumber, String username, String password)
+  {
+    this.type = type;
+    this.fName = fName;
+    this.lName = lName;
+    this.email = email;
+    this. phoneNr = phoneNumber;
+    this.username = username;
+    this.password = password;
   }
 
   /**

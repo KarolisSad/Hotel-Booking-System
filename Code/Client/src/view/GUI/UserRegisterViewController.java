@@ -36,11 +36,11 @@ public class UserRegisterViewController extends ViewController
     }
 
     public void register() throws IOException {
-        viewModel.addUserWithUsername();
-        getViewHandler().openView("ReservationView.fxml");
+        viewModel.register();
+        getViewHandler().openView("GuestMenuView.fxml");
     }
 
-    public void goBack() {
-        //getViewHandler().openView("ReservationView.fxml");
+    public void goBack() throws IOException {
+        getViewHandler().openView("UserLoginMainView.fxml");
     }
 }

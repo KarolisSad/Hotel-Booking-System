@@ -15,6 +15,7 @@ public class RoomBooking
   private LocalDate endDate;
   private Room room;
   private Guest guest;
+  private String roomID;
 
   //todo added this
   private int bookingID;

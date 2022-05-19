@@ -1,7 +1,6 @@
 package viewModel;
 
 import javafx.beans.property.SimpleStringProperty;
-import model.LoginInformation;
 import model.Model;
 
 public class UserRegisterModel {
@@ -24,11 +23,11 @@ public class UserRegisterModel {
         phoneNR = new SimpleStringProperty();
     }
 
-    public void addUserWithUsername()
+    public void register()
     {
         try {
-        LoginInformation register = new LoginInformation(username.get(),password.get());
-        if (model.addGuest(fName.get(),lName.get(),email.get(),phoneNR.get(),register).getErrorMessage() != null)
+        if (!model.register(fName.get(), lName.get(), email.get(), Integer.parseInt(phoneNR.get()),
+                username.get(), password.get()).getType().equals("Success"))
         {
             //errorLabel.set(..)
         }

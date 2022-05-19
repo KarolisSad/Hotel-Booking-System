@@ -23,6 +23,7 @@ public class RoomBookingTransfer
   private int guestID;
   private String roomID;
   private String stateString;
+  private String username;
 
   private ArrayList<RoomBookingTransferObject> roomBookings;
 
@@ -52,6 +53,21 @@ public class RoomBookingTransfer
   {
     this.type = type;
     this.bookingNr = bookingNr;
+  }
+
+  public RoomBookingTransfer(String type,String roomID ,LocalDate startDate, LocalDate endDate, String username)
+  {
+    this.type = type;
+    this.roomID = roomID;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.username = username;
+  }
+
+  public RoomBookingTransfer(String type, String username)
+  {
+    this.type = type;
+    this.username = username;
   }
 
   /**

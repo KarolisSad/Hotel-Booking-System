@@ -236,7 +236,7 @@ public class BookingsForReceptionistViewController extends ViewController
   {
     try
     {
-      getViewHandler().openView("LogInView.fxml");
+      getViewHandler().openView("UserLoginMainView.fxml");
     }
     catch (IOException e)
     {

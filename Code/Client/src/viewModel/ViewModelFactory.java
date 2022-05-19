@@ -26,6 +26,7 @@ public class ViewModelFactory
   private UserLoginMainModel userLoginMainModel;
   private UserLoginModel userLoginModel;
   private UserRegisterModel userRegisterModel;
+  private GuestMenuModel guestMenuModel;
 
   /**
    * A ViewModelFactory constructor initializing all instance variables.
@@ -58,6 +59,7 @@ public class ViewModelFactory
     this.userLoginMainModel = new UserLoginMainModel(model);
     this.userLoginModel = new UserLoginModel(model);
     this.userRegisterModel = new UserRegisterModel(model);
+    this.guestMenuModel = new GuestMenuModel(model);
   }
 
   /**
@@ -169,5 +171,9 @@ public class ViewModelFactory
 
   public UserLoginModel getUserLoginModel() {
     return userLoginModel;
+  }
+
+  public GuestMenuModel getGuestMenuModel() {
+    return guestMenuModel;
   }
 }

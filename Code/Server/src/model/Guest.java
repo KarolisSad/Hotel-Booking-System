@@ -12,6 +12,8 @@ public class Guest
   private String lName;
   private String email;
   private int phoneNr;
+  private String password;
+  private String username;
 
   /**
    * Constructor to initialize instance variables using set methods.
@@ -20,12 +22,40 @@ public class Guest
    * @param email email address of the guest
    * @param phoneNr phone number of the guest
    */
+  public Guest(String fName, String lName, String email, int phoneNr, String username, String password)
+  {
+    setfName(fName);
+    setlName(lName);
+    setEmail(email);
+    setPhoneNr(phoneNr);
+    setPassword(password);
+    setUsername(username);
+  }
+
+  // Use this constructor if we want only to display a guest. (no need to know password).
   public Guest(String fName, String lName, String email, int phoneNr)
   {
     setfName(fName);
     setlName(lName);
     setEmail(email);
     setPhoneNr(phoneNr);
+  }
+
+
+  public void setUsername(String username) {
+    if (username == null || username.isBlank())
+    {
+      throw new IllegalArgumentException("Please fill in username field!");
+    }
+    this.username = username;
+  }
+
+  public void setPassword(String password) {
+    if (password == null || password.isBlank())
+    {
+      throw new IllegalArgumentException("Please fill in password field!");
+    }
+    this.password = password;
   }
 
   /**
@@ -157,7 +187,15 @@ public class Guest
    */
   public Guest copy()
   {
-    Guest other = new Guest(fName, lName, email, phoneNr);
+    Guest other = new Guest(fName, lName, email, phoneNr, username, password);
     return other;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public String getUsername() {
+    return username;
   }
 }

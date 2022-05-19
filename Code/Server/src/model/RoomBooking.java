@@ -16,6 +16,8 @@ public class RoomBooking
   private LocalDate endDate;
   private Room room;
   private Guest guest;
+  private String roomID;
+  private String username;
 
   private int bookingID;
   private RoomBookingState state;
@@ -40,6 +42,22 @@ public class RoomBooking
     setGuest(guest);
     bookingID = 0;
     state = new RoomBookingBookedState();
+  }
+
+  public RoomBooking(LocalDate startDate, LocalDate endDate, String roomID, String username)
+  {
+    setStartAndEndDate(startDate,endDate);
+    setUsername(username);
+    this.roomID = roomID;
+    state = new RoomBookingBookedState();
+  }
+
+  public void setUsername(String username) {
+    if (username == null)
+    {
+      throw new IllegalArgumentException("User should not be empty");
+    }
+    this.username = username;
   }
 
   /**
@@ -203,6 +221,14 @@ public class RoomBooking
   {
     return "RoomBooking{ ID: " + bookingID + "startDate=" + startDate + ", endDate=" + endDate
         + ", room=" + room + ", guest=" + guest + ", state=" + getState() +'}';
+  }
+
+  public String getRoomID() {
+    return roomID;
+  }
+
+  public String getUsername() {
+    return username;
   }
 
   /**

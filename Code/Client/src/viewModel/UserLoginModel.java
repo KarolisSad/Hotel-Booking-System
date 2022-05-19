@@ -32,7 +32,7 @@ public class UserLoginModel {
     }
 
     public GuestTransfer login() throws InterruptedException {
-        GuestTransfer guestTransfer = null;
-            return guestTransfer = model.login(username.get(),password.get());
+        GuestTransfer guestTransfer = model.login(username.get(),password.get());
+        return guestTransfer;
     }
 }

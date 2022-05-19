@@ -255,9 +255,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void logout() {
-        hotelClient.logout();
+    public void logOutForGuest() {
+
     }
+
 
     @Override
     public GuestTransfer login(String username, String password) throws InterruptedException {
@@ -266,7 +267,18 @@ public class ModelManager implements Model {
 
     @Override
     public GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password) {
+
         return hotelClient.register(fName,lName,email,phoneNumber,username,password);
+    }
+
+    @Override
+    public RoomBookingTransfer getBookingsWhenLoggedIn() {
+        return hotelClient.getBookingsWhenLoggedIn();
+    }
+
+    @Override
+    public RoomBookingTransfer bookARoomWhenLoggedIn(String roomName, LocalDate startDate, LocalDate endDate) {
+        return hotelClient.bookARoomWhenLoggedIn(roomName,startDate,endDate);
     }
 
     @Override

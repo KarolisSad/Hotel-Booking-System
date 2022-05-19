@@ -23,6 +23,7 @@ public class RoomBookingTransfer
   private int guestID;
   private String roomID;
   private String stateString;
+  private String username;
 
   private ArrayList<RoomBookingTransferObject> roomBookings;
 
@@ -47,6 +48,8 @@ public class RoomBookingTransfer
     this.roomBookings = roomBookings;
   }
 
+
+
   /**
    * 2 argument constructor used to transfer exception messages.
    *
@@ -58,6 +61,8 @@ public class RoomBookingTransfer
     this.type = type;
     this.message = message;
   }
+
+
 
   /**
    * 3 argument constructor used to request RoomBookingState updates.
@@ -209,6 +214,10 @@ public class RoomBookingTransfer
   public Room getRoom()
   {
     return room;
+  }
+
+  public String getUsername() {
+    return username;
   }
 
   /**

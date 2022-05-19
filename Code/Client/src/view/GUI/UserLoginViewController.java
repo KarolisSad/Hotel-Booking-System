@@ -11,9 +11,7 @@ import viewModel.UserLoginModel;
 
 import java.io.IOException;
 
-public class UserLoginViewController extends ViewController
-{
-    private UserLoginModel viewModel;
+public class UserLoginViewController extends ViewController { private UserLoginModel viewModel;
     @FXML private TextField username;
     @FXML private TextField password;
     @FXML private Label error;
@@ -31,22 +29,20 @@ public class UserLoginViewController extends ViewController
 
     }
 
-    public void login() {
-
+    public void login()  {
         // todo try catch, put in higher ..
         try {
             GuestTransfer guestTransfer = viewModel.login();
-
-            if (guestTransfer.getType().equals("Error"))
+            if (!(guestTransfer.getType().equals("Success")))
             {
                 error.setText("User wasn't found.");
             }
             else {
 
-            getViewHandler().openView("ReservationView.fxml");
+                getViewHandler().openView("GuestMenuView.fxml");
             }
         }
-catch (InterruptedException | IOException e) {
+        catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
     }
