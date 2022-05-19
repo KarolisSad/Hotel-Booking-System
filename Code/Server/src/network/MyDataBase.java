@@ -686,15 +686,14 @@ public class MyDataBase
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-                "insert into guest (username, userPassword, fName, lName, email, phoneNr)\n" +
-                        "values (?,?,?,?,?,?);");
+                "insert into guest (username, fName, lName, email, phoneNr)\n" +
+                        "values (?,?,?,?,?);");
 
         statement.setString(1, guest.getUsername());
-        statement.setString(2, guest.getPassword());
-        statement.setString(3, guest.getfName());
-        statement.setString(4, guest.getlName());
-        statement.setString(5, guest.getEmail());
-        statement.setInt(6, guest.getPhoneNr());
+        statement.setString(2, guest.getfName());
+        statement.setString(3, guest.getlName());
+        statement.setString(4, guest.getEmail());
+        statement.setInt(5, guest.getPhoneNr());
         statement.executeUpdate();
 
         PreparedStatement statement2 = connection.prepareStatement("insert into login(username, userPassword)\n" +
