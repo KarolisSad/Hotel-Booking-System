@@ -1,5 +1,6 @@
 package viewModel;
 
+import mediator.RoomBookingTransfer;
 import model.Model;
 
 public class GuestMenuModel {
@@ -13,5 +14,10 @@ public class GuestMenuModel {
     public void logOff()
     {
         model.logOutForGuest();
+    }
+
+    public void getMyBookings() {
+        RoomBookingTransfer r = model.getBookingsWhenLoggedIn();
+        System.out.println(r.toString());
     }
 }

@@ -191,6 +191,7 @@ public class Guest
     return other;
   }
 
+
   public String getPassword() {
     return password;
   }

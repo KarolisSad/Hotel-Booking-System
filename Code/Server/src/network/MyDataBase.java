@@ -726,54 +726,32 @@ public class MyDataBase
       }
     }
 
-  public RoomBookingTransfer getBookingsWhenLoggedIn(String username) throws SQLException {
-//    try (Connection connection = getConnection())
-//    {
-//      PreparedStatement statement = connection.prepareStatement(
-//              "");
-//
-//      statement.setInt(1, bookingNr);
-//      statement.setInt(2, phoneNr);
-//
-//      ResultSet result = statement.executeQuery();
-//      if (result.next())
-//      {
-//        Guest guest = getGuest(phoneNr);
-//        LocalDate startDate = result.getDate("startdate").toLocalDate();
-//        LocalDate endDate = result.getDate("enddate").toLocalDate();
-//        Room room = getRoom(result.getString("roomid"));
-//
-//        RoomBookingTransfer test = new RoomBookingTransfer("Success", guest, startDate, endDate, room);
-//        System.out.println(test);
-//        return test;
-//      }
-//
-//      else
-//      {
-//        throw new IllegalArgumentException("No such booking found");
-//      }
-//    }
-    return null;
+  public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException {
+    ArrayList<RoomBooking> toSend = new ArrayList<>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("select * from roomBooking where guest = ?;");
+      statement.setString(1, username);
+      ResultSet result = statement.executeQuery();
+      while (result.next())
+      {
+//        Guest guest = getGuest(result.getInt("guest"));
+
+        Room room = getRoom(result.getString("roomid"));
+        LocalDate startDate = result.getDate("startdate").toLocalDate();
+        LocalDate endDate = result.getDate("enddate").toLocalDate();
+        String state = result.getString("state");
+        int bookingID = result.getInt("bookingid");
+        System.out.println(bookingID+ " id");
+        RoomBooking test = new RoomBooking(bookingID,startDate,endDate, room, state);
+        toSend.add(test);
+      }
+    }
+    return toSend;
   }
 
-  //Method to remove when booking will take guest as username
-  public String getPhoneNumberFromUsername(String username) throws SQLException {
-    try (Connection connection = getConnection()) {
-      //searching for a quest in bookingGuest
-      PreparedStatement statement = connection.prepareStatement("select phoneNr\n" +
-              "from guest\n" +
-              "where username = ?;");
-      statement.setString(1, username);
-      ResultSet resultSet = statement.executeQuery();
-      resultSet.next();
-      String nr = resultSet.getString(1);
-      System.out.println(nr);
-      return nr;
-    }
-  }
 
   public void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException {
-    String guestPhoneNR = getPhoneNumberFromUsername(roomBooking.getUsername());
     try (Connection connection = getConnection()) {
       try {
         PreparedStatement statement = connection.prepareStatement(
@@ -782,7 +760,7 @@ public class MyDataBase
 
         statement.setObject(1, roomBooking.getStartDate());
         statement.setObject(2, roomBooking.getEndDate());
-        statement.setInt(3, Integer.parseInt(guestPhoneNR));
+        statement.setString(3,  roomBooking.getUsername());
         statement.setString(4, roomBooking.getRoomID());
         statement.setString(5, roomBooking.getState());
         statement.executeUpdate();

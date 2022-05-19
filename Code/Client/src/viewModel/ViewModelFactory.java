@@ -27,6 +27,8 @@ public class ViewModelFactory
   private UserLoginModel userLoginModel;
   private UserRegisterModel userRegisterModel;
   private GuestMenuModel guestMenuModel;
+  private BookingOverviewForGuestModel bookingOverviewForGuestModel;
+  private RoomOverviewForGuestModel roomOverviewForGuestModel;
 
   /**
    * A ViewModelFactory constructor initializing all instance variables.
@@ -60,6 +62,8 @@ public class ViewModelFactory
     this.userLoginModel = new UserLoginModel(model);
     this.userRegisterModel = new UserRegisterModel(model);
     this.guestMenuModel = new GuestMenuModel(model);
+    this.bookingOverviewForGuestModel = new BookingOverviewForGuestModel(model);
+    this.roomOverviewForGuestModel = new RoomOverviewForGuestModel(model);
   }
 
   /**
@@ -175,5 +179,13 @@ public class ViewModelFactory
 
   public GuestMenuModel getGuestMenuModel() {
     return guestMenuModel;
+  }
+
+  public BookingOverviewForGuestModel getBookingOverviewForGuestModel() {
+    return bookingOverviewForGuestModel;
+  }
+
+  public RoomOverviewForGuestModel getRoomOverviewForGuestModel() {
+    return roomOverviewForGuestModel;
   }
 }

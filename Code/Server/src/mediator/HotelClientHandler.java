@@ -431,6 +431,28 @@ public class HotelClientHandler implements Runnable
           break;
         }
 
+        case "getBookingsWhenLoggedIn":
+        {
+          RoomBookingTransfer roomBookingTransfer = json.fromJson(message, RoomBookingTransfer.class);
+          ArrayList<RoomBookingTransferObject> allBookings = null;
+          try
+          {
+            allBookings = model.getBookingsWhenLoggedIn(roomBookingTransfer.getUsername()).getConvertedList();
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+
+          roomBookingTransfer = new RoomBookingTransfer("AllBookings", allBookings);
+
+          jsonString = json.toJson(roomBookingTransfer);
+          out.println(jsonString);
+          break;
+        }
+
+
+
       }
 
     }

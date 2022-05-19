@@ -316,8 +316,9 @@ public class ModelManager implements Model
     }
 
     @Override
-    public RoomBookingTransfer getBookingsWhenLoggedIn(String username) throws SQLException {
-        return dataBaseAdapter.getBookingsWhenLoggedIn(username);
+    public RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException {
+       bookingList.setAllBookings(dataBaseAdapter.getBookingsWhenLoggedIn(username));
+       return bookingList;
     }
 
     @Override

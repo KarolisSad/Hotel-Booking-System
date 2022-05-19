@@ -137,8 +137,15 @@ public class HotelDataBase implements HotelPersistence
     dataBase.login(username,password);
   }
 
+//  @Override public ArrayList<RoomBooking> getAllBookings(String type)
+//          throws SQLException
+//  {
+//    MyDataBase dataBase = MyDataBase.getInstance();
+//    return dataBase.getAllRoomBookings(type);
+//  }
+
   @Override
-  public RoomBookingTransfer getBookingsWhenLoggedIn(String username) throws SQLException {
+  public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException {
     MyDataBase dataBase = MyDataBase.getInstance();
     return dataBase.getBookingsWhenLoggedIn(username);
   }

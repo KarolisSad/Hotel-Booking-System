@@ -228,13 +228,22 @@ public class RoomBookingTransfer
    *
    * @return All instance variables and their values as a String.
    */
-  @Override public String toString()
-  {
-    return "RoomBookingTransfer{" + "type='" + type + '\'' + ", bookingNr="
-        + bookingNr + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", guestID=" + guestID + ", roomID='" + roomID + '\''
-        + ", stateString='" + stateString + '\'' + ", roomBookings="
-        + roomBookings + ", message='" + message + '\'' + ", booking=" + booking
-        + ", guest=" + guest + '}';
+  @Override
+  public String toString() {
+    return "RoomBookingTransfer{" +
+            "type='" + type + '\'' +
+            ", bookingNr=" + bookingNr +
+            ", startDate=" + startDate +
+            ", endDate=" + endDate +
+            ", guestID=" + guestID +
+            ", roomID='" + roomID + '\'' +
+            ", stateString='" + stateString + '\'' +
+            ", username='" + username + '\'' +
+            ", roomBookings=" + roomBookings +
+            ", message='" + message + '\'' +
+            ", booking=" + booking +
+            ", guest=" + guest +
+            ", room=" + room +
+            '}';
   }
 }
