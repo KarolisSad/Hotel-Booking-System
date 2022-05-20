@@ -44,8 +44,9 @@ public class GuestPersonalInformationController extends ViewController {
         }
         catch (NullPointerException e)
         {
-            //can be null
+            e.printStackTrace();
         }
+        viewModel.setValues();
     }
 
     public void saveDetailsButton()
@@ -67,6 +68,7 @@ public class GuestPersonalInformationController extends ViewController {
     {
         viewModel.reset();
     }
+
 
     public void menuButton() throws IOException {
         getViewHandler().openView("GuestMenuView.fxml");

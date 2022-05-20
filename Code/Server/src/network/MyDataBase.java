@@ -800,32 +800,35 @@ public class MyDataBase
 
   public GuestTransfer getGuestByUsername(String username) {
     System.out.println(
-            "Edit guest values" + username);
-
+            "Get guest values: " + username);
+    GuestTransfer guestTransfer =null;
     try (Connection connection = getConnection())
     {
+      System.out.println("From mydatabase: ");
 
       //updating info about the guest
-      PreparedStatement statement3 = connection.prepareStatement(
+      PreparedStatement statement = connection.prepareStatement(
               "select * from guest where username = ?;");
 
-      statement3.setString(1, username);
-      statement3.executeQuery();
+      statement.setString(1, username);
 
-      ResultSet guest = statement3.executeQuery();
-      String usernameg = guest.getString("username");
-      String fName = guest.getString("fname");
-      String lName = guest.getString("lname");
-      String email = guest.getString("email");
-      int phonenr = guest.getInt("phonenr");
+      ResultSet guest = statement.executeQuery();
+      while (guest.next()) {
+        String usernameg = guest.getString("username");
+        String fName = guest.getString("fname");
+        String lName = guest.getString("lname");
+        String email = guest.getString("email");
+        int phonenr = guest.getInt("phonenr");
+        System.out.println("From mydatabase: " + usernameg);
 
-      System.out.println("From mydatabase: " + usernameg);
-      return new GuestTransfer("getGuestWithUsername", usernameg, fName, lName, email, phonenr);
+        guestTransfer = new GuestTransfer("getGuestWithUsername", usernameg, fName, lName, email, phonenr);
+      }
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException("User can't be found.");
     }
+    return guestTransfer;
   }
 }
 

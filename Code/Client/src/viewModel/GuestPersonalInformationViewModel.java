@@ -57,12 +57,12 @@ public class GuestPersonalInformationViewModel {
         lName.setValue("");
         fName.setValue("");
         email.setValue("");
-        username.set("");
     }
 
     public void updateGuest() {
         model.editGuestWithUsername("editGuestWithUsername", getUsername(), getfName(), getlName(),
                 getEmail(), Integer.parseInt(phoneNr.get()));
+        System.out.println("Editing personal info of: " + getUsername());
     }
 
     private String getEmail() {
@@ -84,14 +84,15 @@ public class GuestPersonalInformationViewModel {
     public void setUsername(String username) {
         this.username.setValue(username + "");
         System.out.println("username should be set: " + username);
-        setValues();
     }
 
     public void setValues() {
-        GuestTransfer guestTransfer = model.getGuestByUsername(username.get());
+        System.out.println("Username in setValues: " + getUsername());
+        GuestTransfer guestTransfer = model.getGuestByUsername(getUsername());
         fName.setValue(guestTransfer.getfName());
         lName.setValue(guestTransfer.getlName());
         email.setValue(guestTransfer.getEmail());
         phoneNr.setValue(guestTransfer.getPhoneNr());
+        System.out.println(fName + " " + lName);
     }
 }

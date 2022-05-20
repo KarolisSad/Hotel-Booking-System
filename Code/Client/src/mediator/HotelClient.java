@@ -14,7 +14,7 @@ import java.net.Socket;
 import java.time.LocalDate;
 
 /**
- * Sending request to the server and receiving requested infromation
+ * Sending request to the server and receiving requested information
  * 2022-05-08
  *
  * @author Group5
