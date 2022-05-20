@@ -119,6 +119,7 @@ public class ModelManager implements Model
         throws SQLException
     {
         bookingList.setAllBookings(dataBaseAdapter.getAllBookings(type));
+
         return bookingList;
     }
 
@@ -197,11 +198,14 @@ public class ModelManager implements Model
      * @return A RoomBookingTransfer object containing information about the booking and the guest associated with it.
      * @throws SQLException
      */
+    /*
     @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr,
         int phoneNr) throws SQLException
     {
         return dataBaseAdapter.getBookingWithGuest(bookingNr, phoneNr);
     }
+
+     */
 
     /**
      * A method that is meant for booking a room.

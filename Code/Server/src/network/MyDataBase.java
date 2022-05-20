@@ -37,13 +37,11 @@ public class MyDataBase
     // TODO - My password is different, so needed to change this.
 
     // Karolis
-     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
+     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-//    return DriverManager.getConnection(
-//        "jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel",
-//        "postgres", "123456789");
+  return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
   }
@@ -310,7 +308,7 @@ public class MyDataBase
             int bookingID = resultSet.getInt("bookingid");
             LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
             LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
-            Guest guest = getGuest(resultSet.getInt("guest"));
+            Guest guest = getGuest(resultSet.getString("guest"));
             Room room = getRoom(resultSet.getString("roomid"));
             String state = resultSet.getString("state");
 
@@ -335,7 +333,7 @@ public class MyDataBase
             int bookingID = resultSet.getInt("bookingid");
             LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
             LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
-            Guest guest = getGuest(resultSet.getInt("guest"));
+            Guest guest = getGuest(resultSet.getString("guest"));
             Room room = getRoom(resultSet.getString("roomid"));
             String state = resultSet.getString("state");
 
@@ -360,7 +358,7 @@ public class MyDataBase
             int bookingID = resultSet.getInt("bookingid");
             LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
             LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
-            Guest guest = getGuest(resultSet.getInt("guest"));
+            Guest guest = getGuest(resultSet.getString("guest"));
             Room room = getRoom(resultSet.getString("roomid"));
             String state = resultSet.getString("state");
 
@@ -385,7 +383,7 @@ public class MyDataBase
             int bookingID = resultSet.getInt("bookingid");
             LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
             LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
-            Guest guest = getGuest(resultSet.getInt("guest"));
+            Guest guest = getGuest(resultSet.getString("guest"));
             Room room = getRoom(resultSet.getString("roomid"));
             String state = resultSet.getString("state");
 
@@ -410,7 +408,7 @@ public class MyDataBase
             int bookingID = resultSet.getInt("bookingid");
             LocalDate startDate = resultSet.getDate("startdate").toLocalDate();
             LocalDate endDate = resultSet.getDate("enddate").toLocalDate();
-            Guest guest = getGuest(resultSet.getInt("guest"));
+            Guest guest = getGuest(resultSet.getString("guest"));
             Room room = getRoom(resultSet.getString("roomid"));
             String state = resultSet.getString("state");
 
@@ -428,17 +426,17 @@ public class MyDataBase
   /**
    * Method that tries to get a guest object from the database.
    *
-   * @param guestId The identifier used for finding the guest.
+   * @param //guestId The identifier used for finding the guest.
    * @return The guest object from the database.
    * @throws IllegalArgumentException if Guest is not found.
    */
-  public Guest getGuest(int guestId) throws SQLException
+  public Guest getGuest(String guestUserName) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * from guest where phoneNr = (?);");
-      statement.setInt(1, guestId);
+          "SELECT * from guest where username = (?);");
+      statement.setString(1, guestUserName);
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
       {
@@ -646,7 +644,8 @@ public class MyDataBase
     }
   }
 
-  public RoomBookingTransfer getRoomWithGuest(int bookingNr, int phoneNr)
+  /*
+  public RoomBookingTransfer getRoomWithGuest(int bookingNr)
       throws SQLException
   {
     try (Connection connection = getConnection())
@@ -657,12 +656,12 @@ public class MyDataBase
               + "WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID AND rb.bookingID = (?) AND phoneNr = (?);");
 
       statement.setInt(1, bookingNr);
-      statement.setInt(2, phoneNr);
+     // statement.setInt(2, phoneNr);
 
       ResultSet result = statement.executeQuery();
       if (result.next())
       {
-        Guest guest = getGuest(phoneNr);
+        //Guest guest = getGuest(phoneNr);
         LocalDate startDate = result.getDate("startdate").toLocalDate();
         LocalDate endDate = result.getDate("enddate").toLocalDate();
         Room room = getRoom(result.getString("roomid"));
@@ -678,6 +677,8 @@ public class MyDataBase
       }
     }
   }
+
+   */
 
   public void register(Guest guest) throws SQLException {
     try (Connection connection = getConnection())

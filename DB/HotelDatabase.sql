@@ -122,8 +122,17 @@ CREATE TRIGGER BookingDate
 BEFORE INSERT ON roomBooking
 FOR EACH ROW
 EXECUTE PROCEDURE double_booking();
+
+CREATE TRIGGER BookingDateUpdate
+    BEFORE UPDATE ON roomBooking
+    FOR EACH ROW
+    WHEN ( OLD.state = new.state )
+    EXECUTE PROCEDURE double_booking();
 -------------------------------<
 
 -----------Trigger------------->
 
 -------------------------------<
+
+
+SELECT * from guest where username = 'chris';

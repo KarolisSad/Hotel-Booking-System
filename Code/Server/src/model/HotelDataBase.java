@@ -107,12 +107,15 @@ public class HotelDataBase implements HotelPersistence
     return dataBase.getAllGuests();
   }
 
+  /*
   @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr,
       int phoneNr) throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
     return dataBase.getRoomWithGuest(bookingNr, phoneNr);
   }
+
+   */
 
   /**
    * Method used for adding a booking to the database.
@@ -137,12 +140,15 @@ public class HotelDataBase implements HotelPersistence
     dataBase.login(username,password);
   }
 
-//  @Override public ArrayList<RoomBooking> getAllBookings(String type)
-//          throws SQLException
-//  {
-//    MyDataBase dataBase = MyDataBase.getInstance();
-//    return dataBase.getAllRoomBookings(type);
-//  }
+  /*
+
+  @Override public ArrayList<RoomBooking> getAllBookings(String type)
+          throws SQLException
+  {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    return dataBase.getAllRoomBookings(type);}
+
+   */
 
   @Override
   public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException {

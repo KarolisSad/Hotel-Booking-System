@@ -186,6 +186,7 @@ public class HotelClientHandler implements Runnable
           }
           catch (Exception e)
           {
+            e.printStackTrace();
             out.println(
                 json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }
@@ -365,6 +366,7 @@ public class HotelClientHandler implements Runnable
           }
           break;
 
+          /*
         case "getBookingWithGuest":
         {
           RoomBookingTransfer receivedRoomBookingTransfer = json.fromJson(
@@ -386,6 +388,8 @@ public class HotelClientHandler implements Runnable
 
           break;
         }
+
+           */
 
         case "registerAGuest":
         {

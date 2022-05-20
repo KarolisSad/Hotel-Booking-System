@@ -28,7 +28,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   ArrayList<Guest> getAllGuests() throws SQLException;
 
   Room getRoom(String roomId) throws SQLException;
-  RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
+  //RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
 
     void register(String fName, String lName, String email, int phoneNr, String username, String password) throws SQLException;
   void login(String username, String password) throws SQLException;

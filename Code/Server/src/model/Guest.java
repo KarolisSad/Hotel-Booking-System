@@ -39,6 +39,9 @@ public class Guest
     setlName(lName);
     setEmail(email);
     setPhoneNr(phoneNr);
+    // TODO FOR TESTING!
+    setPassword("dummyPassword");
+    setUsername("dummyUsername");
   }
 
 
@@ -185,6 +188,7 @@ public class Guest
    *
    * @return a copy of Guest object.
    */
+
   public Guest copy()
   {
     Guest other = new Guest(fName, lName, email, phoneNr, username, password);
