@@ -177,6 +177,7 @@ public class ModelManager implements Model
     @Override public void editBooking(int bookingId, LocalDate startDate,
         LocalDate endDate, String roomId) throws SQLException
     {
+        checkForLegalDates(startDate, endDate);
         dataBaseAdapter.editBooking(bookingId, startDate, endDate, roomId);
     }
 

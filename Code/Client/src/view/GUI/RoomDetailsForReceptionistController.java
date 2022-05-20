@@ -90,9 +90,14 @@ public class RoomDetailsForReceptionistController extends ViewController
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == confirm)
     {
-      viewModel.saveBookingChanged();
-      System.out.println("You confirmed.");
-      getViewHandler().openView("BookingsForReceptionistView.fxml");
+      try{
+        viewModel.saveBookingChanged();
+        getViewHandler().openView("BookingsForReceptionistView.fxml");
+      }
+      catch (IllegalStateException e)
+      {
+        errorLabel.textProperty().set(e.getMessage());
+      }
     }
     else
     {

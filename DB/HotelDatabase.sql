@@ -6,14 +6,12 @@ DROP SCHEMA hotel CASCADE;
 create schema hotel;
 set schema 'hotel';
 
-drop schema hotel cascade ;
 create table if not exists room(
     roomID          varchar(20) PRIMARY KEY NOT NULL                                                  ,
     roomType        varchar(30) NOT NULL CHECK(roomType IN ('Family', 'Single', 'Double', 'Suite'))   ,
     nrBeds          integer     NOT NULL CHECK ( nrBeds between 1 AND 20)
 );
 
-drop table guest;
 create table if not exists guest(
     username        varchar(100) NOT NULL PRIMARY KEY           ,
     fName           VARCHAR(60) NOT NULL                        ,
@@ -43,6 +41,99 @@ ALTER TABLE roombooking ADD CONSTRAINT
 
 ALTER TABLE roombooking ADD CONSTRAINT
     end_date_is_before_start_date CHECK ( startDate < endDate);
+
+
+-------------------------------<
+
+-----------Trigger------------->
+-- Checking if this room is not booked during selected period
+CREATE OR REPLACE FUNCTION double_booking()
+	RETURNS trigger AS
+$BODY$
+DECLARE vBookingCount NUMERIC;
+
+BEGIN
+
+
+	SELECT COUNT(*) INTO vBookingCount
+	FROM roomBooking
+	WHERE roomID = new.roomID
+	and (new.startDate between startDate and endDate
+	OR new.endDate between startDate and endDate)
+	or(new.startDate < startDate AND new.endDate > endDate)
+	or(new.startDate > startDate AND new.endDate < endDate);
+
+
+
+
+
+	IF (vBookingCount > 0) THEN
+		RAISE EXCEPTION 'Room % is already booked during these dates',
+				new.roomID;
+	END IF;
+	return new;
+
+END
+$BODY$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS BookingDate
+  ON roomBooking;
+
+-- attaching trigger to roomBooking
+CREATE TRIGGER BookingDate
+BEFORE INSERT ON roomBooking
+FOR EACH ROW
+EXECUTE PROCEDURE double_booking();
+
+
+
+-------------------------------<
+
+-----------Trigger------------->
+
+-------------------------------<
+
+--------------------------------
+------ NEW FUNCTION ------------
+
+CREATE OR REPLACE FUNCTION update_booking()
+	RETURNS trigger AS
+$BODY$
+DECLARE vBookingCount NUMERIC;
+
+BEGIN
+
+
+	SELECT COUNT(*) INTO vBookingCount
+	FROM roomBooking
+	WHERE roomID = new.roomID
+    AND bookingID != new.bookingID
+	and (new.startDate between startDate and endDate
+	OR new.endDate between startDate and endDate)
+	or(new.startDate < startDate AND new.endDate > endDate)
+	or(new.startDate > startDate AND new.endDate < endDate);
+
+
+
+
+
+
+	IF (vBookingCount > 0) THEN
+		RAISE EXCEPTION 'Room % is already booked during these dates',
+				new.roomID;
+	END IF;
+	return new;
+
+END
+$BODY$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER BookingDateUpdate
+    BEFORE UPDATE ON roomBooking
+    FOR EACH ROW
+    WHEN ( OLD.state = new.state )
+    EXECUTE PROCEDURE update_booking();
+
 
 --------Guest-------
 
@@ -85,54 +176,5 @@ from roomBooking
 where startDate  between '2022-01-03' and '2022-01-11'
 OR endDate between '2022-01-03' and '2022-01-11'
 );
--------------------------------<
-
------------Trigger------------->
--- Checking if this room is not booked during selected period
-CREATE OR REPLACE FUNCTION double_booking()
-	RETURNS trigger AS
-$BODY$
-DECLARE vBookingCount NUMERIC;
-
-BEGIN
-
-	SELECT COUNT(*) INTO vBookingCount
-	FROM roomBooking
-	WHERE roomID = new.roomID
-	and new.startDate between startDate and endDate
-	and new.endDate between startDate and endDate
-	or(new.startDate < startDate and new.endDate > endDate)
-	or(new.startDate > startDate and new.endDate < endDate);
-
-
-	IF (vBookingCount > 0) THEN
-		RAISE EXCEPTION 'Room % is already booked during these dates',
-				new.roomID;
-	END IF;
-	return new;
-
-END
-$BODY$ LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS BookingDate
-  ON roomBooking;
-
--- attaching trigger to roomBooking
-CREATE TRIGGER BookingDate
-BEFORE INSERT ON roomBooking
-FOR EACH ROW
-EXECUTE PROCEDURE double_booking();
-
-CREATE TRIGGER BookingDateUpdate
-    BEFORE UPDATE ON roomBooking
-    FOR EACH ROW
-    WHEN ( OLD.state = new.state )
-    EXECUTE PROCEDURE double_booking();
--------------------------------<
-
------------Trigger------------->
-
--------------------------------<
-
 
 SELECT * from guest where username = 'chris';

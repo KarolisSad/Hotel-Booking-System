@@ -599,8 +599,8 @@ public class MyDataBase
       }
       catch (Exception e)
       {
-        e.printStackTrace();
-        throw new IllegalArgumentException("Unable to edit the booking");
+        //e.printStackTrace();
+        throw new IllegalArgumentException(e.getMessage());
       }
     }
   }
