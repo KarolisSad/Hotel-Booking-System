@@ -161,6 +161,15 @@ public class GuestTransfer {
     return errorMessage;
   }
 
+  public GuestTransfer(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr) {
+    this.type = editGuestWithUsername;
+    this.username = username;
+    this.fName = getfName;
+    this.lName = getlName;
+    this.email = email;
+    this.phoneNr = phoneNr;
+  }
+
   public String getUsername() {
     return username;
   }

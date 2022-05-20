@@ -3,7 +3,6 @@ package mediator;
 import com.google.gson.Gson;
 import model.Guest;
 import model.Model;
-import model.Room;
 import model.RoomType;
 
 import java.beans.PropertyChangeListener;
@@ -617,6 +616,7 @@ public class HotelClient implements Model
     {
       e.printStackTrace();
     }
+
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
@@ -633,6 +633,27 @@ public class HotelClient implements Model
       }
     }
     return json.fromJson(message, RoomBookingTransfer.class);
+  }
+
+  @Override
+  public synchronized GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr)
+    {
+      sendToServerAsJson(
+              new GuestTransfer(editGuestWithUsername, username, getfName, getlName, email, phoneNr));
+      message = null;
+      while (message == null)
+      {
+        try
+        {
+          wait();
+        }
+        catch (InterruptedException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
+      return json.fromJson(message, GuestTransfer.class);
   }
 
 

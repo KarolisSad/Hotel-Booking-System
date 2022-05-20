@@ -31,4 +31,6 @@ public interface HotelPersistence {
     ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException;
 
     void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException;
+
+    void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException;
 }

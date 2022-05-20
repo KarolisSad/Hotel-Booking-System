@@ -330,4 +330,9 @@ public class ModelManager implements Model
         RoomBooking roomBooking = new RoomBooking(startDate,endDate,roomID,username);
         dataBaseAdapter.bookARoomWhenLoggedIn(roomBooking);
     }
+
+    @Override
+    public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
+        dataBaseAdapter.editGuestWithUsername(username,  getfName,  getlName,  email, phoneNr);
+    }
 }

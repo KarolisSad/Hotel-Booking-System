@@ -59,7 +59,23 @@ public class GuestPersonalInformationViewModel{
     }
 
     public void updateGuest() {
-        //model.editGuest("editGuest", getBookingID(), getfName(), getlName(),
-         //       getEmail(), Integer.parseInt(phoneNr.get()));
+        model.editGuestWithUsername("editGuestWithUsername", getUsername(), getfName(), getlName(),
+                getEmail(), Integer.parseInt(phoneNr.get()));
+    }
+
+    private String getEmail() {
+        return email.get();
+    }
+
+    private String getlName() {
+        return lName.get();
+    }
+
+    private String getfName() {
+        return fName.get();
+    }
+
+    private String getUsername() {
+        return username.get();
     }
 }

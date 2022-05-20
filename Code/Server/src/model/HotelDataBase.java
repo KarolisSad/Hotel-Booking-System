@@ -156,4 +156,10 @@ public class HotelDataBase implements HotelPersistence
     dataBase.bookARoomWhenLoggedIn(roomBooking);
   }
 
+  @Override
+  public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    dataBase.editGuestWithUsername( username,  getfName,  getlName,  email,  phoneNr);
+  }
+
 }

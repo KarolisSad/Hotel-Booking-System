@@ -282,6 +282,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int parseInt) {
+        return hotelClient.editGuestWithUsername("editGuestWithUsername", username, getfName, getlName, email, parseInt);
+    }
+
+    @Override
     public void addListener(PropertyChangeListener listener) {
         property.addPropertyChangeListener(listener);
     }

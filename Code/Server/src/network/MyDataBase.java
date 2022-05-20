@@ -769,5 +769,33 @@ public class MyDataBase
       }
     }
   }
+
+  public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
+    System.out.println(
+            "Edit guest values" + username + fName + lName + email + phoneNr);
+
+    try (Connection connection = getConnection())
+    {
+
+      //updating info about the guest
+      PreparedStatement statement3 = connection.prepareStatement(
+              "update guest\n"+ "fname = ?,\n" + "    lname =?,\n"
+                      + "    email =?\n" + " phonenr = ?\n"
+                      + "where username = ?;");
+
+      statement3.setInt(5, phoneNr);
+      statement3.setString(4, email);
+      statement3.setString(3, lName);
+      statement3.setString(2, fName);
+      statement3.setString(1, username);
+      statement3.executeUpdate();
+      System.out.println("Done with editing");
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException("User couldn't be edited.");
+    }
+
+  }
 }
 
