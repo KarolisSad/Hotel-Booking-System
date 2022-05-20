@@ -1,3 +1,8 @@
+-- DELETE ALL --
+DROP SCHEMA hotel CASCADE;
+--------------------------
+
+
 create schema hotel;
 set schema 'hotel';
 
@@ -10,20 +15,27 @@ create table if not exists room(
 
 drop table guest;
 create table if not exists guest(
+    username        varchar(100) NOT NULL PRIMARY KEY           ,
     fName           VARCHAR(60) NOT NULL                        ,
     lName           VARCHAR(60) NOT NULL                        ,
     email           VARCHAR(60) CHECK  ( email like ('%@%'))    ,
-    phoneNr         integer PRIMARY KEY
+    phoneNr         integer NOT NULL
 );
-
 CREATE TABLE IF NOT EXISTS roomBooking(
+    bookingID       SERIAL    PRIMARY KEY                        ,
     startDate       date                                         ,
     endDate         date                                         ,
-    guest           integer                                      ,
+    guest           varchar(100)                                 ,
     roomID          varchar(20)                                  ,
-    PRIMARY KEY (guest, roomID, startDate)                       ,
+    state           varchar(12)                                  ,
     FOREIGN KEY (roomID) REFERENCES room(roomID)                 ,
-    FOREIGN KEY (guest) REFERENCES guest(phoneNr)
+    FOREIGN KEY (guest) REFERENCES guest(username)
+);
+
+CREATE TABLE IF NOT EXISTS login(
+    username        varchar(100) PRIMARY KEY                    ,
+    userPassword    varchar(100) not null                       ,
+    FOREIGN KEY (username) REFERENCES guest(username)
 );
 
 ALTER TABLE roombooking ADD CONSTRAINT
@@ -50,19 +62,19 @@ insert into room
 values ('2','Double',3);
 
 insert into room
-values ('3','FAMILY',5);
+values ('3','Family',5);
 
 ----------Room-Booking---------
-delete from roomBooking;
+delete from roomBooking ;
 
-insert into roomBooking (startDate, endDate, guest, roomID)
-values ('2022-06-10','2022-06-20',11112222,1);
+insert into roomBooking (startDate, endDate, guest, roomID, state)
+values ('2022-06-10','2022-06-20',11112222,1,'Booked');
 
-insert into roomBooking
-values ('2022-02-10','2022-02-20',11112222,1);
+insert into roomBooking (startDate, endDate, guest, roomID, state)
+values ('2022-06-10','2022-06-20',11112222,3,'Booked');
 
-insert into roomBooking
-values ('2022-03-10', '2000-03-20',11112222,1);
+insert into roomBooking (startDate, endDate, guest, roomID, state)
+values ('2023-06-10','2023-06-20',11112222,3,'Booked');
 
 ------All-Available-Rooms------>
 
@@ -115,11 +127,3 @@ EXECUTE PROCEDURE double_booking();
 -----------Trigger------------->
 
 -------------------------------<
-
-update room
-set nrBeds = 11,
-    roomType ='Suite'
-where roomID = '1';
-
-insert into roombooking
-values ('2025-05-01','2025-05-05',20202022,1)
