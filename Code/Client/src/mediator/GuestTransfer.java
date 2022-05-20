@@ -54,7 +54,6 @@ public class GuestTransfer {
 
   /**
    * 1 argument constructor used for transferring type information.
-   * @param addNewGuest
    * @param fName
    * @param lName
    * @param email

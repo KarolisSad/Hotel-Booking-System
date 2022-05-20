@@ -21,12 +21,24 @@ public class Guest
    * @param email email address of the guest
    * @param phoneNr phone number of the guest
    */
-  public Guest(String fName, String lName, String email, int phoneNr)
+  public Guest(String username, String fName, String lName, String email, int phoneNr)
   {
+    setUsername(username);
     setfName(fName);
     setlName(lName);
     setEmail(email);
     setPhoneNr(phoneNr);
+  }
+
+  private void setUsername(String username)
+  {
+    if (username == null || username.isBlank())
+    {
+      throw new NullPointerException(
+          "Username should not be empty. Please enter a valid username.");
+    }
+
+    this.username = username;
   }
 
   /**
@@ -158,7 +170,7 @@ public class Guest
    */
   public Guest copy()
   {
-    Guest other = new Guest(fName, lName, email, phoneNr);
+    Guest other = new Guest(username, fName, lName, email, phoneNr);
     return other;
   }
 

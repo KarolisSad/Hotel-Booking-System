@@ -249,7 +249,6 @@ public class HotelClientHandler implements Runnable
               RoomBookingTransfer.class);
           try
           {
-            System.out.println(roomBooking.getBookingNr());
             model.processBooking(roomBooking.getBookingNr());
           }
           catch (Exception e)
@@ -264,7 +263,6 @@ public class HotelClientHandler implements Runnable
 
         case "CancelBooking":
         {
-          System.out.println("Cancel booking");
           RoomBookingTransfer roomBookingTransfer = json.fromJson(message,
               RoomBookingTransfer.class);
           try
@@ -337,7 +335,6 @@ public class HotelClientHandler implements Runnable
         case "getRoom":
         {
           RoomTransfer getRoom = json.fromJson(message, RoomTransfer.class);
-          System.out.println(getRoom);
           try
           {
             Room roomie = model.getRoom(getRoom.getMessage());

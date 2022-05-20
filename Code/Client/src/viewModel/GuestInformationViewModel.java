@@ -40,11 +40,14 @@ public class GuestInformationViewModel
     this.temp = tempInfo;
   }
 
+
+
   /**
    * Delegates model to create new booking from
    * TemporaryInformation objects values and
    * fields from instance variables
    */
+   /*
   public void bookRoomWithGuest()
   {
 
@@ -63,6 +66,9 @@ public class GuestInformationViewModel
     }
 
   }
+
+    */
+
 
   /**
    * A getter used to call the value of the first name field

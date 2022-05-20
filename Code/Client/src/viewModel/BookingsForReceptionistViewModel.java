@@ -59,7 +59,6 @@ public class BookingsForReceptionistViewModel
       {
         RoomBookingTransfer bookingList = model.getBookedBookings();
         isCheckIn = true;
-        System.out.println("DEBUG-> BookingList of all booked bookings: " + bookingList + " (FROM BookingsForReceptionistViewModel)");
         if (bookingList.getMessage() == null)
         {
           for (int i = 0; i < bookingList.getRoomBookings().size(); i++)
@@ -70,7 +69,7 @@ public class BookingsForReceptionistViewModel
         }
         else
         {
-//          errorLabel.setValue(bookingList.getMessage());
+          errorLabel.setValue(bookingList.getMessage());
         }
 
         break;

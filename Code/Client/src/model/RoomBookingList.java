@@ -51,7 +51,6 @@ public class RoomBookingList
     else
     {
       allBookings.add(booking);
-      System.out.println("new booking was added: " + booking);
     }
 
   }

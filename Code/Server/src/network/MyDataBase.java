@@ -440,12 +440,13 @@ public class MyDataBase
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
       {
+        String userName = resultSet.getString("username");
         String fName = resultSet.getString("fname");
         String lName = resultSet.getString("lname");
         String email = resultSet.getString("email");
         int phoneNr = resultSet.getInt("phoneNr");
 
-        return new Guest(fName, lName, email, phoneNr);
+        return new Guest(userName, fName, lName, email, phoneNr);
       }
       else
       {
@@ -631,11 +632,12 @@ public class MyDataBase
       // NOW
       while (resultSet.next())
       {
+        String userName = resultSet.getString("username");
         String fName = resultSet.getString("fname");
         String lName = resultSet.getString("lname");
         String email = resultSet.getString("email");
         int phonenr = resultSet.getInt("phonenr");
-        allGuests.add(new Guest(fName, lName, email, phonenr));
+        allGuests.add(new Guest(userName, fName, lName, email, phonenr));
         System.out.println(allGuests);
 
       }
