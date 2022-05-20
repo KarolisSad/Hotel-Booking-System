@@ -191,7 +191,7 @@ WHERE roomID IN (SELECT roomID
 
 SELECT *
 FROM guest
-WHERE username = 'chris';
+WHERE username = 'christhougaard';
 
 -- Ignore cancelled bookings testing:
 
@@ -205,13 +205,3 @@ WHERE roomID IN (SELECT roomID
                  WHERE state in ('Booked', 'In Progress', 'Archived') AND
                          (startDate BETWEEN '2022-05-27' AND '2022-05-29'
                          OR endDate BETWEEN '2022-05-27' AND '2022-05-29'));
-
-
-/*
- Select everything
-    from room table
-    where roomID is in (
-         Select roomID from room except
-            (select roomId from roombooking table where startdate is between ?????? and ????? OR endDate is between ????? AND ?????)
- )
- */

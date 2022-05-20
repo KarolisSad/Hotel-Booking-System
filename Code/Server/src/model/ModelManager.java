@@ -36,19 +36,8 @@ public class ModelManager implements Model
         roomList = new RoomList();
         property = new PropertyChangeSupport(this);
         this.dataBaseAdapter = new HotelDataBase();
-        createDummyData();
     }
 
-
-    //todo delete?
-    private void createDummyData()
-    {
-        //        roomList.addRoom(new Room("1.01", RoomType.SINGLE, 1));
-        //        roomList.addRoom(new Room("1.02", RoomType.DOUBLE, 1));
-        //        roomList.addRoom(new Room("1.03", RoomType.FAMILY, 3));
-        //        roomList.addRoom(new Room("1.04", RoomType.DOUBLE, 1));
-        //        roomList.addRoom(new Room("1.05", RoomType.SUITE, 3));
-    }
 
     /**
      * A method that returns all available rooms by selected date

@@ -4,11 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-/*
+
 class GuestTest
 {
   Guest testGuest = new Guest("TestFirstName", "TestLastName", "test@email.com",
-      12345678);
+      12345678, "TestUsername", "TestPassword");
 
   @BeforeEach void setUp()
   {
@@ -16,6 +16,8 @@ class GuestTest
     testGuest.setlName("TestLastName");
     testGuest.setEmail("test@email.com");
     testGuest.setPhoneNr(12345678);
+    testGuest.setUsername("TestUsername");
+    testGuest.setPassword("TestPassword");
   }
 
   // setfName Test \\
@@ -147,19 +149,140 @@ class GuestTest
 
   @Test void setPhoneNrToOneLegal()
   {
-
+    testGuest.setPhoneNr(11223344);
+    assertEquals(11223344, testGuest.getPhoneNr());
   }
 
   // Many
 
-  // Boundary
-
-  // Exception
-
-  @Test void setPhoneNr()
+  @Test void setPhoneNr3Times()
   {
+    testGuest.setPhoneNr(11223344);
+    testGuest.setPhoneNr(22334455);
+    testGuest.setPhoneNr(33445566);
+    assertEquals(33445566, testGuest.getPhoneNr());
+  }
+
+  // Boundary
+  @Test void setPhoneNrToBelowLowerBoundary()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setPhoneNr(9999999));
+  }
+
+  @Test void setPhoneNrToAboveLowerBoundary()
+  {
+    testGuest.setPhoneNr(9999999+1);
+    assertEquals(10000000, testGuest.getPhoneNr());
+  }
+
+  @Test void setPhoneNrToHighestAllowedValue()
+  {
+    testGuest.setPhoneNr(99999999);
+    assertEquals(99999999, testGuest.getPhoneNr());
+  }
+
+  @Test void setPhoneNrToAboveHighBoundary()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setPhoneNr(99999999+1));
   }
 
 
+  // Exception
+
+  //Exceptions already tested in Zero, One and Boundary cases.
+
+
+  // setUserName test \\
+
+  // Zero
+
+  @Test void setUserNameToNull()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setUsername(null));
+  }
+
+  @Test void setUserNameToEmptyString()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setUsername(""));
+  }
+
+  @Test void setUserNameToStringWithNoContents()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setUsername("    "));
+  }
+
+  // One
+
+  @Test void setUserNameToOneCharString()
+  {
+    testGuest.setUsername("a");
+    assertEquals("a", testGuest.getUsername());
+  }
+
+  // Many
+  @Test void setUserNameToStringWith3Chars()
+  {
+    testGuest.setUsername("abc");
+    assertEquals("abc", testGuest.getUsername());
+  }
+
+  @Test void setUserNameToStringWith10Chars()
+  {
+    testGuest.setUsername("abcdefghij");
+    assertEquals("abcdefghij", testGuest.getUsername());
+  }
+
+  // Boundary
+  // Only lower boundary exists -> already tested in Zero-case
+
+  // Exception
+  // Exceptions already tested in Zero case.
+
+  // setPassword test \\
+
+  // Zero
+  @Test void setPasswordToNull()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setPassword(null));
+  }
+
+  @Test void setPasswordToEmptyString()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setPassword(""));
+  }
+
+  @Test void setPasswordToStringWithNoContents()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> testGuest.setPassword("    "));
+  }
+
+  // One
+
+  @Test void setPasswordToOneCharString()
+  {
+    testGuest.setPassword("a");
+    assertEquals("a", testGuest.getPassword());
+  }
+
+  // Many
+  @Test void setPasswordToStringWith3Chars()
+  {
+    testGuest.setPassword("abc");
+    assertEquals("abc", testGuest.getPassword());
+  }
+
+  @Test void setPasswordToStringWith10Chars()
+  {
+    testGuest.setPassword("abcdefghij");
+    assertEquals("abcdefghij", testGuest.getPassword());
+  }
+
+  // Boundary
+  // Only lower boundary exists -> already tested in Zero-case
+
+  // Exception
+  // Exceptions already tested in Zero case.
+
+
 }
-*/
+
