@@ -37,13 +37,13 @@ public class MyDataBase
     // TODO - My password is different, so needed to change this.
 
     // Karolis
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
+     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-   // return DriverManager.getConnection(
-     //   "jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel",
-       // "postgres", "123456789");
+//    return DriverManager.getConnection(
+//        "jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel",
+//        "postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
   }
@@ -679,4 +679,95 @@ public class MyDataBase
     }
   }
 
+  public void register(Guest guest) throws SQLException {
+    try (Connection connection = getConnection())
+    {
+      System.out.println("Starting register");
+      try
+      {
+        PreparedStatement statement = connection.prepareStatement(
+                "insert into guest (username, fName, lName, email, phoneNr)\n" +
+                        "values (?,?,?,?,?);");
+
+        statement.setString(1, guest.getUsername());
+        statement.setString(2, guest.getfName());
+        statement.setString(3, guest.getlName());
+        statement.setString(4, guest.getEmail());
+        statement.setInt(5, guest.getPhoneNr());
+        statement.executeUpdate();
+
+        PreparedStatement statement2 = connection.prepareStatement("insert into login(username, userPassword)\n" +
+                "values (?,?);");
+        statement2.setString(1,guest.getUsername());
+        statement2.setString(2, guest.getPassword());
+        statement2.executeUpdate();
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+        throw new IllegalArgumentException("Unable to register user with: "+ guest.getUsername() + " username.");
+      }
+    }
+  }
+
+  public void login(String username, String password) throws SQLException {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "select * from login where username = ? AND userPassword =?;");
+      statement.setString(1, username);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+
+      if (!(resultSet.next()))
+      {
+        throw new IllegalArgumentException("User with username: " + username + " doesn't exist");
+      }
+      }
+    }
+
+  public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException {
+    ArrayList<RoomBooking> toSend = new ArrayList<>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("select * from roomBooking where guest = ?;");
+      statement.setString(1, username);
+      ResultSet result = statement.executeQuery();
+      while (result.next())
+      {
+//        Guest guest = getGuest(result.getInt("guest"));
+
+        Room room = getRoom(result.getString("roomid"));
+        LocalDate startDate = result.getDate("startdate").toLocalDate();
+        LocalDate endDate = result.getDate("enddate").toLocalDate();
+        String state = result.getString("state");
+        int bookingID = result.getInt("bookingid");
+        System.out.println(bookingID+ " id");
+        RoomBooking test = new RoomBooking(bookingID,startDate,endDate, room, state);
+        toSend.add(test);
+      }
+    }
+    return toSend;
+  }
+
+
+  public void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException {
+    try (Connection connection = getConnection()) {
+      try {
+        PreparedStatement statement = connection.prepareStatement(
+                "insert into roomBooking(startDate, endDate, guest, roomID, state)\n" +
+                        "values (?,?,?,?,?);");
+
+        statement.setObject(1, roomBooking.getStartDate());
+        statement.setObject(2, roomBooking.getEndDate());
+        statement.setString(3,  roomBooking.getUsername());
+        statement.setString(4, roomBooking.getRoomID());
+        statement.setString(5, roomBooking.getState());
+        statement.executeUpdate();
+      } catch (Exception e) {
+        throw new IllegalArgumentException("Booking wasn't added");
+      }
+    }
+  }
 }
+

@@ -10,13 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.ShowBookingViewController">
+<VBox style="-fx-font-family: Arial" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.ShowBookingViewController">
    <children>
       <AnchorPane prefHeight="49.0" prefWidth="600.0">
          <children>
             <Text layoutX="224.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Show booking">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
             </Text>
          </children>
@@ -25,7 +25,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
                <HBox.margin>
                   <Insets left="20.0" top="20.0" />
@@ -41,7 +41,7 @@
                   <Insets left="5.0" top="20.0" />
                </HBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
             </Text>
             <TextField fx:id="inputBookingNrField">
@@ -51,34 +51,34 @@
             </TextField>
          </children>
       </HBox>
-      <HBox prefHeight="35.0" prefWidth="281.0">
+      <HBox prefHeight="35.0" prefWidth="258.0">
          <VBox.margin>
-            <Insets left="140.0" right="114020.0" top="10.0" />
+            <Insets left="170.0" right="170.0" top="10.0" />
          </VBox.margin>
          <children>
-            <Button fx:id="findBookingButton" minWidth="140.0" mnemonicParsing="false" onAction="#findBookingButtonClick" prefHeight="38.0" prefWidth="140.0" text="Search">
+            <Button fx:id="findBookingButton" mnemonicParsing="false" onAction="#findBookingButtonClick" prefHeight="38.0" prefWidth="120.0" text="Find booking">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
                <HBox.margin>
-                  <Insets right="40.0" />
+                  <Insets />
                </HBox.margin>
             </Button>
-            <Button fx:id="clearButton" minWidth="140.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="38.0" prefWidth="140.0" text="Clear">
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="38.0" prefWidth="120.0" text="Clear">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
                <HBox.margin>
-                  <Insets left="60.0" />
+                  <Insets left="20.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <HBox>
+      <HBox prefHeight="60.0" prefWidth="600.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
                <HBox.margin>
                   <Insets left="85.0" top="20.0" />
@@ -94,7 +94,7 @@
                   <Insets left="15.0" top="20.0" />
                </HBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
             </Text>
             <TextField fx:id="outPutPhoneField" editable="false">
@@ -108,7 +108,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Starting date:">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
                <HBox.margin>
                   <Insets left="35.0" top="20.0" />
@@ -124,7 +124,7 @@
                   <Insets left="60.0" top="20.0" />
                </HBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
             </Text>
             <TextField fx:id="outputEndDateField" editable="false">
@@ -138,7 +138,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Room number:">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
                <HBox.margin>
                   <Insets left="25.0" top="20.0" />
@@ -154,7 +154,7 @@
                   <Insets left="7.0" top="20.0" />
                </HBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
             </Text>
             <TextField fx:id="outputBedsField" editable="false">
@@ -166,10 +166,13 @@
       </HBox>
       <AnchorPane prefHeight="7.0" prefWidth="600.0">
          <children>
-            <Button layoutX="451.0" layoutY="8.0" mnemonicParsing="false" onAction="#mainMenuButtonClicked" prefHeight="38.0" prefWidth="120.0" text="Main Menu" />
+            <Button layoutX="451.0" layoutY="8.0" mnemonicParsing="false" onAction="#mainMenuButtonClicked" prefHeight="38.0" prefWidth="120.0" text="Main Menu">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font></Button>
             <Label fx:id="errorLabel" layoutX="27.0" layoutY="15.0" prefHeight="25.0" prefWidth="417.0" text="ErrorLabel" textFill="RED">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Arial" size="16.0" />
                </font>
             </Label>
          </children>

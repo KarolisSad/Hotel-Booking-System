@@ -19,6 +19,8 @@ public class GuestTransfer {
   private String type;
   private String errorMessage;
   private ArrayList<Guest> guests;
+  private String password;
+  private String username;
 
   /**
    * 6 argument constructor used for transferring guest information and a booking identification.
@@ -38,13 +40,37 @@ public class GuestTransfer {
     this.lName = lName;
   }
 
-  /**
-   * 1 argument constructor used for transferring type information.
-   * @param type The type of transfer
-   */
+  public GuestTransfer(String type, String username, String password)
+  {
+    this.type = type;
+    this.username = username;
+    this.password = password;
+  }
+
   public GuestTransfer(String type)
   {
     this.type = type;
+  }
+
+  /**
+   * 1 argument constructor used for transferring type information.
+   * @param addNewGuest
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNumber
+   * @param username
+   * @param type The type of transfer
+   */
+  public GuestTransfer(String type, String fName, String lName, String email, int phoneNumber, String username, String password)
+  {
+    this.type = type;
+    this.fName = fName;
+    this.lName = lName;
+    this.email = email;
+    this. phoneNr = phoneNumber;
+    this.username = username;
+    this.password = password;
   }
 
   /**

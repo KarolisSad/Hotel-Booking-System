@@ -70,7 +70,7 @@ public class BookingsForReceptionistViewModel
         }
         else
         {
-          errorLabel.setValue(bookingList.getMessage());
+//          errorLabel.setValue(bookingList.getMessage());
         }
 
         break;

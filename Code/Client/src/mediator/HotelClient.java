@@ -30,6 +30,7 @@ public class HotelClient implements Model
   private Gson json;
   private Model model;
   private String message;
+  private String username;
 
   /**
    * @param model modelManager
@@ -39,11 +40,12 @@ public class HotelClient implements Model
   public HotelClient(Model model) throws IOException
   {
     this.model = model;
-    socket = new Socket("localhost", 2916);
+    socket = new Socket("localhost", 2917);
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     out = new PrintWriter(new PrintWriter(socket.getOutputStream()), true);
     json = new Gson();
     message = null;
+    username = null;
     startReader();
   }
 
@@ -470,6 +472,8 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+
+
   /**
    * Makes received object into Json format and sends it to a server
    *
@@ -521,6 +525,7 @@ public class HotelClient implements Model
             roomid));
     message = null;
 
+
     try
     {
       wait();
@@ -553,6 +558,83 @@ public class HotelClient implements Model
     }
     return json.fromJson(message, RoomBookingTransfer.class);
   }
+
+  @Override
+  public synchronized void logOutForGuest() {
+    this.username = null;
+  }
+
+  @Override
+  public synchronized GuestTransfer login(String username, String password) {
+    sendToServerAsJson(new GuestTransfer("login",username,password));
+    message = null;
+    while (message == null)
+    {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    GuestTransfer guestTransfer = json.fromJson(message,GuestTransfer.class);
+    if (guestTransfer.getType().equals("Success"))
+    {
+      this.username = username;
+    }
+    return json.fromJson(message,GuestTransfer.class);
+  }
+
+  @Override
+  public synchronized GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password) {
+    sendToServerAsJson(new GuestTransfer("registerAGuest",fName,lName,email,phoneNumber,username,password));
+    message = null;
+    while (message == null)
+    {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
+    System.out.println(guestTransfer.getType() + " styppe");
+    if (guestTransfer.getType().equals("Success"))
+    {
+      this.username = username;
+    }
+    return guestTransfer;
+  }
+
+  @Override
+  public synchronized RoomBookingTransfer getBookingsWhenLoggedIn() {
+    sendToServerAsJsonBooking(new RoomBookingTransfer("getBookingsWhenLoggedIn", username));
+    System.out.println("Username: " + username + " When getting all bookings.");
+    try
+    {
+      wait();
+    }
+    catch (InterruptedException e)
+    {
+      e.printStackTrace();
+    }
+    return json.fromJson(message, RoomBookingTransfer.class);
+  }
+
+  @Override
+  public synchronized RoomBookingTransfer bookARoomWhenLoggedIn(String roomName, LocalDate startDate, LocalDate endDate) {
+    sendToServerAsJsonBooking(new RoomBookingTransfer("bookARoomWhenLoggedIn", roomName,startDate,endDate,username));
+    message = null;
+    while (message == null)
+    {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    return json.fromJson(message, RoomBookingTransfer.class);
+  }
+
 
   @Override public void addListener(PropertyChangeListener listener)
   {

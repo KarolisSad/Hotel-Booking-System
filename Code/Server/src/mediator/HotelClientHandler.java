@@ -387,6 +387,72 @@ public class HotelClientHandler implements Runnable
           break;
         }
 
+        case "registerAGuest":
+        {
+          GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
+          try {
+            model.register(guestTransfer.getfName(),guestTransfer.getlName(),guestTransfer.getEmail(),guestTransfer.getPhoneNr(),
+                    guestTransfer.getUsername(), guestTransfer.getPassword());
+            out.println(json.toJson(new GuestTransfer("Success")));
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new GuestTransfer(e.getMessage())));
+          }
+          break;
+        }
+
+        case "login":
+        {
+          GuestTransfer guestTransfer = json.fromJson(message,GuestTransfer.class);
+          try {
+          model.login(guestTransfer.getUsername(), guestTransfer.getPassword());
+            out.println(json.toJson(new GuestTransfer("Success")));
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new GuestTransfer(e.getMessage())));
+          }
+          break;
+        }
+
+        case "bookARoomWhenLoggedIn":
+        {
+          try {
+            RoomBookingTransfer roomBookingTransfer = json.fromJson(message, RoomBookingTransfer.class);
+            model.bookARoomWhenLoggedIn(roomBookingTransfer.getRoomID(),roomBookingTransfer.getStartDate(),roomBookingTransfer.getEndDate(),roomBookingTransfer.getUsername());
+            out.println(json.toJson(new RoomBookingTransfer("Success","null")));
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("Success",e.getMessage())));
+          }
+
+          break;
+        }
+
+        case "getBookingsWhenLoggedIn":
+        {
+          RoomBookingTransfer roomBookingTransfer = json.fromJson(message, RoomBookingTransfer.class);
+          ArrayList<RoomBookingTransferObject> allBookings = null;
+          try
+          {
+            allBookings = model.getBookingsWhenLoggedIn(roomBookingTransfer.getUsername()).getConvertedList();
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomBookingTransfer("error", e.getMessage())));
+          }
+
+          roomBookingTransfer = new RoomBookingTransfer("AllBookings", allBookings);
+
+          jsonString = json.toJson(roomBookingTransfer);
+          out.println(jsonString);
+          break;
+        }
+
+
+
       }
 
     }

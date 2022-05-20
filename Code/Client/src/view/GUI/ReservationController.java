@@ -68,8 +68,7 @@ public class ReservationController extends ViewController
   {
     String selectedRoomFromListView = availableRoom.getSelectionModel()
         .getSelectedItem();
-    viewModel.reserveRoom(selectedRoomFromListView);
-    getViewHandler().openView("GuestInformationView.fxml");
+    viewModel.bookARoom(selectedRoomFromListView);
   }
 
   /**
@@ -79,7 +78,9 @@ public class ReservationController extends ViewController
    */
   public void back() throws IOException
   {
-    getViewHandler().openView("LoginView.fxml");
+    getViewHandler().openView("GuestMenuView.fxml");
   }
+
+
 
 }

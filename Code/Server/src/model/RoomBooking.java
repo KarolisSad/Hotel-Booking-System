@@ -16,6 +16,8 @@ public class RoomBooking
   private LocalDate endDate;
   private Room room;
   private Guest guest;
+  private String roomID;
+  private String username;
 
   private int bookingID;
   private RoomBookingState state;
@@ -40,6 +42,31 @@ public class RoomBooking
     setGuest(guest);
     bookingID = 0;
     state = new RoomBookingBookedState();
+  }
+
+  public RoomBooking(int bookingID,LocalDate startDate, LocalDate endDate, Room room, String state)
+  {
+    this.bookingID = bookingID;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.room = room;
+    this.state = getStateFromString(state);
+  }
+
+  public RoomBooking(LocalDate startDate, LocalDate endDate, String roomID, String username)
+  {
+    setStartAndEndDate(startDate,endDate);
+    setUsername(username);
+    this.roomID = roomID;
+    state = new RoomBookingBookedState();
+  }
+
+  public void setUsername(String username) {
+    if (username == null)
+    {
+      throw new IllegalArgumentException("User should not be empty");
+    }
+    this.username = username;
   }
 
   /**
@@ -193,16 +220,34 @@ public class RoomBooking
     return state.getState();
   }
 
+  @Override
+  public String toString() {
+    return "RoomBooking{" +
+            "startDate=" + startDate +
+            ", endDate=" + endDate +
+            ", room=" + room +
+            ", guest=" + guest +
+            ", roomID='" + roomID + '\'' +
+            ", username='" + username + '\'' +
+            ", bookingID=" + bookingID +
+            ", state=" + state +
+            '}';
+  }
+
   /**
 
    * A method is meant for getting room booking information.
    *
    * @return Organized output of room booking
    */
-  @Override public String toString()
-  {
-    return "RoomBooking{ ID: " + bookingID + "startDate=" + startDate + ", endDate=" + endDate
-        + ", room=" + room + ", guest=" + guest + ", state=" + getState() +'}';
+
+
+  public String getRoomID() {
+    return roomID;
+  }
+
+  public String getUsername() {
+    return username;
   }
 
   /**

@@ -30,4 +30,10 @@ public interface Model extends UnnamedPropertyChangeSubject
   Room getRoom(String roomId) throws SQLException;
   RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
 
+    void register(String fName, String lName, String email, int phoneNr, String username, String password) throws SQLException;
+  void login(String username, String password) throws SQLException;
+
+  RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException;
+
+    void bookARoomWhenLoggedIn(String roomID, LocalDate startDate, LocalDate endDate, String username) throws SQLException;
 }

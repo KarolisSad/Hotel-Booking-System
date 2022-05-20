@@ -45,6 +45,20 @@ public class SimpleBookingViewModel
         roomBookingTransfer.getBookingState());
 
   }
+  public SimpleBookingViewModel(RoomBookingTransferObject roomBookingTransfer, String user)
+  {
+    startDateProperty = new SimpleObjectProperty<>(
+            roomBookingTransfer.getStartDate());
+    endDateProperty = new SimpleObjectProperty<>(
+            roomBookingTransfer.getEndDate());
+    roomIdProperty = new SimpleStringProperty(roomBookingTransfer.getRoomID());
+    guestProperty = new SimpleObjectProperty<>(roomBookingTransfer.getGuest());
+    bookingIdProperty = new SimpleIntegerProperty(
+            roomBookingTransfer.getBookingID());
+    bookingStateProperty = new SimpleStringProperty(
+            roomBookingTransfer.getBookingState());
+
+  }
 
   /**
    * A getter method for startDateProperty.

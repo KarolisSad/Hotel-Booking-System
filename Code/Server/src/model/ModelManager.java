@@ -303,4 +303,31 @@ public class ModelManager implements Model
         return dataBaseAdapter.getAllGuests();
     }
 
+    @Override
+    public void register(String fName, String lName, String email, int phoneNr, String username, String password) throws SQLException {
+        Guest guest = new Guest(fName, lName, email, phoneNr, username, password);
+        dataBaseAdapter.register(guest);
+
+    }
+
+    @Override
+    public void login(String username, String password) throws SQLException {
+        dataBaseAdapter.login(username,password);
+    }
+
+    @Override
+    public RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException {
+       bookingList.setAllBookings(dataBaseAdapter.getBookingsWhenLoggedIn(username));
+       return bookingList;
+
+    }
+
+    @Override
+    public void bookARoomWhenLoggedIn(String roomID, LocalDate startDate, LocalDate endDate, String username) throws SQLException {
+        checkForLegalDates(startDate, endDate);
+        // No checking for Room object, because when we choose room, we check if there's available rooms -
+        // and if there is it means room value already is legal
+        RoomBooking roomBooking = new RoomBooking(startDate,endDate,roomID,username);
+        dataBaseAdapter.bookARoomWhenLoggedIn(roomBooking);
+    }
 }

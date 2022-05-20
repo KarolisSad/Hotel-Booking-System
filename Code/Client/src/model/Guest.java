@@ -12,6 +12,7 @@ public class Guest
   private String lName;
   private String email;
   private int phoneNr;
+  private String username;
 
   /**
    * Constructor to initialize instance variables using set methods.
@@ -159,5 +160,9 @@ public class Guest
   {
     Guest other = new Guest(fName, lName, email, phoneNr);
     return other;
+  }
+
+  public String getUsername() {
+    return username;
   }
 }

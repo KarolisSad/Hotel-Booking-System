@@ -139,6 +139,6 @@ public class RoomListViewController extends ViewController
    */
   public void back() throws IOException
   {
-    getViewHandler().openView("MenuForHotelManager.fxml");
+    getViewHandler().openView("LoginView.fxml");
   }
 }
