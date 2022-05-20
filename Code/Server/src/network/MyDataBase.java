@@ -156,10 +156,12 @@ public class MyDataBase
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "" + "select * from room where roomID in (select roomID from room\n"
-              + "except\n" + "select roomID\n" + "from roomBooking\n"
-              + "where startDate  between (?) and (?)\n"
-              + "OR endDate between (?) and (?));");
+          "SELECT *\n" + "FROM room\n" + "WHERE roomID IN (SELECT roomID\n"
+              + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
+              + "                 FROM roomBooking\n"
+              + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
+              + "                         (startDate BETWEEN (?) AND (?)\n"
+              + "                         OR endDate BETWEEN (?) AND (?));");
       statement.setObject(1, startDate);
       statement.setObject(2, endDate);
       statement.setObject(3, startDate);
