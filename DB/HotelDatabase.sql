@@ -137,3 +137,5 @@ update guest
                  email ='m@g.com',
                  phonenr = 12345678
 where username = 'nina';
+
+select * from guest where username = 'nina';

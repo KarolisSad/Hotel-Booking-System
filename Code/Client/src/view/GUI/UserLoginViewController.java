@@ -40,6 +40,7 @@ public class UserLoginViewController extends ViewController { private UserLoginM
             else {
 
                 getViewHandler().openView("GuestMenuView.fxml");
+                getViewModelFactory().getGuestMenuModel().passTheUsernameInfo(username.getText());
             }
         }
         catch (InterruptedException | IOException e) {

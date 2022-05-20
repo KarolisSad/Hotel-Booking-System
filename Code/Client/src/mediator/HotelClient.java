@@ -656,6 +656,26 @@ public class HotelClient implements Model
       return json.fromJson(message, GuestTransfer.class);
   }
 
+  @Override
+  public synchronized GuestTransfer getGuestByUsername(String username) {
+    sendToServerAsJson(
+            new GuestTransfer("getGuestByUsername", username));
+    message = null;
+    while (message == null)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+
+    return json.fromJson(message, GuestTransfer.class);
+  }
+
 
   @Override public void addListener(PropertyChangeListener listener)
   {

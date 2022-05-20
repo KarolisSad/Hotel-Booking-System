@@ -1,7 +1,7 @@
 package network;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
-import mediator.RoomTransfer;
 import model.Guest;
 import model.Room;
 import model.RoomBooking;
@@ -796,6 +796,36 @@ public class MyDataBase
       throw new IllegalArgumentException("User couldn't be edited.");
     }
 
+  }
+
+  public GuestTransfer getGuestByUsername(String username) {
+    System.out.println(
+            "Edit guest values" + username);
+
+    try (Connection connection = getConnection())
+    {
+
+      //updating info about the guest
+      PreparedStatement statement3 = connection.prepareStatement(
+              "select * from guest where username = ?;");
+
+      statement3.setString(1, username);
+      statement3.executeQuery();
+
+      ResultSet guest = statement3.executeQuery();
+      String usernameg = guest.getString("username");
+      String fName = guest.getString("fname");
+      String lName = guest.getString("lname");
+      String email = guest.getString("email");
+      int phonenr = guest.getInt("phonenr");
+
+      System.out.println("From mydatabase: " + usernameg);
+      return new GuestTransfer("getGuestWithUsername", usernameg, fName, lName, email, phonenr);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException("User can't be found.");
+    }
   }
 }
 

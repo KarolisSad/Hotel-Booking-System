@@ -287,6 +287,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public GuestTransfer getGuestByUsername(String username) {
+        return hotelClient.getGuestByUsername(username);
+    }
+
+    @Override
     public void addListener(PropertyChangeListener listener) {
         property.addPropertyChangeListener(listener);
     }

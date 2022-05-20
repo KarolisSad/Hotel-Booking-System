@@ -46,8 +46,6 @@ public class GuestPersonalInformationController extends ViewController {
         {
             //can be null
         }
-
-        reset();
     }
 
     public void saveDetailsButton()
@@ -63,15 +61,6 @@ public class GuestPersonalInformationController extends ViewController {
     }
 
     /**
-     * A method that opens the BookingsForReceptionistView.fxml
-     */
-    public void exitButton() throws IOException
-    {
-        reset();
-        getViewHandler().openView("BookingsForReceptionistView.fxml");
-    }
-
-    /**
      * A method that refers to reset() method in ViewModel
      */
     @Override public void reset()
@@ -79,7 +68,8 @@ public class GuestPersonalInformationController extends ViewController {
         viewModel.reset();
     }
 
-    public void menuButton() {
-
+    public void menuButton() throws IOException {
+        getViewHandler().openView("GuestMenuView.fxml");
+        reset();
     }
 }

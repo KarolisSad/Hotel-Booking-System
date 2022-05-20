@@ -1,5 +1,6 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
 
 import java.beans.PropertyChangeListener;
@@ -334,5 +335,10 @@ public class ModelManager implements Model
     @Override
     public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
         dataBaseAdapter.editGuestWithUsername(username,  getfName,  getlName,  email, phoneNr);
+    }
+
+    @Override
+    public GuestTransfer getGuestByUsername(String username) throws SQLException {
+        return dataBaseAdapter.getGuestByUsername(username);
     }
 }

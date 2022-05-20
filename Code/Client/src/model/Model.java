@@ -36,4 +36,6 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingTransfer bookARoomWhenLoggedIn(String roomName, LocalDate startDate, LocalDate endDate);
 
     GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int parseInt);
+
+    GuestTransfer getGuestByUsername(String username);
 }

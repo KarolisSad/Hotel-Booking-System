@@ -399,6 +399,18 @@ public class HotelClientHandler implements Runnable
 
           break;
         }
+        case "getGuestByUsername":{
+          GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
+          try {
+            GuestTransfer transfer = model.getGuestByUsername(guestTransfer.getUsername());
+            out.println(json.toJson(transfer));
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new GuestTransfer(e.getMessage())));
+          }
+          break;
+        }
 
         case "registerAGuest":
         {

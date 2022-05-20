@@ -2,9 +2,11 @@ package viewModel;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
+import mediator.GuestTransfer;
+import model.Guest;
 import model.Model;
 
-public class GuestPersonalInformationViewModel{
+public class GuestPersonalInformationViewModel {
 
     private SimpleStringProperty email;
     private SimpleStringProperty fName;
@@ -14,7 +16,7 @@ public class GuestPersonalInformationViewModel{
     private SimpleStringProperty errorLabel;
     private Model model;
 
-    public GuestPersonalInformationViewModel(Model model){
+    public GuestPersonalInformationViewModel(Model model) {
         this.model = model;
         this.errorLabel = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
@@ -77,5 +79,19 @@ public class GuestPersonalInformationViewModel{
 
     private String getUsername() {
         return username.get();
+    }
+
+    public void setUsername(String username) {
+        this.username.setValue(username + "");
+        System.out.println("username should be set: " + username);
+        setValues();
+    }
+
+    public void setValues() {
+        GuestTransfer guestTransfer = model.getGuestByUsername(username.get());
+        fName.setValue(guestTransfer.getfName());
+        lName.setValue(guestTransfer.getlName());
+        email.setValue(guestTransfer.getEmail());
+        phoneNr.setValue(guestTransfer.getPhoneNr());
     }
 }

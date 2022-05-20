@@ -82,7 +82,12 @@ public class GuestTransfer {
     this.phoneNr = phoneNr;
     }
 
-    /**
+  public GuestTransfer(String getGuestByUsername, String username) {
+    this.type = getGuestByUsername;
+    this.username = username;
+  }
+
+  /**
    * A getter method that returns ArrayList of Guest.
    * @return ArrayList of Guest called guests.
    */
@@ -120,5 +125,21 @@ public class GuestTransfer {
    */
   public String getErrorMessage() {
     return errorMessage;
+  }
+
+  public String getfName() {
+    return fName;
+  }
+
+  public String getlName() {
+    return lName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getPhoneNr() {
+    return String.valueOf(phoneNr);
   }
 }
