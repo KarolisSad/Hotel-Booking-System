@@ -46,7 +46,6 @@ public class GuestPersonalInformationController extends ViewController {
         {
             e.printStackTrace();
         }
-        viewModel.setValues();
     }
 
     public void saveDetailsButton()

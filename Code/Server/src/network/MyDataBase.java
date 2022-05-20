@@ -565,7 +565,7 @@ public class MyDataBase
 
       //updating info about the guest
       PreparedStatement statement3 = connection.prepareStatement(
-          "update guest\n" + "set fname = ?,\n" + "    lname =?,\n"
+          "update guest\n" + "set fname = ?,\n" + "lname =?,\n"
               + "    email =?\n" + "where phonenr = ?;");
 
       statement3.setInt(4, phoneNR);
@@ -779,15 +779,15 @@ public class MyDataBase
 
       //updating info about the guest
       PreparedStatement statement3 = connection.prepareStatement(
-              "update guest\n"+ "fname = ?,\n" + "    lname =?,\n"
-                      + "    email =?\n" + " phonenr = ?\n"
+              "update guest\n"+ "set fname = ?,\n" + "   lname =?,\n"
+                      + "    email =?,\n" + " phonenr = ?\n"
                       + "where username = ?;");
 
-      statement3.setInt(5, phoneNr);
-      statement3.setString(4, email);
-      statement3.setString(3, lName);
-      statement3.setString(2, fName);
-      statement3.setString(1, username);
+      statement3.setInt(4, phoneNr);
+      statement3.setString(3, email);
+      statement3.setString(2, lName);
+      statement3.setString(1, fName);
+      statement3.setString(5, username);
       statement3.executeUpdate();
       System.out.println("Done with editing");
     }
