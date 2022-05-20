@@ -161,7 +161,7 @@ public class MyDataBase
               + "                 FROM roomBooking\n"
               + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
               + "                         (startDate BETWEEN (?) AND (?)\n"
-              + "                         OR endDate BETWEEN (?) AND (?));");
+              + "                         OR endDate BETWEEN (?) AND (?)));");
       statement.setObject(1, startDate);
       statement.setObject(2, endDate);
       statement.setObject(3, startDate);
