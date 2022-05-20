@@ -3,7 +3,6 @@ package mediator;
 import com.google.gson.Gson;
 import model.Guest;
 import model.Model;
-import model.Room;
 import model.RoomType;
 
 import java.beans.PropertyChangeListener;
@@ -15,7 +14,7 @@ import java.net.Socket;
 import java.time.LocalDate;
 
 /**
- * Sending request to the server and receiving requested infromation
+ * Sending request to the server and receiving requested information
  * 2022-05-08
  *
  * @author Group5
@@ -617,6 +616,7 @@ public class HotelClient implements Model
     {
       e.printStackTrace();
     }
+
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
@@ -633,6 +633,47 @@ public class HotelClient implements Model
       }
     }
     return json.fromJson(message, RoomBookingTransfer.class);
+  }
+
+  @Override
+  public synchronized GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr)
+    {
+      sendToServerAsJson(
+              new GuestTransfer(editGuestWithUsername, username, getfName, getlName, email, phoneNr));
+      message = null;
+      while (message == null)
+      {
+        try
+        {
+          wait();
+        }
+        catch (InterruptedException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
+      return json.fromJson(message, GuestTransfer.class);
+  }
+
+  @Override
+  public synchronized GuestTransfer getGuestByUsername(String username) {
+    sendToServerAsJson(
+            new GuestTransfer("getGuestByUsername", username));
+    message = null;
+    while (message == null)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+
+    return json.fromJson(message, GuestTransfer.class);
   }
 
 

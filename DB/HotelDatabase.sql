@@ -6,7 +6,6 @@ DROP SCHEMA hotel CASCADE;
 create schema hotel;
 set schema 'hotel';
 
-drop schema hotel cascade ;
 create table if not exists room(
     roomID          varchar(20) PRIMARY KEY NOT NULL                                                  ,
     roomType        varchar(30) NOT NULL CHECK(roomType IN ('Family', 'Single', 'Double', 'Suite'))   ,
@@ -127,3 +126,16 @@ EXECUTE PROCEDURE double_booking();
 -----------Trigger------------->
 
 -------------------------------<
+insert into login(username, userPassword) VALUES ('nina', 'password');
+
+insert into guest (username, fName, lName, email, phoneNr)
+values ('nina', 'Nina', 'Wrona', 'n@gmail.com', 12344567);
+
+update guest
+                 set fname = 'Maria',
+                 lname = 'Cook',
+                 email ='m@g.com',
+                 phonenr = 12345678
+where username = 'nina';
+
+select * from guest where username = 'nina';

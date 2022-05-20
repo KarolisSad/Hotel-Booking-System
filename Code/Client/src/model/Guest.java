@@ -29,6 +29,19 @@ public class Guest
     setPhoneNr(phoneNr);
   }
 
+  public Guest(String username, String fName, String lName, String email, int phoneNr)
+  {
+    setUsername(username);
+    setfName(fName);
+    setlName(lName);
+    setEmail(email);
+    setPhoneNr(phoneNr);
+  }
+
+  private void setUsername(String username) {
+    this.username = username;
+  }
+
   /**
    * Method setting the fName variable the String passed as an argument.
    * @throws NullPointerException if argument is null or an empty String.

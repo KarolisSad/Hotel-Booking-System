@@ -1,5 +1,6 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 
@@ -31,4 +32,8 @@ public interface HotelPersistence {
     ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException;
 
     void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException;
+
+    void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException;
+
+    GuestTransfer getGuestByUsername(String username) throws SQLException;
 }

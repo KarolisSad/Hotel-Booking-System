@@ -1,5 +1,6 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
 
 import java.beans.PropertyChangeListener;
@@ -329,5 +330,15 @@ public class ModelManager implements Model
         // and if there is it means room value already is legal
         RoomBooking roomBooking = new RoomBooking(startDate,endDate,roomID,username);
         dataBaseAdapter.bookARoomWhenLoggedIn(roomBooking);
+    }
+
+    @Override
+    public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
+        dataBaseAdapter.editGuestWithUsername(username,  getfName,  getlName,  email, phoneNr);
+    }
+
+    @Override
+    public GuestTransfer getGuestByUsername(String username) throws SQLException {
+        return dataBaseAdapter.getGuestByUsername(username);
     }
 }

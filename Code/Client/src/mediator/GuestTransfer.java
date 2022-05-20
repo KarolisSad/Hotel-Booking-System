@@ -73,6 +73,20 @@ public class GuestTransfer {
     this.password = password;
   }
 
+    public GuestTransfer(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr) {
+    this.type = editGuestWithUsername;
+    this.username = username;
+    this.fName = getfName;
+    this.lName = getlName;
+    this.email = email;
+    this.phoneNr = phoneNr;
+    }
+
+  public GuestTransfer(String getGuestByUsername, String username) {
+    this.type = getGuestByUsername;
+    this.username = username;
+  }
+
   /**
    * A getter method that returns ArrayList of Guest.
    * @return ArrayList of Guest called guests.
@@ -104,5 +118,28 @@ public class GuestTransfer {
             ", type='" + type + '\'' +
             ", guests=" + guests +
             '}';
+  }
+  /**
+   * Method used for returning the error message
+   * @return the error message as a string.
+   */
+  public String getErrorMessage() {
+    return errorMessage;
+  }
+
+  public String getfName() {
+    return fName;
+  }
+
+  public String getlName() {
+    return lName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getPhoneNr() {
+    return String.valueOf(phoneNr);
   }
 }
