@@ -38,7 +38,8 @@ public class GuestMenuController extends ViewController
         getViewHandler().openView("BookingOverViewForGuestView.fxml");
     }
 
-    public void personalDetails() {
+    public void personalDetails() throws IOException {
         System.out.println("Personal details");
+        getViewHandler().openView("GuestPersonalInformation.fxml");
     }
 }
