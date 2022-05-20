@@ -525,7 +525,7 @@ public class HotelClient implements Model
             roomid));
     message = null;
 
-        
+
     try
     {
       wait();

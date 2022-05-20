@@ -319,6 +319,7 @@ public class ModelManager implements Model
     public RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException {
        bookingList.setAllBookings(dataBaseAdapter.getBookingsWhenLoggedIn(username));
        return bookingList;
+       
     }
 
     @Override
