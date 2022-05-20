@@ -16,7 +16,6 @@ public interface Model extends UnnamedPropertyChangeSubject
   void editRoomInfo(String roomId, RoomType type, int nrBeds) throws SQLException;
   ArrayList<Room> getAllRooms() throws SQLException;
 
-  // Christian added:
   RoomBookingList getAllBookings(String type) throws SQLException;
   void processBooking(int id) throws SQLException;
   void cancelBooking(int id) throws SQLException;
@@ -36,4 +35,6 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException;
 
     void bookARoomWhenLoggedIn(String roomID, LocalDate startDate, LocalDate endDate, String username) throws SQLException;
+
+    void clearDatabase() throws SQLException;
 }

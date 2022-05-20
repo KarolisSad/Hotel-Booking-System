@@ -158,7 +158,6 @@ public class RoomBookingList
   }
 
 
-  //TODO this should probably be changed when we start implementing cancellation. maybe it should just remove the booking from the list (and database)
   /**
    * A method used to cancel a booking, Eg. setting it's state to cancelled.
    * @param id the Booking ID of the booking to cancel.
@@ -168,6 +167,10 @@ public class RoomBookingList
     getBookingById(id).cancelBooking();
   }
 
+  @Override public String toString()
+  {
+    return allBookings.toString();
+  }
 }
 
 

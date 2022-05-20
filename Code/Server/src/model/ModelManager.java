@@ -19,7 +19,6 @@ public class ModelManager implements Model
 {
     private RoomList roomList;
 
-    // todo CHR
     private RoomBookingList bookingList;
     private PropertyChangeSupport property;
     private HotelPersistence dataBaseAdapter;
@@ -68,6 +67,7 @@ public class ModelManager implements Model
         if (roomId.equals(""))
         {
             // todo change it
+            //todo shouldn't this create a room object and pass that to the database????
             throw new IllegalArgumentException("non");
         }
         dataBaseAdapter.addRoom(roomId, type, nrBeds);
@@ -124,7 +124,6 @@ public class ModelManager implements Model
         dataBaseAdapter.processBooking(bookingList.getBookingById(id));
     }
 
-    // TODO should probably be changed - we need to decide what to do when cancelling a booking. @Karolis??
 
     /**
      * Method calling the cancelBooking() method in the bookingList on the booking with a ID matching the one passed as argument,
@@ -151,6 +150,7 @@ public class ModelManager implements Model
     @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
         throws SQLException
     {
+        //todo shouldn't this create a new room object and pass the changes to the database????
         dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
     }
 
@@ -166,6 +166,8 @@ public class ModelManager implements Model
     @Override public void editBooking(int bookingId, LocalDate startDate,
         LocalDate endDate, String roomId) throws SQLException
     {
+        //todo shouldn't this create a Booking object and pass that, along with edits to the database????
+
         checkForLegalDates(startDate, endDate);
         dataBaseAdapter.editBooking(bookingId, startDate, endDate, roomId);
     }
@@ -283,6 +285,7 @@ public class ModelManager implements Model
      */
     @Override
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
+
         dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
     }
 
@@ -323,5 +326,14 @@ public class ModelManager implements Model
         // and if there is it means room value already is legal
         RoomBooking roomBooking = new RoomBooking(startDate,endDate,roomID,username);
         dataBaseAdapter.bookARoomWhenLoggedIn(roomBooking);
+    }
+
+    /**
+     * Method used for clearing all data in the database. Primarily intended to be used for testing purposes.
+     *
+     */
+    @Override public void clearDatabase() throws SQLException
+    {
+        dataBaseAdapter.clearDatabase();
     }
 }

@@ -244,16 +244,7 @@ public class RoomBooking
 
   @Override
   public String toString() {
-    return "RoomBooking{" +
-            "startDate=" + startDate +
-            ", endDate=" + endDate +
-            ", room=" + room +
-            ", guest=" + guest +
-            ", roomID='" + roomID + '\'' +
-            ", username='" + username + '\'' +
-            ", bookingID=" + bookingID +
-            ", state=" + state +
-            '}';
+    return "<RoomBooking> BookingID: " + bookingID + ", StartDate: " + startDate + ", EndDate: " + endDate + ", Room: " + room + ", Guest: " + guest + ", State: " + state.getState();
   }
 
   /**

@@ -12,7 +12,6 @@ public class Room
   private RoomType roomType;
   private int numberOfBeds;
 
-  //todo change javadoc
 
   /**
    * Four-argument contructor

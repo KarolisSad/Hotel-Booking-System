@@ -79,7 +79,6 @@ public class HotelDataBase implements HotelPersistence
     dataBase.processBooking(booking);
   }
 
-  //TODO What should this do??
   @Override public void cancelBooking(RoomBooking roomBooking)
       throws SQLException
   {
@@ -160,6 +159,12 @@ public class HotelDataBase implements HotelPersistence
   public void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException {
     MyDataBase dataBase = MyDataBase.getInstance();
     dataBase.bookARoomWhenLoggedIn(roomBooking);
+  }
+
+  @Override public void clearDatabase() throws SQLException
+  {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    dataBase.clearDatabase();
   }
 
 }
