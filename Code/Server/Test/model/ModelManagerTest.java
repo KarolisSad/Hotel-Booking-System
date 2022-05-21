@@ -49,7 +49,7 @@ class ModelManagerTest
   {
     try
     {
-      assertEquals(0, model.getAllRooms().size());
+      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
       model.addRoom("Test Room 1", RoomType.SINGLE, 1);
       assertEquals(1, model.getAllRooms().size());
     }
@@ -65,7 +65,7 @@ class ModelManagerTest
   {
     try
     {
-      assertEquals(0, model.getAllRooms().size());
+      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
       model.addRoom("Test Room 1", RoomType.SINGLE, 1);
       model.addRoom("Test Room 2", RoomType.DOUBLE, 2);
       model.addRoom("Test Room 3", RoomType.FAMILY, 3);
@@ -81,7 +81,7 @@ class ModelManagerTest
   {
     try
     {
-      assertEquals(0, model.getAllRooms().size());
+      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
       model.addRoom("Test Room 1", RoomType.SINGLE, 1);
       model.addRoom("Test Room 2", RoomType.DOUBLE, 2);
       model.addRoom("Test Room 3", RoomType.FAMILY, 3);
@@ -159,7 +159,7 @@ class ModelManagerTest
     {
       model.addRoom("Test Room 1", RoomType.SINGLE, 1);
       model.removeRoom("Test Room 1");
-      assertEquals(0, model.getAllRooms().size());
+      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
     }
     catch (SQLException e)
     {
@@ -197,7 +197,7 @@ class ModelManagerTest
       model.removeRoom("Test Room 2");
       model.removeRoom("Test Room 3");
 
-      assertEquals(0, model.getAllRooms().size());
+      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
       assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 1"));
       assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 2"));
       assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 3"));
@@ -563,6 +563,7 @@ class ModelManagerTest
 
   @Test void editRoomInfoRoomIdNullValue()
   {
+    // TODO - Check with group -> is this supposed to be like this??
     try
     {
       model.addRoom("Test Room 1", RoomType.SINGLE, 1);
@@ -960,9 +961,259 @@ class ModelManagerTest
 
   //  Many:
 
+  @Test void getAllBookingsWith3BookingsInDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      assertEquals(3, model.getAllBookings("").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllBookingsWith6BookingsInDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+
+      assertEquals(6, model.getAllBookings("").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllCancelledBookingsWith3InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(2).getBookingID());
+
+      assertEquals(3, model.getAllBookings("cancelled").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllCancelledBookingsWith6InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(2).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(3).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(4).getBookingID());
+      model.cancelBooking(model.getAllBookings("").getBooking(5).getBookingID());
+
+      assertEquals(6, model.getAllBookings("cancelled").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllArchivedBookingsWith3InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+
+      assertEquals(3, model.getAllBookings("archived").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllArchivedBookingsWith6InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(3).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(4).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(5).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(3).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(4).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(5).getBookingID());
+
+      assertEquals(6, model.getAllBookings("archived").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllInProgressBookingsWith3InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+
+
+      assertEquals(3, model.getAllBookings("inProgress").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllInProgressBookingsWith6InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(3).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(4).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(5).getBookingID());
+
+      assertEquals(6, model.getAllBookings("inProgress").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllBookedBookingsWith3InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(2).getBookingID());
+
+
+      assertEquals(3, model.getAllBookings("booked").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void getAllBookedBookingsWith6InDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+      model.book("2", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.book("2", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
+      model.book("2", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
+
+
+      assertEquals(6, model.getAllBookings("booked").bookedRoomListSize());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
   //  Boundary:
 
+    // No boundaires to test
+
   //  Exception:
+
+    // No exceptions to test
 
 
   ////////////////////////////////////////////////////
@@ -973,13 +1224,93 @@ class ModelManagerTest
 
   //  Zero:
 
+  @Test void processBookingZeroValueArgument()
+  {
+      assertThrows(NullPointerException.class, ()-> model.processBooking(0));
+  }
+
   //  One:
+  @Test void processBookingCheckIn1Booking()
+  {
+      try
+      {
+        model.addRoom("1", RoomType.SINGLE, 1);
+        model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+        assertEquals("Booked", model.getAllBookings("").getBooking(0).getState());
+        model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+        assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
+      }
+      catch (SQLException e)
+      {
+        throw new RuntimeException(e);
+      }
+  }
+
+  @Test void processBookingCheckOut1Booking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Archived", model.getAllBookings("").getBooking(0).getState());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void processBookingTryToProcessArchivedBooking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Archived", model.getAllBookings("").getBooking(0).getState());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Archived", model.getAllBookings("").getBooking(0).getState());
+
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void processBookingTryToProcessCancelledBooking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Cancelled", model.getAllBookings("").getBooking(0).getState());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Cancelled", model.getAllBookings("").getBooking(0).getState());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
   //  Many:
 
+    // Many-cases already (Check-in/out more than one booking in one go) tested in getAllBookings-case above.
+
   //  Boundary:
 
+    // No boundary to check.
+
   //  Exception:
+
+    // Exception already checked in Zero-case.
 
 
   ////////////////////////////////////////////////////
@@ -990,13 +1321,87 @@ class ModelManagerTest
 
   //  Zero:
 
+  @Test void cancelBookingZeroValueArgument()
+  {
+    assertThrows(NullPointerException.class, ()-> model.cancelBooking(0));
+  }
+
   //  One:
+
+  @Test void cancelBookingCancel1BookedBooking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      assertEquals("Booked", model.getAllBookings("").getBooking(0).getState());
+      model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Cancelled", model.getAllBookings("").getBooking(0).getState());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
   //  Many:
 
+    // Many-cases already (Cancelling more than one booking in one go) tested in getAllBookings-case above.
+
   //  Boundary:
 
+    // No boundary to check.
+
   //  Exception:
+
+  @Test void cancelBookingCancel1InProgressBooking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
+      assertThrows(IllegalStateException.class, ()->model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID()));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void cancelBookingCancel1ArchivedBooking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Archived", model.getAllBookings("").getBooking(0).getState());
+      assertThrows(IllegalStateException.class, ()->model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID()));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void cancelBookingCancel1AlreadyCancelledBooking()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
+      assertEquals("Cancelled", model.getAllBookings("").getBooking(0).getState());
+      assertThrows(IllegalStateException.class, ()->model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID()));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
 
   ////////////////////////////////////////////////////

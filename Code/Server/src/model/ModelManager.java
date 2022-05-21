@@ -150,7 +150,7 @@ public class ModelManager implements Model
     @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
         throws SQLException
     {
-        //todo shouldn't this create a new room object and pass the changes to the database????
+        //todo shouldn't this do something if a null-value is passed as roomID???
         dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
     }
 
