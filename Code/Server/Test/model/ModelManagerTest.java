@@ -1411,14 +1411,151 @@ class ModelManagerTest
   ////////////////////////////////////////////////////
 
   //  Zero:
+  @Test void editBookingWithNullValues()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      assertThrows(NullPointerException.class, ()-> model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), null, null, null));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
   //  One:
 
+  @Test void editBookingRoomNumber()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now(), LocalDate.now().plusDays(2), "2");
+      assertEquals("2", model.getAllBookings("").getBooking(0).getRoom().getRoomId());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void editBookingStartDate()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), "1");
+      assertEquals(LocalDate.now().plusDays(1), model.getAllBookings("").getBooking(0).getStartDate());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void editBookingEndDate()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now(), LocalDate.now().plusDays(1), "1");
+      assertEquals(LocalDate.now().plusDays(1), model.getAllBookings("").getBooking(0).getEndDate());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
   //  Many:
+
+  @Test void editBookingAllInformation()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("2", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(2), LocalDate.now().plusDays(5), "2");
+      assertEquals(LocalDate.now().plusDays(5), model.getAllBookings("").getBooking(0).getEndDate());
+      assertEquals(LocalDate.now().plusDays(2), model.getAllBookings("").getBooking(0).getStartDate());
+      assertEquals("2", model.getAllBookings("").getBooking(0).getRoom().getRoomId());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
 
   //  Boundary:
 
+  @Test void editBookingLowBoundaryStartDateBeforeToday()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      assertThrows(IllegalArgumentException.class, ()->model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().minusDays(1), LocalDate.now().plusDays(2), "1"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void editBookingBoundaryEndDateIsEqualToStartDate()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      assertThrows(IllegalArgumentException.class, ()->model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(1), LocalDate.now().plusDays(1), "1"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test void editBookingBoundaryEndDateIsBeforeStartDate()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
+      assertThrows(IllegalArgumentException.class, ()->model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(3), LocalDate.now().plusDays(1), "1"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
   //  Exception:
+
+  @Test void editBookingRoomAllreadyBookedForNewDates()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1);
+      model.book("1", LocalDate.now(), LocalDate.now().plusDays(7), bob);
+      model.book("1", LocalDate.now().plusDays(8), LocalDate.now().plusDays(10), bob);
+      assertThrows(IllegalArgumentException.class, ()->
+          model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(),
+              LocalDate.now(), LocalDate.now().plusDays(9), "1"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
 
   ////////////////////////////////////////////////////
@@ -1427,7 +1564,9 @@ class ModelManagerTest
   //                                                //
   ////////////////////////////////////////////////////
 
+                // TODO Not done yet
   //  Zero:
+
 
   //  One:
 
@@ -1437,39 +1576,6 @@ class ModelManagerTest
 
   //  Exception:
 
-
-  ////////////////////////////////////////////////////
-  //                                                //
-  //             getAllGuests testing               //
-  //                                                //
-  ////////////////////////////////////////////////////
-
-  //  Zero:
-
-  //  One:
-
-  //  Many:
-
-  //  Boundary:
-
-  //  Exception:
-
-
-  ////////////////////////////////////////////////////
-  //                                                //
-  //                getRoom testing                 //
-  //                                                //
-  ////////////////////////////////////////////////////
-
-  //  Zero:
-
-  //  One:
-
-  //  Many:
-
-  //  Boundary:
-
-  //  Exception:
 
 
   ////////////////////////////////////////////////////
@@ -1480,13 +1586,59 @@ class ModelManagerTest
 
   //  Zero:
 
+    // No zero-case to test
+
   //  One:
+  @Test void register1User()
+  {
+    try
+    {
+      model.register("Bob", "Builder", "bob@build.com", 12312312, "BuildBob", "bobspassword");
+      assertEquals("BuildBob", model.getAllGuests().get(0).getUsername());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
   //  Many:
 
+  @Test void register3Users()
+  {
+    try
+    {
+      model.register("Bob", "Builder", "bob@build.com", 12312312, "BuildBob", "bobspassword");
+      model.register("Wendy", "Worker", "wendy@work.com", 33221100, "WendyWork", "wendyspassword");
+      model.register("Test", "Tester", "tester@test.com", 99887766, "Test", "test");
+
+      assertEquals(3, model.getAllGuests().size());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+
+  }
+
   //  Boundary:
 
+    // No boundaries to test.
+
   //  Exception:
+
+  @Test void registerUserWithNonUniqueUsername()
+  {
+    try
+    {
+      model.register("Bob", "Builder", "bob@build.com", 12312312, "BuildBob", "bobspassword");
+      assertThrows(IllegalArgumentException.class, ()->model.register("Bobby", "Builderson", "bobby@email.com", 55446699, "BuildBob", "password"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
 
   ////////////////////////////////////////////////////
@@ -1497,46 +1649,64 @@ class ModelManagerTest
 
   //  Zero:
 
-  //  One:
-
-  //  Many:
-
-  //  Boundary:
-
-  //  Exception:
-
-
-  ////////////////////////////////////////////////////
-  //                                                //
-  //         getBookingsWhenLoggedIn testing        //
-  //                                                //
-  ////////////////////////////////////////////////////
-
-  //  Zero:
+  @Test void loginWithNoUsersRegistered()
+  {
+    assertThrows(IllegalArgumentException.class, ()-> model.login("Bob", "Builder"));
+  }
 
   //  One:
 
-  //  Many:
+  @Test void loginWithUserInDB()
+  {
+    try
+    {
+      model.register("Bob", "Builder", "bob@build.com", 12312312, "BuildBob", "bobspassword");
+      assertDoesNotThrow(()-> model.login("BuildBob", "bobspassword"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
 
-  //  Boundary:
-
-  //  Exception:
-
-
-  ////////////////////////////////////////////////////
-  //                                                //
-  //         bookARoomWhenLoggedIn testing          //
-  //                                                //
-  ////////////////////////////////////////////////////
-
-  //  Zero:
-
-  //  One:
+  }
 
   //  Many:
 
+  @Test void loginWith3UsersInDB()
+  {
+    try
+    {
+      model.register("Bob", "Builder", "bob@build.com", 12312312, "BuildBob", "bobspassword");
+      model.register("Wendy", "Worker", "wendy@work.com", 33221100, "WendyWork", "wendyspassword");
+      model.register("Test", "Tester", "tester@test.com", 99887766, "Test", "test");
+      assertDoesNotThrow(()-> model.login("BuildBob", "bobspassword"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+
+  }
+
   //  Boundary:
+
+    // No boundaries to check
 
   //  Exception:
 
+    // Login with non-existent user already tested.
+
+  @Test void loginWithWrongPassword()
+  {
+    try
+    {
+      model.register("Bob", "Builder", "bob@build.com", 12312312, "BuildBob", "bobspassword");
+      assertThrows(IllegalArgumentException.class, ()->model.login("BuildBob", "WRONGPASSWORD"));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+
+  }
 }

@@ -166,8 +166,6 @@ public class ModelManager implements Model
     @Override public void editBooking(int bookingId, LocalDate startDate,
         LocalDate endDate, String roomId) throws SQLException
     {
-        //todo shouldn't this create a Booking object and pass that, along with edits to the database????
-
         checkForLegalDates(startDate, endDate);
         dataBaseAdapter.editBooking(bookingId, startDate, endDate, roomId);
     }

@@ -730,7 +730,7 @@ public class MyDataBase
       }
       catch (Exception e)
       {
-        e.printStackTrace();
+        //e.printStackTrace();
         throw new IllegalArgumentException(
             "Unable to register user with: " + guest.getUsername()
                 + " username.");
