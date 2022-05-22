@@ -27,7 +27,7 @@ public class BookingsForReceptionistViewController extends ViewController
   @FXML private TableColumn<SimpleBookingViewModel, Integer> bookingIdColumn;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> startDateColumn;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> endDateColumn;
-  @FXML private TableColumn<SimpleBookingViewModel, Guest> guestColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, String> guestColumn;
   @FXML private TableColumn<SimpleBookingViewModel, String> roomNumberColumn;
   @FXML private TableColumn<SimpleBookingViewModel, String> stateColumn;
   @FXML private Label errorLabel;
@@ -49,7 +49,7 @@ public class BookingsForReceptionistViewController extends ViewController
     endDateColumn.setCellValueFactory(
         cellData -> cellData.getValue().endDateProperty());
     guestColumn.setCellValueFactory(
-        cellData -> cellData.getValue().guestProperty());
+        cellData -> cellData.getValue().guestNameProperty());
     roomNumberColumn.setCellValueFactory(
         cellData -> cellData.getValue().roomIdProperty());
     stateColumn.setCellValueFactory(

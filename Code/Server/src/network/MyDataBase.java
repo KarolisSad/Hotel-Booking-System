@@ -44,7 +44,7 @@ public class MyDataBase
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+       return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
@@ -59,7 +59,7 @@ public class MyDataBase
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Milit@ria2003");
     // Christian
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
 
@@ -162,7 +162,7 @@ public class MyDataBase
             RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
         rooms.add(room);
       }
-      if (rooms.isEmpty())
+      if (rooms == null)
       {
         throw new IllegalArgumentException("No rooms were added yet.");
       }
