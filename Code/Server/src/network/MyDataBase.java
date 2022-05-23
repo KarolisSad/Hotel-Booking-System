@@ -44,7 +44,7 @@ public class MyDataBase
     // Nina
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-    //   return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+       return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
@@ -810,15 +810,13 @@ public class MyDataBase
 
   public void clearDatabase() throws SQLException
   {
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-            "DELETE FROM roombooking;"
-            + "DELETE FROM room;"
-                + "DELETE FROM login;"
-                + "DELETE FROM guest;");
+            "DELETE FROM roombooking;" + "DELETE FROM room;"
+                + "DELETE FROM login;" + "DELETE FROM guest;");
 
         statement.executeUpdate();
       }
@@ -827,6 +825,7 @@ public class MyDataBase
         throw new RuntimeException(e);
       }
     }
+  }
 
   public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
     System.out.println(

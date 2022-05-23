@@ -166,6 +166,7 @@ public class HotelDataBase implements HotelPersistence
   {
     MyDataBase dataBase = MyDataBase.getInstance();
     dataBase.clearDatabase();
+  }
 
   @Override
   public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
