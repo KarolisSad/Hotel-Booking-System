@@ -168,30 +168,58 @@ public class ViewModelFactory
     return showBookingViewModel;
   }
 
+  /**
+   * A getter for userRegisterModel.
+   * @return UserRegisterModel object.
+   */
   public UserRegisterModel getUserRegisterModel() {
     return userRegisterModel;
   }
 
+  /**
+   * A getter for userLoginMainModel.
+   * @return UserLoginMainModel object.
+   */
   public UserLoginMainModel getUserLoginMainModel() {
     return userLoginMainModel;
   }
 
+  /**
+   * A getter for userLoginModel.
+   * @return UserLoginModel object.
+   */
   public UserLoginModel getUserLoginModel() {
     return userLoginModel;
   }
 
+  /**
+   * A getter for guestMenuModel.
+   * @return GuestMenuModel object.
+   */
   public GuestMenuModel getGuestMenuModel() {
     return guestMenuModel;
   }
 
+  /**
+   * A getter for bookingOverviewForGuestModel.
+   * @return BookingOverviewForGuestModel object.
+   */
   public BookingOverviewForGuestModel getBookingOverviewForGuestModel() {
     return bookingOverviewForGuestModel;
   }
 
+  /**
+   * A getter for roomOverviewForGuestModel.
+   * @return RoomOverviewForGuestModel object.
+   */
   public RoomOverviewForGuestModel getRoomOverviewForGuestModel() {
     return roomOverviewForGuestModel;
   }
 
+  /**
+   * A getter for guestPersonalInformationViewModel.
+   * @return GuestPersonalInformationViewModel object.
+   */
   public GuestPersonalInformationViewModel getGuestPersonalInformationViewModel() {
     return guestPersonalInformationViewModel;
   }
