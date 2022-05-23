@@ -32,6 +32,12 @@ public class HotelClientHandler implements Runnable
   private Model model;
   private String message;
 
+  /**
+   * Constructor initializing instance variables.
+   * @param socket
+   * @param model
+   * @throws IOException
+   */
   public HotelClientHandler(Socket socket, Model model) throws IOException
   {
     this.socket = socket;
