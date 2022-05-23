@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS room
     roomID   varchar(20) PRIMARY KEY NOT NULL,
     roomType varchar(30)             NOT NULL CHECK (roomType IN ('Family', 'Single', 'Double', 'Suite')),
     nrBeds   integer                 NOT NULL CHECK ( nrBeds BETWEEN 1 AND 20)
+
 );
 
 CREATE TABLE IF NOT EXISTS guest
@@ -205,3 +206,18 @@ WHERE roomID IN (SELECT roomID
                  WHERE state in ('Booked', 'In Progress', 'Archived') AND
                          (startDate BETWEEN '2022-05-27' AND '2022-05-29'
                          OR endDate BETWEEN '2022-05-27' AND '2022-05-29'));
+
+-------------------------------<
+insert into login(username, userPassword) VALUES ('nina', 'password');
+
+insert into guest (username, fName, lName, email, phoneNr)
+values ('nina', 'Nina', 'Wrona', 'n@gmail.com', 12344567);
+
+update guest
+                 set fname = 'Maria',
+                 lname = 'Cook',
+                 email ='m@g.com',
+                 phonenr = 12345678
+where username = 'nina';
+
+select * from guest where username = 'nina';

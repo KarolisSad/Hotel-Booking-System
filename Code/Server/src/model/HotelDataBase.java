@@ -1,5 +1,6 @@
 package model;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import network.MyDataBase;
@@ -165,6 +166,17 @@ public class HotelDataBase implements HotelPersistence
   {
     MyDataBase dataBase = MyDataBase.getInstance();
     dataBase.clearDatabase();
+
+  @Override
+  public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    dataBase.editGuestWithUsername( username,  getfName,  getlName,  email,  phoneNr);
+  }
+
+  @Override
+  public GuestTransfer getGuestByUsername(String username) throws SQLException {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    return dataBase.getGuestByUsername(username);
   }
 
 }

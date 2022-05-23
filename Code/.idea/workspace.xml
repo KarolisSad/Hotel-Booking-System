@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8d8e691a-79aa-41ec-9929-588db118e48a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Client/Client.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Server.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../General (to delete)/production/Server/View/AddEditView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../General (to delete)/production/Server/View/GuestInformationView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../General (to delete)/production/Server/View/LogInView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../General (to delete)/production/Server/View/ReservationView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../General (to delete)/production/Server/View/RoomListView.fxml" beforeDir="false" />
-    </list>
+    <list default="true" id="8d8e691a-79aa-41ec-9929-588db118e48a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

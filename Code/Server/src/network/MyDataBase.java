@@ -1,7 +1,7 @@
 package network;
 
+import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
-import mediator.RoomTransfer;
 import model.Guest;
 import model.Room;
 import model.RoomBooking;
@@ -42,9 +42,9 @@ public class MyDataBase
     // Karolis
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-       return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+    //   return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
@@ -586,7 +586,7 @@ public class MyDataBase
 
       //updating info about the guest
       PreparedStatement statement3 = connection.prepareStatement(
-          "update guest\n" + "set fname = ?,\n" + "    lname =?,\n"
+          "update guest\n" + "set fname = ?,\n" + "lname =?,\n"
               + "    email =?\n" + "where phonenr = ?;");
 
       statement3.setInt(4, phoneNR);
@@ -828,6 +828,65 @@ public class MyDataBase
       }
     }
 
+  public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
+    System.out.println(
+            "Edit guest values" + username + fName + lName + email + phoneNr);
+
+    try (Connection connection = getConnection())
+    {
+
+      //updating info about the guest
+      PreparedStatement statement3 = connection.prepareStatement(
+              "update guest\n"+ "set fname = ?,\n" + "   lname =?,\n"
+                      + "    email =?,\n" + " phonenr = ?\n"
+                      + "where username = ?;");
+
+      statement3.setInt(4, phoneNr);
+      statement3.setString(3, email);
+      statement3.setString(2, lName);
+      statement3.setString(1, fName);
+      statement3.setString(5, username);
+      statement3.executeUpdate();
+      System.out.println("Done with editing");
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException("User couldn't be edited.");
+    }
+
+  }
+
+  public GuestTransfer getGuestByUsername(String username) {
+    System.out.println(
+            "Get guest values: " + username);
+    GuestTransfer guestTransfer =null;
+    try (Connection connection = getConnection())
+    {
+      System.out.println("From mydatabase: ");
+
+      //updating info about the guest
+      PreparedStatement statement = connection.prepareStatement(
+              "select * from guest where username = ?;");
+
+      statement.setString(1, username);
+
+      ResultSet guest = statement.executeQuery();
+      while (guest.next()) {
+        String usernameg = guest.getString("username");
+        String fName = guest.getString("fname");
+        String lName = guest.getString("lname");
+        String email = guest.getString("email");
+        int phonenr = guest.getInt("phonenr");
+        System.out.println("From mydatabase: " + usernameg);
+
+        guestTransfer = new GuestTransfer("getGuestWithUsername", usernameg, fName, lName, email, phonenr);
+      }
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException("User can't be found.");
+    }
+    return guestTransfer;
   }
 }
 

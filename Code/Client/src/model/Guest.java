@@ -38,6 +38,7 @@ public class Guest
           "Username should not be empty. Please enter a valid username.");
     }
 
+
     this.username = username;
   }
 
