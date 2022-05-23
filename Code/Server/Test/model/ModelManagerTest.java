@@ -1,13 +1,11 @@
 package model;
 
-import com.sun.scenario.animation.shared.SingleLoopClipEnvelope;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

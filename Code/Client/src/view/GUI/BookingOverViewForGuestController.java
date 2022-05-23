@@ -2,9 +2,7 @@ package view.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import view.ViewController;
 import viewModel.BookingOverviewForGuestModel;
 import viewModel.GuestMenuModel;
@@ -12,6 +10,7 @@ import viewModel.SimpleBookingViewModel;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class BookingOverViewForGuestController  extends ViewController
 {
@@ -57,6 +56,34 @@ public class BookingOverViewForGuestController  extends ViewController
     public void reset() {
         viewModel.reset();
     }
+
+    public void cancelBookingButton() throws IOException
+    {
+            //Confirmation box
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            //Style
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add("");
+            dialogPane.getStylesheets().add(getClass().getResource("box.css").toExternalForm());
+            dialogPane.getStyleClass().add("box.css");
+            //
+            alert.setHeaderText("Are you sure you want to cancel the booking");
+
+            ButtonType confirm = new ButtonType("Confirm");
+            ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(confirm, cancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == confirm)
+            {
+                viewModel.removeBooking();
+                System.out.println("The booking is canceled.");
+            }
+            else
+            {
+                System.out.println("You pressed NO");
+                alert.close();
+            }
+        }
 
 
     public void roomDetails() throws IOException {

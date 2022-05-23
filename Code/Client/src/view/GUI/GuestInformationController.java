@@ -59,23 +59,10 @@ public class GuestInformationController extends ViewController
    * A void method setting guest information
    * for currently running booking.
    */
-    /*
-  public void confirmButton()
-  {
-    try
-    {
-      getViewModelFactory().getGuestInformationViewModel().bookRoomWithGuest();
-    }
-
-    catch (Exception e)
-    {
-      errorLabel.textProperty().set(e.getMessage());
-    }
-
-  }
 
 
-     */
+
+
 
   /**
    * A void method opening the reservation view.

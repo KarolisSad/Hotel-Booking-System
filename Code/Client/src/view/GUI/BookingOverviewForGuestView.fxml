@@ -41,6 +41,11 @@
                                 <Font name="Arial" size="13.0" />
                             </font>
                         </Button>
+                  <Button fx:id="cancelBookingButton" mnemonicParsing="false" onAction="#cancelBookingButton" prefHeight="30.0" prefWidth="113.0" text="Cancel Booking">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
                     </children>
                 </VBox>
             </children>

@@ -72,7 +72,7 @@
                   <Font name="Arial Narrow" size="13.0" />
                </font></Label>
             <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="95.0" text="GoBack" />
-            <Button mnemonicParsing="false" onAction="#confirmButton" prefHeight="39.0" prefWidth="124.0" text="Confirm" />
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="Confirm" />
          </children>
       </HBox>
    </children>

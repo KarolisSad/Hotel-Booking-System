@@ -44,9 +44,9 @@ public class MyDataBase
     // Nina
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-    //   return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+       //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
           ////////////////////////////////////////////////////
           //                                                //
@@ -61,7 +61,7 @@ public class MyDataBase
     // Christian
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
     // Juste
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
+   // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
 
 
   }
@@ -581,18 +581,18 @@ public class MyDataBase
       ResultSet resultSet = statement.executeQuery();
       System.out.println("before: ");
       System.out.println(resultSet.next());
-      int phoneNR = resultSet.getInt("guest");
-      System.out.println(phoneNR + ": phonrNR");
+      String username = resultSet.getString("guest");
 
       //updating info about the guest
       PreparedStatement statement3 = connection.prepareStatement(
           "update guest\n" + "set fname = ?,\n" + "lname =?,\n"
-              + "    email =?\n" + "where phonenr = ?;");
+              + "    email =?,\n" + "phonenr = ? where username = ?;");
 
-      statement3.setInt(4, phoneNR);
+      statement3.setInt(4, phoneNr);
       statement3.setString(3, email);
       statement3.setString(2, lName);
       statement3.setString(1, fName);
+      statement3.setString(5, username);
       statement3.executeUpdate();
       System.out.println("Done with editing");
     }
@@ -810,15 +810,13 @@ public class MyDataBase
 
   public void clearDatabase() throws SQLException
   {
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-            "DELETE FROM roombooking;"
-            + "DELETE FROM room;"
-                + "DELETE FROM login;"
-                + "DELETE FROM guest;");
+            "DELETE FROM roombooking;" + "DELETE FROM room;"
+                + "DELETE FROM login;" + "DELETE FROM guest;");
 
         statement.executeUpdate();
       }
@@ -827,6 +825,7 @@ public class MyDataBase
         throw new RuntimeException(e);
       }
     }
+  }
 
   public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
     System.out.println(

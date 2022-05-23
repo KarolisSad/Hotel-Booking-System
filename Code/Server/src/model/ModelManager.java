@@ -334,6 +334,7 @@ public class ModelManager implements Model
     @Override public void clearDatabase() throws SQLException
     {
         dataBaseAdapter.clearDatabase();
+    }
 
     @Override
     public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
