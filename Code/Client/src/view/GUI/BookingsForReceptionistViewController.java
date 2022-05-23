@@ -15,7 +15,7 @@ import java.util.Optional;
  * A class creating an BookingsForReceptionistViewController object.
  *
  * @author Group 5
- * @version 12/05/2022
+ * @version 23/05/2022
  */
 public class BookingsForReceptionistViewController extends ViewController
 {
@@ -249,6 +249,10 @@ public class BookingsForReceptionistViewController extends ViewController
     }
   }
 
+  /**
+   * Method used when the Menu button is clicked in the window.
+   * It opens UserLoginMainView.
+   */
   public void mainMenuButtonClicked()
   {
     try

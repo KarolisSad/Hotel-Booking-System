@@ -4,7 +4,7 @@ package model;
  * A class creating a Guest object
  *
  * @author Group 5
- * @version 04/05/2022
+ * @version 23/05/2022
  */
 public class Guest
 {
@@ -30,6 +30,11 @@ public class Guest
     setPhoneNr(phoneNr);
   }
 
+  /**
+   * A method used to set a username.
+   * @throws NullPointerException if passed username is empty.
+   * @param username
+   */
   private void setUsername(String username)
   {
     if (username == null || username.isBlank())
@@ -175,6 +180,11 @@ public class Guest
     return other;
   }
 
+  /**
+   * A method that return the username.
+   *
+   * @return a String username
+   */
   public String getUsername() {
     return username;
   }

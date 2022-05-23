@@ -9,6 +9,12 @@ import viewModel.RoomOverviewForGuestModel;
 
 import java.io.IOException;
 
+/**
+ * A class creating a RoomDetailsForReceptionist Object
+ *
+ * @author Group 5
+ * @version 23-05-2022
+ */
 public class RoomOverviewForGuestController extends ViewController
 {
     public TextField bookingIDtextField;
@@ -57,6 +63,11 @@ public class RoomOverviewForGuestController extends ViewController
 
     }
 
+    /**
+     * Method called when the back button is pressed.
+     * Opens the BookingOverviewForGuestView window.
+     * @throws IOException
+     */
     public void exitButton() throws IOException {
         getViewHandler().openView("BookingOverviewForGuestView.fxml");
     }

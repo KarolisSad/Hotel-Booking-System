@@ -14,7 +14,7 @@ import java.time.LocalDate;
  * A class that implements the Model interface and manages the bookings.
  *
  * @author Group 5
- * @version 04/18/2022
+ * @version 04/23/2022
  */
 
 public class ModelManager implements Model {
@@ -259,33 +259,70 @@ public class ModelManager implements Model {
 
     }
 
-
+    /**
+     * Method for requesting logging in from the server.
+     *
+     * @param username
+     * @param password
+     * @return RoomBookingTransfer object containing either a success message, or an exception message.
+     */
     @Override
     public GuestTransfer login(String username, String password) throws InterruptedException {
         return hotelClient.login(username,password);
     }
 
+    /**
+     * Method for requesting registering in the server.
+     *
+     * @param username
+     * @param password
+     * @param fName  guest's first name
+     * @param lName    guest's last name
+     * @param email    guest's email
+     * @param phoneNumber guest's phone number
+     */
     @Override
     public GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password) {
 
         return hotelClient.register(fName,lName,email,phoneNumber,username,password);
     }
 
+    /**
+     * Method for requesting getting bookings, of a logged in guest, from the server.
+     */
     @Override
     public RoomBookingTransfer getBookingsWhenLoggedIn() {
         return hotelClient.getBookingsWhenLoggedIn();
     }
 
+    /**
+     * Method for requesting making a new booking, for a logged in guest, from the server.
+     */
     @Override
     public RoomBookingTransfer bookARoomWhenLoggedIn(String roomName, LocalDate startDate, LocalDate endDate) {
         return hotelClient.bookARoomWhenLoggedIn(roomName,startDate,endDate);
     }
 
+    /**
+     * Method for requesting changes of a guest with a specific username, from the server.
+     *
+     * @param editGuestWithUsername
+     * @param username
+     * @param getfName  guest's first name
+     * @param getlName    guest's last name
+     * @param email    guest's email
+     * @param phoneNr guest's phone number
+     */
     @Override
-    public GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int parseInt) {
-        return hotelClient.editGuestWithUsername("editGuestWithUsername", username, getfName, getlName, email, parseInt);
+    public GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr) {
+        return hotelClient.editGuestWithUsername("editGuestWithUsername", username, getfName, getlName, email, phoneNr);
     }
 
+    /**
+     * Method for requesting getting information of a guest with a specific username, from the server.
+     *
+     * @param username
+     */
     @Override
     public GuestTransfer getGuestByUsername(String username) {
         return hotelClient.getGuestByUsername(username);

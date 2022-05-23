@@ -49,12 +49,12 @@ public class BookingOverViewForGuestController  extends ViewController
                     viewModel.setSelected(newValue);
                 });
 
-        viewModel.reset();
+       reset();
     }
 
     @Override
     public void reset() {
-
+        viewModel.reset();
     }
 
     public void cancelBookingButton() throws IOException

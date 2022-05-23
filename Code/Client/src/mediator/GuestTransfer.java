@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Purpose of this object is to store different values when sending to a server
  *
- * @version 2022-05-18
+ * @version 2022-05-23
  * @author Group5
  */
 public class GuestTransfer {
@@ -40,6 +40,12 @@ public class GuestTransfer {
     this.lName = lName;
   }
 
+  /**
+   * 3 argument constructor used for transferring guest username and password.
+   * @param type The type of transfer
+   * @param username The guest username
+   * @param password The guest password
+   */
   public GuestTransfer(String type, String username, String password)
   {
     this.type = type;
@@ -47,19 +53,25 @@ public class GuestTransfer {
     this.password = password;
   }
 
+  /**
+   * 1 argument constructor used for transferring type of GuestTransfer.
+   * Used for errors.
+   * @param type The type of transfer
+   */
   public GuestTransfer(String type)
   {
     this.type = type;
   }
 
   /**
-   * 1 argument constructor used for transferring type information.
-   * @param fName
-   * @param lName
-   * @param email
-   * @param phoneNumber
-   * @param username
-   * @param type The type of transfer
+   * 7 argument constructor used for transferring all information about the guest.
+   * @param type The type of transfer.
+   * @param fName First name of the guest
+   * @param lName Last name of the guest
+   * @param email Guest's email
+   * @param phoneNumber Guest's phone number
+   * @param username The guest username
+   * @param password The guest password
    */
   public GuestTransfer(String type, String fName, String lName, String email, int phoneNumber, String username, String password)
   {
@@ -72,6 +84,15 @@ public class GuestTransfer {
     this.password = password;
   }
 
+  /**
+   * 6 argument constructor used for transferring type information, used to edit guest details.
+   * @param editGuestWithUsername The type of transfer.
+   * @param getfName First name of the guest
+   * @param getlName Last name of the guest
+   * @param email Guest's email
+   * @param phoneNr Guest's phone number
+   * @param username The guest username
+   */
     public GuestTransfer(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr) {
     this.type = editGuestWithUsername;
     this.username = username;
@@ -81,6 +102,12 @@ public class GuestTransfer {
     this.phoneNr = phoneNr;
     }
 
+  /**
+   * 2 argument constructor used for transferring type of GuestTransfer.
+   * Used for getting the guest by its username.
+   * @param getGuestByUsername The type of transfer
+   * @param username The guest's username
+   */
   public GuestTransfer(String getGuestByUsername, String username) {
     this.type = getGuestByUsername;
     this.username = username;
@@ -126,18 +153,34 @@ public class GuestTransfer {
     return errorMessage;
   }
 
+  /**
+   * Method used for returning the first name.
+   * @return the fName as a string.
+   */
   public String getfName() {
     return fName;
   }
 
+  /**
+   * Method used for returning the last name.
+   * @return the lName as a string.
+   */
   public String getlName() {
     return lName;
   }
 
+  /**
+   * Method used for returning the email.
+   * @return the email as a string.
+   */
   public String getEmail() {
     return email;
   }
 
+  /**
+   * Method used for returning the phone number.
+   * @return the phone number as a string.
+   */
   public String getPhoneNr() {
     return String.valueOf(phoneNr);
   }

@@ -126,7 +126,11 @@ public class RoomOverviewForGuestModel {
         return type;
     }
 
-
+    /**
+     * Setter for room booking details.
+     * This method retrieves a specific room from the model
+     * and sets all variables.
+     */
     public void setRoomBookingDetails(SimpleBookingViewModel selectedBooking) {
         try {
             Room room = model.getRoom(selectedBooking.roomIdProperty().get()).getRoom();
