@@ -69,4 +69,8 @@ public class GuestMenuController extends ViewController
         getViewModelFactory().getGuestPersonalInformationViewModel().setValues();
 
     }
+
+    public void conferenceBook() throws IOException {
+        getViewHandler().openView("ConferenceAvailableRoomView.fxml");
+    }
 }

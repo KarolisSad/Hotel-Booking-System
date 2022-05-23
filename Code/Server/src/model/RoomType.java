@@ -8,7 +8,7 @@ package model;
  */
 public enum RoomType
 {
-  SINGLE, DOUBLE, FAMILY, SUITE;
+  SINGLE, DOUBLE, FAMILY, SUITE, CONFERENCE;
 
   /**
    * Override of toString method.

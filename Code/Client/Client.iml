@@ -12,6 +12,6 @@
     <orderEntry type="library" name="JavaFX11" level="application" />
     <orderEntry type="library" name="JavaFX11.02" level="application" />
     <orderEntry type="library" name="lib" level="application" />
-
+    <orderEntry type="library" name="java-fx" level="application" />
   </component>
 </module>

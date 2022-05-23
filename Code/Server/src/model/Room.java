@@ -49,6 +49,9 @@ public class Room
       case "suite":
       case "Suite":
         return RoomType.SUITE;
+      case "Conference":
+      case"conference":
+        return RoomType.CONFERENCE;
       default:
         return null;
     }

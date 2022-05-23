@@ -180,4 +180,10 @@ public class HotelDataBase implements HotelPersistence
     return dataBase.getGuestByUsername(username);
   }
 
+  @Override
+  public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    return dataBase.availableConferenceRooms(startDate,endDate);
+  }
+
 }

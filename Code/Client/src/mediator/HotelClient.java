@@ -728,6 +728,23 @@ public class HotelClient implements Model
     return json.fromJson(message, GuestTransfer.class);
   }
 
+  @Override
+  public synchronized RoomTransfer availableConferenceRooms(LocalDate startDate, LocalDate endDate) {
+    sendToServerAsJson(new RoomTransfer("availableConferenceRooms", startDate, endDate));
+    message = null;
+    while (message == null)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return json.fromJson(message, RoomTransfer.class);  }
+
 
   @Override public void addListener(PropertyChangeListener listener)
   {
