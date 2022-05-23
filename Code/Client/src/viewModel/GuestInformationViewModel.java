@@ -47,27 +47,10 @@ public class GuestInformationViewModel
    * TemporaryInformation objects values and
    * fields from instance variables
    */
-   /*
-  public void bookRoomWithGuest()
-  {
 
-    RoomTransfer roomTransfer = model.book(temp.getRoomID(),
-        temp.getStartDate(), temp.getEndDate(),
-        new Guest(firstNameField.getValue(), lastNameField.getValue(),
-            emailField.getValue(),
-            Integer.parseInt(phoneNumberField.getValue())));
-    if (roomTransfer.getMessage() == null)
-    {
-      errorLabel.setValue("Room was booked!");
-    }
-    else
-    {
-      errorLabel.setValue(roomTransfer.getMessage());
-    }
 
-  }
 
-    */
+
 
 
   /**

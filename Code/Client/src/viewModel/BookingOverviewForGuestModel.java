@@ -3,6 +3,7 @@ package viewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mediator.RoomBookingTransfer;
@@ -26,6 +27,7 @@ public class BookingOverviewForGuestModel {
         this.selectedBookingProperty = new SimpleObjectProperty<>();
     }
 
+
     public ObservableList<SimpleBookingViewModel> getBookings() {
         return bookings;
     }
@@ -47,6 +49,12 @@ public class BookingOverviewForGuestModel {
 
     public void reset() {
         updateBookings();
+    }
+
+  public void removeBooking()
+    {
+        model.removeBooking(getSelectedBookingProperty().bookingIdProperty().get());
+        reset();
     }
 
     public void updateBookings() {
