@@ -9,7 +9,7 @@ import java.io.IOException;
  * A class creating MenuForHotelManageController
  *
  * @author Group 5
- * @version 12/05/2022
+ * @version 23/05/2022
  */
 
 public class MenuForHotelManagerController extends ViewController
@@ -63,6 +63,12 @@ public class MenuForHotelManagerController extends ViewController
     getViewHandler().openView("GuestOverViewForHotelManager.fxml");
   }
 
+  /**
+   * A method that provides functionality to the USerLoginMainView button.
+   * When the button is clicked a new window opens that contains USerLoginMainView.
+   *
+   * @throws IOException
+   */
   public void mainMenuButton() throws IOException
   {
     getViewHandler().openView("USerLoginMainView.fxml");

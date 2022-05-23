@@ -9,6 +9,13 @@ import viewModel.GuestPersonalInformationViewModel;
 
 import java.io.IOException;
 
+/**
+ * A class creating GuestPersonalInformationController object.
+ *
+ * @author Group 5
+ * @version 23/05/2022
+ */
+
 public class GuestPersonalInformationController extends ViewController {
 
     @FXML
@@ -25,6 +32,10 @@ public class GuestPersonalInformationController extends ViewController {
     private Label errorLabel;
     private GuestPersonalInformationViewModel viewModel;
 
+    /**
+     * A none argument, void method initializing instance variables.
+     * We bind all of FXML objects to ViewModel.
+     */
     @Override protected void init()
     {
         viewModel = getViewModelFactory().getGuestPersonalInformationViewModel();
@@ -48,6 +59,9 @@ public class GuestPersonalInformationController extends ViewController {
         }
     }
 
+    /**
+     * A method referencing to ViewModel updateGuest() method.
+     */
     public void saveDetailsButton()
     {
         try

@@ -6,6 +6,12 @@ import mediator.GuestTransfer;
 import model.Guest;
 import model.Model;
 
+/**
+ * A class providing functionality for GuestPersonalInformationController.
+ *
+ * @author Group 5
+ * @version 12/05/2022
+ */
 public class GuestPersonalInformationViewModel {
 
     private SimpleStringProperty email;
@@ -16,6 +22,10 @@ public class GuestPersonalInformationViewModel {
     private SimpleStringProperty errorLabel;
     private Model model;
 
+    /**
+     * Constructor initializing instance variables.
+     * @param model
+     */
     public GuestPersonalInformationViewModel(Model model) {
         this.model = model;
         this.errorLabel = new SimpleStringProperty();
@@ -26,31 +36,63 @@ public class GuestPersonalInformationViewModel {
         this.username = new SimpleStringProperty();
     }
 
-
+    /**
+     * A getter method that returns guest's email as SimpleStringProperty.
+     *
+     * @return SimpleStringProperty called email.
+     */
     public SimpleStringProperty getEmailProperty() {
         return email;
     }
 
+    /**
+     * A getter method that returns guest's first name as SimpleStringProperty.
+     *
+     * @return SimpleStringProperty called fName.
+     */
     public SimpleStringProperty getfNameProperty() {
         return fName;
     }
 
+    /**
+     * A getter method that returns guest's last name as SimpleStringProperty.
+     *
+     * @return SimpleStringProperty called lName.
+     */
     public SimpleStringProperty getlNameProperty() {
         return lName;
     }
 
+    /**
+     * A getter method that returns guest's username as SimpleStringProperty.
+     *
+     * @return SimpleStringProperty called username.
+     */
     public SimpleStringProperty getUsernameProperty() {
         return username;
     }
 
+    /**
+     * A getter method that returns guest's phone number as SimpleStringProperty.
+     *
+     * @return SimpleStringProperty called phoneNr.
+     */
     public SimpleStringProperty getPhoneNrProperty() {
         return phoneNr;
     }
 
+    /**
+     * A getter method that returns error message as SimpleStringProperty.
+     *
+     * @return SimpleStringProperty called errorLabel.
+     */
     public SimpleStringProperty getErrorLabelProperty() {
         return errorLabel;
     }
 
+    /**
+     * Method that sets all values to an empty String.
+     */
     public void reset() {
         email.setValue("");
         errorLabel.setValue("");
@@ -59,33 +101,64 @@ public class GuestPersonalInformationViewModel {
         email.setValue("");
     }
 
+    /**
+     * Method calling editGuestWithUsername() from the model.
+     */
     public void updateGuest() {
         model.editGuestWithUsername("editGuestWithUsername", getUsername(), getfName(), getlName(),
                 getEmail(), Integer.parseInt(phoneNr.get()));
         System.out.println("Editing personal info of: " + getUsername());
     }
 
+    /**
+     * A getter method that returns guest's email as String.
+     *
+     * @return String called email.
+     */
     private String getEmail() {
         return email.get();
     }
 
+    /**
+     * A getter method that returns guest's last name as String.
+     *
+     * @return String called lName.
+     */
     private String getlName() {
         return lName.get();
     }
 
+    /**
+     * A getter method that returns guest's first name as String.
+     *
+     * @return String called fName.
+     */
     private String getfName() {
         return fName.get();
     }
 
+    /**
+     * A getter method that returns guest's username as String.
+     *
+     * @return String called username.
+     */
     private String getUsername() {
         return username.get();
     }
 
+    /**
+     * A setter method that sets guest's username.
+     * @param username
+     */
     public void setUsername(String username) {
         this.username.setValue(username + "");
         System.out.println("username should be set: " + username);
     }
 
+    /**
+     * A setter method that sets guest's first name, last name
+     * email and phone number.
+     */
     public void setValues() {
         System.out.println("Username in setValues: " + getUsername());
         GuestTransfer guestTransfer = model.getGuestByUsername(getUsername());
