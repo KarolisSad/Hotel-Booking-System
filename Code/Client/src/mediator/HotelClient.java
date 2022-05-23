@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 /**
  * Sending request to the server and receiving requested information
- * 2022-05-08
+ * 2022-05-23
  *
  * @author Group5
  */
@@ -556,11 +556,21 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+  /**
+   * A method meant to reset the username, when the guest logs out from the system.
+   */
   @Override
   public synchronized void logOutForGuest() {
     this.username = null;
   }
 
+  /**
+   * A method meant to send the username and the password to the system, when the guest log in to the system.
+   * This method sends them through a GuestTransfer object.
+   *
+   * @param username
+   * @param password
+   */
   @Override
   public synchronized GuestTransfer login(String username, String password) {
     sendToServerAsJson(new GuestTransfer("login",username,password));
@@ -581,6 +591,19 @@ public class HotelClient implements Model
     return json.fromJson(message,GuestTransfer.class);
   }
 
+  /**
+   * A method meant to send the username and the password to the system,
+   * alongside with all guest's details.
+   * This method is a part of registering a guest in the system
+   * This method sends the details through a GuestTransfer object.
+   *
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNumber
+   * @param username
+   * @param password
+   */
   @Override
   public synchronized GuestTransfer register(String fName, String lName, String email, int phoneNumber, String username, String password) {
     sendToServerAsJson(new GuestTransfer("registerAGuest",fName,lName,email,phoneNumber,username,password));
@@ -602,6 +625,11 @@ public class HotelClient implements Model
     return guestTransfer;
   }
 
+  /**
+   * A method meant to send the username to the system in order to
+   * get all the bookings made by specific username.
+   * This method sends the username through a RoomBookingTransfer object.
+   */
   @Override
   public synchronized RoomBookingTransfer getBookingsWhenLoggedIn() {
     sendToServerAsJsonBooking(new RoomBookingTransfer("getBookingsWhenLoggedIn", username));
@@ -618,6 +646,15 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+  /**
+   * A method meant to send booking details to the system in order to
+   * get book a room by specific username, when he is logged in the system.
+   * This method sends the details through a RoomBookingTransfer object.
+   *
+   * @param roomName
+   * @param startDate
+   * @param endDate
+   */
   @Override
   public synchronized RoomBookingTransfer bookARoomWhenLoggedIn(String roomName, LocalDate startDate, LocalDate endDate) {
     sendToServerAsJsonBooking(new RoomBookingTransfer("bookARoomWhenLoggedIn", roomName,startDate,endDate,username));
@@ -633,6 +670,17 @@ public class HotelClient implements Model
     return json.fromJson(message, RoomBookingTransfer.class);
   }
 
+  /**
+   * A method meant to send guest details to the system in order to
+   * change his details.
+   * We are searching by specific username, when the guest is logged in the system.
+   * This method sends the details through a GuestTransfer object.
+   *
+   * @param editGuestWithUsername
+   * @param username
+   * @param getfName
+   * @param getlName
+   */
   @Override
   public synchronized GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr)
     {
@@ -654,6 +702,12 @@ public class HotelClient implements Model
       return json.fromJson(message, GuestTransfer.class);
   }
 
+  /**
+   * A method meant to get Guest details from the server.
+   * We are passing username in order to look for specific guest in the server.
+   *
+   * @param username
+   */
   @Override
   public synchronized GuestTransfer getGuestByUsername(String username) {
     sendToServerAsJson(

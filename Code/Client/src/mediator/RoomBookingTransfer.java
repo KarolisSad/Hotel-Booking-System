@@ -55,6 +55,15 @@ public class RoomBookingTransfer
     this.bookingNr = bookingNr;
   }
 
+  /**
+   * 5 argument constructor used to transfer booking details to the server.
+   * Used for booking a room when a guest is logged in the system.
+   * @param type The type of transfer
+   * @param roomID the room identification of the booking.
+   * @param startDate the start date of the booking.
+   * @param endDate the end date of the booking.
+   * @param username
+   */
   public RoomBookingTransfer(String type,String roomID ,LocalDate startDate, LocalDate endDate, String username)
   {
     this.type = type;
@@ -64,6 +73,13 @@ public class RoomBookingTransfer
     this.username = username;
   }
 
+  /**
+   * 2 argument constructor used to request all bookings
+   * made by the guest, when one's logged in.
+   *
+   * @param type The type of transfer
+   * @param username
+   */
   public RoomBookingTransfer(String type, String username)
   {
     this.type = type;
