@@ -581,18 +581,18 @@ public class MyDataBase
       ResultSet resultSet = statement.executeQuery();
       System.out.println("before: ");
       System.out.println(resultSet.next());
-      int phoneNR = resultSet.getInt("guest");
-      System.out.println(phoneNR + ": phonrNR");
+      String username = resultSet.getString("guest");
 
       //updating info about the guest
       PreparedStatement statement3 = connection.prepareStatement(
           "update guest\n" + "set fname = ?,\n" + "lname =?,\n"
-              + "    email =?\n" + "where phonenr = ?;");
+              + "    email =?,\n" + "phonenr = ? where username = ?;");
 
-      statement3.setInt(4, phoneNR);
+      statement3.setInt(4, phoneNr);
       statement3.setString(3, email);
       statement3.setString(2, lName);
       statement3.setString(1, fName);
+      statement3.setString(5, username);
       statement3.executeUpdate();
       System.out.println("Done with editing");
     }
