@@ -43,5 +43,6 @@ public class GuestMenuController extends ViewController
         getViewModelFactory().getGuestPersonalInformationViewModel().setUsername(viewModel.getUsername());
         getViewHandler().openView("GuestPersonalInformation.fxml");
         getViewModelFactory().getGuestPersonalInformationViewModel().setValues();
+
     }
 }

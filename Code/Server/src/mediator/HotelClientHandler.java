@@ -399,6 +399,8 @@ public class HotelClientHandler implements Runnable
 
           break;
         }
+
+           */
         case "getGuestByUsername":{
           GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
           try {
@@ -411,8 +413,6 @@ public class HotelClientHandler implements Runnable
           }
           break;
         }
-
-           */
 
         case "registerAGuest":
         {
