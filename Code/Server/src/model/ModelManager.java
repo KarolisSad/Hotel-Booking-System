@@ -20,7 +20,6 @@ public class ModelManager implements Model
 {
     private RoomList roomList;
 
-    // todo CHR
     private RoomBookingList bookingList;
     private PropertyChangeSupport property;
     private HotelPersistence dataBaseAdapter;
@@ -37,19 +36,8 @@ public class ModelManager implements Model
         roomList = new RoomList();
         property = new PropertyChangeSupport(this);
         this.dataBaseAdapter = new HotelDataBase();
-        createDummyData();
     }
 
-
-    //todo delete?
-    private void createDummyData()
-    {
-        //        roomList.addRoom(new Room("1.01", RoomType.SINGLE, 1));
-        //        roomList.addRoom(new Room("1.02", RoomType.DOUBLE, 1));
-        //        roomList.addRoom(new Room("1.03", RoomType.FAMILY, 3));
-        //        roomList.addRoom(new Room("1.04", RoomType.DOUBLE, 1));
-        //        roomList.addRoom(new Room("1.05", RoomType.SUITE, 3));
-    }
 
     /**
      * A method that returns all available rooms by selected date
@@ -80,6 +68,7 @@ public class ModelManager implements Model
         if (roomId.equals(""))
         {
             // todo change it
+            //todo shouldn't this create a room object and pass that to the database????
             throw new IllegalArgumentException("non");
         }
         dataBaseAdapter.addRoom(roomId, type, nrBeds);
@@ -120,6 +109,7 @@ public class ModelManager implements Model
         throws SQLException
     {
         bookingList.setAllBookings(dataBaseAdapter.getAllBookings(type));
+
         return bookingList;
     }
 
@@ -135,7 +125,6 @@ public class ModelManager implements Model
         dataBaseAdapter.processBooking(bookingList.getBookingById(id));
     }
 
-    // TODO should probably be changed - we need to decide what to do when cancelling a booking. @Karolis??
 
     /**
      * Method calling the cancelBooking() method in the bookingList on the booking with a ID matching the one passed as argument,
@@ -162,6 +151,7 @@ public class ModelManager implements Model
     @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
         throws SQLException
     {
+        //todo shouldn't this do something if a null-value is passed as roomID???
         dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
     }
 
@@ -177,6 +167,7 @@ public class ModelManager implements Model
     @Override public void editBooking(int bookingId, LocalDate startDate,
         LocalDate endDate, String roomId) throws SQLException
     {
+        checkForLegalDates(startDate, endDate);
         dataBaseAdapter.editBooking(bookingId, startDate, endDate, roomId);
     }
 
@@ -198,11 +189,14 @@ public class ModelManager implements Model
      * @return A RoomBookingTransfer object containing information about the booking and the guest associated with it.
      * @throws SQLException
      */
+    /*
     @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr,
         int phoneNr) throws SQLException
     {
         return dataBaseAdapter.getBookingWithGuest(bookingNr, phoneNr);
     }
+
+     */
 
     /**
      * A method that is meant for booking a room.
@@ -290,6 +284,7 @@ public class ModelManager implements Model
      */
     @Override
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
+
         dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
     }
 
@@ -331,6 +326,14 @@ public class ModelManager implements Model
         RoomBooking roomBooking = new RoomBooking(startDate,endDate,roomID,username);
         dataBaseAdapter.bookARoomWhenLoggedIn(roomBooking);
     }
+
+    /**
+     * Method used for clearing all data in the database. Primarily intended to be used for testing purposes.
+     *
+     */
+    @Override public void clearDatabase() throws SQLException
+    {
+        dataBaseAdapter.clearDatabase();
 
     @Override
     public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {

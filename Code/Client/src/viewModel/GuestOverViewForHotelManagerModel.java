@@ -17,7 +17,7 @@ public class GuestOverViewForHotelManagerModel
 {
 
   private Model model;
-  private ObservableList<String> guests;
+  private ObservableList<SimpleGuestViewModel> guests;
 
   /**
    * Constructor initializing instance variables.
@@ -28,8 +28,6 @@ public class GuestOverViewForHotelManagerModel
   {
     this.guests = FXCollections.observableArrayList();
     this.model = model;
-
-    guests.add("TODO:  change to listView");
   }
 
   /**
@@ -39,13 +37,9 @@ public class GuestOverViewForHotelManagerModel
   {
     guests.clear();
     GuestTransfer guest = model.getAllGuests();
-    System.out.println(guest.getGuests());
     for (int i = 0; i < guest.getGuests().size(); i++)
     {
-      guests.add(
-          "FirstName: " + guest.getGuests().get(i).getfName() + "    LastName "
-              + guest.getGuests().get(i).getlName() + "    Phone Number: "
-              + guest.getGuests().get(i).getPhoneNr());
+      guests.add(new SimpleGuestViewModel(guest.getGuests().get(i)));
     }
   }
 
@@ -53,7 +47,7 @@ public class GuestOverViewForHotelManagerModel
    * A method used to call all guests.
    * @return guests
    */
-  public ObservableList<String> getGuests()
+  public ObservableList<SimpleGuestViewModel> getGuests()
   {
     getAllGuests();
     return guests;

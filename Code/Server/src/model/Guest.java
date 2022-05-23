@@ -33,12 +33,15 @@ public class Guest
   }
 
   // Use this constructor if we want only to display a guest. (no need to know password).
-  public Guest(String fName, String lName, String email, int phoneNr)
+  public Guest(String username, String fName, String lName, String email, int phoneNr)
   {
+    setUsername(username);
     setfName(fName);
     setlName(lName);
     setEmail(email);
     setPhoneNr(phoneNr);
+
+    setPassword("dummyPassword");
   }
 
 
@@ -185,6 +188,7 @@ public class Guest
    *
    * @return a copy of Guest object.
    */
+
   public Guest copy()
   {
     Guest other = new Guest(fName, lName, email, phoneNr, username, password);

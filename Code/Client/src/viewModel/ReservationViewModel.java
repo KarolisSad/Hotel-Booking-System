@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import model.Model;
@@ -60,7 +61,8 @@ public class ReservationViewModel
     }
     else
     {
-      errorLabel.setValue(roomTransfer.getMessage() + " e");
+      availableRooms.clear();
+      errorLabel.setValue(roomTransfer.getMessage());
     }
   }
 
@@ -95,27 +97,33 @@ public class ReservationViewModel
    * @param roomName selected room ID
    */
   //OLD
-//  public void reserveRoom(String roomName)
-//  {
-//    temp.setStartDate(
-//        dateFromDatePicker(startDatePicker.getValue().toString()));
-//    temp.setEndDate(dateFromDatePicker(endDatePicker.getValue().toString()));
-//    temp.setRoomID(roomName);
-//  }
+  //  public void reserveRoom(String roomName)
+  //  {
+  //    temp.setStartDate(
+  //        dateFromDatePicker(startDatePicker.getValue().toString()));
+  //    temp.setEndDate(dateFromDatePicker(endDatePicker.getValue().toString()));
+  //    temp.setRoomID(roomName);
+  //  }
   // NEW
   public void bookARoom(String roomName)
   {
-    RoomBookingTransfer roomBookingTransfer = model.bookARoomWhenLoggedIn
-            (roomName,dateFromDatePicker(startDatePicker.getValue().toString())
-            ,dateFromDatePicker(endDatePicker.getValue().toString()));
+    RoomBookingTransfer roomBookingTransfer = model.bookARoomWhenLoggedIn(
+        roomName, dateFromDatePicker(startDatePicker.getValue().toString()),
+        dateFromDatePicker(endDatePicker.getValue().toString()));
 
     if (!(roomBookingTransfer.getMessage().equals("null")))
     {
-      errorLabel.setValue("Room wasn't added.."+roomBookingTransfer.getMessage());
+      errorLabel.setValue(
+          "Room wasn't added.." + roomBookingTransfer.getMessage());
     }
-    else {
-      errorLabel.setValue("Booking was successfully made!");
+    else
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Information");
+      alert.setHeaderText(null);
+      alert.setContentText("Room successfully booked!");
 
+      alert.showAndWait();
     }
   }
 
@@ -136,6 +144,7 @@ public class ReservationViewModel
 
   /**
    * A method meant to call available rooms in the system
+   *
    * @return availableRooms as an Observable list
    */
   public ObservableList<String> getRooms()
@@ -145,6 +154,7 @@ public class ReservationViewModel
 
   /**
    * A method meant for getting an error label
+   *
    * @return errorLabel as SimpleStringProperty
    */
   public SimpleStringProperty getErrorLabel()
@@ -154,6 +164,7 @@ public class ReservationViewModel
 
   /**
    * A method meant to call start date objectProperty from the date piker
+   *
    * @return startDatePicker
    */
   public ObjectProperty<LocalDate> getStartDatePicker()
@@ -163,6 +174,7 @@ public class ReservationViewModel
 
   /**
    * A method meant to call end date objectProperty from the date piker
+   *
    * @return endDatePicker
    */
   public ObjectProperty<LocalDate> getEndDatePicker()
@@ -170,5 +182,9 @@ public class ReservationViewModel
     return endDatePicker;
   }
 
+  public void clear()
+  {
+    getAllAvailableRooms();
+  }
 }
 

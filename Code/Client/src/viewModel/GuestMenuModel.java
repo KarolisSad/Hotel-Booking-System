@@ -28,6 +28,5 @@ public class GuestMenuModel {
 
     public void getMyBookings() {
         RoomBookingTransfer r = model.getBookingsWhenLoggedIn();
-        System.out.println(r.toString());
     }
 }

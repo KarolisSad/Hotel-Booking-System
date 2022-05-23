@@ -99,6 +99,28 @@ public class RoomBooking
    */
   public void setStartAndEndDate(LocalDate startDate, LocalDate endDate)
   {
+    if (startDate == null || endDate == null)
+    {
+      throw new NullPointerException(
+          "Please enter a start date and an end date.");
+    }
+
+    else if (startDate.isBefore(LocalDate.now()))
+    {
+      throw new IllegalArgumentException(
+          "Start date should not be before current date: " + LocalDate.now());
+    }
+    else if (endDate.isEqual(startDate))
+    {
+      throw new IllegalArgumentException(
+          "End date cannot be the same date as start-date.");
+
+    }
+    else if (endDate.isBefore(startDate))
+    {
+      throw new IllegalArgumentException(
+          "End date cannot be before start date.");
+    }
     this.startDate = startDate;
     this.endDate = endDate;
   }
@@ -222,16 +244,7 @@ public class RoomBooking
 
   @Override
   public String toString() {
-    return "RoomBooking{" +
-            "startDate=" + startDate +
-            ", endDate=" + endDate +
-            ", room=" + room +
-            ", guest=" + guest +
-            ", roomID='" + roomID + '\'' +
-            ", username='" + username + '\'' +
-            ", bookingID=" + bookingID +
-            ", state=" + state +
-            '}';
+    return "<RoomBooking> BookingID: " + bookingID + ", StartDate: " + startDate + ", EndDate: " + endDate + ", Room: " + room + ", Guest: " + guest + ", State: " + state.getState();
   }
 
   /**

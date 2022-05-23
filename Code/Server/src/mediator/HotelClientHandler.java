@@ -186,6 +186,7 @@ public class HotelClientHandler implements Runnable
           }
           catch (Exception e)
           {
+            e.printStackTrace();
             out.println(
                 json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }
@@ -248,7 +249,6 @@ public class HotelClientHandler implements Runnable
               RoomBookingTransfer.class);
           try
           {
-            System.out.println(roomBooking.getBookingNr());
             model.processBooking(roomBooking.getBookingNr());
           }
           catch (Exception e)
@@ -263,7 +263,6 @@ public class HotelClientHandler implements Runnable
 
         case "CancelBooking":
         {
-          System.out.println("Cancel booking");
           RoomBookingTransfer roomBookingTransfer = json.fromJson(message,
               RoomBookingTransfer.class);
           try
@@ -322,10 +321,11 @@ public class HotelClientHandler implements Runnable
           }
           catch (Exception e)
           {
+            System.out.println(e.getMessage());
             out.println(
                 json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }
-          out.println(successMessage);
+          //out.println(successMessage);
           //out.println(new RoomTransfer("Success", "Success"));
           break;
 
@@ -348,7 +348,6 @@ public class HotelClientHandler implements Runnable
         case "getRoom":
         {
           RoomTransfer getRoom = json.fromJson(message, RoomTransfer.class);
-          System.out.println(getRoom);
           try
           {
             Room roomie = model.getRoom(getRoom.getMessage());
@@ -378,6 +377,7 @@ public class HotelClientHandler implements Runnable
           }
           break;
 
+          /*
         case "getBookingWithGuest":
         {
           RoomBookingTransfer receivedRoomBookingTransfer = json.fromJson(
@@ -411,6 +411,8 @@ public class HotelClientHandler implements Runnable
           }
           break;
         }
+
+           */
 
         case "registerAGuest":
         {

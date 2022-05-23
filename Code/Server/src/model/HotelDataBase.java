@@ -80,7 +80,6 @@ public class HotelDataBase implements HotelPersistence
     dataBase.processBooking(booking);
   }
 
-  //TODO What should this do??
   @Override public void cancelBooking(RoomBooking roomBooking)
       throws SQLException
   {
@@ -108,12 +107,15 @@ public class HotelDataBase implements HotelPersistence
     return dataBase.getAllGuests();
   }
 
+  /*
   @Override public RoomBookingTransfer getBookingWithGuest(int bookingNr,
       int phoneNr) throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
     return dataBase.getRoomWithGuest(bookingNr, phoneNr);
   }
+
+   */
 
   /**
    * Method used for adding a booking to the database.
@@ -138,12 +140,15 @@ public class HotelDataBase implements HotelPersistence
     dataBase.login(username,password);
   }
 
-//  @Override public ArrayList<RoomBooking> getAllBookings(String type)
-//          throws SQLException
-//  {
-//    MyDataBase dataBase = MyDataBase.getInstance();
-//    return dataBase.getAllRoomBookings(type);
-//  }
+  /*
+
+  @Override public ArrayList<RoomBooking> getAllBookings(String type)
+          throws SQLException
+  {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    return dataBase.getAllRoomBookings(type);}
+
+   */
 
   @Override
   public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException {
@@ -156,6 +161,11 @@ public class HotelDataBase implements HotelPersistence
     MyDataBase dataBase = MyDataBase.getInstance();
     dataBase.bookARoomWhenLoggedIn(roomBooking);
   }
+
+  @Override public void clearDatabase() throws SQLException
+  {
+    MyDataBase dataBase = MyDataBase.getInstance();
+    dataBase.clearDatabase();
 
   @Override
   public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {

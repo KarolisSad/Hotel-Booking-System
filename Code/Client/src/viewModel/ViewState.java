@@ -37,7 +37,7 @@ public class ViewState {
    * A boolean method returning true if the AddEditViewControllers next action
    * is to add a new room.
    * And false if next action to edit an existing room.
-   * @return
+   * @return true if next action is to add a room, and false if next action is edit.
    */
   public boolean isAdd(){
     return add;

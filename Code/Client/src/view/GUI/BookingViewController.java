@@ -45,7 +45,7 @@ public class BookingViewController extends ViewController
     startDate.setCellValueFactory(
         cellDate -> cellDate.getValue().startDateProperty());
     endDate.setCellValueFactory(
-        cellData -> cellData.getValue().startDateProperty());
+        cellData -> cellData.getValue().endDateProperty());
     guestID.setCellValueFactory(
         cellData -> cellData.getValue().guestIdProperty().asObject());
     roomID.setCellValueFactory(

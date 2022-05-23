@@ -12,7 +12,6 @@ public class Room
   private RoomType roomType;
   private int numberOfBeds;
 
-  //todo change javadoc
 
   /**
    * Four-argument contructor
@@ -96,7 +95,7 @@ public class Room
    * @param roomId the roomId
    * @throws IllegalArgumentException if argument is null or an empty String.
    */
-  private void setRoomId(String roomId)
+  public void setRoomId(String roomId)
   {
     if (roomId == null || roomId.isBlank())
     {

@@ -48,7 +48,7 @@ public class ReservationController extends ViewController
    */
   @Override public void reset()
   {
-    //viewModel.clear();
+    viewModel.clear();
   }
 
   /**
@@ -69,6 +69,7 @@ public class ReservationController extends ViewController
     String selectedRoomFromListView = availableRoom.getSelectionModel()
         .getSelectedItem();
     viewModel.bookARoom(selectedRoomFromListView);
+    reset();
   }
 
   /**

@@ -17,7 +17,7 @@ class RoomBookingListTest
   Room room6 = new Room("1.06", RoomType.SINGLE, 1);
   Room room7 = new Room("1.07", RoomType.SINGLE, 1);
 
-  Guest guest = new Guest("Bob", "Builder", "bob@builder.test", 88888888);
+  Guest guest = new Guest( "BobBuilder","Bob", "Builder", "bob@builder.test", 88888888);
   RoomBooking book1 = new RoomBooking(LocalDate.now(), LocalDate.now().plusDays(10), room1, guest);
   RoomBooking book2 = new RoomBooking(LocalDate.now().plusDays(10), LocalDate.now().plusDays(20), room1, guest);
   RoomBooking book3 = new RoomBooking(LocalDate.now(), LocalDate.now().plusDays(10), room2, guest);

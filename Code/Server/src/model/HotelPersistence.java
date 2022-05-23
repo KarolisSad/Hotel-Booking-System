@@ -23,7 +23,7 @@ public interface HotelPersistence {
     void editBooking (int bookingId, LocalDate startDate, LocalDate endDate, String roomId) throws SQLException;
     Room getRoom(String roomId) throws SQLException;
     ArrayList<Guest> getAllGuests() throws SQLException;
-    RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
+   // RoomBookingTransfer getBookingWithGuest(int bookingNr, int phoneNr) throws SQLException;
 
 
     void register(Guest guest) throws SQLException;
@@ -32,6 +32,8 @@ public interface HotelPersistence {
     ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException;
 
     void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException;
+
+    void clearDatabase() throws SQLException;
 
     void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException;
 

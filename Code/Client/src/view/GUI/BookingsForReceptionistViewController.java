@@ -1,8 +1,8 @@
 package view.GUI;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.Guest;
 import view.ViewController;
 import viewModel.BookingsForReceptionistViewModel;
 import viewModel.SimpleBookingViewModel;
@@ -27,7 +27,7 @@ public class BookingsForReceptionistViewController extends ViewController
   @FXML private TableColumn<SimpleBookingViewModel, Integer> bookingIdColumn;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> startDateColumn;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> endDateColumn;
-  @FXML private TableColumn<SimpleBookingViewModel, Integer> guestColumn;
+  @FXML private TableColumn<SimpleBookingViewModel, String> guestColumn;
   @FXML private TableColumn<SimpleBookingViewModel, String> roomNumberColumn;
   @FXML private TableColumn<SimpleBookingViewModel, String> stateColumn;
   @FXML private Label errorLabel;
@@ -49,7 +49,7 @@ public class BookingsForReceptionistViewController extends ViewController
     endDateColumn.setCellValueFactory(
         cellData -> cellData.getValue().endDateProperty());
     guestColumn.setCellValueFactory(
-        cellData -> cellData.getValue().guestIdProperty().asObject());
+        cellData -> cellData.getValue().guestNameProperty());
     roomNumberColumn.setCellValueFactory(
         cellData -> cellData.getValue().roomIdProperty());
     stateColumn.setCellValueFactory(
@@ -120,6 +120,7 @@ public class BookingsForReceptionistViewController extends ViewController
    * Method called when pressing the guest information button in the GUI.
    * Opens a window containing the guest information for the selected booking,
    * which will allow the receptionist to make changes to the personal information of the guest.
+   *
    * @throws IOException
    */
   public void guestInformationButton() throws IOException
@@ -134,6 +135,7 @@ public class BookingsForReceptionistViewController extends ViewController
    * Method called when pressing the room information button in the GUI.
    * Opens a window containing the booking information for the selected booking,
    * which will allow the receptionist to make changes to the booking or cancel it.
+   *
    * @throws IOException
    */
   public void roomInformationButton() throws IOException
@@ -158,7 +160,7 @@ public class BookingsForReceptionistViewController extends ViewController
     DialogPane dialogPane = popUp.getDialogPane();
     dialogPane.getStylesheets().add("");
     dialogPane.getStylesheets()
-            .add(getClass().getResource("box.css").toExternalForm());
+        .add(getClass().getResource("box.css").toExternalForm());
     dialogPane.getStyleClass().add("box.css");
 
     if (viewModel.isCheckIn())
@@ -187,8 +189,16 @@ public class BookingsForReceptionistViewController extends ViewController
       Optional<ButtonType> result = popUp.showAndWait();
       if (result.get() == checkIn)
       {
-        viewModel.processBooking(viewModel.getSelectedBookingProperty());
-        reset();
+        if (viewModel.getSelectedBookingProperty().getStartDate()
+            .isEqual(LocalDate.now()))
+        {
+          viewModel.processBooking(viewModel.getSelectedBookingProperty());
+          reset();
+        }
+        else
+        {
+          errorLabel.setText("You can't check in if the start date is not today");
+        }
       }
       else
       {
@@ -221,9 +231,16 @@ public class BookingsForReceptionistViewController extends ViewController
       Optional<ButtonType> result = popUp.showAndWait();
       if (result.get() == checkIn)
       {
-        viewModel.processBooking(viewModel.getSelectedBookingProperty());
-        showBookedButton();
-        reset();
+        if (viewModel.getSelectedBookingProperty().getEndDate()
+            .isEqual(LocalDate.now().plusDays(2)))
+        {
+          viewModel.processBooking(viewModel.getSelectedBookingProperty());
+          reset();
+        }
+        else
+        {
+          errorLabel.setText("You can't check out if the end date is not today");
+        }
       }
       else
       {

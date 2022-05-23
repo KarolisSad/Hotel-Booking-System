@@ -1,5 +1,6 @@
 package view.GUI;
 
+import javafx.event.ActionEvent;
 import view.ViewController;
 
 import java.io.IOException;
@@ -60,5 +61,10 @@ public class MenuForHotelManagerController extends ViewController
   public void guestsOverviewButton() throws IOException
   {
     getViewHandler().openView("GuestOverViewForHotelManager.fxml");
+  }
+
+  public void mainMenuButton() throws IOException
+  {
+    getViewHandler().openView("USerLoginMainView.fxml");
   }
 }

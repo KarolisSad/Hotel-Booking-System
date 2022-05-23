@@ -25,6 +25,7 @@ public class SimpleBookingViewModel
   private StringProperty bookingStateProperty;
 
   private ObjectProperty<Guest> guestProperty;
+  private StringProperty guestNameProperty;
 
   /**
    * A SimpleBookingViewModel constructor initializing all instance variables.
@@ -43,6 +44,7 @@ public class SimpleBookingViewModel
         roomBookingTransfer.getBookingID());
     bookingStateProperty = new SimpleStringProperty(
         roomBookingTransfer.getBookingState());
+    this.guestNameProperty = new SimpleStringProperty(roomBookingTransfer.getGuest().getfName() + " " + roomBookingTransfer.getGuest().getlName());
 
   }
   public SimpleBookingViewModel(RoomBookingTransferObject roomBookingTransfer, String user)
@@ -139,5 +141,10 @@ public class SimpleBookingViewModel
   public StringProperty bookingStateProperty()
   {
     return bookingStateProperty;
+  }
+
+  public StringProperty guestNameProperty()
+  {
+    return guestNameProperty;
   }
 }

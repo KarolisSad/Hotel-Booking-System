@@ -130,7 +130,6 @@ public class RoomOverviewForGuestModel {
     public void setRoomBookingDetails(SimpleBookingViewModel selectedBooking) {
         try {
             Room room = model.getRoom(selectedBooking.roomIdProperty().get()).getRoom();
-            System.out.println(room.toString());
             roomNumber.setValue(room.getRoomId());
             nrOfBeds.setValue(String.valueOf(room.getNumberOfBeds()));
             type.setValue(room.getRoomType().toString());

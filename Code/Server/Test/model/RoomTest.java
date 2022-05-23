@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
+
 class RoomTest
 {
   Room testRoom = new Room("TestRoom", RoomType.SINGLE, 1);
 
   @BeforeEach void setUp()
   {
-    testRoom.setRoomId("TestRoom");
+
   }
 
   // setRoomId test \\
@@ -64,6 +64,3 @@ class RoomTest
 
 
 }
-
-
- */

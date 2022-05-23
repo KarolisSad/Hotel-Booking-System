@@ -111,6 +111,6 @@ public class ShowBookingViewController extends ViewController
   @FXML private void mainMenuButtonClicked() throws IOException
   {
     reset();
-    getViewHandler().openView("LogInView.fxml");
+    getViewHandler().openView("UserLoginMainView.fxml");
   }
 }
