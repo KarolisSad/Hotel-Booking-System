@@ -21,6 +21,7 @@ public class Room
    * @param roomId room number
    * @param roomOfType The type of room
    * @param numberOfBeds the number of beds to be assigned to the room.
+   * @param dailyPrice the daily price of the room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds, int dailyPrice)
   {
@@ -153,6 +154,10 @@ public class Room
     return numberOfBeds;
   }
 
+  /**
+   * Method meant for getting the daily price
+   * @return price
+   */
   public int getPrice()
   {
     return price;
@@ -169,12 +174,15 @@ public class Room
     return other;
   }
 
+
   /**
    * Method returning a string representation of the room object.
    * @return A string containing all variables and their values.
    */
+
   @Override public String toString()
   {
+
     return "Room number: " + roomId + ", Type: " + roomType.toString()
         + ", Number of beds: " + numberOfBeds + ", Price: " + price;
   }

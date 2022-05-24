@@ -281,7 +281,10 @@ public class MyDataBase
   {
     try (Connection connection = getConnection())
     {
-      System.out.println(type.toString());
+      System.out.println("ROOM ID: " + roomID);
+      System.out.println("ROOM TYPE: " + type);
+      System.out.println("BEDS: " + nrBeds);
+      System.out.println("PRICE: " + price);
       try
       {
         PreparedStatement statement = connection.prepareStatement(
@@ -296,6 +299,7 @@ public class MyDataBase
       }
       catch (Exception e)
       {
+        e.printStackTrace();
         throw new IllegalArgumentException(
             "Unable to edit " + roomID + " room.");
       }
