@@ -16,11 +16,11 @@ public class HotelDataBase implements HotelPersistence
   {
   }
 
-  @Override public void addRoom(String ID, RoomType type, int numberOfBeds)
+  @Override public void addRoom(Room room)
       throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
-    dataBase.addOneRoom(ID, type, numberOfBeds);
+    dataBase.addOneRoom(room);
   }
 
   @Override public void remove(String ID) throws SQLException
@@ -42,11 +42,11 @@ public class HotelDataBase implements HotelPersistence
     return dataBase.availableRooms(startDate, endDate);
   }
 
-  @Override public void editRoomInfo(String roomID, RoomType type, int nrBeds)
+  @Override public void editRoomInfo(String roomID, RoomType type, int nrBeds, int price)
       throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
-    dataBase.editRoomInfo(roomID, type, nrBeds);
+    dataBase.editRoomInfo(roomID, type, nrBeds, price);
   }
 
   @Override public void editGuest(int bookingID, String fName, String lName,

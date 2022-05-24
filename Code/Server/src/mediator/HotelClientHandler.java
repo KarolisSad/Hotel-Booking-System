@@ -71,7 +71,7 @@ public class HotelClientHandler implements Runnable
           try
           {
             model.addRoom(room.getRoomId(), room.getRoomType(),
-                room.getNrBeds());
+                room.getNrBeds(), room.getDailyPrice());
             out.println(successMessage);
           }
           catch (Exception e)
@@ -146,7 +146,7 @@ public class HotelClientHandler implements Runnable
           {
             System.out.println(room.getRoomType());
             model.editRoomInfo(room.getRoomId(), room.getRoomType(),
-                room.getNrBeds());
+                room.getNrBeds(), room.getDailyPrice());
 
             out.println(successMessage);
           }
@@ -377,30 +377,7 @@ public class HotelClientHandler implements Runnable
           }
           break;
 
-          /*
-        case "getBookingWithGuest":
-        {
-          RoomBookingTransfer receivedRoomBookingTransfer = json.fromJson(
-              message, RoomBookingTransfer.class);
-          System.out.println("Client Handler start!");
-          try
-          {
-            RoomBookingTransfer toSend = model.getBookingWithGuest(
-                receivedRoomBookingTransfer.getBookingNr(),
-                receivedRoomBookingTransfer.getGuestID());
-            System.out.println("SENDING: " + toSend);
-            out.println(json.toJson(toSend));
-          }
-          catch (Exception e)
-          {
-            out.println(
-                json.toJson(new RoomBookingTransfer("error", e.getMessage())));
-          }
 
-          break;
-        }
-
-           */
         case "getGuestByUsername":{
           GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
           try {

@@ -44,9 +44,9 @@ public class MyDataBase
     // Nina
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-       //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+       return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
           ////////////////////////////////////////////////////
           //                                                //
@@ -66,7 +66,7 @@ public class MyDataBase
 
   }
 
-  public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
+  public void addOneRoom(Room room)
       throws SQLException
   {
     try (Connection connection = getConnection())
@@ -74,11 +74,12 @@ public class MyDataBase
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-            "INSERT INTO room(roomID, roomType, nrBeds) VALUES (?, ?, ?);");
+            "INSERT INTO room(roomID, roomType, nrBeds, dailyPrice) VALUES (?, ?, ?, ?);");
 
-        statement.setString(1, roomID);
-        statement.setString(2, roomType.toString());
-        statement.setInt(3, nrBeds);
+        statement.setString(1, room.getRoomId());
+        statement.setString(2, room.getRoomType().toString());
+        statement.setInt(3, room.getNumberOfBeds());
+        statement.setInt(4, room.getPrice());
         statement.executeUpdate();
       }
       catch (Exception e)
@@ -88,7 +89,7 @@ public class MyDataBase
         if (error.contains("room_pkey"))
         {
           throw new IllegalArgumentException(
-              "Room with ID: " + roomID + " already exists!");
+              "Room with ID: " + room.getRoomId() + " already exists!");
         }
         else if (error.contains("room_roomtype_check"))
         {
@@ -157,9 +158,10 @@ public class MyDataBase
       {
         String roomId = resultSet.getString("roomid");
         String roomType = resultSet.getString("roomtype");
-        int nrBends = resultSet.getInt("nrbeds");
+        int nrbeds = resultSet.getInt("nrbeds");
+        int price = resultSet.getInt("dailyprice");
         Room room = new Room(roomId,
-            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
+            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrbeds, price);
         rooms.add(room);
       }
       if (rooms == null)
@@ -195,8 +197,9 @@ public class MyDataBase
         String roomId = resultSet.getString("roomid");
         String roomType = resultSet.getString("roomtype");
         int nrBends = resultSet.getInt("nrbeds");
+        int price = resultSet.getInt("dailyprice");
         Room room = new Room(roomId,
-            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
+            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends, price);
         rooms.add(room);
       }
       if (rooms.isEmpty())
@@ -273,7 +276,7 @@ public class MyDataBase
    * @param nrBeds The new number of beds to be assigned to the room.
    * @throws IllegalArgumentException if room is able to be edited.
    */
-  public void editRoomInfo(String roomID, RoomType type, int nrBeds)
+  public void editRoomInfo(String roomID, RoomType type, int nrBeds, int price)
       throws SQLException
   {
     try (Connection connection = getConnection())
@@ -282,12 +285,13 @@ public class MyDataBase
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-            "update room\n" + "set nrBeds = ?,\n" + "    roomType =?\n"
+            "update room\n" + "set nrBeds = ?,\n" + "    roomType =?,\n" + " dailyPrice=?"
                 + "where roomID = ?;");
 
-        statement.setString(3, roomID);
+        statement.setString(4, roomID);
         statement.setString(2, type.toString());
         statement.setInt(1, nrBeds);
+        statement.setInt(3, price);
         statement.executeUpdate();
       }
       catch (Exception e)
@@ -498,8 +502,9 @@ public class MyDataBase
         String id = resultSet.getString("roomid");
         String roomtype = resultSet.getString("roomtype");
         int nrBeds = resultSet.getInt("nrbeds");
+        int price = resultSet.getInt("dailyprice");
 
-        return new Room(id, Room.convertRoomTypeFromString(roomtype), nrBeds);
+        return new Room(id, Room.convertRoomTypeFromString(roomtype), nrBeds, price);
       }
       else
       {
