@@ -16,6 +16,7 @@ public class SimpleRoomViewModel
   private StringProperty roomNumberProperty;
   private ObjectProperty<RoomType> roomTypeProperty;
   private IntegerProperty numberOfBedsProperty;
+  private IntegerProperty dailyPriceProperty;
 
   /**
    * A SimpleRoomViewModel constructor initializing all instance variables.
@@ -25,6 +26,7 @@ public class SimpleRoomViewModel
     roomNumberProperty = new SimpleStringProperty(room.getRoomId());
     roomTypeProperty = new SimpleObjectProperty<>(room.getRoomType());
     numberOfBedsProperty = new SimpleIntegerProperty(room.getNumberOfBeds());
+    dailyPriceProperty = new SimpleIntegerProperty(room.getPrice());
   }
 
   /**
@@ -52,5 +54,10 @@ public class SimpleRoomViewModel
   public IntegerProperty numberOfBedsProperty()
   {
     return numberOfBedsProperty;
+  }
+
+  public IntegerProperty dailyPriceProperty()
+  {
+    return dailyPriceProperty;
   }
 }

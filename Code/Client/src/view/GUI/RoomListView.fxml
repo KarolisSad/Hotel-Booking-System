@@ -21,6 +21,7 @@
             <TableColumn fx:id="numberColumn" prefWidth="145.0" text="Room Number" />
             <TableColumn fx:id="typeColumn" prefWidth="200.0" text="Type" />
             <TableColumn fx:id="numberOfBedsColumn" prefWidth="118.0" text="Number of beds" />
+            <TableColumn fx:id="dailyPriceColumn" prefWidth="118.0" text="Daily price" />
          </columns>
       </TableView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

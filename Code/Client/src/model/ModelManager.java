@@ -57,8 +57,8 @@ public class ModelManager implements Model {
      * @return true if room is added successfully
      */
     @Override
-    public RoomTransfer addRoom(String roomId, RoomType type, int nrBeds) {
-        return hotelClient.addRoom(roomId, type, nrBeds);
+    public RoomTransfer addRoom(String roomId, RoomType type, int nrBeds, int dailyPrice) {
+        return hotelClient.addRoom(roomId, type, nrBeds, dailyPrice);
     }
 
     /**

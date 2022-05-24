@@ -23,6 +23,7 @@ public class AddEditViewController extends ViewController
   @FXML private TextField idField;
   @FXML private ComboBox<RoomType> typeDropdown;
   @FXML private TextField nrOfBedsField;
+  @FXML private TextField dailyPriceField;
   private RoomType selectedType;
   private Label errorLabel;
 
@@ -43,6 +44,7 @@ public class AddEditViewController extends ViewController
 
       Bindings.bindBidirectional(nrOfBedsField.textProperty(),
           viewModel.numberOfBedsProperty(), new NumberStringConverter());
+      Bindings.bindBidirectional(dailyPriceField.textProperty(), viewModel.dailyPriceProperty(), new NumberStringConverter());
       typeDropdown.getItems().removeAll(typeDropdown.getItems());
       typeDropdown.getItems().add(RoomType.FAMILY);
       typeDropdown.getItems().add(RoomType.DOUBLE);
@@ -109,7 +111,7 @@ public class AddEditViewController extends ViewController
       //
       alert.setHeaderText("Are you sure you want to make changes?");
       alert.setContentText("Type: " + getType() + "\nNumber of beds: "
-          + viewModel.getNumberOfBeds());
+          + viewModel.getNumberOfBeds() + "\nDaily price: " + viewModel.dailyPriceProperty().get());
 
       ButtonType confirm = new ButtonType("Confirm");
       ButtonType cancel = new ButtonType("Cancel",

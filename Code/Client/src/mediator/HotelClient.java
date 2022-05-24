@@ -80,10 +80,10 @@ public class HotelClient implements Model
    * @return message containing information if room was successfully added
    */
   @Override public synchronized RoomTransfer addRoom(String roomID,
-      RoomType type, int numberOfBeds)
+      RoomType type, int numberOfBeds, int dailyPrice)
   {
     sendToServerAsJson(
-        new RoomTransfer("addOneRoom", roomID, type, numberOfBeds, null));
+        new RoomTransfer("addOneRoom", roomID, type, numberOfBeds, dailyPrice));
     message = null;
     while (message == null)
     {
@@ -96,6 +96,7 @@ public class HotelClient implements Model
         e.printStackTrace();
       }
     }
+    System.out.println("RETURN WHEN ADD ROOM: " + message);
     return json.fromJson(message, RoomTransfer.class);
   }
 
