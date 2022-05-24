@@ -32,6 +32,15 @@ public class Guest
     setUsername(username);
   }
 
+  /**
+   * Constructor to initialize instance variables using set methods.
+   * We use this constructor if we want only to display a guest.
+   * @param username
+   * @param fName first name of the guest
+   * @param lName last name of the guest
+   * @param email email address of the guest
+   * @param phoneNr phone number of the guest
+   */
   // Use this constructor if we want only to display a guest. (no need to know password).
   public Guest(String username, String fName, String lName, String email, int phoneNr)
   {
@@ -44,7 +53,11 @@ public class Guest
     setPassword("dummyPassword");
   }
 
-
+  /**
+   * A setter for username.
+   * @param username
+   * @throws IllegalArgumentException when username is null.
+   */
   public void setUsername(String username) {
     if (username == null || username.isBlank())
     {
@@ -53,6 +66,11 @@ public class Guest
     this.username = username;
   }
 
+  /**
+   * A setter for password.
+   * @param password
+   * @throws IllegalArgumentException when username is null.
+   */
   public void setPassword(String password) {
     if (password == null || password.isBlank())
     {
@@ -195,11 +213,20 @@ public class Guest
     return other;
   }
 
-
+  /**
+   * A method that returns password of the guest.
+   *
+   * @return password
+   */
   public String getPassword() {
     return password;
   }
 
+  /**
+   * A method that returns username of the guest.
+   *
+   * @return username
+   */
   public String getUsername() {
     return username;
   }
