@@ -120,8 +120,10 @@ public class ReservationController extends ViewController
     });
 
     // Price Filter
-    priceFromFilter.textFormatterProperty().setValue(new TextFormatter<>(numberValidationFormatter));
-    priceToFilter.textFormatterProperty().setValue(new TextFormatter<>(numberValidationFormatter));
+    priceFromFilter.textFormatterProperty()
+        .setValue(new TextFormatter<>(numberValidationFormatter));
+    priceToFilter.textFormatterProperty()
+        .setValue(new TextFormatter<>(numberValidationFormatter));
 
     priceFromFilter.textProperty().addListener((obs, oldVal, newVal) -> {
       filterPriceButton.setDisable(false);
@@ -131,11 +133,8 @@ public class ReservationController extends ViewController
       filterPriceButton.setDisable(false);
     });
 
-
     reset();
   }
-
-
 
   /**
    * Method used for resetting the view.
@@ -144,10 +143,14 @@ public class ReservationController extends ViewController
   @Override public void reset()
   {
     viewModel.getAllAvailableRooms();
-    if (priceFromFilter.textProperty().get().isEmpty() && priceFromFilter.textProperty().get().isEmpty())
+    if (priceFromFilter.textProperty().get().isEmpty()
+        && priceFromFilter.textProperty().get().isEmpty())
     {
       filterPriceButton.setDisable(true);
     }
+
+    filterByPriceActive = false;
+    filterByBedsActive = false;
   }
 
   /**
@@ -161,18 +164,19 @@ public class ReservationController extends ViewController
 
   private void filterByRoomTypes(String selection)
   {
-    reset();
 
     if (selection.equals("All"))
     {
-      reset();
+      viewModel.getAllAvailableRooms();
     }
 
     else
     {
+      viewModel.getAllAvailableRooms();
       viewModel.getRooms().removeIf(
           roomViewModel -> !roomViewModel.roomTypeProperty().get().toString()
               .equals(selection));
+
     }
   }
 
@@ -181,8 +185,6 @@ public class ReservationController extends ViewController
     if (!selection.isEmpty())
     {
       filterByBedsActive = true;
-      System.out.println("Filtering by beds");
-
       int nrBedsToFilter = Integer.parseInt(selection);
       viewModel.getRooms().removeIf(
           roomViewModel -> roomViewModel.numberOfBedsProperty().get()
@@ -191,10 +193,8 @@ public class ReservationController extends ViewController
 
     else
     {
-      reset();
       filterByBedsActive = false;
       runFilters("bed");
-      System.out.println("NOT Filtering by beds");
     }
 
   }
@@ -203,39 +203,36 @@ public class ReservationController extends ViewController
   {
     runFilters("price");
 
-    if (priceFromFilter.textProperty().get().isEmpty() && priceToFilter.textProperty().get().isEmpty())
-    {
-      System.out.println("NOTHING TO RUN");
-    }
-
-    else if (!priceFromFilter.textProperty().get().isEmpty() && priceToFilter.textProperty().get().isEmpty())
+    if (!priceFromFilter.textProperty().get().isEmpty()
+        && priceToFilter.textProperty().get().isEmpty())
     {
       filterByPriceActive = true;
-      int lowPriceToFilter = Integer.parseInt(priceFromFilter.textProperty().get());
-      System.out.println("Running price filter with only low value!");
-      System.out.println("Should remove all rooms with total value less than: " + lowPriceToFilter);
-
+      int lowPriceToFilter = Integer.parseInt(
+          priceFromFilter.textProperty().get());
       viewModel.getRooms()
           .removeIf(room -> lowPriceToFilter > room.totalPriceProperty().get());
     }
 
-    else if (priceFromFilter.textProperty().get().isEmpty() && !priceToFilter.textProperty().get().isEmpty())
+    else if (priceFromFilter.textProperty().get().isEmpty()
+        && !priceToFilter.textProperty().get().isEmpty())
     {
       filterByPriceActive = true;
-      System.out.println("Running price filter with only high value!");
-      int highPriceToFilter = Integer.parseInt(priceToFilter.textProperty().get());
+      int highPriceToFilter = Integer.parseInt(
+          priceToFilter.textProperty().get());
       viewModel.getRooms().removeIf(
           roomViewModel -> roomViewModel.totalPriceProperty().get()
               > highPriceToFilter);
 
     }
 
-    else if (!priceFromFilter.textProperty().get().isEmpty() && !priceToFilter.textProperty().get().isEmpty())
+    else if (!priceFromFilter.textProperty().get().isEmpty()
+        && !priceToFilter.textProperty().get().isEmpty())
     {
       filterByPriceActive = true;
-      System.out.println("Running price filter with both values!");
-      int lowPriceToFilter = Integer.parseInt(priceFromFilter.textProperty().get());
-      int highPriceToFilter = Integer.parseInt(priceToFilter.textProperty().get());
+      int lowPriceToFilter = Integer.parseInt(
+          priceFromFilter.textProperty().get());
+      int highPriceToFilter = Integer.parseInt(
+          priceToFilter.textProperty().get());
 
       viewModel.getRooms().removeIf(
           roomViewModel -> roomViewModel.totalPriceProperty().get()
@@ -243,6 +240,11 @@ public class ReservationController extends ViewController
       viewModel.getRooms().removeIf(
           roomViewModel -> roomViewModel.totalPriceProperty().get()
               < lowPriceToFilter);
+    }
+
+    else
+    {
+      filterByPriceActive = false;
     }
   }
 
@@ -274,23 +276,25 @@ public class ReservationController extends ViewController
 
       case "roomType":
       {
-          System.out.println("CASE ROOMTYPE");
+        if (filterByBedsActive)
+        {
+          filterByBedCount(bedsFilter.textProperty().get());
+        }
 
-          if (filterByBedsActive)
-          {
-            filterByBedCount(bedsFilter.textProperty().get());
-          }
-
-          if (filterByPriceActive)
-          {
-            runFilterByPrice();
-          }
-          break;
+       else if (filterByPriceActive)
+        {
+          runFilterByPrice();
+        }
+        break;
       }
     }
   }
 
-
+  @FXML private void filterByPrice()
+  {
+    runFilterByPrice();
+    filterByBedCount(bedsFilter.textProperty().get());
+  }
 
   /**
    * A void method  opening the GuestInformation view.
@@ -313,12 +317,5 @@ public class ReservationController extends ViewController
   public void back() throws IOException
   {
     getViewHandler().openView("GuestMenuView.fxml");
-  }
-
-  @FXML private void filterByPrice()
-  {
-    System.out.println("BUTTON CLICKED");
-    runFilterByPrice();
-    filterByBedCount(bedsFilter.textProperty().get());
   }
 }
