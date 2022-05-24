@@ -13,7 +13,7 @@ public interface Model extends UnnamedPropertyChangeSubject
   RoomTransfer book(String roomId, LocalDate startDate, LocalDate endDate, Guest guest);
   RoomTransfer addRoom(String roomId, RoomType type, int nrBeds, int dailyPrice);
   RoomTransfer removeRoom(String roomId);
-  RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds);
+  RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds, int dailyPrice);
   RoomTransfer getAllRooms();
   RoomBookingTransfer editBooking(int bookingId, LocalDate startDate, LocalDate endDate, String roomid);
   RoomBookingTransfer removeBooking(int bookingId);

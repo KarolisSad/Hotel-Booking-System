@@ -121,8 +121,8 @@ public class ModelManager implements Model {
      * @return true if editing succeeds
      */
     @Override
-    public RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds) {
-        return hotelClient.editRoomInfo(roomId, type, nrBeds);
+    public RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds, int dailyPrice) {
+        return hotelClient.editRoomInfo(roomId, type, nrBeds, dailyPrice);
     }
 
     /**

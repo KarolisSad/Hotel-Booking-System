@@ -31,6 +31,8 @@ public class RoomDetailsForReceptionistModel
   private StringProperty roomNumber;
   private StringProperty nrOfBeds;
 
+  private StringProperty dailyPrice;
+
   private ArrayList<RoomType> types;
 
   private ObjectProperty<LocalDate> startDatePicker;
@@ -53,6 +55,7 @@ public class RoomDetailsForReceptionistModel
     status = new SimpleStringProperty();
     roomNumber = new SimpleStringProperty();
     type = new SimpleStringProperty();
+    dailyPrice = new SimpleStringProperty();
     startDatePicker = new SimpleObjectProperty<>();
     endDatePicker = new SimpleObjectProperty<>();
     nrOfBeds = new SimpleStringProperty();
@@ -185,10 +188,16 @@ public class RoomDetailsForReceptionistModel
     roomNumber.setValue(room.getRoomId());
     nrOfBeds.setValue(String.valueOf(room.getNumberOfBeds()));
     type.setValue(room.getRoomType().toString());
+    dailyPrice.setValue(String.valueOf(room.getPrice()));
     bookingId.setValue(
         String.valueOf(selectedBooking.bookingIdProperty().get()));
     status.setValue(selectedBooking.bookingStateProperty().get());
     startDatePicker.setValue(selectedBooking.getStartDate());
     endDatePicker.setValue(selectedBooking.getEndDate());
+  }
+
+  public StringProperty getDailyPrice()
+  {
+    return dailyPrice;
   }
 }

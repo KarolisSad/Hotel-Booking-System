@@ -110,9 +110,9 @@ public class HotelClient implements Model
    * @return message containing information if room was successfully edited
    */
   @Override public synchronized RoomTransfer editRoomInfo(String roomID,
-      RoomType type, int nrBeds)
+      RoomType type, int nrBeds, int dailyPrice)
   {
-    sendToServerAsJson(new RoomTransfer("edit", roomID, type, nrBeds));
+    sendToServerAsJson(new RoomTransfer("edit", roomID, type, nrBeds, dailyPrice));
     message = null;
     try
     {
@@ -122,6 +122,7 @@ public class HotelClient implements Model
     {
       e.printStackTrace();
     }
+    System.out.println("MESSAGE: " + message);
     return json.fromJson(message, RoomTransfer.class);
   }
 

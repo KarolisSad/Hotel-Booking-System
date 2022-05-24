@@ -170,7 +170,7 @@ public class AddEditViewModel
   public void editRoomInfo()
   {
     RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type,
-        nrOfBeds.get());
+        nrOfBeds.get(), dailyPrice.get());
     if (roomTransfer.getMessage() == null)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -181,6 +181,7 @@ public class AddEditViewModel
       alert.showAndWait();    }
     else
     {
+
       errorProperty.set(roomTransfer.getMessage());
     }
   }
