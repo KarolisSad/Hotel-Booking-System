@@ -12,16 +12,32 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * A class connecting the server to the database.
+ * Created as Singleton.
+ * @author Group 5
+ * @version 24/05/2022
+ */
 public class MyDataBase
 {
 
   private static MyDataBase instance;
 
+  /**
+   * A constructor registering the Driver.
+   */
   private MyDataBase() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
+  /**
+   * Method creating an instance variable of the class for the first time.
+   * Then returning the same variable every time its called.
+   *
+   * @return MyDataBase instance variable.
+   * @throws SQLException
+   */
   public static synchronized MyDataBase getInstance() throws SQLException
   {
     if (instance == null)
@@ -31,6 +47,11 @@ public class MyDataBase
     return instance;
   }
 
+  /**
+   * Getting connection with database.
+   * @return database connection
+   * @throws SQLException
+   */
   private Connection getConnection() throws SQLException
   {
           ////////////////////////////////////////////////////
@@ -42,11 +63,11 @@ public class MyDataBase
     // Karolis
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
        //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
           ////////////////////////////////////////////////////
           //                                                //
@@ -66,6 +87,13 @@ public class MyDataBase
 
   }
 
+  /**
+   * A method adding a room to the database.
+   * @param roomID
+   * @param roomType
+   * @param nrBeds
+   * @throws SQLException
+   */
   public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
       throws SQLException
   {
@@ -105,6 +133,12 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method checking if a specific room is registered in the database.
+   * @param roomID
+   * @return true if room exits.
+   * @throws SQLException
+   */
   // Return true if room exits.
   // PURPOSE: being able to throw exception. Otherwise it would try to remove not existent room. (Might be better solution)
   public boolean doesRoomExist(String roomID) throws SQLException
@@ -119,6 +153,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method removing a room with specific ID, from the database.
+   * @param ID
+   * @throws SQLException
+   */
   public void removeOneRoom(String ID) throws SQLException
   {
     if (!(doesRoomExist(ID)))
@@ -144,6 +183,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method getting information about all rooms that are in the database.
+   * @return ArrayList of rooms
+   * @throws SQLException
+   */
   public ArrayList<Room> getAllRooms() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -170,6 +214,13 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method getting information about all rooms that are in the database.
+   * @param startDate
+   * @param endDate
+   * @return ArrayList of rooms
+   * @throws SQLException
+   */
   public ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate)
       throws SQLException
   {
@@ -565,6 +616,16 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method that changes guest details in the database.
+   * Using bookingID to identify the guest.
+   * @param bookingID
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNr
+   * @throws SQLException
+   */
   public void editGuest(int bookingID, String fName, String lName, String email,
       int phoneNr) throws SQLException
   {
@@ -603,6 +664,15 @@ public class MyDataBase
 
   }
 
+  /**
+   * A method that edits booking details in the database.
+   * Using bookingId to identify the booking.
+   * @param bookingId
+   * @param startDate
+   * @param endDate
+   * @param roomId
+   * @throws SQLException
+   */
   public void editBooking(int bookingId, LocalDate startDate, LocalDate endDate,
       String roomId) throws SQLException
   {
@@ -628,6 +698,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method getting details about all guests registered in the database.
+   * @return ArrayList of guests
+   * @throws SQLException
+   */
   public ArrayList<Guest> getAllGuests() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -704,6 +779,11 @@ public class MyDataBase
 
    */
 
+  /**
+   * A method that adds a new guest to the database.
+   * @param guest
+   * @throws SQLException
+   */
   public void register(Guest guest) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -738,6 +818,12 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method checking if the guest with specific username and password exist in the database.
+   * @param username
+   * @param password
+   * @throws SQLException
+   */
   public void login(String username, String password) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -756,6 +842,12 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method getting all the bookings made by a person who is logged in the system.
+   * @param username
+   * @return ArrayList of bookings
+   * @throws SQLException
+   */
   public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username)
       throws SQLException
   {
@@ -784,6 +876,12 @@ public class MyDataBase
     return toSend;
   }
 
+  /**
+   * Method inserting a new booking to the database.
+   * Made for a person who is logged in the database.
+   * @param roomBooking
+   * @throws SQLException
+   */
   public void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -808,6 +906,10 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method deleting all data from all tables in database.
+   * @throws SQLException
+   */
   public void clearDatabase() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -827,6 +929,15 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method changing information about guest in the database for a guest
+   * having specific username.
+   * @param username
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNr
+   */
   public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
     System.out.println(
             "Edit guest values" + username + fName + lName + email + phoneNr);
@@ -855,6 +966,11 @@ public class MyDataBase
 
   }
 
+  /**
+   * Method getting all information about a guest from the database.
+   * @param username
+   * @return GuestTransfer object called guestTransfer
+   */
   public GuestTransfer getGuestByUsername(String username) {
     System.out.println(
             "Get guest values: " + username);
