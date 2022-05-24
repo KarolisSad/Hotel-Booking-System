@@ -18,12 +18,8 @@ public class UserLoginMainViewController extends ViewController
 
     }
 
-    public void receptionist() throws IOException {
-        getViewHandler().openView("BookingsForReceptionistView.fxml");
-    }
-
-    public void hotelManager() throws IOException {
-        getViewHandler().openView("MenuForHotelManager.fxml");
+    public void admin() throws IOException {
+        getViewHandler().openView("AdminLogInView.fxml");
     }
 
     public void login() throws IOException {
