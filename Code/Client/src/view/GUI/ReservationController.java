@@ -1,20 +1,14 @@
 package view.GUI;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
-import mediator.RoomTransfer;
-import model.RoomType;
 import view.ViewController;
 import viewModel.ReservationViewModel;
 import viewModel.SimpleRoomViewModel;
-import viewModel.ViewModelFactory;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.util.function.UnaryOperator;
 
@@ -26,6 +20,7 @@ import java.util.function.UnaryOperator;
  */
 public class ReservationController extends ViewController
 {
+  @FXML private Button filterPriceButton;
   @FXML private ComboBox<String> roomTypeFilter;
   @FXML private TextField bedsFilter;
   @FXML private TextField priceFromFilter;
@@ -40,13 +35,8 @@ public class ReservationController extends ViewController
   @FXML private DatePicker endDate;
   @FXML private Label errorLabel;
   private ReservationViewModel viewModel;
-
-  private int priceToValue;
-  private int priceFromValue;
-  private boolean lowValueInput;
-  private boolean highValueInput;
   private boolean filterByPriceActive;
-  private boolean filterByBeds;
+  private boolean filterByBedsActive;
 
   /**
    * A none argument, void method initializing instance variables.
@@ -56,6 +46,8 @@ public class ReservationController extends ViewController
 
     viewModel = getViewModelFactory().getReservationViewModel();
     DecimalFormat currencyFormat = new DecimalFormat("0.00 DKK");
+    filterByBedsActive = false;
+    filterByPriceActive = false;
 
     // Binding
     startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
@@ -71,7 +63,7 @@ public class ReservationController extends ViewController
         cellData -> cellData.getValue().numberOfBedsProperty().asObject());
 
     // Formatter that makes sure that nothing other than number can be typed in the textfield.
-    UnaryOperator<TextFormatter.Change> bedCountValidationFormatter = change -> {
+    UnaryOperator<TextFormatter.Change> numberValidationFormatter = change -> {
       if (change.getText().matches("\\d+"))
       {
         return change;
@@ -117,26 +109,30 @@ public class ReservationController extends ViewController
     roomTypeFilter.getSelectionModel().selectedItemProperty()
         .addListener((obs, oldVal, newVal) -> {
           filterByRoomTypes(newVal);
+          runFilters("roomType");
         });
 
     //Number of beds filter
     bedsFilter.textFormatterProperty()
-        .setValue(new TextFormatter<>(bedCountValidationFormatter));
+        .setValue(new TextFormatter<>(numberValidationFormatter));
     bedsFilter.textProperty().addListener((obs, oldVal, newVal) -> {
       filterByBedCount(newVal);
     });
 
     // Price Filter
-    priceFromFilter.textFormatterProperty().setValue(new TextFormatter<>(bedCountValidationFormatter));
-    priceToFilter.textFormatterProperty().setValue(new TextFormatter<>(bedCountValidationFormatter));
+    priceFromFilter.textFormatterProperty().setValue(new TextFormatter<>(numberValidationFormatter));
+    priceToFilter.textFormatterProperty().setValue(new TextFormatter<>(numberValidationFormatter));
 
     priceFromFilter.textProperty().addListener((obs, oldVal, newVal) -> {
-        setPriceFromValue(newVal);
+      filterPriceButton.setDisable(false);
     });
 
     priceToFilter.textProperty().addListener((obs, oldVal, newVal) -> {
-    setPriceToValue(newVal);
+      filterPriceButton.setDisable(false);
     });
+
+
+    reset();
   }
 
 
@@ -148,6 +144,10 @@ public class ReservationController extends ViewController
   @Override public void reset()
   {
     viewModel.getAllAvailableRooms();
+    if (priceFromFilter.textProperty().get().isEmpty() && priceFromFilter.textProperty().get().isEmpty())
+    {
+      filterPriceButton.setDisable(true);
+    }
   }
 
   /**
@@ -178,101 +178,119 @@ public class ReservationController extends ViewController
 
   private void filterByBedCount(String selection)
   {
-    filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
-
-
     if (!selection.isEmpty())
     {
-      filterByBeds = true;
+      filterByBedsActive = true;
       System.out.println("Filtering by beds");
 
       int nrBedsToFilter = Integer.parseInt(selection);
       viewModel.getRooms().removeIf(
           roomViewModel -> roomViewModel.numberOfBedsProperty().get()
               < nrBedsToFilter);
-
     }
+
     else
     {
       reset();
-      filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
-      filterByBeds = false;
+      filterByBedsActive = false;
+      runFilters("bed");
       System.out.println("NOT Filtering by beds");
     }
 
-    if (filterByPriceActive)
-    {
-      runFilterByPrice();
-    }
-  }
-
-  private void setPriceFromValue(String selection)
-  {
-    if (!selection.isEmpty())
-    {
-      priceFromValue = Integer.parseInt(selection);
-      lowValueInput = true;
-      System.out.println("From value set: " + priceFromValue);
-      if (highValueInput)
-      {
-        runFilterByPrice();
-      }
-    }
-    else
-    {
-      filterByPriceActive = false;
-      lowValueInput = false;
-      filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
-    }
-
-    if (filterByBeds)
-    {
-      filterByBedCount(bedsFilter.textProperty().get());
-    }
-  }
-
-  private void setPriceToValue(String selection)
-  {
-    if (!selection.isEmpty())
-    {
-      int newToValue = Integer.parseInt(selection);
-      if (newToValue > priceFromValue)
-      {
-        priceToValue = newToValue;
-        highValueInput = true;
-        System.out.println("To value set: " + priceToValue);
-        if (lowValueInput)
-        {
-          runFilterByPrice();
-        }
-      }
-
-    }
-    else
-    {
-      filterByPriceActive = false;
-      highValueInput = false;
-      filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
-    }
-
-    if (filterByBeds)
-    {
-      filterByBedCount(bedsFilter.textProperty().get());
-    }
   }
 
   private void runFilterByPrice()
   {
-    filterByPriceActive = true;
-    viewModel.getRooms().removeIf(
-        roomViewModel -> roomViewModel.totalPriceProperty().get() > priceToValue
-            || roomViewModel.totalPriceProperty().get() < priceFromValue);
+    runFilters("price");
 
-    if (filterByBeds)
+    if (priceFromFilter.textProperty().get().isEmpty() && priceToFilter.textProperty().get().isEmpty())
     {
-      filterByBedCount(bedsFilter.textProperty().get());
+      System.out.println("NOTHING TO RUN");
+    }
+
+    else if (!priceFromFilter.textProperty().get().isEmpty() && priceToFilter.textProperty().get().isEmpty())
+    {
+      filterByPriceActive = true;
+      int lowPriceToFilter = Integer.parseInt(priceFromFilter.textProperty().get());
+      System.out.println("Running price filter with only low value!");
+      System.out.println("Should remove all rooms with total value less than: " + lowPriceToFilter);
+
+      viewModel.getRooms()
+          .removeIf(room -> lowPriceToFilter > room.totalPriceProperty().get());
+    }
+
+    else if (priceFromFilter.textProperty().get().isEmpty() && !priceToFilter.textProperty().get().isEmpty())
+    {
+      filterByPriceActive = true;
+      System.out.println("Running price filter with only high value!");
+      int highPriceToFilter = Integer.parseInt(priceToFilter.textProperty().get());
+      viewModel.getRooms().removeIf(
+          roomViewModel -> roomViewModel.totalPriceProperty().get()
+              > highPriceToFilter);
+
+    }
+
+    else if (!priceFromFilter.textProperty().get().isEmpty() && !priceToFilter.textProperty().get().isEmpty())
+    {
+      filterByPriceActive = true;
+      System.out.println("Running price filter with both values!");
+      int lowPriceToFilter = Integer.parseInt(priceFromFilter.textProperty().get());
+      int highPriceToFilter = Integer.parseInt(priceToFilter.textProperty().get());
+
+      viewModel.getRooms().removeIf(
+          roomViewModel -> roomViewModel.totalPriceProperty().get()
+              > highPriceToFilter);
+      viewModel.getRooms().removeIf(
+          roomViewModel -> roomViewModel.totalPriceProperty().get()
+              < lowPriceToFilter);
     }
   }
+
+  private void runFilters(String callingMethod)
+  {
+    switch (callingMethod)
+    {
+      case "bed":
+      {
+        filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
+
+        if (filterByPriceActive)
+        {
+          runFilterByPrice();
+        }
+        break;
+      }
+
+      case "price":
+      {
+        filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
+
+        if (filterByBedsActive)
+        {
+          filterByBedCount(bedsFilter.textProperty().get());
+        }
+        break;
+      }
+
+      case "roomType":
+      {
+          System.out.println("CASE ROOMTYPE");
+
+          if (filterByBedsActive)
+          {
+            filterByBedCount(bedsFilter.textProperty().get());
+          }
+
+          if (filterByPriceActive)
+          {
+            runFilterByPrice();
+          }
+          break;
+      }
+    }
+  }
+
+
 
   /**
    * A void method  opening the GuestInformation view.
@@ -297,4 +315,10 @@ public class ReservationController extends ViewController
     getViewHandler().openView("GuestMenuView.fxml");
   }
 
+  @FXML private void filterByPrice()
+  {
+    System.out.println("BUTTON CLICKED");
+    runFilterByPrice();
+    filterByBedCount(bedsFilter.textProperty().get());
+  }
 }

@@ -40,7 +40,7 @@
          <children>
             <TableView fx:id="availableRoomsTable" prefHeight="173.0" prefWidth="447.0">
                 <placeholder>
-                    <Label text="No rooms available. Try with other dates or change filtering"/>
+                    <Label text="No rooms available. Try with other dates or change filtering" />
                 </placeholder>
               <columns>
                 <TableColumn fx:id="roomNumberColumn" prefWidth="92.0" text="Room number" />
@@ -70,24 +70,33 @@
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
+                        <VBox>
                            <children>
-                              <Label text="From:">
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="priceFromFilter" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="To:">
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="priceToFilter" />
+                              <HBox>
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="From:">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="priceFromFilter" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="To:">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="priceToFilter" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="filterPriceButton" mnemonicParsing="false" onAction="#filterByPrice" prefHeight="23.0" prefWidth="172.0" text="Run price filter" />
                            </children>
                         </VBox>
                      </children>
