@@ -204,6 +204,10 @@ public class RoomTransfer {
         return message;
     }
 
+    /**
+     * ToString method
+     * @return All instance variables and their values as a String.
+     */
     @Override public String toString()
     {
         return "RoomTransfer{" + "roomId='" + roomId + '\'' + ", roomType="

@@ -19,6 +19,10 @@ public class HotelServer implements Runnable{
     private int PORT = 2917;
     private ServerSocket welcomeSocket;
 
+    /**
+     * Constructor initializing instance variables.
+     * @param model
+     */
     public HotelServer(Model model)
     {
         this.model = model;
