@@ -12,6 +12,7 @@ import model.Model;
 import model.Room;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /**
@@ -41,11 +42,12 @@ public class ReservationViewModel
   {
     this.model = model;
     this.availableRooms = FXCollections.observableArrayList();
-    startDatePicker = new SimpleObjectProperty<>();
-    endDatePicker = new SimpleObjectProperty<>();
+    startDatePicker = new SimpleObjectProperty<>(LocalDate.now());
+    endDatePicker = new SimpleObjectProperty<>(LocalDate.now().plusDays(2));
     selectedRoomProperty = new SimpleObjectProperty<>();
     this.errorLabel = new SimpleStringProperty("");
 
+    getAllAvailableRooms();
 
     //TODO not needed??
     this.temp = tempInfo;
@@ -84,7 +86,7 @@ public class ReservationViewModel
     {
       for (Room room : rooms)
       {
-        availableRooms.add(new SimpleRoomViewModel(room));
+        availableRooms.add(new SimpleRoomViewModel(room, getStartDatePicker().get(), getEndDatePicker().get()));
       }
     }
     catch (Exception e)
@@ -107,6 +109,7 @@ public class ReservationViewModel
 
     if (!(roomBookingTransfer.getMessage().equals("null")))
     {
+      System.out.println("ERROR: " + roomBookingTransfer.getMessage());
       errorLabel.setValue(
           "Room wasn't added.." + roomBookingTransfer.getMessage());
     }
@@ -190,5 +193,6 @@ public class ReservationViewModel
   {
     getAllAvailableRooms();
   }
+
 }
 
