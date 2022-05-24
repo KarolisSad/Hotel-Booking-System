@@ -24,7 +24,8 @@ public class ReservationViewModel
 {
 
   private Model model;
-  private ObservableList<String> availableRooms;
+  private ObservableList<SimpleRoomViewModel> availableRooms;
+  private ObjectProperty<SimpleRoomViewModel> selectedRoomProperty;
   private ObjectProperty<LocalDate> startDatePicker;
   private ObjectProperty<LocalDate> endDatePicker;
   private SimpleStringProperty errorLabel;
@@ -42,7 +43,11 @@ public class ReservationViewModel
     this.availableRooms = FXCollections.observableArrayList();
     startDatePicker = new SimpleObjectProperty<>();
     endDatePicker = new SimpleObjectProperty<>();
+    selectedRoomProperty = new SimpleObjectProperty<>();
     this.errorLabel = new SimpleStringProperty("");
+
+
+    //TODO not needed??
     this.temp = tempInfo;
   }
 
@@ -77,9 +82,9 @@ public class ReservationViewModel
     availableRooms.clear();
     try
     {
-      for (int i = 0; i < rooms.size(); i++)
+      for (Room room : rooms)
       {
-        availableRooms.add(rooms.get(i).getRoomId());
+        availableRooms.add(new SimpleRoomViewModel(room));
       }
     }
     catch (Exception e)
@@ -89,22 +94,11 @@ public class ReservationViewModel
   }
 
   /**
-   * Sets new values for TemporaryInformation object for:
-   * startDate value received from startDatePicker,
-   * endDate value received from endDatePicker,
-   * roomID value received from argument
+   * REDO THIS TODO
    *
    * @param roomName selected room ID
    */
-  //OLD
-  //  public void reserveRoom(String roomName)
-  //  {
-  //    temp.setStartDate(
-  //        dateFromDatePicker(startDatePicker.getValue().toString()));
-  //    temp.setEndDate(dateFromDatePicker(endDatePicker.getValue().toString()));
-  //    temp.setRoomID(roomName);
-  //  }
-  // NEW
+
   public void bookARoom(String roomName)
   {
     RoomBookingTransfer roomBookingTransfer = model.bookARoomWhenLoggedIn(
@@ -147,9 +141,19 @@ public class ReservationViewModel
    *
    * @return availableRooms as an Observable list
    */
-  public ObservableList<String> getRooms()
+  public ObservableList<SimpleRoomViewModel> getRooms()
   {
     return availableRooms;
+  }
+
+  public ObjectProperty<SimpleRoomViewModel> getSelected()
+  {
+    return selectedRoomProperty;
+  }
+
+  public void setSelected(SimpleRoomViewModel roomViewModel)
+  {
+    selectedRoomProperty.set(roomViewModel);
   }
 
   /**

@@ -142,9 +142,10 @@ public class HotelClientHandler implements Runnable
 
         case "edit":
           room = json.fromJson(message, RoomTransfer.class);
+          System.out.println("RECEIVED FROM CLIENT: " + message);
+          System.out.println("AFTER CONVERT: " + room);
           try
           {
-            System.out.println(room.getRoomType());
             model.editRoomInfo(room.getRoomId(), room.getRoomType(),
                 room.getNrBeds(), room.getDailyPrice());
 
@@ -152,6 +153,7 @@ public class HotelClientHandler implements Runnable
           }
           catch (Exception e)
           {
+            e.printStackTrace();
             out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
           }
           break;

@@ -1,13 +1,12 @@
 package view.GUI;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import mediator.RoomTransfer;
 import view.ViewController;
 import viewModel.ReservationViewModel;
+import viewModel.SimpleRoomViewModel;
 import viewModel.ViewModelFactory;
 
 import java.io.IOException;
@@ -21,10 +20,15 @@ import java.rmi.RemoteException;
  */
 public class ReservationController extends ViewController
 {
+  @FXML private TableView<SimpleRoomViewModel> availableRoomsTable;
+  @FXML private TableColumn<SimpleRoomViewModel, String> roomNumberColumn;
+  @FXML private TableColumn<SimpleRoomViewModel, String> roomTypeColumn;
+  @FXML private TableColumn<SimpleRoomViewModel, Integer> numberOfBedsColumn;
+  @FXML private TableColumn<SimpleRoomViewModel, Integer> dailyPriceColumn;
+  @FXML private TableColumn<SimpleRoomViewModel, Integer> totalPriceColumn;
   @FXML private DatePicker startDate;
   @FXML private DatePicker endDate;
   @FXML private Label errorLabel;
-  @FXML private ListView<String> availableRoom;
   private ReservationViewModel viewModel;
 
   /**
@@ -36,10 +40,22 @@ public class ReservationController extends ViewController
     viewModel = getViewModelFactory().getReservationViewModel();
 
     // Binding
-    availableRoom.setItems(viewModel.getRooms());
     startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
     endDate.valueProperty().bindBidirectional(viewModel.getEndDatePicker());
     errorLabel.textProperty().bind(viewModel.getErrorLabel());
+
+
+    roomNumberColumn.setCellValueFactory(cellData -> cellData.getValue()
+        .roomNumberProperty());
+    roomTypeColumn.setCellValueFactory(cellData -> cellData.getValue().roomTypeProperty().asString());
+    numberOfBedsColumn.setCellValueFactory(cellData -> cellData.getValue().numberOfBedsProperty().asObject());
+    dailyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().dailyPriceProperty().asObject());
+
+    availableRoomsTable.setItems(viewModel.getRooms());
+
+    availableRoomsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+      viewModel.setSelected(newValue);
+    });
   }
 
   /**
@@ -48,7 +64,7 @@ public class ReservationController extends ViewController
    */
   @Override public void reset()
   {
-    viewModel.clear();
+    viewModel.getAllAvailableRooms();
   }
 
   /**
@@ -66,9 +82,7 @@ public class ReservationController extends ViewController
 
   public void reservationButton() throws IOException
   {
-    String selectedRoomFromListView = availableRoom.getSelectionModel()
-        .getSelectedItem();
-    viewModel.bookARoom(selectedRoomFromListView);
+    viewModel.bookARoom(viewModel.getSelected().get().roomNumberProperty().get());
     reset();
   }
 
