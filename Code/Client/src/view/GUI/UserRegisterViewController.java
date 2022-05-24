@@ -8,6 +8,12 @@ import viewModel.UserRegisterModel;
 
 import java.io.IOException;
 
+/**
+ * Class representing the UserRegisterView window.
+ *
+ * @author Group 5
+ * @version 23-05-2022
+ */
 public class UserRegisterViewController extends ViewController
 {
 
@@ -19,6 +25,10 @@ public class UserRegisterViewController extends ViewController
     @FXML private TextField lName;
     @FXML private TextField fName;
 
+    /**
+     * Method initializing instance variables.
+     * And binging TextFields and Label to viewModel properties.
+     */
     @Override
     protected void init() {
         viewModel = getViewModelFactory().getUserRegisterModel();
@@ -35,11 +45,20 @@ public class UserRegisterViewController extends ViewController
 
     }
 
+    /**
+     * Method calls register() method in viewModel.
+     * And opens GuestMenuView window.
+     * @throws IOException
+     */
     public void register() throws IOException {
         viewModel.register();
         getViewHandler().openView("GuestMenuView.fxml");
     }
 
+    /**
+     * Method opens UserLoginMainView window.
+     * @throws IOException
+     */
     public void goBack() throws IOException {
         getViewHandler().openView("UserLoginMainView.fxml");
     }

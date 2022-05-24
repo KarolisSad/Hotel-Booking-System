@@ -11,11 +11,22 @@ import viewModel.UserLoginModel;
 
 import java.io.IOException;
 
+/**
+ * Class representing the UserLoginView window.
+ *
+ * @author Group 5
+ * @version 23-05-2022
+ */
+
 public class UserLoginViewController extends ViewController { private UserLoginModel viewModel;
     @FXML private TextField username;
     @FXML private TextField password;
     @FXML private Label error;
 
+    /**
+     * Method initializing instance variables.
+     * And binging TextFields and Label to viewModel properties.
+     */
     @Override
     protected void init() {
         viewModel = getViewModelFactory().getUserLoginModel();
@@ -29,6 +40,9 @@ public class UserLoginViewController extends ViewController { private UserLoginM
 
     }
 
+    /**
+     *  Method referencing to viewModel method called login().
+     */
     public void login()  {
         // todo try catch, put in higher ..
         try {
@@ -48,6 +62,10 @@ public class UserLoginViewController extends ViewController { private UserLoginM
         }
     }
 
+    /**
+     * Method opening UserLoginMainView window.
+     * @throws IOException
+     */
     public void menu() throws IOException {
         getViewHandler().openView("UserLoginMainView.fxml");
     }
