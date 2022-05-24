@@ -16,6 +16,7 @@ import viewModel.ViewModelFactory;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.util.function.UnaryOperator;
 
 /**
  * A class creating an ReservationController object.
@@ -40,6 +41,13 @@ public class ReservationController extends ViewController
   @FXML private Label errorLabel;
   private ReservationViewModel viewModel;
 
+  private int priceToValue;
+  private int priceFromValue;
+  private boolean lowValueInput;
+  private boolean highValueInput;
+  private boolean filterByPriceActive;
+  private boolean filterByBeds;
+
   /**
    * A none argument, void method initializing instance variables.
    */
@@ -49,38 +57,53 @@ public class ReservationController extends ViewController
     viewModel = getViewModelFactory().getReservationViewModel();
     DecimalFormat currencyFormat = new DecimalFormat("0.00 DKK");
 
-
     // Binding
     startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
     endDate.valueProperty().bindBidirectional(viewModel.getEndDatePicker());
     errorLabel.textProperty().bind(viewModel.getErrorLabel());
 
     // Table
-    roomNumberColumn.setCellValueFactory(cellData -> cellData.getValue()
-        .roomNumberProperty());
-    roomTypeColumn.setCellValueFactory(cellData -> cellData.getValue().roomTypeProperty().asString());
-    numberOfBedsColumn.setCellValueFactory(cellData -> cellData.getValue().numberOfBedsProperty().asObject());
+    roomNumberColumn.setCellValueFactory(
+        cellData -> cellData.getValue().roomNumberProperty());
+    roomTypeColumn.setCellValueFactory(
+        cellData -> cellData.getValue().roomTypeProperty().asString());
+    numberOfBedsColumn.setCellValueFactory(
+        cellData -> cellData.getValue().numberOfBedsProperty().asObject());
 
-      // Format price information to danish standard
+    // Formatter that makes sure that nothing other than number can be typed in the textfield.
+    UnaryOperator<TextFormatter.Change> bedCountValidationFormatter = change -> {
+      if (change.getText().matches("\\d+"))
+      {
+        return change;
+      }
+      else
+      {
+        change.setText("");
+        return change;
+      }
+    };
+
+    // Format price information to danish standard
     dailyPriceColumn.setCellValueFactory(cellData -> {
-      String formattedPrice = currencyFormat.format(cellData.getValue().dailyPriceProperty().get());
+      String formattedPrice = currencyFormat.format(
+          cellData.getValue().dailyPriceProperty().get());
       return new SimpleStringProperty(formattedPrice);
     });
     totalPriceColumn.setCellValueFactory(cellData -> {
-      String formattedPrice = currencyFormat.format(cellData.getValue().totalPriceProperty().get());
+      String formattedPrice = currencyFormat.format(
+          cellData.getValue().totalPriceProperty().get());
       return new SimpleStringProperty(formattedPrice);
     });
 
-
     availableRoomsTable.setItems(viewModel.getRooms());
 
-      // Add event listener when selecting a room
-    availableRoomsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
-      viewModel.setSelected(newValue);
-    });
+    // Add event listener when selecting a room
+    availableRoomsTable.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldValue, newValue) -> {
+          viewModel.setSelected(newValue);
+        });
 
     //Filtering
-
 
     // RoomType filter
     roomTypeFilter.getItems().removeAll(roomTypeFilter.getItems());
@@ -89,17 +112,33 @@ public class ReservationController extends ViewController
     roomTypeFilter.getItems().add("Family");
     roomTypeFilter.getItems().add("Suite");
     roomTypeFilter.getItems().add("All");
+    roomTypeFilter.getSelectionModel().select("All");
 
-    roomTypeFilter.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-     filterByRoomTypes(newVal);
+    roomTypeFilter.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldVal, newVal) -> {
+          filterByRoomTypes(newVal);
+        });
+
+    //Number of beds filter
+    bedsFilter.textFormatterProperty()
+        .setValue(new TextFormatter<>(bedCountValidationFormatter));
+    bedsFilter.textProperty().addListener((obs, oldVal, newVal) -> {
+      filterByBedCount(newVal);
     });
 
-    // Number of beds filter
-   // bedsFilter.textProperty().addListener((obs, oldVal, newVal) ->
-     //   availableRoomsTable.setItems(viewModel.getRooms(), newVal));
+    // Price Filter
+    priceFromFilter.textFormatterProperty().setValue(new TextFormatter<>(bedCountValidationFormatter));
+    priceToFilter.textFormatterProperty().setValue(new TextFormatter<>(bedCountValidationFormatter));
 
+    priceFromFilter.textProperty().addListener((obs, oldVal, newVal) -> {
+        setPriceFromValue(newVal);
+    });
 
+    priceToFilter.textProperty().addListener((obs, oldVal, newVal) -> {
+    setPriceToValue(newVal);
+    });
   }
+
 
 
   /**
@@ -126,14 +165,112 @@ public class ReservationController extends ViewController
 
     if (selection.equals("All"))
     {
-
       reset();
     }
 
     else
     {
       viewModel.getRooms().removeIf(
-          roomViewModel -> !roomViewModel.roomTypeProperty().get().toString().equals(selection));
+          roomViewModel -> !roomViewModel.roomTypeProperty().get().toString()
+              .equals(selection));
+    }
+  }
+
+  private void filterByBedCount(String selection)
+  {
+    filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
+
+
+    if (!selection.isEmpty())
+    {
+      filterByBeds = true;
+      System.out.println("Filtering by beds");
+
+      int nrBedsToFilter = Integer.parseInt(selection);
+      viewModel.getRooms().removeIf(
+          roomViewModel -> roomViewModel.numberOfBedsProperty().get()
+              < nrBedsToFilter);
+
+    }
+    else
+    {
+      reset();
+      filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
+      filterByBeds = false;
+      System.out.println("NOT Filtering by beds");
+    }
+
+    if (filterByPriceActive)
+    {
+      runFilterByPrice();
+    }
+  }
+
+  private void setPriceFromValue(String selection)
+  {
+    if (!selection.isEmpty())
+    {
+      priceFromValue = Integer.parseInt(selection);
+      lowValueInput = true;
+      System.out.println("From value set: " + priceFromValue);
+      if (highValueInput)
+      {
+        runFilterByPrice();
+      }
+    }
+    else
+    {
+      filterByPriceActive = false;
+      lowValueInput = false;
+      filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
+    }
+
+    if (filterByBeds)
+    {
+      filterByBedCount(bedsFilter.textProperty().get());
+    }
+  }
+
+  private void setPriceToValue(String selection)
+  {
+    if (!selection.isEmpty())
+    {
+      int newToValue = Integer.parseInt(selection);
+      if (newToValue > priceFromValue)
+      {
+        priceToValue = newToValue;
+        highValueInput = true;
+        System.out.println("To value set: " + priceToValue);
+        if (lowValueInput)
+        {
+          runFilterByPrice();
+        }
+      }
+
+    }
+    else
+    {
+      filterByPriceActive = false;
+      highValueInput = false;
+      filterByRoomTypes(roomTypeFilter.getSelectionModel().getSelectedItem());
+    }
+
+    if (filterByBeds)
+    {
+      filterByBedCount(bedsFilter.textProperty().get());
+    }
+  }
+
+  private void runFilterByPrice()
+  {
+    filterByPriceActive = true;
+    viewModel.getRooms().removeIf(
+        roomViewModel -> roomViewModel.totalPriceProperty().get() > priceToValue
+            || roomViewModel.totalPriceProperty().get() < priceFromValue);
+
+    if (filterByBeds)
+    {
+      filterByBedCount(bedsFilter.textProperty().get());
     }
   }
 
@@ -143,7 +280,8 @@ public class ReservationController extends ViewController
 
   public void reservationButton() throws IOException
   {
-    viewModel.bookARoom(viewModel.getSelected().get().roomNumberProperty().get());
+    viewModel.bookARoom(
+        viewModel.getSelected().get().roomNumberProperty().get());
     roomTypeFilter.getSelectionModel().select("All");
     reset();
   }
@@ -151,13 +289,12 @@ public class ReservationController extends ViewController
   /**
    * Method called when clicking the back button in the GUI.
    * Opens the LogInView view.
+   *
    * @throws IOException
    */
   public void back() throws IOException
   {
     getViewHandler().openView("GuestMenuView.fxml");
   }
-
-
 
 }
