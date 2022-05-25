@@ -61,13 +61,14 @@ public class MyDataBase
           ////////////////////////////////////////////////////
 
     // Karolis
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
      //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
        //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+
 
           ////////////////////////////////////////////////////
           //                                                //
@@ -1003,5 +1004,41 @@ public class MyDataBase
     }
     return guestTransfer;
   }
+
+    public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+                "SELECT *\n" + "FROM conferenceRooms\n" + "WHERE roomID IN (SELECT roomID\n"
+                        + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
+                        + "                 FROM roomBooking\n"
+                        + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
+                        + "                         (startDate BETWEEN (?) AND (?)\n"
+                        + "                         OR endDate BETWEEN (?) AND (?)))"
+                        + "ORDER BY roomID;");
+        statement.setObject(1, startDate);
+        statement.setObject(2, endDate);
+        statement.setObject(3, startDate);
+        statement.setObject(4, endDate);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<Room> rooms = new ArrayList<>();
+
+        while (resultSet.next())
+        {
+          String roomId = resultSet.getString("roomid");
+          String roomType = resultSet.getString("roomtype");
+          int nrBends = resultSet.getInt("nrbeds");
+          Room room = new Room(roomId,
+                  RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
+          rooms.add(room);
+        }
+        if (rooms.isEmpty())
+        {
+          throw new IllegalArgumentException(
+                  "No available room were found. Please select different date.");
+        }
+        return rooms;
+      }
+    }
 }
 

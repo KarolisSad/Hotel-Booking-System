@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.RoomDetailsForReceptionistController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-font-family: Arial" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.RoomDetailsForReceptionistController">
    <children>
       <Label alignment="CENTER" prefHeight="97.0" prefWidth="600.0" text="Room Details">
          <font>
-            <Font size="28.0" />
+            <Font name="Apple Chancery" size="28.0" />
          </font>
       </Label>
       <VBox prefHeight="337.0" prefWidth="600.0">
@@ -25,26 +25,32 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="System Bold Italic" size="20.0" />
+                        <Font name="Arial Bold" size="13.0" />
                      </font>
                   </Label>
                   <TextField fx:id="bookingIDtextField" editable="false" prefHeight="25.0" prefWidth="150.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
                   </TextField>
                   <Label text="Status">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="System Bold Italic" size="20.0" />
+                        <Font name="Arial Bold" size="13.0" />
                      </font>
                   </Label>
                   <TextField fx:id="statusTextField" editable="false" prefHeight="25.0" prefWidth="150.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
@@ -52,16 +58,19 @@
                <children>
                   <Label prefHeight="40.0" prefWidth="150.0" text="Room Number">
                      <font>
-                        <Font size="15.0" />
+                        <Font name="Arial Bold" size="13.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="roomNumberField" />
+                  <TextField fx:id="roomNumberField">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font></TextField>
                   <Label prefHeight="40.0" prefWidth="150.0" text="Number of beds">
                      <font>
-                        <Font size="15.0" />
+                        <Font name="Arial Bold" size="13.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -71,6 +80,9 @@
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
                   </TextField>
                </children>
             </HBox>
@@ -78,13 +90,16 @@
                <children>
                   <Label prefHeight="40.0" prefWidth="150.0" text="Type">
                      <font>
-                        <Font size="15.0" />
+                        <Font name="Arial Bold" size="13.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="typeField" editable="false" />
+                  <TextField fx:id="typeField" editable="false">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font></TextField>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0">
@@ -93,6 +108,9 @@
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
                   </Label>
                   <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="150.0">
                      <HBox.margin>
@@ -103,6 +121,9 @@
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
                   </Label>
                   <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="150.0">
                      <HBox.margin>
@@ -119,16 +140,25 @@
                <HBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#cancelBookingButton" prefHeight="30.0" prefWidth="150.0" text="Cancel the booking">
                <HBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
             </Button>
             <Button layoutX="315.0" layoutY="15.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="30.0" prefWidth="150.0" text="Exit">
                <HBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
             </Button>
          </children>
       </HBox>
@@ -138,6 +168,9 @@
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
             </Label>
          </children>
       </HBox>

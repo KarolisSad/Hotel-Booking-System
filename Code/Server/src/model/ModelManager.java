@@ -397,4 +397,9 @@ public class ModelManager implements Model
     public GuestTransfer getGuestByUsername(String username) throws SQLException {
         return dataBaseAdapter.getGuestByUsername(username);
     }
+
+    @Override
+    public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        return dataBaseAdapter.availableConferenceRooms(startDate,endDate);
+    }
 }

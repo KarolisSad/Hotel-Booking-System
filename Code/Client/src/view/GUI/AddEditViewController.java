@@ -48,6 +48,7 @@ public class AddEditViewController extends ViewController
       typeDropdown.getItems().add(RoomType.DOUBLE);
       typeDropdown.getItems().add(RoomType.SINGLE);
       typeDropdown.getItems().add(RoomType.SUITE);
+      typeDropdown.getItems().add(RoomType.CONFERENCE);
 
       errorLabel.textProperty().bind(viewModel.errorPropertyProperty());
     }
