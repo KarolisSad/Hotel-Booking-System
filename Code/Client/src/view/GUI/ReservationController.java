@@ -49,6 +49,11 @@ public class ReservationController extends ViewController
     filterByBedsActive = false;
     filterByPriceActive = false;
 
+    startDate.getEditor().setDisable(true);
+    startDate.getEditor().setOpacity(1);
+    endDate.getEditor().setDisable(true);
+    endDate.getEditor().setOpacity(1);
+
     // Binding
     startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
     endDate.valueProperty().bindBidirectional(viewModel.getEndDatePicker());
@@ -324,6 +329,7 @@ public class ReservationController extends ViewController
    */
   public void back() throws IOException
   {
+    reset();
     getViewHandler().openView("GuestMenuView.fxml");
   }
 }

@@ -56,7 +56,7 @@
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="92.0" prefWidth="600.0">
                     <children>
-                        <Label prefHeight="40.0" prefWidth="150.0" text="Number of beds">
+                        <Label prefHeight="40.0" prefWidth="150.0" text="Capacity">
                             <font>
                                 <Font name="Arial" size="15.0" />
                             </font>
