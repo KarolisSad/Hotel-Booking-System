@@ -9,7 +9,7 @@ set schema 'hotel';
 drop schema hotel cascade ;
 create table if not exists room(
     roomID          varchar(20) PRIMARY KEY NOT NULL                                                  ,
-    roomType        varchar(30) NOT NULL CHECK(roomType IN ('Family', 'Single', 'Double', 'Suite'))   ,
+    roomType        varchar(30) NOT NULL CHECK(roomType IN ('Family', 'Single', 'Double', 'Suite', 'Conference'))   ,
     nrBeds          integer     NOT NULL CHECK ( nrBeds between 1 AND 20)
 );
 
@@ -77,8 +77,7 @@ insert into roomBooking (startDate, endDate, guest, roomID, state)
 values ('2023-06-10','2023-06-20',11112222,3,'Booked');
 
 ------All-Available-Rooms------>
-
-select * from room where roomID in (select roomID from room
+select * from conferenceRooms where roomID in (select roomID from room
 except
 select roomID
 from roomBooking
@@ -126,4 +125,19 @@ EXECUTE PROCEDURE double_booking();
 
 -----------Trigger------------->
 
+-------------------------------<
+
+-----------Views--------------->
+create view conferenceRooms as
+select *
+from room
+where roomType = 'Conference';
+drop view conferenceRooms;
+
+
+create view regularRooms as
+select *
+from room
+where roomType not in ('Conference');
+drop view conferenceRooms;
 -------------------------------<
