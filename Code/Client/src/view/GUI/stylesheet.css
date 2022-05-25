@@ -1,0 +1,24 @@
+.textfield{
+    -fx-font-size: 10px;
+    -fx-font-family: open-sans;
+    -fx-font-color: #392F2E;
+    -fx-background-color: #E6D3A8;
+}
+
+.header{
+    -fx-font-size: 14px;
+    -fx-font-family: lato;
+}
+
+.button{
+    -fx-font-size: 10px;
+    -fx-font-family: open-sans;
+    -fx-font-color: #392F2E;
+     -fx-border-color: #3A7563;
+        -fx-border-width: 2;
+        -fx-border-radius: 5;
+}
+
+.body{
+       -fx-background-color: #E6D3A8;
+}

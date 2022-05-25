@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane style="-fx-font-family: Arial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.UserLoginMainViewController">
+<AnchorPane style="-fx-font-family: Arial" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.UserLoginMainViewController" stylesheets="stylesheet.css">
     <children>
         <Button layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="150.0" text="Login">
             <font>
