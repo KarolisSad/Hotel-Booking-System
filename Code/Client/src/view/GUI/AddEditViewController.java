@@ -53,6 +53,7 @@ public class AddEditViewController extends ViewController
       typeDropdown.getItems().add(RoomType.SUITE);
       typeDropdown.getItems().add(RoomType.CONFERENCE);
 
+
       errorLabel.textProperty()
           .bindBidirectional(viewModel.errorPropertyProperty());
     }
@@ -99,14 +100,13 @@ public class AddEditViewController extends ViewController
   {
     try
     {
+      selectedType = typeDropdown.getSelectionModel().getSelectedItem();
+      viewModel.setType(selectedType);
       Room room = new Room(viewModel.getRoomId(), viewModel.getType(), viewModel.getNumberOfBeds(), viewModel.dailyPriceProperty().get());
-      room.toString();
 
       if (viewModel.getViewState().isAdd())
       {
 
-        selectedType = typeDropdown.getSelectionModel().getSelectedItem();
-        viewModel.setType(selectedType);
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         //Style
