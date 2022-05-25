@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * A class that implements the Model interface and manages the bookings.
  *
  * @author Group 5
- * @version 04/05/2022
+ * @version 24/05/2022
  */
 
 public class ModelManager implements Model
@@ -61,17 +61,11 @@ public class ModelManager implements Model
      * @param nrBeds the number of beds in the room to be added
      * @return true if room is added successfully
      */
-    @Override public void addRoom(String roomId, RoomType type, int nrBeds)
+    @Override public void addRoom(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
-
-        if (roomId.equals(""))
-        {
-            // todo change it
-            //todo shouldn't this create a room object and pass that to the database????
-            throw new IllegalArgumentException("non");
-        }
-        dataBaseAdapter.addRoom(roomId, type, nrBeds);
+        Room room = new Room(roomId, type, nrBeds, price);
+        dataBaseAdapter.addRoom(room);
     }
 
     /**
@@ -148,11 +142,14 @@ public class ModelManager implements Model
      * @param nrBeds The (new) number of beds in the room.
      * @return true if editing succeeds
      */
-    @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
+    @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
-        //todo shouldn't this do something if a null-value is passed as roomID???
-        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
+        if (roomId.isEmpty() || roomId == null)
+        {
+            throw new NullPointerException("Room ID can not be null or an empty string when editing a room.");
+        }
+        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds, price);
     }
 
     /**
@@ -299,6 +296,17 @@ public class ModelManager implements Model
         return dataBaseAdapter.getAllGuests();
     }
 
+    /**
+     * Method used for registering the guest in the system.
+     * Calls the register() method in dataBaseAdapter.
+     * @param fName
+     * @param lName
+     * @param email
+     * @param phoneNr
+     * @param username
+     * @param password
+     * @throws SQLException
+     */
     @Override
     public void register(String fName, String lName, String email, int phoneNr, String username, String password) throws SQLException {
         Guest guest = new Guest(fName, lName, email, phoneNr, username, password);
@@ -306,11 +314,26 @@ public class ModelManager implements Model
 
     }
 
+    /**
+     * Method used to check if there is any guest having this username and password in the database.
+     * If yes, this method gives the access to the personal account of the guest.
+     * Calls login() method in the dataBaseAdapter.
+     * @param username
+     * @param password
+     * @throws SQLException
+     */
     @Override
     public void login(String username, String password) throws SQLException {
         dataBaseAdapter.login(username,password);
     }
 
+    /**
+     * Method used to get all bookings of a guest that is logged in the system.
+     * Calls getBookingsWhenLoggedIn() method in dataBaseAdapter.
+     * @param username
+     * @return bookingList with the list of bookings made by the guest.
+     * @throws SQLException
+     */
     @Override
     public RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException {
        bookingList.setAllBookings(dataBaseAdapter.getBookingsWhenLoggedIn(username));
@@ -318,6 +341,15 @@ public class ModelManager implements Model
 
     }
 
+    /**
+     * Method used to make a booking, when a guest is logged in the system.
+     * Calls bookARoomWhenLoggedIn() method in dataBaseAdapter.
+     * @param roomID
+     * @param startDate
+     * @param endDate
+     * @param username
+     * @throws SQLException
+     */
     @Override
     public void bookARoomWhenLoggedIn(String roomID, LocalDate startDate, LocalDate endDate, String username) throws SQLException {
         checkForLegalDates(startDate, endDate);
@@ -336,13 +368,55 @@ public class ModelManager implements Model
         dataBaseAdapter.clearDatabase();
     }
 
+    /**
+     * Method used to edit a guest with a specific username.
+     * Calls editGuestWithUsername method in dataBaseAdapter.
+     * @param username
+     * @param name
+     * @param lastName
+     * @param email
+     * @param phoneNr
+     * @throws SQLException
+     */
     @Override
-    public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
-        dataBaseAdapter.editGuestWithUsername(username,  getfName,  getlName,  email, phoneNr);
+    public void editGuestWithUsername(String username, String name, String lastName, String email, int phoneNr) throws IllegalArgumentException, SQLException {
+        try {
+            checkGuestBeforeEditing(username,name, lastName,email,phoneNr);
+        dataBaseAdapter.editGuestWithUsername(username,  name,  lastName,  email, phoneNr);
+
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Please fill in missing details");
+        }
     }
 
+    private void checkGuestBeforeEditing(String username, String name, String lastName, String email, int phoneNr) {
+
+        if (username.equals("") || username == null
+                || name.equals("") || name == null
+                || lastName.equals("") || lastName == null
+                || email.equals("") || phoneNr <9999999 || phoneNr > 99999999)
+        {
+            throw new IllegalArgumentException("Please fill in missing details.");
+        }
+    }
+
+    /**
+     * Method used to get details about a guest with a specific username.
+     * Calls getGuestByUsername method in dataBaseAdapter.
+     * @param username
+     * @return
+     * @throws SQLException
+     */
     @Override
     public GuestTransfer getGuestByUsername(String username) throws SQLException {
         return dataBaseAdapter.getGuestByUsername(username);
+    }
+
+    @Override
+    public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        checkForLegalDates(startDate, endDate);
+        return dataBaseAdapter.availableConferenceRooms(startDate,endDate);
     }
 }

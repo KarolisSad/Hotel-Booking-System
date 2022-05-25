@@ -1,6 +1,7 @@
 package view.GUI;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Model;
 import view.ViewController;
@@ -22,9 +23,10 @@ public class RoomOverviewForGuestController extends ViewController
     public TextField statusTextField;
     public TextField roomNumberField;
     public TextField nrOfBedsField;
-    public TextField typeField;
     public DatePicker startDatePicker;
     public DatePicker endDatePicker;
+    @FXML private TextField roomTypeField;
+    @FXML private TextField priceField;
     private RoomOverviewForGuestModel viewModel;
 
     /**
@@ -37,11 +39,14 @@ public class RoomOverviewForGuestController extends ViewController
 
         try
         {
+            //TODO shouldn't all bindings here be regular and not bi-directional??
+
             bookingIDtextField.textProperty().bindBidirectional(viewModel.getBookingId());
             statusTextField.textProperty().bindBidirectional(viewModel.getStatus());
-            typeField.textProperty().bindBidirectional(viewModel.getType());
+            roomTypeField.textProperty().bindBidirectional(viewModel.getType());
             nrOfBedsField.textProperty().bindBidirectional(viewModel.getNrOfBeds());
             roomNumberField.textProperty().bindBidirectional(viewModel.getRoomNumber());
+            priceField.textProperty().bindBidirectional(viewModel.getPrice());
             startDatePicker.valueProperty()
                     .bindBidirectional(viewModel.getStartDatePicker());
             endDatePicker.valueProperty()

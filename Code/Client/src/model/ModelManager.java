@@ -57,8 +57,8 @@ public class ModelManager implements Model {
      * @return true if room is added successfully
      */
     @Override
-    public RoomTransfer addRoom(String roomId, RoomType type, int nrBeds) {
-        return hotelClient.addRoom(roomId, type, nrBeds);
+    public RoomTransfer addRoom(String roomId, RoomType type, int nrBeds, int dailyPrice) {
+        return hotelClient.addRoom(roomId, type, nrBeds, dailyPrice);
     }
 
     /**
@@ -121,8 +121,8 @@ public class ModelManager implements Model {
      * @return true if editing succeeds
      */
     @Override
-    public RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds) {
-        return hotelClient.editRoomInfo(roomId, type, nrBeds);
+    public RoomTransfer editRoomInfo(String roomId, RoomType type, int nrBeds, int dailyPrice) {
+        return hotelClient.editRoomInfo(roomId, type, nrBeds, dailyPrice);
     }
 
     /**
@@ -326,6 +326,11 @@ public class ModelManager implements Model {
     @Override
     public GuestTransfer getGuestByUsername(String username) {
         return hotelClient.getGuestByUsername(username);
+    }
+
+    @Override
+    public RoomTransfer availableConferenceRooms(LocalDate startDate, LocalDate endDate) {
+        return hotelClient.availableConferenceRooms(startDate, endDate);
     }
 
     @Override

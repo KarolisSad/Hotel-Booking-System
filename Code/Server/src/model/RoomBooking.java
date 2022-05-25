@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * A class that creates a room booking.
  *
  * @author Group 5
- * @version 04/05/2022
+ * @version 24/05/2022
  */
 public class RoomBooking
 {
@@ -44,6 +44,15 @@ public class RoomBooking
     state = new RoomBookingBookedState();
   }
 
+  /**
+   * A 5 argument constructor passing booking information.
+   * Used when a guest is logged in the system and requests getting information about all his bookings.
+   * @param bookingID
+   * @param startDate
+   * @param endDate
+   * @param room
+   * @param state
+   */
   public RoomBooking(int bookingID,LocalDate startDate, LocalDate endDate, Room room, String state)
   {
     this.bookingID = bookingID;
@@ -53,6 +62,14 @@ public class RoomBooking
     this.state = getStateFromString(state);
   }
 
+  /**
+   *  A 5 argument constructor passing booking information.
+   *  Used when a guest is logged in the system and makes a new booking.
+   * @param startDate
+   * @param endDate
+   * @param roomID
+   * @param username
+   */
   public RoomBooking(LocalDate startDate, LocalDate endDate, String roomID, String username)
   {
     setStartAndEndDate(startDate,endDate);
@@ -61,6 +78,11 @@ public class RoomBooking
     state = new RoomBookingBookedState();
   }
 
+  /**
+   * A method setting a username in the system.
+   * @throws IllegalArgumentException if the username is null.
+   * @param username
+   */
   public void setUsername(String username) {
     if (username == null)
     {
@@ -259,6 +281,11 @@ public class RoomBooking
     return roomID;
   }
 
+  /**
+   * Method getting the username.
+   *
+   * @return String object called username.
+   */
   public String getUsername() {
     return username;
   }

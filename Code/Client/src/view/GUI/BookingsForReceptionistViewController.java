@@ -20,6 +20,10 @@ import java.util.Optional;
 public class BookingsForReceptionistViewController extends ViewController
 {
 
+  @FXML
+  private Button guestInfoButton;
+  @FXML
+  private Button roomInfoButton;
   @FXML private Button checkIn;
   @FXML private Button bookedButton;
   @FXML private Button inProgressButton;
@@ -73,6 +77,8 @@ public class BookingsForReceptionistViewController extends ViewController
               checkIn.setDisable(false);
             }
             viewModel.setSelected(newValue);
+            guestInfoButton.setDisable(false);
+            roomInfoButton.setDisable(false);
           }
         });
 
@@ -86,6 +92,9 @@ public class BookingsForReceptionistViewController extends ViewController
   {
     inProgressButton.setDisable(false);
     bookedButton.setDisable(true);
+    checkIn.setDisable(true);
+    guestInfoButton.setDisable(true);
+    roomInfoButton.setDisable(true);
     viewModel.reset();
   }
 

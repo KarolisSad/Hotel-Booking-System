@@ -27,6 +27,7 @@ public class AddEditViewModel
   private ViewState viewState;
   private Model model;
   private StringProperty errorProperty;
+  private IntegerProperty dailyPrice;
 
   /**
    * Constructor initializing instance variables.
@@ -43,6 +44,7 @@ public class AddEditViewModel
 
     roomId = new SimpleStringProperty();
     nrOfBeds = new SimpleIntegerProperty();
+    dailyPrice = new SimpleIntegerProperty();
     type = null;
     types = new ArrayList<>();
 
@@ -65,6 +67,7 @@ public class AddEditViewModel
     {
       roomId.set("");
       nrOfBeds.set(0);
+      dailyPrice.set(0);
       setType(null);
     }
     else
@@ -78,6 +81,7 @@ public class AddEditViewModel
         if (roomTransfer.getRoomList().get(i).getRoomId().equals(roomId.get()))
         {
           nrOfBeds.set(roomTransfer.getRoomList().get(i).getNumberOfBeds());
+          dailyPrice.set(roomTransfer.getRoomList().get(i).getPrice());
           setType(roomTransfer.getRoomList().get(i).getRoomType());
         }
       }
@@ -143,7 +147,7 @@ public class AddEditViewModel
   public void addRoom()
   {
     RoomTransfer roomTransfer = model.addRoom(roomId.get(), type,
-        nrOfBeds.get());
+        nrOfBeds.get(), dailyPrice.get());
     if (roomTransfer.getMessage() == null)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -166,7 +170,7 @@ public class AddEditViewModel
   public void editRoomInfo()
   {
     RoomTransfer roomTransfer = model.editRoomInfo(roomId.get(), type,
-        nrOfBeds.get());
+        nrOfBeds.get(), dailyPrice.get());
     if (roomTransfer.getMessage() == null)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -177,6 +181,7 @@ public class AddEditViewModel
       alert.showAndWait();    }
     else
     {
+
       errorProperty.set(roomTransfer.getMessage());
     }
   }
@@ -218,4 +223,11 @@ public class AddEditViewModel
   {
     return type;
   }
+
+  public IntegerProperty dailyPriceProperty()
+  {
+    return dailyPrice;
+  }
+
+
 }

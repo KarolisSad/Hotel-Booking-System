@@ -12,16 +12,32 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * A class connecting the server to the database.
+ * Created as Singleton.
+ * @author Group 5
+ * @version 24/05/2022
+ */
 public class MyDataBase
 {
 
   private static MyDataBase instance;
 
+  /**
+   * A constructor registering the Driver.
+   */
   private MyDataBase() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
+  /**
+   * Method creating an instance variable of the class for the first time.
+   * Then returning the same variable every time its called.
+   *
+   * @return MyDataBase instance variable.
+   * @throws SQLException
+   */
   public static synchronized MyDataBase getInstance() throws SQLException
   {
     if (instance == null)
@@ -31,6 +47,11 @@ public class MyDataBase
     return instance;
   }
 
+  /**
+   * Getting connection with database.
+   * @return database connection
+   * @throws SQLException
+   */
   private Connection getConnection() throws SQLException
   {
           ////////////////////////////////////////////////////
@@ -40,13 +61,14 @@ public class MyDataBase
           ////////////////////////////////////////////////////
 
     // Karolis
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-       //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+     //  return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
+
 
           ////////////////////////////////////////////////////
           //                                                //
@@ -59,14 +81,22 @@ public class MyDataBase
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Milit@ria2003");
     // Christian
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
+      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
     // Juste
    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
 
 
   }
 
-  public void addOneRoom(String roomID, RoomType roomType, int nrBeds)
+  public void addOneRoom(Room room)
+
+  /**
+   * A method adding a room to the database.
+   * @param roomID
+   * @param roomType
+   * @param nrBeds
+   * @throws SQLException
+   */
       throws SQLException
   {
     try (Connection connection = getConnection())
@@ -74,11 +104,12 @@ public class MyDataBase
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-            "INSERT INTO room(roomID, roomType, nrBeds) VALUES (?, ?, ?);");
+            "INSERT INTO room(roomID, roomType, nrBeds, dailyPrice) VALUES (?, ?, ?, ?);");
 
-        statement.setString(1, roomID);
-        statement.setString(2, roomType.toString());
-        statement.setInt(3, nrBeds);
+        statement.setString(1, room.getRoomId());
+        statement.setString(2, room.getRoomType().toString());
+        statement.setInt(3, room.getNumberOfBeds());
+        statement.setInt(4, room.getPrice());
         statement.executeUpdate();
       }
       catch (Exception e)
@@ -88,7 +119,7 @@ public class MyDataBase
         if (error.contains("room_pkey"))
         {
           throw new IllegalArgumentException(
-              "Room with ID: " + roomID + " already exists!");
+              "Room with ID: " + room.getRoomId() + " already exists!");
         }
         else if (error.contains("room_roomtype_check"))
         {
@@ -105,6 +136,12 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method checking if a specific room is registered in the database.
+   * @param roomID
+   * @return true if room exits.
+   * @throws SQLException
+   */
   // Return true if room exits.
   // PURPOSE: being able to throw exception. Otherwise it would try to remove not existent room. (Might be better solution)
   public boolean doesRoomExist(String roomID) throws SQLException
@@ -119,6 +156,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method removing a room with specific ID, from the database.
+   * @param ID
+   * @throws SQLException
+   */
   public void removeOneRoom(String ID) throws SQLException
   {
     if (!(doesRoomExist(ID)))
@@ -144,6 +186,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method getting information about all rooms that are in the database.
+   * @return ArrayList of rooms
+   * @throws SQLException
+   */
   public ArrayList<Room> getAllRooms() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -157,9 +204,10 @@ public class MyDataBase
       {
         String roomId = resultSet.getString("roomid");
         String roomType = resultSet.getString("roomtype");
-        int nrBends = resultSet.getInt("nrbeds");
+        int nrbeds = resultSet.getInt("nrbeds");
+        int price = resultSet.getInt("dailyprice");
         Room room = new Room(roomId,
-            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
+            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrbeds, price);
         rooms.add(room);
       }
       if (rooms == null)
@@ -170,13 +218,20 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method getting information about all rooms that are in the database.
+   * @param startDate
+   * @param endDate
+   * @return ArrayList of rooms
+   * @throws SQLException
+   */
   public ArrayList<Room> availableRooms(LocalDate startDate, LocalDate endDate)
       throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT *\n" + "FROM room\n" + "WHERE roomID IN (SELECT roomID\n"
+          "SELECT *\n" + "FROM regularrooms\n" + "WHERE roomID IN (SELECT roomID\n"
               + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
               + "                 FROM roomBooking\n"
               + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
@@ -195,8 +250,9 @@ public class MyDataBase
         String roomId = resultSet.getString("roomid");
         String roomType = resultSet.getString("roomtype");
         int nrBends = resultSet.getInt("nrbeds");
+        int price = resultSet.getInt("dailyprice");
         Room room = new Room(roomId,
-            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
+            RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends, price);
         rooms.add(room);
       }
       if (rooms.isEmpty())
@@ -273,21 +329,22 @@ public class MyDataBase
    * @param nrBeds The new number of beds to be assigned to the room.
    * @throws IllegalArgumentException if room is able to be edited.
    */
-  public void editRoomInfo(String roomID, RoomType type, int nrBeds)
+  public void editRoomInfo(String roomID, RoomType type, int nrBeds, int price)
       throws SQLException
   {
     try (Connection connection = getConnection())
     {
-      System.out.println(type.toString());
+
       try
       {
         PreparedStatement statement = connection.prepareStatement(
-            "update room\n" + "set nrBeds = ?,\n" + "    roomType =?\n"
+            "update room\n" + "set nrBeds = ?,\n" + "    roomType =?,\n" + " dailyPrice=?"
                 + "where roomID = ?;");
 
-        statement.setString(3, roomID);
+        statement.setString(4, roomID);
         statement.setString(2, type.toString());
         statement.setInt(1, nrBeds);
+        statement.setInt(3, price);
         statement.executeUpdate();
       }
       catch (Exception e)
@@ -498,8 +555,9 @@ public class MyDataBase
         String id = resultSet.getString("roomid");
         String roomtype = resultSet.getString("roomtype");
         int nrBeds = resultSet.getInt("nrbeds");
+        int price = resultSet.getInt("dailyprice");
 
-        return new Room(id, Room.convertRoomTypeFromString(roomtype), nrBeds);
+        return new Room(id, Room.convertRoomTypeFromString(roomtype), nrBeds, price);
       }
       else
       {
@@ -565,11 +623,19 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method that changes guest details in the database.
+   * Using bookingID to identify the guest.
+   * @param bookingID
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNr
+   * @throws SQLException
+   */
   public void editGuest(int bookingID, String fName, String lName, String email,
       int phoneNr) throws SQLException
   {
-    System.out.println(
-        "Edit guest values" + bookingID + fName + lName + email + phoneNr);
 
     try (Connection connection = getConnection())
     {
@@ -579,8 +645,6 @@ public class MyDataBase
           "select distinct roomBooking.guest from roomBooking where bookingid = ?;");
       statement.setInt(1, bookingID);
       ResultSet resultSet = statement.executeQuery();
-      System.out.println("before: ");
-      System.out.println(resultSet.next());
       String username = resultSet.getString("guest");
 
       //updating info about the guest
@@ -594,15 +658,23 @@ public class MyDataBase
       statement3.setString(1, fName);
       statement3.setString(5, username);
       statement3.executeUpdate();
-      System.out.println("Done with editing");
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      throw new IllegalArgumentException("Booking wasn't made");
     }
 
   }
 
+  /**
+   * A method that edits booking details in the database.
+   * Using bookingId to identify the booking.
+   * @param bookingId
+   * @param startDate
+   * @param endDate
+   * @param roomId
+   * @throws SQLException
+   */
   public void editBooking(int bookingId, LocalDate startDate, LocalDate endDate,
       String roomId) throws SQLException
   {
@@ -628,6 +700,11 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method getting details about all guests registered in the database.
+   * @return ArrayList of guests
+   * @throws SQLException
+   */
   public ArrayList<Guest> getAllGuests() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -660,55 +737,21 @@ public class MyDataBase
         String email = resultSet.getString("email");
         int phonenr = resultSet.getInt("phonenr");
         allGuests.add(new Guest(userName, fName, lName, email, phonenr));
-        System.out.println(allGuests);
-
       }
       return allGuests;
 
     }
   }
 
-  /*
-  public RoomBookingTransfer getRoomWithGuest(int bookingNr)
-      throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement statement = connection.prepareStatement(
-          "SELECT fName, lName, phoneNr, startDate, endDate, r.roomID, nrBeds\n"
-              + "FROM roomBooking rb,\n" + "     room r,\n" + "     guest g\n"
-              + "WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID AND rb.bookingID = (?) AND phoneNr = (?);");
-
-      statement.setInt(1, bookingNr);
-     // statement.setInt(2, phoneNr);
-
-      ResultSet result = statement.executeQuery();
-      if (result.next())
-      {
-        //Guest guest = getGuest(phoneNr);
-        LocalDate startDate = result.getDate("startdate").toLocalDate();
-        LocalDate endDate = result.getDate("enddate").toLocalDate();
-        Room room = getRoom(result.getString("roomid"));
-
-        RoomBookingTransfer test = new RoomBookingTransfer("Success", guest, startDate, endDate, room);
-        System.out.println(test);
-        return test;
-      }
-
-      else
-      {
-        throw new IllegalArgumentException("No such booking found");
-      }
-    }
-  }
-
+  /**
+   * A method that adds a new guest to the database.
+   * @param guest
+   * @throws SQLException
    */
-
   public void register(Guest guest) throws SQLException
   {
     try (Connection connection = getConnection())
     {
-      System.out.println("Starting register");
       try
       {
         PreparedStatement statement = connection.prepareStatement(
@@ -738,6 +781,12 @@ public class MyDataBase
     }
   }
 
+  /**
+   * A method checking if the guest with specific username and password exist in the database.
+   * @param username
+   * @param password
+   * @throws SQLException
+   */
   public void login(String username, String password) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -756,6 +805,12 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method getting all the bookings made by a person who is logged in the system.
+   * @param username
+   * @return ArrayList of bookings
+   * @throws SQLException
+   */
   public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username)
       throws SQLException
   {
@@ -775,7 +830,6 @@ public class MyDataBase
         LocalDate endDate = result.getDate("enddate").toLocalDate();
         String state = result.getString("state");
         int bookingID = result.getInt("bookingid");
-        System.out.println(bookingID + " id");
         RoomBooking test = new RoomBooking(bookingID, startDate, endDate, room,
             state);
         toSend.add(test);
@@ -784,6 +838,12 @@ public class MyDataBase
     return toSend;
   }
 
+  /**
+   * Method inserting a new booking to the database.
+   * Made for a person who is logged in the database.
+   * @param roomBooking
+   * @throws SQLException
+   */
   public void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -808,6 +868,10 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method deleting all data from all tables in database.
+   * @throws SQLException
+   */
   public void clearDatabase() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -827,9 +891,16 @@ public class MyDataBase
     }
   }
 
+  /**
+   * Method changing information about guest in the database for a guest
+   * having specific username.
+   * @param username
+   * @param fName
+   * @param lName
+   * @param email
+   * @param phoneNr
+   */
   public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
-    System.out.println(
-            "Edit guest values" + username + fName + lName + email + phoneNr);
 
     try (Connection connection = getConnection())
     {
@@ -846,7 +917,6 @@ public class MyDataBase
       statement3.setString(1, fName);
       statement3.setString(5, username);
       statement3.executeUpdate();
-      System.out.println("Done with editing");
     }
     catch (Exception e)
     {
@@ -855,14 +925,15 @@ public class MyDataBase
 
   }
 
+  /**
+   * Method getting all information about a guest from the database.
+   * @param username
+   * @return GuestTransfer object called guestTransfer
+   */
   public GuestTransfer getGuestByUsername(String username) {
-    System.out.println(
-            "Get guest values: " + username);
     GuestTransfer guestTransfer =null;
     try (Connection connection = getConnection())
     {
-      System.out.println("From mydatabase: ");
-
       //updating info about the guest
       PreparedStatement statement = connection.prepareStatement(
               "select * from guest where username = ?;");
@@ -876,7 +947,6 @@ public class MyDataBase
         String lName = guest.getString("lname");
         String email = guest.getString("email");
         int phonenr = guest.getInt("phonenr");
-        System.out.println("From mydatabase: " + usernameg);
 
         guestTransfer = new GuestTransfer("getGuestWithUsername", usernameg, fName, lName, email, phonenr);
       }
@@ -887,5 +957,42 @@ public class MyDataBase
     }
     return guestTransfer;
   }
+
+    public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+                "SELECT *\n" + "FROM conferenceRooms\n" + "WHERE roomID IN (SELECT roomID\n"
+                        + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
+                        + "                 FROM roomBooking\n"
+                        + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
+                        + "                         (startDate BETWEEN (?) AND (?)\n"
+                        + "                         OR endDate BETWEEN (?) AND (?)))"
+                        + "ORDER BY roomID;");
+        statement.setObject(1, startDate);
+        statement.setObject(2, endDate);
+        statement.setObject(3, startDate);
+        statement.setObject(4, endDate);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<Room> rooms = new ArrayList<>();
+
+        while (resultSet.next())
+        {
+          String roomId = resultSet.getString("roomid");
+          String roomType = resultSet.getString("roomtype");
+          int nrBends = resultSet.getInt("nrbeds");
+          int price = resultSet.getInt("dailyPrice");
+          Room room = new Room(roomId,
+                  RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends, price);
+          rooms.add(room);
+        }
+        if (rooms.isEmpty())
+        {
+          throw new IllegalArgumentException(
+                  "No available room were found. Please select different date.");
+        }
+        return rooms;
+      }
+    }
 }
 

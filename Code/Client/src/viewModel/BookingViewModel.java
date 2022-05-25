@@ -3,6 +3,7 @@ package viewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import mediator.RoomBookingTransfer;
 import model.*;
 
@@ -98,6 +99,13 @@ public class BookingViewModel
     else
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
+      //Style
+      DialogPane dialogPane = alert.getDialogPane();
+      dialogPane.getStylesheets().add("");
+      dialogPane.getStylesheets()
+              .add(getClass().getResource("box.css").toExternalForm());
+      dialogPane.getStyleClass().add("box.css");
+
       alert.setTitle("Error");
       alert.setHeaderText("Cannot cancel booking!");
       alert.setContentText(roomBookingTransfer.getMessage());

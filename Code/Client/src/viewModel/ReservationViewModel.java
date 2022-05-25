@@ -6,12 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import model.Model;
 import model.Room;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +26,8 @@ public class ReservationViewModel
 {
 
   private Model model;
-  private ObservableList<String> availableRooms;
+  private ObservableList<SimpleRoomViewModel> availableRooms;
+  private ObjectProperty<SimpleRoomViewModel> selectedRoomProperty;
   private ObjectProperty<LocalDate> startDatePicker;
   private ObjectProperty<LocalDate> endDatePicker;
   private SimpleStringProperty errorLabel;
@@ -40,9 +43,14 @@ public class ReservationViewModel
   {
     this.model = model;
     this.availableRooms = FXCollections.observableArrayList();
-    startDatePicker = new SimpleObjectProperty<>();
-    endDatePicker = new SimpleObjectProperty<>();
+    startDatePicker = new SimpleObjectProperty<>(LocalDate.now());
+    endDatePicker = new SimpleObjectProperty<>(LocalDate.now().plusDays(2));
+    selectedRoomProperty = new SimpleObjectProperty<>();
     this.errorLabel = new SimpleStringProperty("");
+
+    getAllAvailableRooms();
+
+    //TODO not needed??
     this.temp = tempInfo;
   }
 
@@ -77,9 +85,9 @@ public class ReservationViewModel
     availableRooms.clear();
     try
     {
-      for (int i = 0; i < rooms.size(); i++)
+      for (Room room : rooms)
       {
-        availableRooms.add(rooms.get(i).getRoomId());
+        availableRooms.add(new SimpleRoomViewModel(room, getStartDatePicker().get(), getEndDatePicker().get()));
       }
     }
     catch (Exception e)
@@ -89,22 +97,11 @@ public class ReservationViewModel
   }
 
   /**
-   * Sets new values for TemporaryInformation object for:
-   * startDate value received from startDatePicker,
-   * endDate value received from endDatePicker,
-   * roomID value received from argument
+   * REDO THIS TODO
    *
    * @param roomName selected room ID
    */
-  //OLD
-  //  public void reserveRoom(String roomName)
-  //  {
-  //    temp.setStartDate(
-  //        dateFromDatePicker(startDatePicker.getValue().toString()));
-  //    temp.setEndDate(dateFromDatePicker(endDatePicker.getValue().toString()));
-  //    temp.setRoomID(roomName);
-  //  }
-  // NEW
+
   public void bookARoom(String roomName)
   {
     RoomBookingTransfer roomBookingTransfer = model.bookARoomWhenLoggedIn(
@@ -113,12 +110,20 @@ public class ReservationViewModel
 
     if (!(roomBookingTransfer.getMessage().equals("null")))
     {
+      System.out.println("ERROR: " + roomBookingTransfer.getMessage());
       errorLabel.setValue(
           "Room wasn't added.." + roomBookingTransfer.getMessage());
     }
     else
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      // Style
+      DialogPane dialogPane = alert.getDialogPane();
+      dialogPane.getStylesheets().add("");
+      dialogPane.getStylesheets()
+              .add(getClass().getResource("box.css").toExternalForm());
+      dialogPane.getStyleClass().add("box.css");
+
       alert.setTitle("Information");
       alert.setHeaderText(null);
       alert.setContentText("Room successfully booked!");
@@ -147,9 +152,28 @@ public class ReservationViewModel
    *
    * @return availableRooms as an Observable list
    */
-  public ObservableList<String> getRooms()
+  public ObservableList<SimpleRoomViewModel> getRooms()
   {
     return availableRooms;
+  }
+
+
+  /**
+   * A method used for returning the selected SimpleRoomViewModel property.
+   * @return the selectedRoomProperty
+   */
+  public ObjectProperty<SimpleRoomViewModel> getSelected()
+  {
+    return selectedRoomProperty;
+  }
+
+  /**
+   * Method used for setting the SimpleRoomViewModel property.
+   * @param roomViewModel The object to set the variable to.
+   */
+  public void setSelected(SimpleRoomViewModel roomViewModel)
+  {
+    selectedRoomProperty.set(roomViewModel);
   }
 
   /**
@@ -184,7 +208,8 @@ public class ReservationViewModel
 
   public void clear()
   {
-    getAllAvailableRooms();
+    errorLabel.set("");
   }
+
 }
 

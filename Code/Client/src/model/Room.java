@@ -11,6 +11,7 @@ public class Room
   private String roomId;
   private RoomType roomType;
   private int numberOfBeds;
+  private int price;
 
 
   /**
@@ -21,11 +22,12 @@ public class Room
    * @param roomOfType The type of room
    * @param numberOfBeds the number of beds to be assigned to the room.
    */
-  public Room(String roomId, RoomType roomOfType, int numberOfBeds)
+  public Room(String roomId, RoomType roomOfType, int numberOfBeds, int dailyPrice)
   {
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);
+    setPrice(dailyPrice);
   }
 
   /**
@@ -51,9 +53,9 @@ public class Room
    */
   public void setNumberOfBeds(int numberOfBeds)
   {
-    if (numberOfBeds == 0)
+    if (numberOfBeds <= 0)
     {
-      throw new IllegalArgumentException("Number of beds should not be 0");
+      throw new IllegalArgumentException("Number of beds should not be smaller that 1.");
     }
 
     else
@@ -63,7 +65,7 @@ public class Room
   }
 
   /**
-   * Private method setting the roomId variable to the string given as argument.
+   * Method setting the roomId variable to the string given as argument.
    *
    * @param roomId
    * @throws IllegalArgumentException if argument is null or an empty String.
@@ -77,6 +79,21 @@ public class Room
     }
 
     this.roomId = roomId;
+  }
+
+  /**
+   * Method used for setting the price of a room.
+   *
+   * @param price The price of the room
+   * @throws IllegalArgumentException if the price passed as arguments is smaller than 1.
+   */
+  public void setPrice(int price)
+  {
+    if (price <= 0)
+    {
+      throw new IllegalArgumentException("The price for a room should not be less than zero.");
+    }
+    this.price = price;
   }
 
   /**
@@ -108,13 +125,22 @@ public class Room
   }
 
   /**
+   * Method meant for getting the daily price
+   * @return price
+   */
+  public int getPrice()
+  {
+    return price;
+  }
+
+  /**
    * A method meant for making a copy of a room object
    *
    * @return a copy of room object
    */
   public Room copy()
   {
-    Room other = new Room(roomId, roomType, numberOfBeds);
+    Room other = new Room(roomId, roomType, numberOfBeds, price);
     return other;
   }
 
@@ -122,12 +148,10 @@ public class Room
    * Method returning a string representation of the room object.
    * @return A string containing all variables and their values.
    */
-  @Override
-  public String toString() {
-    return "Room{" +
-        "roomId='" + roomId + '\'' +
-        ", roomType=" + roomType +
-        ", numberOfBeds=" + numberOfBeds +
-        '}';
+  @Override public String toString()
+  {
+
+    return "Room number: " + roomId + ", Type: " + roomType.toString()
+        + ", Number of beds: " + numberOfBeds + ", Price: " + price;
   }
 }

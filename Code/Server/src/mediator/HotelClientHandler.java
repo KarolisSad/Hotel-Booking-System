@@ -32,6 +32,12 @@ public class HotelClientHandler implements Runnable
   private Model model;
   private String message;
 
+  /**
+   * Constructor initializing instance variables.
+   * @param socket
+   * @param model
+   * @throws IOException
+   */
   public HotelClientHandler(Socket socket, Model model) throws IOException
   {
     this.socket = socket;
@@ -71,7 +77,7 @@ public class HotelClientHandler implements Runnable
           try
           {
             model.addRoom(room.getRoomId(), room.getRoomType(),
-                room.getNrBeds());
+                room.getNrBeds(), room.getDailyPrice());
             out.println(successMessage);
           }
           catch (Exception e)
@@ -142,16 +148,18 @@ public class HotelClientHandler implements Runnable
 
         case "edit":
           room = json.fromJson(message, RoomTransfer.class);
+          System.out.println("RECEIVED FROM CLIENT: " + message);
+          System.out.println("AFTER CONVERT: " + room);
           try
           {
-            System.out.println(room.getRoomType());
             model.editRoomInfo(room.getRoomId(), room.getRoomType(),
-                room.getNrBeds());
+                room.getNrBeds(), room.getDailyPrice());
 
             out.println(successMessage);
           }
           catch (Exception e)
           {
+            e.printStackTrace();
             out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
           }
           break;
@@ -283,7 +291,6 @@ public class HotelClientHandler implements Runnable
           GuestTransfer guest = json.fromJson(message, GuestTransfer.class);
           try
           {
-            System.out.println(guest.getFullName());
             model.editGuest(guest.getBookingID(), guest.getfName(),
                 guest.getlName(), guest.getEmail(), guest.getPhoneNr());
           }
@@ -301,13 +308,13 @@ public class HotelClientHandler implements Runnable
             System.out.println(guest.getFullName());
             model.editGuestWithUsername(guest.getUsername(), guest.getfName(),
                     guest.getlName(), guest.getEmail(), guest.getPhoneNr());
+          out.println(successMessage);
           }
           catch (Exception throwables)
           {
             out.println(json.toJson(
-                    new RoomTransfer("error", throwables.getMessage())));
+                    new GuestTransfer("error", throwables.getMessage())));
           }
-          out.println(successMessage);
           break;
         case "editBooking":
           RoomBookingTransfer bookingEdit = json.fromJson(message,
@@ -377,30 +384,7 @@ public class HotelClientHandler implements Runnable
           }
           break;
 
-          /*
-        case "getBookingWithGuest":
-        {
-          RoomBookingTransfer receivedRoomBookingTransfer = json.fromJson(
-              message, RoomBookingTransfer.class);
-          System.out.println("Client Handler start!");
-          try
-          {
-            RoomBookingTransfer toSend = model.getBookingWithGuest(
-                receivedRoomBookingTransfer.getBookingNr(),
-                receivedRoomBookingTransfer.getGuestID());
-            System.out.println("SENDING: " + toSend);
-            out.println(json.toJson(toSend));
-          }
-          catch (Exception e)
-          {
-            out.println(
-                json.toJson(new RoomBookingTransfer("error", e.getMessage())));
-          }
 
-          break;
-        }
-
-           */
         case "getGuestByUsername":{
           GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
           try {
@@ -478,6 +462,22 @@ public class HotelClientHandler implements Runnable
           break;
         }
 
+        case "availableConferenceRooms":
+        {
+          room = json.fromJson(message, RoomTransfer.class);
+          try
+          {
+            RoomTransfer transfer = new RoomTransfer("availableConferenceRooms",
+                    model.availableConferenceRooms(room.getStartDate(), room.getEndDate()));
+            jsonString = json.toJson(transfer);
+            out.println(jsonString);
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
+          }
+          break;
+        }
 
 
       }

@@ -2,6 +2,7 @@ package view.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import view.ViewController;
 import viewModel.UserRegisterModel;
@@ -9,10 +10,10 @@ import viewModel.UserRegisterModel;
 import java.io.IOException;
 
 /**
- * A class that creates UserRegisterViewController object.
+ * Class representing the UserRegisterView window.
  *
  * @author Group 5
- * @version 25-05-22
+ * @version 23-05-2022
  */
 public class UserRegisterViewController extends ViewController
 {
@@ -24,9 +25,11 @@ public class UserRegisterViewController extends ViewController
     @FXML private TextField email;
     @FXML private TextField lName;
     @FXML private TextField fName;
+    @FXML private Label errorLabel;
 
     /**
-     * A none argument, void method initializing instance variables.
+     * Method initializing instance variables.
+     * And binging TextFields and Label to viewModel properties.
      */
     @Override
     protected void init() {
@@ -37,6 +40,7 @@ public class UserRegisterViewController extends ViewController
         email.textProperty().bindBidirectional(viewModel.getEmail());
         lName.textProperty().bindBidirectional(viewModel.getlName());
         fName.textProperty().bindBidirectional(viewModel.fNameProperty());
+        errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
     }
 
 
@@ -46,21 +50,31 @@ public class UserRegisterViewController extends ViewController
     }
 
     /**
-     * A method that meant for providing functionality to the register button.
-     * When the button is pressed the program goes into Guest menu view, otherwise and error pop up.
+     * Method calls register() method in viewModel.
+     * And opens GuestMenuView window.
      * @throws IOException
      */
     public void register() throws IOException {
-        viewModel.register();
-        getViewHandler().openView("GuestMenuView.fxml");
+
+        if (viewModel.register())
+        {
+         setUsernameInGuestInfo();
+            getViewHandler().openView("GuestMenuView.fxml");
+
+        }
+
+
     }
 
     /**
-     * A method that provides functionality to the go back button.
-     * When the button is pressed the program goes back to the main menu.
+     * Method opens UserLoginMainView window.
      * @throws IOException
      */
     public void goBack() throws IOException {
         getViewHandler().openView("UserLoginMainView.fxml");
+    }
+
+    public void setUsernameInGuestInfo(){
+        getViewModelFactory().getGuestMenuModel().passTheUsernameInfo(viewModel.usernameProperty().get());
     }
 }

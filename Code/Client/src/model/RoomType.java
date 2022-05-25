@@ -8,7 +8,7 @@ package model;
  */
 public enum RoomType
 {
-  SINGLE, DOUBLE, FAMILY, SUITE;
+  SINGLE, DOUBLE, FAMILY, SUITE, CONFERENCE;
 
   /**
    * A method getting a name of the enum room type.

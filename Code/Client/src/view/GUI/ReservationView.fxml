@@ -2,9 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -34,9 +37,73 @@
             </font>
         </Label>
         <HBox alignment="CENTER" prefHeight="212.0" prefWidth="600.0">
-            <children>
-                <ListView fx:id="availableRoom" prefHeight="200.0" prefWidth="200.0" />
-            </children>
+         <children>
+            <TableView fx:id="availableRoomsTable" prefHeight="173.0" prefWidth="447.0">
+                <placeholder>
+                    <Label text="No rooms available. Try with other dates or change filtering" />
+                </placeholder>
+              <columns>
+                <TableColumn fx:id="roomNumberColumn" prefWidth="54.0" text="Room" />
+                <TableColumn fx:id="roomTypeColumn" prefWidth="47.0" text="Type" />
+                  <TableColumn fx:id="numberOfBedsColumn" prefWidth="99.0" text="Number of beds" />
+                  <TableColumn fx:id="dailyPriceColumn" prefWidth="89.0" text="Price pr. day" />
+                  <TableColumn fx:id="totalPriceColumn" prefWidth="126.0" text="Total price" />
+              </columns>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </TableView>
+            <VBox>
+               <children>
+                  <Label text="Filter by room type:" />
+                  <ComboBox fx:id="roomTypeFilter" prefWidth="150.0" />
+                  <Label text="Filter by number of beds:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="bedsFilter" />
+                  <Label text="Filter by price:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="From:">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="priceFromFilter" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="To:">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="priceToFilter" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="filterPriceButton" mnemonicParsing="false" onAction="#filterByPrice" prefHeight="23.0" prefWidth="172.0" text="Run price filter" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
         </HBox>
         <HBox alignment="TOP_CENTER" prefHeight="29.0" prefWidth="590.0">
             <children>

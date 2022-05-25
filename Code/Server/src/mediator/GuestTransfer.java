@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Purpose of this object is to store different values when sending to a server
  *
- * @version 2022-05-18
+ * @version 2022-05-23
  * @author Group5
  */
 public class GuestTransfer {
@@ -161,6 +161,15 @@ public class GuestTransfer {
     return errorMessage;
   }
 
+  /**
+   * 6 argument constructor used for transferring type information, used to edit guest details.
+   * @param editGuestWithUsername The type of transfer.
+   * @param getfName First name of the guest
+   * @param getlName Last name of the guest
+   * @param email Guest's email
+   * @param phoneNr Guest's phone number
+   * @param username The guest username
+   */
   public GuestTransfer(String editGuestWithUsername, String username, String getfName, String getlName, String email, int phoneNr) {
     this.type = editGuestWithUsername;
     this.username = username;
@@ -170,10 +179,18 @@ public class GuestTransfer {
     this.phoneNr = phoneNr;
   }
 
+  /**
+   * Method used for returning the username.
+   * @return the username as a String.
+   */
   public String getUsername() {
     return username;
   }
 
+  /**
+   * Method used for returning the password.
+   * @return the password as a String.
+   */
   public String getPassword() {
     return password;
   }

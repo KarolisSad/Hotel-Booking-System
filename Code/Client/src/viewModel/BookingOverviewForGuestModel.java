@@ -1,9 +1,6 @@
 package viewModel;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mediator.RoomBookingTransfer;
@@ -82,8 +79,15 @@ public class BookingOverviewForGuestModel {
 
   public void removeBooking()
     {
-        model.removeBooking(getSelectedBookingProperty().bookingIdProperty().get());
-        reset();
+        try {
+            System.out.println("test");
+            model.removeBooking(getSelectedBookingProperty().bookingIdProperty().get());
+            reset();
+        }
+       catch (Exception e)
+       {
+           errorLabel.setValue("Please first select a room to cancel.");
+       }
     }
   
     /**
@@ -101,5 +105,9 @@ public class BookingOverviewForGuestModel {
                 bookings.add(new SimpleBookingViewModel(roomBookings.getRoomBookings().get(i),"User"));
             }
         }
+    }
+
+    public SimpleStringProperty getErrorLabelProperty() {
+        return errorLabel;
     }
 }

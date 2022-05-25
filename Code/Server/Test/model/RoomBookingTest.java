@@ -11,9 +11,9 @@ class RoomBookingTest
 {
   LocalDate today = LocalDate.now();
   LocalDate end = today.plusDays(5);
-  Room testRoom = new Room("TestRoom101", RoomType.FAMILY, 3);
-  Room testRoom2 = new Room("TestRoom102", RoomType.FAMILY, 3);
-  Room testRoom3 = new Room("TestRoom103", RoomType.FAMILY, 3);
+  Room testRoom = new Room("TestRoom101", RoomType.FAMILY, 3, 10);
+  Room testRoom2 = new Room("TestRoom102", RoomType.FAMILY, 3, 10);
+  Room testRoom3 = new Room("TestRoom103", RoomType.FAMILY, 3, 10);
   Guest guest = new Guest("BobBuilder","Bob", "Builder", "bob@builder.test", 12345678);
   Guest guest2 = new Guest("WendyWorker","Wendy", "Worker", "wendy@worker.test", 87654321);
   Guest guest3 = new Guest("AllanTest","Allan", "Test", "allan@test.test", 55555555);

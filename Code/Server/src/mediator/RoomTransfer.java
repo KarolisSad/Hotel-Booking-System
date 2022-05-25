@@ -27,6 +27,7 @@ public class RoomTransfer {
     private Guest guest;
     private String message;
     private Room room;
+    private int dailyPrice;
 
     /**
      * 5 argument constructor used for transferring a type of the transfer and room identification
@@ -203,6 +204,20 @@ public class RoomTransfer {
     public String getMessage() {
         return message;
     }
+
+    /**
+     * A getter for the dailyPrice variable
+     * @return daily price
+     */
+    public int getDailyPrice()
+    {
+        return dailyPrice;
+    }
+
+
+     /** ToString method
+     * @return All instance variables and their values as a String.
+     */
 
     @Override public String toString()
     {

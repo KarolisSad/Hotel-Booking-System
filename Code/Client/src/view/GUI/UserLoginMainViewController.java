@@ -6,10 +6,10 @@ import view.ViewController;
 import java.io.IOException;
 
 /**
- * A class that creates UserLoginMainViewController object.
+ * Class representing the UserLoginMainView window.
  *
  * @author Group 5
- * @version 25-05-22
+ * @version 23-05-2022
  */
 public class UserLoginMainViewController extends ViewController
 {
@@ -35,6 +35,23 @@ public class UserLoginMainViewController extends ViewController
     /**
      * A method meant to provide functionality for log in button.
      * When the button is pressed it will open a log in window for the hotel guests.
+     * Method opening the BookingsForReceptionistView.
+     * @throws IOException
+     */
+    public void receptionist() throws IOException {
+        getViewHandler().openView("BookingsForReceptionistView.fxml");
+    }
+
+    /**
+     * Method opening the MenuForHotelManager.
+     * @throws IOException
+     */
+    public void hotelManager() throws IOException {
+        getViewHandler().openView("MenuForHotelManager.fxml");
+    }
+
+    /**
+     * Method opening the UserLoginView.
      * @throws IOException
      */
     public void login() throws IOException {
@@ -42,8 +59,7 @@ public class UserLoginMainViewController extends ViewController
     }
 
     /**
-     * A method meant to provide functionality for the register button.
-     * When the button is pressed the program opens a window, where a new user can be created.
+     * Method opening the UserRegisterGuest.
      * @throws IOException
      */
     public void register() throws IOException {

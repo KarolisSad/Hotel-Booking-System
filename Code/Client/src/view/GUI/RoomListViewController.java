@@ -23,6 +23,7 @@ public class RoomListViewController extends ViewController
   @FXML private TableColumn<SimpleRoomViewModel, String> numberColumn;
   @FXML private TableColumn<SimpleRoomViewModel, String> typeColumn;
   @FXML private TableColumn<SimpleRoomViewModel, Integer> numberOfBedsColumn;
+  @FXML private TableColumn<SimpleRoomViewModel, Integer> dailyPriceColumn;
   @FXML private Label errorLabel;
   private RoomListViewModel viewModel;
 
@@ -40,6 +41,7 @@ public class RoomListViewController extends ViewController
         cellData -> cellData.getValue().roomTypeProperty().asString());
     numberOfBedsColumn.setCellValueFactory(
         cellData -> cellData.getValue().numberOfBedsProperty().asObject());
+    dailyPriceColumn.setCellValueFactory(cellData -> cellData.getValue().dailyPriceProperty().asObject());
     errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
 
     roomTable.setItems(viewModel.getAllRooms());

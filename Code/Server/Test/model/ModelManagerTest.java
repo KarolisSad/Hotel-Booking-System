@@ -38,7 +38,7 @@ class ModelManagerTest
 
   @Test void addRoomWithNullAsArguments()
   {
-    assertThrows(NullPointerException.class, ()-> model.addRoom(null, null, 0));
+    assertThrows(IllegalArgumentException.class, ()-> model.addRoom(null, null, 0, 10));
   }
 
   //  One:
@@ -47,8 +47,8 @@ class ModelManagerTest
   {
     try
     {
-      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      assertEquals(0, model.getAllRooms().size());
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
       assertEquals(1, model.getAllRooms().size());
     }
     catch (SQLException e)
@@ -63,10 +63,10 @@ class ModelManagerTest
   {
     try
     {
-      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.DOUBLE, 2);
-      model.addRoom("Test Room 3", RoomType.FAMILY, 3);
+      assertEquals(0, model.getAllRooms().size());
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.DOUBLE, 2, 10);
+      model.addRoom("Test Room 3", RoomType.FAMILY, 3, 10);
       assertEquals(3, model.getAllRooms().size());
     }
     catch (SQLException e)
@@ -79,12 +79,12 @@ class ModelManagerTest
   {
     try
     {
-      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.DOUBLE, 2);
-      model.addRoom("Test Room 3", RoomType.FAMILY, 3);
-      model.addRoom("Test Room 4", RoomType.SUITE, 3);
-      model.addRoom("Test Room 5", RoomType.FAMILY, 3);
+      assertEquals(0, model.getAllRooms().size());
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.DOUBLE, 2, 10);
+      model.addRoom("Test Room 3", RoomType.FAMILY, 3, 10);
+      model.addRoom("Test Room 4", RoomType.SUITE, 3, 10);
+      model.addRoom("Test Room 5", RoomType.FAMILY, 3, 10);
       assertEquals(5, model.getAllRooms().size());
     }
     catch (SQLException e)
@@ -97,22 +97,22 @@ class ModelManagerTest
 
   @Test void addRoomWith0BedsLowBoundary()
   {
-    assertThrows(IllegalArgumentException.class, ()-> model.addRoom("Test Room 1", RoomType.SINGLE, 0));
+    assertThrows(IllegalArgumentException.class, ()-> model.addRoom("Test Room 1", RoomType.SINGLE, 0, 10));
   }
 
   @Test void addRoomWith1BedNoException()
   {
-    assertDoesNotThrow(()-> model.addRoom("Test Room 1", RoomType.SINGLE, 1));
+    assertDoesNotThrow(()-> model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10));
   }
 
   @Test void addRoomWith20BedsNoException()
   {
-    assertDoesNotThrow(()-> model.addRoom("Test Room 1", RoomType.SINGLE, 20));
+    assertDoesNotThrow(()-> model.addRoom("Test Room 1", RoomType.SINGLE, 20, 10));
   }
 
   @Test void addRoomWith21BedsBoundary()
   {
-    assertThrows(IllegalArgumentException.class, ()-> model.addRoom("Test Room 1", RoomType.SINGLE, 21));
+    assertThrows(IllegalArgumentException.class, ()-> model.addRoom("Test Room 1", RoomType.SINGLE, 21, 10));
   }
 
   //  Exception:
@@ -121,8 +121,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(IllegalArgumentException.class, ()-> model.addRoom("Test Room 1", RoomType.DOUBLE, 1));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(IllegalArgumentException.class, ()-> model.addRoom("Test Room 1", RoomType.DOUBLE, 1, 10));
     }
     catch (SQLException e)
     {
@@ -155,9 +155,10 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertEquals(1, model.getAllRooms().size());
       model.removeRoom("Test Room 1");
-      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
+      assertEquals(0, model.getAllRooms().size());
     }
     catch (SQLException e)
     {
@@ -169,9 +170,9 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
       model.removeRoom("Test Room 3");
       assertEquals(2, model.getAllRooms().size());
       assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 3"));
@@ -188,17 +189,15 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      assertEquals(3, model.getAllRooms().size());
       model.removeRoom("Test Room 1");
       model.removeRoom("Test Room 2");
       model.removeRoom("Test Room 3");
+      assertEquals(0, model.getAllRooms().size());
 
-      assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
-      assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 1"));
-      assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 2"));
-      assertThrows(IllegalArgumentException.class, ()-> model.getRoom("Test Room 3"));
     }
     catch (SQLException e)
     {
@@ -210,13 +209,13 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 6", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 7", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 6", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 7", RoomType.SINGLE, 1, 10);
       model.removeRoom("Test Room 1");
       model.removeRoom("Test Room 2");
       model.removeRoom("Test Room 3");
@@ -245,7 +244,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertThrows(IllegalArgumentException.class, ()-> model.removeRoom("Test Room 1"));
     }
@@ -259,7 +258,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
       assertThrows(IllegalArgumentException.class, ()-> model.removeRoom("Test Room 1"));
@@ -299,8 +298,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertEquals("[Room number: Test Room 1, Type: Single, Number of beds: 1]", model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(2)).toString()
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertEquals("[Room number: Test Room 1, Type: Single, Number of beds: 1, Price: 10]", model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(2)).toString()
       );
     }
     catch (SQLException e)
@@ -313,7 +312,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertThrows(IllegalArgumentException.class, ()-> model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(5)));
     }
@@ -329,12 +328,12 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
-      assertEquals("[Room number: Test Room 1, Type: Single, Number of beds: 1, Room number: Test Room 2, Type: Single, Number of beds: 1, Room number: Test Room 3, Type: Single, Number of beds: 1, Room number: Test Room 4, Type: Single, Number of beds: 1, Room number: Test Room 5, Type: Single, Number of beds: 1]", model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(2)).toString()
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
+      assertEquals("[Room number: Test Room 1, Type: Single, Number of beds: 1, Price: 10, Room number: Test Room 2, Type: Single, Number of beds: 1, Price: 10, Room number: Test Room 3, Type: Single, Number of beds: 1, Price: 10, Room number: Test Room 4, Type: Single, Number of beds: 1, Price: 10, Room number: Test Room 5, Type: Single, Number of beds: 1, Price: 10]", model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(2)).toString()
       );
     }
     catch (SQLException e)
@@ -347,14 +346,14 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.book("Test Room 2", LocalDate.now(), LocalDate.now().plusDays(2), bob);
-      assertEquals("[Room number: Test Room 3, Type: Single, Number of beds: 1, Room number: Test Room 4, Type: Single, Number of beds: 1, Room number: Test Room 5, Type: Single, Number of beds: 1]", model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(2)).toString()
+      assertEquals("[Room number: Test Room 3, Type: Single, Number of beds: 1, Price: 10, Room number: Test Room 4, Type: Single, Number of beds: 1, Price: 10, Room number: Test Room 5, Type: Single, Number of beds: 1, Price: 10]", model.availableRooms(LocalDate.now(), LocalDate.now().plusDays(2)).toString()
       );
     }
     catch (SQLException e)
@@ -367,11 +366,11 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.book("Test Room 2", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.book("Test Room 3", LocalDate.now(), LocalDate.now().plusDays(2), bob);
@@ -392,11 +391,11 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
       assertThrows(IllegalArgumentException.class, ()->model.availableRooms(LocalDate.now().minusDays(2),
           LocalDate.now()));
     }
@@ -410,11 +409,11 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
       assertThrows(IllegalArgumentException.class, ()->model.availableRooms(LocalDate.now(),
           LocalDate.now()));
     }
@@ -428,11 +427,11 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
       assertThrows(IllegalArgumentException.class, ()->model.availableRooms(LocalDate.now().plusDays(8),
           LocalDate.now()));
     }
@@ -466,7 +465,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
       assertEquals(0, model.getAllBookings("").bookedRoomListSize());
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertEquals(1, model.getAllBookings("").bookedRoomListSize());
@@ -483,7 +482,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
       assertEquals(0, model.getAllBookings("").bookedRoomListSize());
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.book("Test Room 1", LocalDate.now().plusDays(3), LocalDate.now().plusDays(5), bob);
@@ -500,11 +499,11 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 2", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 3", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 4", RoomType.SINGLE, 1);
-      model.addRoom("Test Room 5", RoomType.SINGLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 2", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 3", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 4", RoomType.SINGLE, 1, 10);
+      model.addRoom("Test Room 5", RoomType.SINGLE, 1, 10);
       assertEquals(0, model.getAllBookings("").bookedRoomListSize());
       model.book("Test Room 1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.book("Test Room 1", LocalDate.now().plusDays(3), LocalDate.now().plusDays(5), bob);
@@ -550,8 +549,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(NullPointerException.class, ()-> model.editRoomInfo(null, null, 0));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(NullPointerException.class, ()-> model.editRoomInfo(null, null, 0, 10));
     }
     catch (SQLException e)
     {
@@ -561,11 +560,10 @@ class ModelManagerTest
 
   @Test void editRoomInfoRoomIdNullValue()
   {
-    // TODO - Check with group -> is this supposed to be like this??
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(NullPointerException.class, ()-> model.editRoomInfo(null, RoomType.SINGLE, 2));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(NullPointerException.class, ()-> model.editRoomInfo(null, RoomType.SINGLE, 2, 10));
     }
     catch (SQLException e)
     {
@@ -577,8 +575,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(NullPointerException.class, ()-> model.editRoomInfo("Test Room 1", null, 2));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", null, 2, 10));
     }
     catch (SQLException e)
     {
@@ -590,8 +588,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", RoomType.SINGLE, 0));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", RoomType.SINGLE, 0, 10));
     }
     catch (SQLException e)
     {
@@ -605,8 +603,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.editRoomInfo("Test Room 1", RoomType.DOUBLE, 1);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.editRoomInfo("Test Room 1", RoomType.DOUBLE, 1, 10);
       assertEquals("Double", model.getRoom("Test Room 1").getRoomType().toString());
     }
     catch (SQLException e)
@@ -619,8 +617,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      model.editRoomInfo("Test Room 1", RoomType.SINGLE, 3);
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      model.editRoomInfo("Test Room 1", RoomType.SINGLE, 3, 10);
       assertEquals(3, model.getRoom("Test Room 1").getNumberOfBeds());
     }
     catch (SQLException e)
@@ -635,10 +633,10 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertEquals("Room number: Test Room 1, Type: Single, Number of beds: 1", model.getRoom("Test Room 1").toString());
-      model.editRoomInfo("Test Room 1", RoomType.SUITE, 3);
-      assertEquals("Room number: Test Room 1, Type: Suite, Number of beds: 3", model.getRoom("Test Room 1").toString());
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertEquals("Room number: Test Room 1, Type: Single, Number of beds: 1, Price: 10", model.getRoom("Test Room 1").toString());
+      model.editRoomInfo("Test Room 1", RoomType.SUITE, 3, 10);
+      assertEquals("Room number: Test Room 1, Type: Suite, Number of beds: 3, Price: 10", model.getRoom("Test Room 1").toString());
     }
     catch (SQLException e)
     {
@@ -652,8 +650,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", RoomType.SINGLE, 0));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", RoomType.SINGLE, 0, 10));
     }
     catch (SQLException e)
     {
@@ -665,8 +663,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("Test Room 1", RoomType.SINGLE, 1);
-      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", RoomType.SINGLE, 21));
+      model.addRoom("Test Room 1", RoomType.SINGLE, 1, 10);
+      assertThrows(IllegalArgumentException.class, ()-> model.editRoomInfo("Test Room 1", RoomType.SINGLE, 21, 10));
     }
     catch (SQLException e)
     {
@@ -689,7 +687,14 @@ class ModelManagerTest
 
   @Test void getAllRoomsWithNoRoomsCreated()
   {
-    assertThrows(IllegalArgumentException.class, ()-> model.getAllRooms());
+    try
+    {
+      assertEquals(0, model.getAllRooms().size());
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   //  One:
@@ -698,8 +703,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      assertEquals("[Room number: 1, Type: Single, Number of beds: 1]", model.getAllRooms().toString());
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      assertEquals("[Room number: 1, Type: Single, Number of beds: 1, Price: 10]", model.getAllRooms().toString());
     }
     catch (SQLException e)
     {
@@ -713,12 +718,12 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.SINGLE, 1);
-      model.addRoom("3", RoomType.SINGLE, 1);
-      assertEquals("[Room number: 1, Type: Single, Number of beds: 1,"
-          + " Room number: 2, Type: Single, Number of beds: 1,"
-          + " Room number: 3, Type: Single, Number of beds: 1]", model.getAllRooms().toString());
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.SINGLE, 1, 10);
+      model.addRoom("3", RoomType.SINGLE, 1, 10);
+      assertEquals("[Room number: 1, Type: Single, Number of beds: 1, Price: 10,"
+          + " Room number: 2, Type: Single, Number of beds: 1, Price: 10,"
+          + " Room number: 3, Type: Single, Number of beds: 1, Price: 10]", model.getAllRooms().toString());
     }
     catch (SQLException e)
     {
@@ -730,16 +735,16 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.SINGLE, 1);
-      model.addRoom("3", RoomType.SINGLE, 1);
-      model.addRoom("4", RoomType.SINGLE, 1);
-      model.addRoom("5", RoomType.SINGLE, 1);
-      assertEquals("[Room number: 1, Type: Single, Number of beds: 1,"
-          + " Room number: 2, Type: Single, Number of beds: 1,"
-          + " Room number: 3, Type: Single, Number of beds: 1,"
-          + " Room number: 4, Type: Single, Number of beds: 1,"
-          + " Room number: 5, Type: Single, Number of beds: 1]", model.getAllRooms().toString());
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.SINGLE, 1, 10);
+      model.addRoom("3", RoomType.SINGLE, 1, 10);
+      model.addRoom("4", RoomType.SINGLE, 1, 10);
+      model.addRoom("5", RoomType.SINGLE, 1, 10);
+      assertEquals("[Room number: 1, Type: Single, Number of beds: 1, Price: 10,"
+          + " Room number: 2, Type: Single, Number of beds: 1, Price: 10,"
+          + " Room number: 3, Type: Single, Number of beds: 1, Price: 10,"
+          + " Room number: 4, Type: Single, Number of beds: 1, Price: 10,"
+          + " Room number: 5, Type: Single, Number of beds: 1, Price: 10]", model.getAllRooms().toString());
     }
     catch (SQLException e)
     {
@@ -780,7 +785,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
@@ -796,7 +801,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
@@ -812,7 +817,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
@@ -829,7 +834,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.processBooking(model.getAllBookings("").getBooking(1).getBookingID());
@@ -848,12 +853,12 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       assertEquals("[<RoomBooking> BookingID: " + model.getAllBookings("").getBooking(0).getBookingID() +
               ", StartDate: " + LocalDate.now() + ","
               + " EndDate: "+ LocalDate.now().plusDays(1) +", Room: Room number: 1,"
-              + " Type: Single, Number of beds: 1, Guest: Guest: 'First Name: 'Bob'"
+              + " Type: Single, Number of beds: 1, Price: 10, Guest: Guest: 'First Name: 'Bob'"
               + "Last Name: Builder'Email address: bob@builder.com'Phone Nr: 12345678, State: Booked]",
           model.getAllBookings("").toString());
     }
@@ -867,7 +872,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -876,7 +881,7 @@ class ModelManagerTest
       assertEquals("[<RoomBooking> BookingID: " + model.getAllBookings("cancelled").getBooking(0).getBookingID() + ","
               + " StartDate: " + LocalDate.now() + ","
               + " EndDate: "+LocalDate.now().plusDays(1)+", Room: Room number: 1,"
-              + " Type: Single, Number of beds: 1, Guest: Guest: 'First Name: 'Bob'"
+              + " Type: Single, Number of beds: 1, Price: 10, Guest: Guest: 'First Name: 'Bob'"
               + "Last Name: Builder'Email address: bob@builder.com'Phone Nr: 12345678, State: Cancelled]",
           model.getAllBookings("cancelled").toString());
     }
@@ -890,7 +895,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -900,7 +905,7 @@ class ModelManagerTest
       assertEquals("[<RoomBooking> BookingID: " + model.getAllBookings("archived").getBooking(0).getBookingID() + ","
               + " StartDate: " + LocalDate.now() + ","
           + " EndDate: "+LocalDate.now().plusDays(1)+", Room: Room number: 1,"
-              + " Type: Single, Number of beds: 1, Guest: Guest: 'First Name: 'Bob'"
+              + " Type: Single, Number of beds: 1, Price: 10, Guest: Guest: 'First Name: 'Bob'"
               + "Last Name: Builder'Email address: bob@builder.com'Phone Nr: 12345678, State: Archived]",
           model.getAllBookings("archived").toString());
     }
@@ -914,7 +919,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -923,7 +928,7 @@ class ModelManagerTest
       assertEquals("[<RoomBooking> BookingID: " + model.getAllBookings("inProgress").getBooking(0).getBookingID() + ","
               + " StartDate: " + LocalDate.now() + ","
               + " EndDate: "+LocalDate.now().plusDays(1)+", Room: Room number: 1,"
-              + " Type: Single, Number of beds: 1, Guest: Guest: 'First Name: 'Bob'"
+              + " Type: Single, Number of beds: 1, Price: 10, Guest: Guest: 'First Name: 'Bob'"
               + "Last Name: Builder'Email address: bob@builder.com'Phone Nr: 12345678, State: In progress]",
           model.getAllBookings("inProgress").toString());
     }
@@ -937,7 +942,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -947,7 +952,7 @@ class ModelManagerTest
       assertEquals("[<RoomBooking> BookingID: " + model.getAllBookings("booked").getBooking(0).getBookingID() + ","
               + " StartDate: " + LocalDate.now() + ","
               + " EndDate: "+LocalDate.now().plusDays(1)+", Room: Room number: 1,"
-              + " Type: Single, Number of beds: 1, Guest: Guest: 'First Name: 'Bob'"
+              + " Type: Single, Number of beds: 1, Price: 10, Guest: Guest: 'First Name: 'Bob'"
               + "Last Name: Builder'Email address: bob@builder.com'Phone Nr: 12345678, State: Booked]",
           model.getAllBookings("booked").toString());
     }
@@ -963,7 +968,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
       assertEquals(3, model.getAllBookings("").bookedRoomListSize());
@@ -978,8 +983,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -999,8 +1004,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1023,8 +1028,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1050,8 +1055,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1077,8 +1082,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1110,8 +1115,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1135,8 +1140,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1162,8 +1167,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1187,8 +1192,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.DOUBLE, 2);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.DOUBLE, 2, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(1), bob);
       model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), bob);
       model.book("1", LocalDate.now().plusDays(4), LocalDate.now().plusDays(5), bob);
@@ -1232,7 +1237,7 @@ class ModelManagerTest
   {
       try
       {
-        model.addRoom("1", RoomType.SINGLE, 1);
+        model.addRoom("1", RoomType.SINGLE, 1, 10);
         model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
         assertEquals("Booked", model.getAllBookings("").getBooking(0).getState());
         model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
@@ -1248,7 +1253,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
       assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
@@ -1265,7 +1270,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
       assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
@@ -1285,7 +1290,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
       assertEquals("Cancelled", model.getAllBookings("").getBooking(0).getState());
@@ -1330,7 +1335,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertEquals("Booked", model.getAllBookings("").getBooking(0).getState());
       model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
@@ -1356,7 +1361,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
       assertEquals("In progress", model.getAllBookings("").getBooking(0).getState());
@@ -1372,7 +1377,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
       model.processBooking(model.getAllBookings("").getBooking(0).getBookingID());
@@ -1389,7 +1394,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.cancelBooking(model.getAllBookings("").getBooking(0).getBookingID());
       assertEquals("Cancelled", model.getAllBookings("").getBooking(0).getState());
@@ -1413,7 +1418,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertThrows(NullPointerException.class, ()-> model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), null, null, null));
     }
@@ -1429,8 +1434,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now(), LocalDate.now().plusDays(2), "2");
       assertEquals("2", model.getAllBookings("").getBooking(0).getRoom().getRoomId());
@@ -1445,7 +1450,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), "1");
       assertEquals(LocalDate.now().plusDays(1), model.getAllBookings("").getBooking(0).getStartDate());
@@ -1460,7 +1465,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now(), LocalDate.now().plusDays(1), "1");
       assertEquals(LocalDate.now().plusDays(1), model.getAllBookings("").getBooking(0).getEndDate());
@@ -1477,8 +1482,8 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
-      model.addRoom("2", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.addRoom("2", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(2), LocalDate.now().plusDays(5), "2");
       assertEquals(LocalDate.now().plusDays(5), model.getAllBookings("").getBooking(0).getEndDate());
@@ -1498,7 +1503,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertThrows(IllegalArgumentException.class, ()->model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().minusDays(1), LocalDate.now().plusDays(2), "1"));
     }
@@ -1512,7 +1517,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertThrows(IllegalArgumentException.class, ()->model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(1), LocalDate.now().plusDays(1), "1"));
     }
@@ -1526,7 +1531,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(2), bob);
       assertThrows(IllegalArgumentException.class, ()->model.editBooking(model.getAllBookings("").getBooking(0).getBookingID(), LocalDate.now().plusDays(3), LocalDate.now().plusDays(1), "1"));
     }
@@ -1542,7 +1547,7 @@ class ModelManagerTest
   {
     try
     {
-      model.addRoom("1", RoomType.SINGLE, 1);
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
       model.book("1", LocalDate.now(), LocalDate.now().plusDays(7), bob);
       model.book("1", LocalDate.now().plusDays(8), LocalDate.now().plusDays(10), bob);
       assertThrows(IllegalArgumentException.class, ()->

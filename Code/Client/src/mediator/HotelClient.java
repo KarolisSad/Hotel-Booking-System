@@ -80,10 +80,10 @@ public class HotelClient implements Model
    * @return message containing information if room was successfully added
    */
   @Override public synchronized RoomTransfer addRoom(String roomID,
-      RoomType type, int numberOfBeds)
+      RoomType type, int numberOfBeds, int dailyPrice)
   {
     sendToServerAsJson(
-        new RoomTransfer("addOneRoom", roomID, type, numberOfBeds, null));
+        new RoomTransfer("addOneRoom", roomID, type, numberOfBeds, dailyPrice));
     message = null;
     while (message == null)
     {
@@ -96,6 +96,7 @@ public class HotelClient implements Model
         e.printStackTrace();
       }
     }
+    System.out.println("RETURN WHEN ADD ROOM: " + message);
     return json.fromJson(message, RoomTransfer.class);
   }
 
@@ -109,9 +110,9 @@ public class HotelClient implements Model
    * @return message containing information if room was successfully edited
    */
   @Override public synchronized RoomTransfer editRoomInfo(String roomID,
-      RoomType type, int nrBeds)
+      RoomType type, int nrBeds, int dailyPrice)
   {
-    sendToServerAsJson(new RoomTransfer("edit", roomID, type, nrBeds));
+    sendToServerAsJson(new RoomTransfer("edit", roomID, type, nrBeds, dailyPrice));
     message = null;
     try
     {
@@ -121,6 +122,7 @@ public class HotelClient implements Model
     {
       e.printStackTrace();
     }
+    System.out.println("MESSAGE: " + message);
     return json.fromJson(message, RoomTransfer.class);
   }
 
@@ -698,7 +700,6 @@ public class HotelClient implements Model
           e.printStackTrace();
         }
       }
-
       return json.fromJson(message, GuestTransfer.class);
   }
 
@@ -727,6 +728,23 @@ public class HotelClient implements Model
 
     return json.fromJson(message, GuestTransfer.class);
   }
+
+  @Override
+  public synchronized RoomTransfer availableConferenceRooms(LocalDate startDate, LocalDate endDate) {
+    sendToServerAsJson(new RoomTransfer("availableConferenceRooms", startDate, endDate));
+    message = null;
+    while (message == null)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return json.fromJson(message, RoomTransfer.class);  }
 
 
   @Override public void addListener(PropertyChangeListener listener)

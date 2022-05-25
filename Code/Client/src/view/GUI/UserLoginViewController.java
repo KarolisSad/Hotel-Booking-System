@@ -20,12 +20,16 @@ import java.io.IOException;
 public class UserLoginViewController extends ViewController {
 
     private UserLoginModel viewModel;
+
+public class UserLoginViewController extends ViewController { private UserLoginModel viewModel;
+
     @FXML private TextField username;
     @FXML private TextField password;
     @FXML private Label error;
 
     /**
-     * A none argument, void method initializing instance variables.
+     * Method initializing instance variables.
+     * And binging TextFields and Label to viewModel properties.
      */
     @Override
     protected void init() {
@@ -41,9 +45,7 @@ public class UserLoginViewController extends ViewController {
     }
 
     /**
-     * A method meant for providing functionality to the login button.
-     * When the button is pressed the system checks if the given user log in
-     * exists and if so it opens a guest menu window, otherwise it will output an error message.
+     *  Method referencing to viewModel method called login().
      */
     public void login()  {
         try {
@@ -64,9 +66,7 @@ public class UserLoginViewController extends ViewController {
     }
 
     /**
-     * A method that provides functionality to the menu button.
-     * When the button is pressed the program will open a Log in window for existing
-     * users to access their accounts.
+     * Method opening UserLoginMainView window.
      * @throws IOException
      */
     public void menu() throws IOException {
