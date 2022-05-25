@@ -65,7 +65,7 @@ public class MyDataBase
     // Nina
      // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-       return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+     //  return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
@@ -81,7 +81,7 @@ public class MyDataBase
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Milit@ria2003");
     // Christian
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
+      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
     // Juste
    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
 
@@ -334,10 +334,7 @@ public class MyDataBase
   {
     try (Connection connection = getConnection())
     {
-      System.out.println("ROOM ID: " + roomID);
-      System.out.println("ROOM TYPE: " + type);
-      System.out.println("BEDS: " + nrBeds);
-      System.out.println("PRICE: " + price);
+
       try
       {
         PreparedStatement statement = connection.prepareStatement(
@@ -352,7 +349,6 @@ public class MyDataBase
       }
       catch (Exception e)
       {
-        e.printStackTrace();
         throw new IllegalArgumentException(
             "Unable to edit " + roomID + " room.");
       }
@@ -640,8 +636,6 @@ public class MyDataBase
   public void editGuest(int bookingID, String fName, String lName, String email,
       int phoneNr) throws SQLException
   {
-    System.out.println(
-        "Edit guest values" + bookingID + fName + lName + email + phoneNr);
 
     try (Connection connection = getConnection())
     {
@@ -651,8 +645,6 @@ public class MyDataBase
           "select distinct roomBooking.guest from roomBooking where bookingid = ?;");
       statement.setInt(1, bookingID);
       ResultSet resultSet = statement.executeQuery();
-      System.out.println("before: ");
-      System.out.println(resultSet.next());
       String username = resultSet.getString("guest");
 
       //updating info about the guest
@@ -666,7 +658,6 @@ public class MyDataBase
       statement3.setString(1, fName);
       statement3.setString(5, username);
       statement3.executeUpdate();
-      System.out.println("Done with editing");
     }
     catch (Exception e)
     {
@@ -746,49 +737,11 @@ public class MyDataBase
         String email = resultSet.getString("email");
         int phonenr = resultSet.getInt("phonenr");
         allGuests.add(new Guest(userName, fName, lName, email, phonenr));
-        System.out.println(allGuests);
-
       }
       return allGuests;
 
     }
   }
-
-  /*
-  public RoomBookingTransfer getRoomWithGuest(int bookingNr)
-      throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement statement = connection.prepareStatement(
-          "SELECT fName, lName, phoneNr, startDate, endDate, r.roomID, nrBeds\n"
-              + "FROM roomBooking rb,\n" + "     room r,\n" + "     guest g\n"
-              + "WHERE rb.guest = g.phoneNr AND rb.roomID = r.roomID AND rb.bookingID = (?) AND phoneNr = (?);");
-
-      statement.setInt(1, bookingNr);
-     // statement.setInt(2, phoneNr);
-
-      ResultSet result = statement.executeQuery();
-      if (result.next())
-      {
-        //Guest guest = getGuest(phoneNr);
-        LocalDate startDate = result.getDate("startdate").toLocalDate();
-        LocalDate endDate = result.getDate("enddate").toLocalDate();
-        Room room = getRoom(result.getString("roomid"));
-
-        RoomBookingTransfer test = new RoomBookingTransfer("Success", guest, startDate, endDate, room);
-        System.out.println(test);
-        return test;
-      }
-
-      else
-      {
-        throw new IllegalArgumentException("No such booking found");
-      }
-    }
-  }
-
-   */
 
   /**
    * A method that adds a new guest to the database.
@@ -799,7 +752,6 @@ public class MyDataBase
   {
     try (Connection connection = getConnection())
     {
-      System.out.println("Starting register");
       try
       {
         PreparedStatement statement = connection.prepareStatement(
@@ -878,7 +830,6 @@ public class MyDataBase
         LocalDate endDate = result.getDate("enddate").toLocalDate();
         String state = result.getString("state");
         int bookingID = result.getInt("bookingid");
-        System.out.println(bookingID + " id");
         RoomBooking test = new RoomBooking(bookingID, startDate, endDate, room,
             state);
         toSend.add(test);
@@ -950,8 +901,6 @@ public class MyDataBase
    * @param phoneNr
    */
   public void editGuestWithUsername(String username, String fName, String lName, String email, int phoneNr) {
-    System.out.println(
-            "Edit guest values" + username + fName + lName + email + phoneNr);
 
     try (Connection connection = getConnection())
     {
@@ -968,7 +917,6 @@ public class MyDataBase
       statement3.setString(1, fName);
       statement3.setString(5, username);
       statement3.executeUpdate();
-      System.out.println("Done with editing");
     }
     catch (Exception e)
     {
@@ -983,13 +931,9 @@ public class MyDataBase
    * @return GuestTransfer object called guestTransfer
    */
   public GuestTransfer getGuestByUsername(String username) {
-    System.out.println(
-            "Get guest values: " + username);
     GuestTransfer guestTransfer =null;
     try (Connection connection = getConnection())
     {
-      System.out.println("From mydatabase: ");
-
       //updating info about the guest
       PreparedStatement statement = connection.prepareStatement(
               "select * from guest where username = ?;");
@@ -1003,7 +947,6 @@ public class MyDataBase
         String lName = guest.getString("lname");
         String email = guest.getString("email");
         int phonenr = guest.getInt("phonenr");
-        System.out.println("From mydatabase: " + usernameg);
 
         guestTransfer = new GuestTransfer("getGuestWithUsername", usernameg, fName, lName, email, phonenr);
       }
