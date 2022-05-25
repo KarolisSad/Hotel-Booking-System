@@ -289,7 +289,6 @@ public class HotelClientHandler implements Runnable
           GuestTransfer guest = json.fromJson(message, GuestTransfer.class);
           try
           {
-            System.out.println(guest.getFullName());
             model.editGuest(guest.getBookingID(), guest.getfName(),
                 guest.getlName(), guest.getEmail(), guest.getPhoneNr());
           }
@@ -307,13 +306,13 @@ public class HotelClientHandler implements Runnable
             System.out.println(guest.getFullName());
             model.editGuestWithUsername(guest.getUsername(), guest.getfName(),
                     guest.getlName(), guest.getEmail(), guest.getPhoneNr());
+          out.println(successMessage);
           }
           catch (Exception throwables)
           {
             out.println(json.toJson(
-                    new RoomTransfer("error", throwables.getMessage())));
+                    new GuestTransfer("error", throwables.getMessage())));
           }
-          out.println(successMessage);
           break;
         case "editBooking":
           RoomBookingTransfer bookingEdit = json.fromJson(message,
