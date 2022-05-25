@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.NumberStringConverter;
+import model.Room;
 import model.RoomType;
 import view.ViewController;
 import viewModel.AddEditViewModel;
@@ -24,6 +25,7 @@ public class AddEditViewController extends ViewController
   @FXML private ComboBox<RoomType> typeDropdown;
   @FXML private TextField nrOfBedsField;
   private RoomType selectedType;
+  @FXML
   private Label errorLabel;
 
   private AddEditViewModel viewModel;
@@ -50,7 +52,7 @@ public class AddEditViewController extends ViewController
       typeDropdown.getItems().add(RoomType.SUITE);
       typeDropdown.getItems().add(RoomType.CONFERENCE);
 
-      errorLabel.textProperty().bind(viewModel.errorPropertyProperty());
+      errorLabel.textProperty().bindBidirectional(viewModel.errorPropertyProperty());
     }
     catch (NullPointerException e)
     {
@@ -93,85 +95,86 @@ public class AddEditViewController extends ViewController
    */
   public void confirmButton() throws IOException
   {
+    try{
+      Room room = new Room(viewModel.getRoomId(), viewModel.getType(), viewModel.getNumberOfBeds());
+      room.toString();
 
-    if (viewModel.getViewState().isAdd())
-    {
-
-      selectedType = typeDropdown.getSelectionModel().getSelectedItem();
-      viewModel.setType(selectedType);
-
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      //Style
-      DialogPane dialogPane = alert.getDialogPane();
-      dialogPane.getStylesheets().add("");
-      dialogPane.getStylesheets()
-          .add(getClass().getResource("box.css").toExternalForm());
-      dialogPane.getStyleClass().add("box.css");
-      //
-      alert.setHeaderText("Are you sure you want to make changes?");
-      alert.setContentText("Type: " + getType() + "\nNumber of beds: "
-          + viewModel.getNumberOfBeds());
-
-      ButtonType confirm = new ButtonType("Confirm");
-      ButtonType cancel = new ButtonType("Cancel",
-          ButtonBar.ButtonData.CANCEL_CLOSE);
-      alert.getButtonTypes().setAll(confirm, cancel);
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == confirm)
+      if (viewModel.getViewState().isAdd())
       {
-        viewModel.addRoom();
-        System.out.println("You confirmed.");
-        getViewHandler().openView("RoomListView.fxml");
+
+        selectedType = typeDropdown.getSelectionModel().getSelectedItem();
+        viewModel.setType(selectedType);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        //Style
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add("");
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("box.css").toExternalForm());
+        dialogPane.getStyleClass().add("box.css");
+        //
+        alert.setHeaderText("Are you sure you want to make changes?");
+        alert.setContentText("Type: " + viewModel.getType() + "\nNumber of beds: "
+                + viewModel.getNumberOfBeds());
+
+        ButtonType confirm = new ButtonType("Confirm");
+        ButtonType cancel = new ButtonType("Cancel",
+                ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(confirm, cancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == confirm)
+        {
+          viewModel.addRoom();
+          System.out.println("You confirmed.");
+          getViewHandler().openView("RoomListView.fxml");
+        }
+        else
+        {
+          System.out.println("You pressed NO");
+          alert.close();
+        }
+
       }
       else
       {
-        System.out.println("You pressed NO");
-        alert.close();
-      }
+        selectedType = typeDropdown.getSelectionModel().getSelectedItem();
+        viewModel.setType(selectedType);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        //Style
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add("");
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("box.css").toExternalForm());
+        dialogPane.getStyleClass().add("box.css");
+        //
+        alert.setHeaderText("Confirm edit of room: " + viewModel.getRoomId());
+        alert.setContentText("Type: " + viewModel.getType() + "\nNumber of beds: "
+                + viewModel.getNumberOfBeds());
 
-    }
-    else
-    {
-      selectedType = typeDropdown.getSelectionModel().getSelectedItem();
-      viewModel.setType(selectedType);
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      //Style
-      DialogPane dialogPane = alert.getDialogPane();
-      dialogPane.getStylesheets().add("");
-      dialogPane.getStylesheets()
-          .add(getClass().getResource("box.css").toExternalForm());
-      dialogPane.getStyleClass().add("box.css");
-      //
-      alert.setHeaderText("Confirm edit of room: " + viewModel.getRoomId());
-      alert.setContentText("Type: " + getType() + "\nNumber of beds: "
-          + viewModel.getNumberOfBeds());
+        ButtonType confirm = new ButtonType("Confirm");
+        ButtonType cancel = new ButtonType("Cancel",
+                ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(confirm, cancel);
 
-      ButtonType confirm = new ButtonType("Confirm");
-      ButtonType cancel = new ButtonType("Cancel",
-          ButtonBar.ButtonData.CANCEL_CLOSE);
-      alert.getButtonTypes().setAll(confirm, cancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == confirm)
+        {
+          viewModel.editRoomInfo();
+          viewModel.reset();
+        }
+        else
+        {
+          alert.close();
+        }
 
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == confirm)
-      {
-        viewModel.editRoomInfo();
-        viewModel.reset();
-      }
-      else
-      {
-        alert.close();
-      }
-
-      try
-      {
         getViewHandler().openView("RoomListView.fxml");
-      }
-      catch (IOException e)
-      {
 
-      }
     }
-
+    }
+      catch (Exception e){
+      System.out.println(e.getMessage());
+      errorLabel.setText(e.getMessage() + "");
+    }
   }
 
   /**
