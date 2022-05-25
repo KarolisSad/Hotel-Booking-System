@@ -11,6 +11,7 @@ public class Room
   private String roomId;
   private RoomType roomType;
   private int numberOfBeds;
+  private int price;
 
 
   /**
@@ -20,12 +21,14 @@ public class Room
    * @param roomId room number
    * @param roomOfType The type of room
    * @param numberOfBeds the number of beds to be assigned to the room.
+   * @param dailyPrice the daily price of the room
    */
-  public Room(String roomId, RoomType roomOfType, int numberOfBeds)
+  public Room(String roomId, RoomType roomOfType, int numberOfBeds, int dailyPrice)
   {
     setRoomId(roomId);
     setRoomType(roomOfType);
     setNumberOfBeds(numberOfBeds);
+    setPrice(dailyPrice);
   }
 
   /**
@@ -92,7 +95,7 @@ public class Room
   }
 
   /**
-   * Private method setting the roomId variable to the string given as argument.
+   * Public method setting the roomId variable to the string given as argument.
    * This method is private as it is only used in the constructor, and as the roomID serves as the primary key in the database, once a room is created the number should never change.
    *
    * @param roomId the roomId
@@ -110,6 +113,23 @@ public class Room
   }
 
   /**
+   * Method used for setting the price of a room.
+   *
+   * @param price The price of the room
+   * @throws IllegalArgumentException if the price passed as arguments is smaller than 1.
+   */
+  public void setPrice(int price)
+  {
+    if (price <= 0)
+    {
+      throw new IllegalArgumentException("The price for a room should not be less than zero.");
+    }
+    this.price = price;
+  }
+
+
+
+  /**
    * A method meant for calling room ID (room number)
    *
    * @return roomId
@@ -119,18 +139,31 @@ public class Room
     return roomId;
   }
 
-
-  //TODO delete??
+  /**
+   * A method meant for getting the RoomType variable
+   * @return the type of room as a RoomType Enum.
+   */
   public RoomType getRoomType()
   {
     return roomType;
   }
 
-
-  //TODO delete??
+  /**
+   * Method meant for getting the number of beds.
+   * @return number of beds.
+   */
   public int getNumberOfBeds()
   {
     return numberOfBeds;
+  }
+
+  /**
+   * Method meant for getting the daily price
+   * @return price
+   */
+  public int getPrice()
+  {
+    return price;
   }
 
   /**
@@ -140,18 +173,21 @@ public class Room
    */
   public Room copy()
   {
-    Room other = new Room(roomId, roomType, numberOfBeds);
+    Room other = new Room(roomId, roomType, numberOfBeds, price);
     return other;
   }
+
 
   /**
    * Method returning a string representation of the room object.
    * @return A string containing all variables and their values.
    */
+
   @Override public String toString()
   {
+
     return "Room number: " + roomId + ", Type: " + roomType.toString()
-        + ", Number of beds: " + numberOfBeds;
+        + ", Number of beds: " + numberOfBeds + ", Price: " + price;
   }
 
 }
