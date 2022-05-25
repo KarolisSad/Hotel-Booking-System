@@ -3,10 +3,7 @@ package view.GUI;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import view.ViewController;
 import viewModel.BookingViewModel;
 import viewModel.SimpleBookingViewModel;
@@ -23,9 +20,10 @@ import java.time.LocalDate;
  */
 public class BookingViewController extends ViewController
 {
+  @FXML
+    private Button cancelButton;
 
-  public Label errorLabel;
-  private BookingViewModel viewModel;
+    private BookingViewModel viewModel;
 
   @FXML private TableView<SimpleBookingViewModel> table;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> endDate;
@@ -62,6 +60,7 @@ public class BookingViewController extends ViewController
           if (newValue != null)
           {
             viewModel.setSelected(newValue.bookingIdProperty().get());
+            cancelButton.setDisable(false);
           }
 
           //                    viewModel.setSelected(newValue.getBookingID().get());
@@ -77,6 +76,7 @@ public class BookingViewController extends ViewController
   @Override public void reset()
   {
     viewModel.updateBookingList();
+    cancelButton.setDisable(true);
   }
 
   /**
