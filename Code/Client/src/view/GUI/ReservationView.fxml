@@ -43,11 +43,11 @@
                     <Label text="No rooms available. Try with other dates or change filtering" />
                 </placeholder>
               <columns>
-                <TableColumn fx:id="roomNumberColumn" prefWidth="92.0" text="Room number" />
-                <TableColumn fx:id="roomTypeColumn" prefWidth="58.0" text="Type" />
-                  <TableColumn fx:id="numberOfBedsColumn" prefWidth="103.0" text="Number of beds" />
-                  <TableColumn fx:id="dailyPriceColumn" prefWidth="82.0" text="Price pr. day" />
-                  <TableColumn fx:id="totalPriceColumn" text="Total price" />
+                <TableColumn fx:id="roomNumberColumn" prefWidth="54.0" text="Room" />
+                <TableColumn fx:id="roomTypeColumn" prefWidth="47.0" text="Type" />
+                  <TableColumn fx:id="numberOfBedsColumn" prefWidth="99.0" text="Number of beds" />
+                  <TableColumn fx:id="dailyPriceColumn" prefWidth="89.0" text="Price pr. day" />
+                  <TableColumn fx:id="totalPriceColumn" prefWidth="126.0" text="Total price" />
               </columns>
                <HBox.margin>
                   <Insets right="5.0" />

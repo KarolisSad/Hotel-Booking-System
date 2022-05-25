@@ -191,7 +191,7 @@ public class ReservationViewModel
 
   public void clear()
   {
-    getAllAvailableRooms();
+    errorLabel.set("");
   }
 
 }

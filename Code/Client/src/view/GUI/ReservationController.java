@@ -142,6 +142,7 @@ public class ReservationController extends ViewController
    */
   @Override public void reset()
   {
+    viewModel.clear();
     viewModel.getAllAvailableRooms();
     if (priceFromFilter.textProperty().get().isEmpty()
         && priceFromFilter.textProperty().get().isEmpty())
