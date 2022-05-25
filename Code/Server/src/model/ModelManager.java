@@ -145,7 +145,10 @@ public class ModelManager implements Model
     @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
-        //todo shouldn't this do something if a null-value is passed as roomID???
+        if (roomId.isEmpty() || roomId == null)
+        {
+            throw new NullPointerException("Room ID can not be null or an empty string when editing a room.");
+        }
         dataBaseAdapter.editRoomInfo(roomId, type, nrBeds, price);
     }
 
