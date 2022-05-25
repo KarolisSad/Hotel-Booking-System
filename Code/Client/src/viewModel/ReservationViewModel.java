@@ -157,11 +157,20 @@ public class ReservationViewModel
     return availableRooms;
   }
 
+
+  /**
+   * A method used for returning the selected SimpleRoomViewModel property.
+   * @return the selectedRoomProperty
+   */
   public ObjectProperty<SimpleRoomViewModel> getSelected()
   {
     return selectedRoomProperty;
   }
 
+  /**
+   * Method used for setting the SimpleRoomViewModel property.
+   * @param roomViewModel The object to set the variable to.
+   */
   public void setSelected(SimpleRoomViewModel roomViewModel)
   {
     selectedRoomProperty.set(roomViewModel);

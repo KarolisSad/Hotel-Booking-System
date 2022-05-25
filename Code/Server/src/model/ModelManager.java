@@ -394,6 +394,7 @@ public class ModelManager implements Model
 
     @Override
     public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        checkForLegalDates(startDate, endDate);
         return dataBaseAdapter.availableConferenceRooms(startDate,endDate);
     }
 }
