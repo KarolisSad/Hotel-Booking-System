@@ -53,9 +53,9 @@ public class Room
    */
   public void setNumberOfBeds(int numberOfBeds)
   {
-    if (numberOfBeds == 0)
+    if (numberOfBeds <= 0)
     {
-      throw new IllegalArgumentException("Number of beds should not be 0");
+      throw new IllegalArgumentException("Number of beds should not be smaller that 1.");
     }
 
     else
