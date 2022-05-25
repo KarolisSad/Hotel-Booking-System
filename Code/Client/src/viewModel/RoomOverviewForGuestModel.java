@@ -19,6 +19,7 @@ public class RoomOverviewForGuestModel {
     private StringProperty status;
     private StringProperty roomNumber;
     private StringProperty nrOfBeds;
+    private StringProperty price;
     private ArrayList<RoomType> types;
     private ObjectProperty<LocalDate> startDatePicker;
     private ObjectProperty<LocalDate> endDatePicker;
@@ -31,6 +32,7 @@ public class RoomOverviewForGuestModel {
         status = new SimpleStringProperty();
         roomNumber = new SimpleStringProperty();
         type = new SimpleStringProperty();
+        price = new SimpleStringProperty();
         startDatePicker = new SimpleObjectProperty<>();
         endDatePicker = new SimpleObjectProperty<>();
         nrOfBeds = new SimpleStringProperty();
@@ -126,6 +128,11 @@ public class RoomOverviewForGuestModel {
         return type;
     }
 
+    public StringProperty getPrice()
+    {
+        return price;
+    }
+
     /**
      * Setter for room booking details.
      * This method retrieves a specific room from the model
@@ -137,6 +144,7 @@ public class RoomOverviewForGuestModel {
             roomNumber.setValue(room.getRoomId());
             nrOfBeds.setValue(String.valueOf(room.getNumberOfBeds()));
             type.setValue(room.getRoomType().toString());
+            price.setValue(String.valueOf(room.getPrice()));
             bookingId.setValue(
                     String.valueOf(selectedBooking.bookingIdProperty().get()));
             status.setValue(selectedBooking.bookingStateProperty().get());

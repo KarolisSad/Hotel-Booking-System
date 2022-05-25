@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS room
 (
     roomID   varchar(20) PRIMARY KEY NOT NULL,
     roomType varchar(30)             NOT NULL CHECK (roomType IN ('Family', 'Single', 'Double', 'Suite')),
-    nrBeds   integer                 NOT NULL CHECK ( nrBeds BETWEEN 1 AND 20)
-
+    nrBeds   integer                 NOT NULL CHECK ( nrBeds BETWEEN 1 AND 20),
+    dailyPrice  integer NOT NULL CHECK ( dailyPrice > 0 )
 );
 
 CREATE TABLE IF NOT EXISTS guest

@@ -28,6 +28,7 @@ public class RoomDetailsForReceptionistController extends ViewController
   @FXML private TextField roomNumberField;
   @FXML private TextField nrOfBedsField;
   @FXML private TextField typeField;
+  @FXML private TextField dailyPriceField;
   @FXML private DatePicker startDatePicker;
   @FXML private DatePicker endDatePicker;
   @FXML private Label errorLabel;
@@ -49,6 +50,7 @@ public class RoomDetailsForReceptionistController extends ViewController
       typeField.textProperty().bindBidirectional(viewModel.getType());
       nrOfBedsField.textProperty().bindBidirectional(viewModel.getNrOfBeds());
       roomNumberField.textProperty().bindBidirectional(viewModel.getRoomNumber());
+      dailyPriceField.textProperty().bindBidirectional(viewModel.getDailyPrice());
       startDatePicker.valueProperty()
           .bindBidirectional(viewModel.getStartDatePicker());
       endDatePicker.valueProperty()

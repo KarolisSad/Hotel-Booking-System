@@ -22,6 +22,7 @@ public class HotelDataBase implements HotelPersistence
   {
   }
 
+  @Override public void addRoom(Room room)
   /**
    * A method that requests an adding of a new room, from database.
    * @param ID
@@ -33,7 +34,7 @@ public class HotelDataBase implements HotelPersistence
       throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
-    dataBase.addOneRoom(ID, type, numberOfBeds);
+    dataBase.addOneRoom(room);
   }
 
   /**
@@ -72,6 +73,8 @@ public class HotelDataBase implements HotelPersistence
     return dataBase.availableRooms(startDate, endDate);
   }
 
+  @Override public void editRoomInfo(String roomID, RoomType type, int nrBeds, int price)
+
   /**
    *  A method that requests editing specific room's information, from database.
    * @param roomID
@@ -79,11 +82,10 @@ public class HotelDataBase implements HotelPersistence
    * @param nrBeds
    * @throws SQLException
    */
-  @Override public void editRoomInfo(String roomID, RoomType type, int nrBeds)
       throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
-    dataBase.editRoomInfo(roomID, type, nrBeds);
+    dataBase.editRoomInfo(roomID, type, nrBeds, price);
   }
 
   /**
