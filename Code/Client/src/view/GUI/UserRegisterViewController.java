@@ -43,6 +43,7 @@ public class UserRegisterViewController extends ViewController
         errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
     }
 
+
     @Override
     public void reset() {
 

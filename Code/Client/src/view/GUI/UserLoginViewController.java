@@ -12,13 +12,17 @@ import viewModel.UserLoginModel;
 import java.io.IOException;
 
 /**
- * Class representing the UserLoginView window.
+ * A class that creates a UserLoginViewController object.
  *
  * @author Group 5
- * @version 23-05-2022
+ * @version 25-05-22
  */
+public class UserLoginViewController extends ViewController {
+
+    private UserLoginModel viewModel;
 
 public class UserLoginViewController extends ViewController { private UserLoginModel viewModel;
+
     @FXML private TextField username;
     @FXML private TextField password;
     @FXML private Label error;
@@ -44,7 +48,6 @@ public class UserLoginViewController extends ViewController { private UserLoginM
      *  Method referencing to viewModel method called login().
      */
     public void login()  {
-        // todo try catch, put in higher ..
         try {
             GuestTransfer guestTransfer = viewModel.login();
             if (!(guestTransfer.getType().equals("Success")))

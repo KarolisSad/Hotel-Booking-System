@@ -23,12 +23,7 @@
                 <Font name="Beirut Regular" size="22.0" />
             </font>
         </Text>
-        <Button layoutX="44.0" layoutY="343.0" mnemonicParsing="false" onAction="#hotelManager" text="HotelManager">
-            <font>
-                <Font name="Arial" size="13.0" />
-            </font>
-        </Button>
-        <Button layoutX="44.0" layoutY="308.0" mnemonicParsing="false" onAction="#receptionist" prefHeight="25.0" prefWidth="96.0" text="Receptionist">
+        <Button layoutX="44.0" layoutY="343.0" mnemonicParsing="false" onAction="#admin" text="Admin">
             <font>
                 <Font name="Arial" size="13.0" />
             </font>

@@ -30,6 +30,7 @@ public class ViewModelFactory
   private BookingOverviewForGuestModel bookingOverviewForGuestModel;
   private RoomOverviewForGuestModel roomOverviewForGuestModel;
   private GuestPersonalInformationViewModel guestPersonalInformationViewModel;
+  private AdminLogInViewModel adminLogInViewModel;
   private ConferenceAvailableRoomViewModel conferenceAvailableRoomViewModel;
 
   /**
@@ -68,7 +69,16 @@ public class ViewModelFactory
     this.roomOverviewForGuestModel = new RoomOverviewForGuestModel(model);
 
     this.guestPersonalInformationViewModel = new GuestPersonalInformationViewModel(model);
+    this.adminLogInViewModel = new AdminLogInViewModel();
     this.conferenceAvailableRoomViewModel = new ConferenceAvailableRoomViewModel(model);
+  }
+  
+/**
+   * A getter for AdminLogInViewModel.
+   * @return AdminLogInViewModel object
+   */
+  public AdminLogInViewModel getAdminLogInViewModel() {
+    return adminLogInViewModel;
   }
 
   /**

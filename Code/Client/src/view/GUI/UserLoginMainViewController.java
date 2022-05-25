@@ -24,6 +24,17 @@ public class UserLoginMainViewController extends ViewController
     }
 
     /**
+     * A method that provides functionality to the admin button.
+     * When the button is pressed that program opens the log in window for the administration.
+     * @throws IOException
+     */
+    public void admin() throws IOException {
+        getViewHandler().openView("AdminLogInView.fxml");
+    }
+
+    /**
+     * A method meant to provide functionality for log in button.
+     * When the button is pressed it will open a log in window for the hotel guests.
      * Method opening the BookingsForReceptionistView.
      * @throws IOException
      */
@@ -55,8 +66,3 @@ public class UserLoginMainViewController extends ViewController
         getViewHandler().openView("UserRegisterGuest.fxml");
     }
 }
-
-
-//    public void receptionist() throws IOException {
-//        getViewHandler().openView("GuestDetailsForReceptionist.fxml");
-//    }
