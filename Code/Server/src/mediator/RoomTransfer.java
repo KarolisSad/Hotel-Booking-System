@@ -215,7 +215,7 @@ public class RoomTransfer {
     }
 
 
-     * ToString method
+     /** ToString method
      * @return All instance variables and their values as a String.
      */
 

@@ -9,7 +9,7 @@ SET SCHEMA 'hotel';
 CREATE TABLE IF NOT EXISTS room
 (
     roomID   varchar(20) PRIMARY KEY NOT NULL,
-    roomType varchar(30)             NOT NULL CHECK (roomType IN ('Family', 'Single', 'Double', 'Suite')),
+    roomType varchar(30)             NOT NULL CHECK (roomType IN ('Family', 'Single', 'Double', 'Suite', 'Conference')),
     nrBeds   integer                 NOT NULL CHECK ( nrBeds BETWEEN 1 AND 20),
     dailyPrice  integer NOT NULL CHECK ( dailyPrice > 0 )
 );
@@ -140,6 +140,27 @@ CREATE TRIGGER BookingDateUpdate
     FOR EACH ROW
     WHEN ( old.state = new.state )
 EXECUTE PROCEDURE update_booking();
+
+-----------Views--------------->
+create view conferenceRooms as
+select *
+from room
+where roomType = 'Conference';
+
+
+create view regularRooms as
+select *
+from room
+where roomType not in ('Conference');
+-------------------------------<
+
+
+drop view conferenceRooms;
+drop view conferenceRooms;
+
+
+
+
 
 
 --------Guest-------

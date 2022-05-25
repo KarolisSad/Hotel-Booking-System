@@ -22,7 +22,7 @@ public class HotelDataBase implements HotelPersistence
   {
   }
 
-  @Override public void addRoom(Room room)
+  @Override public void addRoom(Room room) throws SQLException
   /**
    * A method that requests an adding of a new room, from database.
    * @param ID
@@ -30,8 +30,6 @@ public class HotelDataBase implements HotelPersistence
    * @param numberOfBeds
    * @throws SQLException
    */
-  @Override public void addRoom(String ID, RoomType type, int numberOfBeds)
-      throws SQLException
   {
     MyDataBase dataBase = MyDataBase.getInstance();
     dataBase.addOneRoom(room);

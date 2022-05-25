@@ -61,9 +61,9 @@ public class MyDataBase
           ////////////////////////////////////////////////////
 
     // Karolis
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
+    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
-     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
@@ -231,7 +231,7 @@ public class MyDataBase
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT *\n" + "FROM room\n" + "WHERE roomID IN (SELECT roomID\n"
+          "SELECT *\n" + "FROM regularrooms\n" + "WHERE roomID IN (SELECT roomID\n"
               + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
               + "                 FROM roomBooking\n"
               + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
@@ -1038,8 +1038,9 @@ public class MyDataBase
           String roomId = resultSet.getString("roomid");
           String roomType = resultSet.getString("roomtype");
           int nrBends = resultSet.getInt("nrbeds");
+          int price = resultSet.getInt("dailyPrice");
           Room room = new Room(roomId,
-                  RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends);
+                  RoomType.valueOf(roomType.toUpperCase(Locale.ROOT)), nrBends, price);
           rooms.add(room);
         }
         if (rooms.isEmpty())
