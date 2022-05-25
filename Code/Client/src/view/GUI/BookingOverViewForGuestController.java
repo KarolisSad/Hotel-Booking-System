@@ -48,7 +48,8 @@ public class BookingOverViewForGuestController  extends ViewController
                 .addListener((obs, oldValue, newValue) -> {
                     viewModel.setSelected(newValue);
                 });
-
+        errorLabel.textProperty()
+                .bindBidirectional(viewModel.getErrorLabelProperty());
        reset();
     }
 

@@ -105,9 +105,16 @@ public class GuestPersonalInformationViewModel {
      * Method calling editGuestWithUsername() from the model.
      */
     public void updateGuest() {
-        model.editGuestWithUsername("editGuestWithUsername", getUsername(), getfName(), getlName(),
+
+        GuestTransfer guestTransfer = model.editGuestWithUsername("editGuestWithUsername", getUsername(), getfName(), getlName(),
                 getEmail(), Integer.parseInt(phoneNr.get()));
-        System.out.println("Editing personal info of: " + getUsername());
+        if (guestTransfer.getType().equals("error"))
+        {
+            errorLabel.setValue("Please fill in all text fields.");
+        }
+        else {
+            errorLabel.setValue("");
+        }
     }
 
     /**

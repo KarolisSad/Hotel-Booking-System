@@ -700,7 +700,6 @@ public class HotelClient implements Model
           e.printStackTrace();
         }
       }
-
       return json.fromJson(message, GuestTransfer.class);
   }
 
