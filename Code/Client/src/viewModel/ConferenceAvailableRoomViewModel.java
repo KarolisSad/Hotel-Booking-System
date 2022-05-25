@@ -83,6 +83,7 @@ public class ConferenceAvailableRoomViewModel
             {
                 availableRooms.add(new SimpleRoomViewModel(room, getStartDatePicker().get(), getEndDatePicker().get()));
             }
+            errorLabel.set("");
         }
         catch (Exception e)
         {
