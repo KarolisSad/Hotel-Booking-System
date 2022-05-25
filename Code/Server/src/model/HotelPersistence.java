@@ -38,4 +38,6 @@ public interface HotelPersistence {
     void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException;
 
     GuestTransfer getGuestByUsername(String username) throws SQLException;
+
+    ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException;
 }

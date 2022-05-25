@@ -2,6 +2,7 @@ package model;
 
 import mediator.GuestTransfer;
 import mediator.RoomBookingTransfer;
+import mediator.RoomTransfer;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.sql.SQLException;
@@ -42,4 +43,6 @@ public interface Model extends UnnamedPropertyChangeSubject
     void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException;
 
   GuestTransfer getGuestByUsername(String username) throws SQLException;
+
+  ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException;
 }

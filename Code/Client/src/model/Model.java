@@ -38,4 +38,6 @@ public interface Model extends UnnamedPropertyChangeSubject
     GuestTransfer editGuestWithUsername(String editGuestWithUsername, String username, String getfName, String getlName, String email, int parseInt);
 
     GuestTransfer getGuestByUsername(String username);
+
+    RoomTransfer availableConferenceRooms(LocalDate startDate, LocalDate endDate);
 }

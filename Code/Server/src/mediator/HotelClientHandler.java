@@ -32,6 +32,12 @@ public class HotelClientHandler implements Runnable
   private Model model;
   private String message;
 
+  /**
+   * Constructor initializing instance variables.
+   * @param socket
+   * @param model
+   * @throws IOException
+   */
   public HotelClientHandler(Socket socket, Model model) throws IOException
   {
     this.socket = socket;
@@ -457,6 +463,22 @@ public class HotelClientHandler implements Runnable
           break;
         }
 
+        case "availableConferenceRooms":
+        {
+          room = json.fromJson(message, RoomTransfer.class);
+          try
+          {
+            RoomTransfer transfer = new RoomTransfer("availableConferenceRooms",
+                    model.availableConferenceRooms(room.getStartDate(), room.getEndDate()));
+            jsonString = json.toJson(transfer);
+            out.println(jsonString);
+          }
+          catch (Exception e)
+          {
+            out.println(json.toJson(new RoomTransfer("error", e.getMessage())));
+          }
+          break;
+        }
 
 
       }

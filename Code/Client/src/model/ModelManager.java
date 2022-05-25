@@ -329,6 +329,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public RoomTransfer availableConferenceRooms(LocalDate startDate, LocalDate endDate) {
+        return hotelClient.availableConferenceRooms(startDate, endDate);
+    }
+
+    @Override
     public void addListener(PropertyChangeListener listener) {
         property.addPropertyChangeListener(listener);
     }

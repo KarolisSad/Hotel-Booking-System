@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * A class that implements the Model interface and manages the bookings.
  *
  * @author Group 5
- * @version 04/05/2022
+ * @version 24/05/2022
  */
 
 public class ModelManager implements Model
@@ -293,6 +293,17 @@ public class ModelManager implements Model
         return dataBaseAdapter.getAllGuests();
     }
 
+    /**
+     * Method used for registering the guest in the system.
+     * Calls the register() method in dataBaseAdapter.
+     * @param fName
+     * @param lName
+     * @param email
+     * @param phoneNr
+     * @param username
+     * @param password
+     * @throws SQLException
+     */
     @Override
     public void register(String fName, String lName, String email, int phoneNr, String username, String password) throws SQLException {
         Guest guest = new Guest(fName, lName, email, phoneNr, username, password);
@@ -300,11 +311,26 @@ public class ModelManager implements Model
 
     }
 
+    /**
+     * Method used to check if there is any guest having this username and password in the database.
+     * If yes, this method gives the access to the personal account of the guest.
+     * Calls login() method in the dataBaseAdapter.
+     * @param username
+     * @param password
+     * @throws SQLException
+     */
     @Override
     public void login(String username, String password) throws SQLException {
         dataBaseAdapter.login(username,password);
     }
 
+    /**
+     * Method used to get all bookings of a guest that is logged in the system.
+     * Calls getBookingsWhenLoggedIn() method in dataBaseAdapter.
+     * @param username
+     * @return bookingList with the list of bookings made by the guest.
+     * @throws SQLException
+     */
     @Override
     public RoomBookingList getBookingsWhenLoggedIn(String username) throws SQLException {
        bookingList.setAllBookings(dataBaseAdapter.getBookingsWhenLoggedIn(username));
@@ -312,6 +338,15 @@ public class ModelManager implements Model
 
     }
 
+    /**
+     * Method used to make a booking, when a guest is logged in the system.
+     * Calls bookARoomWhenLoggedIn() method in dataBaseAdapter.
+     * @param roomID
+     * @param startDate
+     * @param endDate
+     * @param username
+     * @throws SQLException
+     */
     @Override
     public void bookARoomWhenLoggedIn(String roomID, LocalDate startDate, LocalDate endDate, String username) throws SQLException {
         checkForLegalDates(startDate, endDate);
@@ -330,13 +365,35 @@ public class ModelManager implements Model
         dataBaseAdapter.clearDatabase();
     }
 
+    /**
+     * Method used to edit a guest with a specific username.
+     * Calls editGuestWithUsername method in dataBaseAdapter.
+     * @param username
+     * @param getfName
+     * @param getlName
+     * @param email
+     * @param phoneNr
+     * @throws SQLException
+     */
     @Override
     public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
         dataBaseAdapter.editGuestWithUsername(username,  getfName,  getlName,  email, phoneNr);
     }
 
+    /**
+     * Method used to get details about a guest with a specific username.
+     * Calls getGuestByUsername method in dataBaseAdapter.
+     * @param username
+     * @return
+     * @throws SQLException
+     */
     @Override
     public GuestTransfer getGuestByUsername(String username) throws SQLException {
         return dataBaseAdapter.getGuestByUsername(username);
+    }
+
+    @Override
+    public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        return dataBaseAdapter.availableConferenceRooms(startDate,endDate);
     }
 }
