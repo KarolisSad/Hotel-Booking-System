@@ -9,7 +9,6 @@ import model.RoomType;
 import view.ViewController;
 import viewModel.AddEditViewModel;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -26,8 +25,7 @@ public class AddEditViewController extends ViewController
   @FXML private TextField nrOfBedsField;
   @FXML private TextField dailyPriceField;
   private RoomType selectedType;
-  @FXML
-  private Label errorLabel;
+  @FXML private Label errorLabel;
 
   private AddEditViewModel viewModel;
 
@@ -46,7 +44,8 @@ public class AddEditViewController extends ViewController
 
       Bindings.bindBidirectional(nrOfBedsField.textProperty(),
           viewModel.numberOfBedsProperty(), new NumberStringConverter());
-      Bindings.bindBidirectional(dailyPriceField.textProperty(), viewModel.dailyPriceProperty(), new NumberStringConverter());
+      Bindings.bindBidirectional(dailyPriceField.textProperty(),
+          viewModel.dailyPriceProperty(), new NumberStringConverter());
       typeDropdown.getItems().removeAll(typeDropdown.getItems());
       typeDropdown.getItems().add(RoomType.FAMILY);
       typeDropdown.getItems().add(RoomType.DOUBLE);
@@ -54,7 +53,8 @@ public class AddEditViewController extends ViewController
       typeDropdown.getItems().add(RoomType.SUITE);
       typeDropdown.getItems().add(RoomType.CONFERENCE);
 
-      errorLabel.textProperty().bindBidirectional(viewModel.errorPropertyProperty());
+      errorLabel.textProperty()
+          .bindBidirectional(viewModel.errorPropertyProperty());
     }
     catch (NullPointerException e)
     {
@@ -97,40 +97,12 @@ public class AddEditViewController extends ViewController
    */
   public void confirmButton() throws IOException
   {
-    try{
-      Room room = new Room(viewModel.getRoomId(), viewModel.getType(), viewModel.getNumberOfBeds());
+    try
+    {
+      Room room = new Room(viewModel.getRoomId(), viewModel.getType(), viewModel.getNumberOfBeds(), viewModel.dailyPriceProperty().get());
       room.toString();
 
-    if (viewModel.getViewState().isAdd())
-    {
-
-      selectedType = typeDropdown.getSelectionModel().getSelectedItem();
-      viewModel.setType(selectedType);
-
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      //Style
-      DialogPane dialogPane = alert.getDialogPane();
-      dialogPane.getStylesheets().add("");
-      dialogPane.getStylesheets()
-          .add(getClass().getResource("box.css").toExternalForm());
-      dialogPane.getStyleClass().add("box.css");
-      //
-      alert.setHeaderText("Are you sure you want to make changes?");
-      alert.setContentText("Type: " + getType() + "\nNumber of beds: "
-          + viewModel.getNumberOfBeds() + "\nDaily price: " + viewModel.dailyPriceProperty().get());
-
-      ButtonType confirm = new ButtonType("Confirm");
-      ButtonType cancel = new ButtonType("Cancel",
-          ButtonBar.ButtonData.CANCEL_CLOSE);
-      alert.getButtonTypes().setAll(confirm, cancel);
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == confirm)
-      {
-        viewModel.addRoom();
-        System.out.println("You confirmed.");
-        getViewHandler().openView("RoomListView.fxml");
-      }
-      else
+      if (viewModel.getViewState().isAdd())
       {
 
         selectedType = typeDropdown.getSelectionModel().getSelectedItem();
@@ -141,16 +113,17 @@ public class AddEditViewController extends ViewController
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add("");
         dialogPane.getStylesheets()
-                .add(getClass().getResource("box.css").toExternalForm());
+            .add(getClass().getResource("box.css").toExternalForm());
         dialogPane.getStyleClass().add("box.css");
         //
         alert.setHeaderText("Are you sure you want to make changes?");
-        alert.setContentText("Type: " + viewModel.getType() + "\nNumber of beds: "
-                + viewModel.getNumberOfBeds());
+        alert.setContentText("Type: " + getType() + "\nNumber of beds: "
+            + viewModel.getNumberOfBeds() + "\nDaily price: "
+            + viewModel.dailyPriceProperty().get());
 
         ButtonType confirm = new ButtonType("Confirm");
         ButtonType cancel = new ButtonType("Cancel",
-                ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(confirm, cancel);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == confirm)
@@ -164,8 +137,8 @@ public class AddEditViewController extends ViewController
           System.out.println("You pressed NO");
           alert.close();
         }
-
       }
+
       else
       {
         selectedType = typeDropdown.getSelectionModel().getSelectedItem();
@@ -174,17 +147,15 @@ public class AddEditViewController extends ViewController
         //Style
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add("");
-        dialogPane.getStylesheets()
-                .add(getClass().getResource("box.css").toExternalForm());
+        dialogPane.getStylesheets().add(getClass().getResource("box.css").toExternalForm());
         dialogPane.getStyleClass().add("box.css");
         //
         alert.setHeaderText("Confirm edit of room: " + viewModel.getRoomId());
-        alert.setContentText("Type: " + viewModel.getType() + "\nNumber of beds: "
-                + viewModel.getNumberOfBeds());
+        alert.setContentText(
+            "Type: " + viewModel.getType() + "\nNumber of beds: " + viewModel.getNumberOfBeds());
 
         ButtonType confirm = new ButtonType("Confirm");
-        ButtonType cancel = new ButtonType("Cancel",
-                ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(confirm, cancel);
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -199,32 +170,30 @@ public class AddEditViewController extends ViewController
         }
 
         getViewHandler().openView("RoomListView.fxml");
-
+      }
     }
-    }
-      catch (Exception e){
+      catch(Exception e)
+      {
       System.out.println(e.getMessage());
       errorLabel.setText(e.getMessage() + "");
     }
   }
 
-  /**
-   * A void method opening the RoomList view.
-   */
-  public void exitButton() throws IOException
-  {
+    /**
+     * A void method opening the RoomList view.
+     */
+    public void exitButton () throws IOException {
     reset();
     getViewHandler().openView("RoomListView.fxml");
   }
 
-  /**
-   * A getter method returning a RoomTypes object
-   *
-   * @return A RoomTypes object called selectedType.
-   */
-  public RoomType getType()
-  {
+    /**
+     * A getter method returning a RoomTypes object
+     *
+     * @return A RoomTypes object called selectedType.
+     */
+    public RoomType getType () {
     return selectedType;
   }
 
-}
+  }

@@ -21,8 +21,6 @@ public class UserLoginViewController extends ViewController {
 
     private UserLoginModel viewModel;
 
-public class UserLoginViewController extends ViewController { private UserLoginModel viewModel;
-
     @FXML private TextField username;
     @FXML private TextField password;
     @FXML private Label error;
