@@ -2,6 +2,7 @@ package view.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import view.ViewController;
 import viewModel.UserRegisterModel;
@@ -24,6 +25,7 @@ public class UserRegisterViewController extends ViewController
     @FXML private TextField email;
     @FXML private TextField lName;
     @FXML private TextField fName;
+    @FXML private Label errorLabel;
 
     /**
      * Method initializing instance variables.
@@ -38,6 +40,7 @@ public class UserRegisterViewController extends ViewController
         email.textProperty().bindBidirectional(viewModel.getEmail());
         lName.textProperty().bindBidirectional(viewModel.getlName());
         fName.textProperty().bindBidirectional(viewModel.fNameProperty());
+        errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
     }
 
     @Override
@@ -51,9 +54,15 @@ public class UserRegisterViewController extends ViewController
      * @throws IOException
      */
     public void register() throws IOException {
-        viewModel.register();
-        setUsernameInGuestInfo();
-        getViewHandler().openView("GuestMenuView.fxml");
+
+        if (viewModel.register())
+        {
+         setUsernameInGuestInfo();
+            getViewHandler().openView("GuestMenuView.fxml");
+
+        }
+
+
     }
 
     /**

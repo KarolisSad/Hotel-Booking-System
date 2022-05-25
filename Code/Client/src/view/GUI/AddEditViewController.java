@@ -24,6 +24,7 @@ public class AddEditViewController extends ViewController
   @FXML private TextField idField;
   @FXML private ComboBox<RoomType> typeDropdown;
   @FXML private TextField nrOfBedsField;
+  @FXML private TextField dailyPriceField;
   private RoomType selectedType;
   @FXML
   private Label errorLabel;
@@ -45,6 +46,7 @@ public class AddEditViewController extends ViewController
 
       Bindings.bindBidirectional(nrOfBedsField.textProperty(),
           viewModel.numberOfBedsProperty(), new NumberStringConverter());
+      Bindings.bindBidirectional(dailyPriceField.textProperty(), viewModel.dailyPriceProperty(), new NumberStringConverter());
       typeDropdown.getItems().removeAll(typeDropdown.getItems());
       typeDropdown.getItems().add(RoomType.FAMILY);
       typeDropdown.getItems().add(RoomType.DOUBLE);
@@ -99,7 +101,36 @@ public class AddEditViewController extends ViewController
       Room room = new Room(viewModel.getRoomId(), viewModel.getType(), viewModel.getNumberOfBeds());
       room.toString();
 
-      if (viewModel.getViewState().isAdd())
+    if (viewModel.getViewState().isAdd())
+    {
+
+      selectedType = typeDropdown.getSelectionModel().getSelectedItem();
+      viewModel.setType(selectedType);
+
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      //Style
+      DialogPane dialogPane = alert.getDialogPane();
+      dialogPane.getStylesheets().add("");
+      dialogPane.getStylesheets()
+          .add(getClass().getResource("box.css").toExternalForm());
+      dialogPane.getStyleClass().add("box.css");
+      //
+      alert.setHeaderText("Are you sure you want to make changes?");
+      alert.setContentText("Type: " + getType() + "\nNumber of beds: "
+          + viewModel.getNumberOfBeds() + "\nDaily price: " + viewModel.dailyPriceProperty().get());
+
+      ButtonType confirm = new ButtonType("Confirm");
+      ButtonType cancel = new ButtonType("Cancel",
+          ButtonBar.ButtonData.CANCEL_CLOSE);
+      alert.getButtonTypes().setAll(confirm, cancel);
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == confirm)
+      {
+        viewModel.addRoom();
+        System.out.println("You confirmed.");
+        getViewHandler().openView("RoomListView.fxml");
+      }
+      else
       {
 
         selectedType = typeDropdown.getSelectionModel().getSelectedItem();

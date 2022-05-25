@@ -61,17 +61,11 @@ public class ModelManager implements Model
      * @param nrBeds the number of beds in the room to be added
      * @return true if room is added successfully
      */
-    @Override public void addRoom(String roomId, RoomType type, int nrBeds)
+    @Override public void addRoom(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
-
-        if (roomId.equals(""))
-        {
-            // todo change it
-            //todo shouldn't this create a room object and pass that to the database????
-            throw new IllegalArgumentException("non");
-        }
-        dataBaseAdapter.addRoom(roomId, type, nrBeds);
+        Room room = new Room(roomId, type, nrBeds, price);
+        dataBaseAdapter.addRoom(room);
     }
 
     /**
@@ -148,11 +142,14 @@ public class ModelManager implements Model
      * @param nrBeds The (new) number of beds in the room.
      * @return true if editing succeeds
      */
-    @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
+    @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
-        //todo shouldn't this do something if a null-value is passed as roomID???
-        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
+        if (roomId.isEmpty() || roomId == null)
+        {
+            throw new NullPointerException("Room ID can not be null or an empty string when editing a room.");
+        }
+        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds, price);
     }
 
     /**
@@ -375,15 +372,34 @@ public class ModelManager implements Model
      * Method used to edit a guest with a specific username.
      * Calls editGuestWithUsername method in dataBaseAdapter.
      * @param username
-     * @param getfName
-     * @param getlName
+     * @param name
+     * @param lastName
      * @param email
      * @param phoneNr
      * @throws SQLException
      */
     @Override
-    public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
-        dataBaseAdapter.editGuestWithUsername(username,  getfName,  getlName,  email, phoneNr);
+    public void editGuestWithUsername(String username, String name, String lastName, String email, int phoneNr) throws IllegalArgumentException, SQLException {
+        try {
+            checkGuestBeforeEditing(username,name, lastName,email,phoneNr);
+        dataBaseAdapter.editGuestWithUsername(username,  name,  lastName,  email, phoneNr);
+
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Please fill in missing details");
+        }
+    }
+
+    private void checkGuestBeforeEditing(String username, String name, String lastName, String email, int phoneNr) {
+
+        if (username.equals("") || username == null
+                || name.equals("") || name == null
+                || lastName.equals("") || lastName == null
+                || email.equals("") || phoneNr <9999999 || phoneNr > 99999999)
+        {
+            throw new IllegalArgumentException("Please fill in missing details.");
+        }
     }
 
     /**
@@ -400,6 +416,7 @@ public class ModelManager implements Model
 
     @Override
     public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        checkForLegalDates(startDate, endDate);
         return dataBaseAdapter.availableConferenceRooms(startDate,endDate);
     }
 }

@@ -1,7 +1,10 @@
 package viewModel;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import model.Model;
+
+import javax.print.DocFlavor;
 
 /**
  * A class that is used to provide functionality to UserRegisterController.
@@ -11,6 +14,7 @@ import model.Model;
  */
 public class UserRegisterModel {
 
+    public SimpleStringProperty errorLabel;
     private Model model;
     private SimpleStringProperty username;
     private SimpleStringProperty password;
@@ -31,24 +35,28 @@ public class UserRegisterModel {
         lName = new SimpleStringProperty();
         email = new SimpleStringProperty();
         phoneNR = new SimpleStringProperty();
+        errorLabel = new SimpleStringProperty("");
     }
 
     /**
      * A method calling register() method from model.
      */
-    public void register()
+    public boolean register()
     {
         try {
         if (!model.register(fName.get(), lName.get(), email.get(), Integer.parseInt(phoneNR.get()),
                 username.get(), password.get()).getType().equals("Success"))
         {
-            //errorLabel.set(..)
+            errorLabel.setValue("error");
+            return false;
         }
-        // NEXT WINDOW
+
+        return true;
         }
         catch (Exception e)
         {
-            //errorLabel.set(..)
+            errorLabel.setValue("error");
+            return false;
         }
     }
 
@@ -100,4 +108,7 @@ public class UserRegisterModel {
         return phoneNR;
     }
 
+    public SimpleStringProperty getErrorLabel() {
+        return errorLabel;
+    }
 }

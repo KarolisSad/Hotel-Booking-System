@@ -68,7 +68,7 @@
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></TextField>
-                  <Label prefHeight="40.0" prefWidth="150.0" text="Number of beds">
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Capacity">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
@@ -86,7 +86,7 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="71.0" prefWidth="600.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="40.0" prefWidth="150.0" text="Type">
                      <font>
@@ -96,10 +96,20 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="typeField" editable="false">
+                  <TextField fx:id="typeField" />
+                  <Label prefHeight="40.0" prefWidth="150.0" text="Daily Price">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
-                     </font></TextField>
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="dailyPriceField" editable="false" prefHeight="25.0" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0">
