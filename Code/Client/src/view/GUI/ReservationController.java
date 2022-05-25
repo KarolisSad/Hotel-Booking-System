@@ -143,6 +143,13 @@ public class ReservationController extends ViewController
   @Override public void reset()
   {
     viewModel.clear();
+    roomTypeFilter.getSelectionModel().select("All");
+    bedsFilter.textProperty().set("");
+    priceFromFilter.textProperty().set("");
+    priceToFilter.textProperty().set("");
+
+    filterByPriceActive = false;
+    filterByBedsActive = false;
     viewModel.getAllAvailableRooms();
     if (priceFromFilter.textProperty().get().isEmpty()
         && priceFromFilter.textProperty().get().isEmpty())
@@ -150,8 +157,7 @@ public class ReservationController extends ViewController
       filterPriceButton.setDisable(true);
     }
 
-    filterByPriceActive = false;
-    filterByBedsActive = false;
+
   }
 
   /**
@@ -160,6 +166,7 @@ public class ReservationController extends ViewController
 
   public void lookForAvailableRooms()
   {
+    reset();
     viewModel.getAllAvailableRooms();
   }
 
