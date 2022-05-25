@@ -43,7 +43,7 @@ public class ViewHandler extends ViewCreator
     this.primaryStage = primaryStage;
     this.currentScene = new Scene(new Region());
 
-    openView("UserLoginMainView.fxml");
+    openView("MainMenu.fxml");
 
   }
 

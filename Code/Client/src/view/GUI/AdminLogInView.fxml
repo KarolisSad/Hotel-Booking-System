@@ -20,7 +20,7 @@
          </font>
       </Text>
       <TextField fx:id="username" layoutX="244.0" layoutY="170.0" />
-      <TextField fx:id="password" layoutX="244.0" layoutY="225.0" />
+      <TextField layoutX="244.0" layoutY="225.0" />
       <Button layoutX="461.0" layoutY="309.0" mnemonicParsing="false" onAction="#LogInButton" text="Log in" />
       <Button layoutX="51.0" layoutY="309.0" mnemonicParsing="false" onAction="#MainMenuButton" text="Main menu" />
       <Text layoutX="203.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administration ">

@@ -7,7 +7,7 @@ import model.Guest;
 import model.Model;
 
 /**
- * A class providing functionality for GuestDetailsForReceptionistController.
+ * A class providing functionality for ReceptionistGuestDetailsViewController.
  *
  * @version 16/05/2022
  */

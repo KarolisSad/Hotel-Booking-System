@@ -11,6 +11,8 @@ import mediator.RoomBookingTransfer;
 import mediator.RoomTransfer;
 import model.Model;
 import model.Room;
+import viewModel.Helpers.SimpleRoomViewModel;
+import viewModel.Helpers.TemporaryInformation;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

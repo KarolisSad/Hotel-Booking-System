@@ -64,11 +64,11 @@ public class AdminLogInViewController extends ViewController
     if ((viewModel.getLogInfo().containsKey(userID)) && (viewModel.getLogInfo().get(userID).equals(pass))){
       if (userID.equals("hotel"))
       {
-        getViewHandler().openView("MenuForHotelManager.fxml");
+        getViewHandler().openView("HotelManagerMenu.fxml");
       }
       else
       {
-        getViewHandler().openView("BookingsForReceptionistView.fxml");
+        getViewHandler().openView("ReceptionistBookingView.fxml");
       }
     }
     else
@@ -84,7 +84,7 @@ public class AdminLogInViewController extends ViewController
    */
   public void MainMenuButton() throws IOException
   {
-    getViewHandler().openView("UserLoginMainView.fxml");
+    getViewHandler().openView("MainMenu.fxml");
   }
 
 

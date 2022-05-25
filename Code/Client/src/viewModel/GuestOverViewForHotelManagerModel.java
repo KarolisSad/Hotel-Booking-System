@@ -1,14 +1,13 @@
 package viewModel;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mediator.GuestTransfer;
 import model.Model;
+import viewModel.Helpers.SimpleGuestViewModel;
 
 /**
- * A class providing functionality for GuestOverViewForHotelManagerController
+ * A class providing functionality for HotelManagerGuestOverViewController
  *
  * @author Group 5
  * @version 12/05/2022

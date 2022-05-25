@@ -1,6 +1,8 @@
 package viewModel;
 
 import model.Model;
+import viewModel.Helpers.TemporaryInformation;
+import viewModel.Helpers.ViewState;
 
 /**
  * A class that is used to create all ViewModel objects and
@@ -12,23 +14,20 @@ import model.Model;
 public class ViewModelFactory
 {
 
-  private GuestInformationViewModel guestInformationViewModel;
-  private ReservationViewModel reservationViewModel;
-  private RoomListViewModel roomListViewModel;
-  private AddEditViewModel addEditViewModel;
-  private LogInViewModel logInViewModel;
-  private BookingsForReceptionistViewModel bookingsForReceptionistViewModel;
+  private GuestReservationViewModel guestReservationViewModel;
+  private HotelManagerRoomListViewModel hotelManagerRoomListViewModel;
+  private HotelManagerAddEditRoomViewModel hotelManagerAddEditRoomViewModel;
+  private ReceptionistBookingViewModel receptionistBookingViewModel;
   private GuestDetailsForReceptionistViewModel guestDetailsForReceptionistViewModel;
-  private RoomDetailsForReceptionistModel roomDetailsForReceptionistModel;
-  private BookingViewModel bookingViewModel;
+  private ReceptionistRoomAndBookingDetailsViewModel receptionistRoomAndBookingDetailsViewModel;
+  private HotelManagerBookingViewModel hotelManagerBookingViewModel;
   private GuestOverViewForHotelManagerModel guestOverViewForHotelManagerModel;
-  private ShowBookingViewModel showBookingViewModel;
-  private UserLoginMainModel userLoginMainModel;
-  private UserLoginModel userLoginModel;
-  private UserRegisterModel userRegisterModel;
+  private MainMenuViewModel mainMenuViewModel;
+  private GuestLoginModel guestLoginModel;
+  private GuestRegisterModel guestRegisterModel;
   private GuestMenuModel guestMenuModel;
-  private BookingOverviewForGuestModel bookingOverviewForGuestModel;
-  private RoomOverviewForGuestModel roomOverviewForGuestModel;
+  private GuestBookingOverViewModel guestBookingOverViewModel;
+  private GuestRoomAndBookingDetailsViewModel guestRoomAndBookingDetailsViewModel;
   private GuestPersonalInformationViewModel guestPersonalInformationViewModel;
   private AdminLogInViewModel adminLogInViewModel;
   private ConferenceAvailableRoomViewModel conferenceAvailableRoomViewModel;
@@ -42,32 +41,25 @@ public class ViewModelFactory
     TemporaryInformation tempInfo = new TemporaryInformation();
     ViewState state = new ViewState();
 
-    this.reservationViewModel = new ReservationViewModel(model, tempInfo);
-    this.guestInformationViewModel = new GuestInformationViewModel(model,
-        tempInfo);
-    this.roomListViewModel = new RoomListViewModel(model, state);
-    this.addEditViewModel = new AddEditViewModel(model, state);
-    this.logInViewModel = new LogInViewModel(model);
-
-    this.bookingsForReceptionistViewModel = new BookingsForReceptionistViewModel(
+    this.guestReservationViewModel = new GuestReservationViewModel(model, tempInfo);
+    this.hotelManagerRoomListViewModel = new HotelManagerRoomListViewModel(model, state);
+    this.hotelManagerAddEditRoomViewModel = new HotelManagerAddEditRoomViewModel(model, state);
+    this.receptionistBookingViewModel = new ReceptionistBookingViewModel(
         model);
     this.guestDetailsForReceptionistViewModel = new GuestDetailsForReceptionistViewModel(
         model);
-    this.roomDetailsForReceptionistModel = new RoomDetailsForReceptionistModel(
+    this.receptionistRoomAndBookingDetailsViewModel = new ReceptionistRoomAndBookingDetailsViewModel(
         model, tempInfo);
-    this.bookingViewModel = new BookingViewModel(model);
+    this.hotelManagerBookingViewModel = new HotelManagerBookingViewModel(model);
 
     this.guestOverViewForHotelManagerModel = new GuestOverViewForHotelManagerModel(
         model);
-
-    this.showBookingViewModel = new ShowBookingViewModel(model);
-    this.userLoginMainModel = new UserLoginMainModel(model);
-    this.userLoginModel = new UserLoginModel(model);
-    this.userRegisterModel = new UserRegisterModel(model);
+    this.mainMenuViewModel = new MainMenuViewModel(model);
+    this.guestLoginModel = new GuestLoginModel(model);
+    this.guestRegisterModel = new GuestRegisterModel(model);
     this.guestMenuModel = new GuestMenuModel(model);
-    this.bookingOverviewForGuestModel = new BookingOverviewForGuestModel(model);
-    this.roomOverviewForGuestModel = new RoomOverviewForGuestModel(model);
-
+    this.guestBookingOverViewModel = new GuestBookingOverViewModel(model);
+    this.guestRoomAndBookingDetailsViewModel = new GuestRoomAndBookingDetailsViewModel(model);
     this.guestPersonalInformationViewModel = new GuestPersonalInformationViewModel(model);
     this.adminLogInViewModel = new AdminLogInViewModel();
     this.conferenceAvailableRoomViewModel = new ConferenceAvailableRoomViewModel(model);
@@ -81,58 +73,41 @@ public class ViewModelFactory
     return adminLogInViewModel;
   }
 
+
   /**
-   * A getter for guestInformationViewModel.
-   * @return GuestInformationViewModel object.
+   * A getter for guestReservationViewModel.
+   * @return GuestReservationViewModel object.
    */
-  public GuestInformationViewModel getGuestInformationViewModel()
+  public GuestReservationViewModel getReservationViewModel()
   {
-    return guestInformationViewModel;
+    return guestReservationViewModel;
   }
 
   /**
-   * A getter for reservationViewModel.
-   * @return ReservationViewModel object.
+   * A getter for hotelManagerRoomListViewModel.
+   * @return HotelManagerRoomListViewModel object.
    */
-  public ReservationViewModel getReservationViewModel()
+  public HotelManagerRoomListViewModel getRoomListViewModel()
   {
-    return reservationViewModel;
+    return hotelManagerRoomListViewModel;
   }
 
   /**
-   * A getter for roomListViewModel.
-   * @return RoomListViewModel object.
+   * A getter for hotelManagerAddEditRoomViewModel.
+   * @return HotelManagerAddEditRoomViewModel object.
    */
-  public RoomListViewModel getRoomListViewModel()
+  public HotelManagerAddEditRoomViewModel getAddEditViewModel()
   {
-    return roomListViewModel;
+    return hotelManagerAddEditRoomViewModel;
   }
 
   /**
-   * A getter for addEditViewModel.
-   * @return AddEditViewModel object.
+   * A getter for receptionistBookingViewModel.
+   * @return ReceptionistBookingViewModel object.
    */
-  public AddEditViewModel getAddEditViewModel()
+  public ReceptionistBookingViewModel getBookingsForReceptionistViewModel()
   {
-    return addEditViewModel;
-  }
-
-  /**
-   * A getter for logInViewModel.
-   * @return LogInViewModel object.
-   */
-  public LogInViewModel getLogInViewModel()
-  {
-    return logInViewModel;
-  }
-
-  /**
-   * A getter for bookingsForReceptionistViewModel.
-   * @return BookingsForReceptionistViewModel object.
-   */
-  public BookingsForReceptionistViewModel getBookingsForReceptionistViewModel()
-  {
-    return bookingsForReceptionistViewModel;
+    return receptionistBookingViewModel;
   }
 
   /**
@@ -145,21 +120,21 @@ public class ViewModelFactory
   }
 
   /**
-   * A getter for roomDetailsForReceptionistModel.
-   * @return RoomDetailsForReceptionistModel object.
+   * A getter for receptionistRoomAndBookingDetailsViewModel.
+   * @return ReceptionistRoomAndBookingDetailsViewModel object.
    */
-  public RoomDetailsForReceptionistModel getRoomDetailsForReceptionistModel()
+  public ReceptionistRoomAndBookingDetailsViewModel getRoomDetailsForReceptionistModel()
   {
-    return roomDetailsForReceptionistModel;
+    return receptionistRoomAndBookingDetailsViewModel;
   }
 
   /**
-   * A getter for bookingViewModel.
-   * @return BookingViewModel object.
+   * A getter for hotelManagerBookingViewModel.
+   * @return HotelManagerBookingViewModel object.
    */
-  public BookingViewModel getBookingViewModel()
+  public HotelManagerBookingViewModel getBookingViewModel()
   {
-    return bookingViewModel;
+    return hotelManagerBookingViewModel;
   }
 
   /**
@@ -172,36 +147,27 @@ public class ViewModelFactory
   }
 
   /**
-   * A getter for showBookingViewModel.
-   * @return ShowBookingViewModel object.
+   * A getter for guestRegisterModel.
+   * @return GuestRegisterModel object.
    */
-  public ShowBookingViewModel getShowBookingViewModel()
-  {
-    return showBookingViewModel;
+  public GuestRegisterModel getUserRegisterModel() {
+    return guestRegisterModel;
   }
 
   /**
-   * A getter for userRegisterModel.
-   * @return UserRegisterModel object.
+   * A getter for mainMenuViewModel.
+   * @return MainMenuViewModel object.
    */
-  public UserRegisterModel getUserRegisterModel() {
-    return userRegisterModel;
+  public MainMenuViewModel getUserLoginMainModel() {
+    return mainMenuViewModel;
   }
 
   /**
-   * A getter for userLoginMainModel.
-   * @return UserLoginMainModel object.
+   * A getter for guestLoginModel.
+   * @return GuestLoginModel object.
    */
-  public UserLoginMainModel getUserLoginMainModel() {
-    return userLoginMainModel;
-  }
-
-  /**
-   * A getter for userLoginModel.
-   * @return UserLoginModel object.
-   */
-  public UserLoginModel getUserLoginModel() {
-    return userLoginModel;
+  public GuestLoginModel getUserLoginModel() {
+    return guestLoginModel;
   }
 
   /**
@@ -213,19 +179,19 @@ public class ViewModelFactory
   }
 
   /**
-   * A getter for bookingOverviewForGuestModel.
-   * @return BookingOverviewForGuestModel object.
+   * A getter for guestBookingOverViewModel.
+   * @return GuestBookingOverViewModel object.
    */
-  public BookingOverviewForGuestModel getBookingOverviewForGuestModel() {
-    return bookingOverviewForGuestModel;
+  public GuestBookingOverViewModel getBookingOverviewForGuestModel() {
+    return guestBookingOverViewModel;
   }
 
   /**
-   * A getter for roomOverviewForGuestModel.
-   * @return RoomOverviewForGuestModel object.
+   * A getter for guestRoomAndBookingDetailsViewModel.
+   * @return GuestRoomAndBookingDetailsViewModel object.
    */
-  public RoomOverviewForGuestModel getRoomOverviewForGuestModel() {
-    return roomOverviewForGuestModel;
+  public GuestRoomAndBookingDetailsViewModel getRoomOverviewForGuestModel() {
+    return guestRoomAndBookingDetailsViewModel;
   }
 
   /**
