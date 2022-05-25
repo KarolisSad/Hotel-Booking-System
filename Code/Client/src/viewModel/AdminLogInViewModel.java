@@ -6,10 +6,16 @@ import model.Model;
 
 import java.util.HashMap;
 
+/**
+ * A class creating AdminLogInViewModel object that contains a log-in details for receptionist and hotel manager.
+ */
 public class AdminLogInViewModel
 {
   private HashMap<String, String> logInfo = new HashMap<String, String>();
 
+  /**
+   * Zero-argument constructor that puts value in the hashmap list.
+   */
   public AdminLogInViewModel ()
   {
     logInfo.put("receptionist1", "pass1");
@@ -18,6 +24,10 @@ public class AdminLogInViewModel
     logInfo.put("hotel", "manager");
   }
 
+  /**
+   * A getter that calls the hashmap called logInfo.
+   * @return logInfo
+   */
   public HashMap<String, String> getLogInfo()
   {
     return logInfo;

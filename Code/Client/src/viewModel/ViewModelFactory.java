@@ -71,6 +71,10 @@ public class ViewModelFactory
     this.adminLogInViewModel = new AdminLogInViewModel();
   }
 
+  /**
+   * A getter for AdminLogInViewModel.
+   * @return AdminLogInViewModel object
+   */
   public AdminLogInViewModel getAdminLogInViewModel() {
     return adminLogInViewModel;
   }

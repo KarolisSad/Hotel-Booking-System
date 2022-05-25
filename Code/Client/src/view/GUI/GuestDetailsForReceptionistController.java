@@ -35,19 +35,18 @@ public class GuestDetailsForReceptionistController extends ViewController
   @Override protected void init()
   {
     viewModel = getViewModelFactory().getGuestDetailsForReceptionistViewModel();
-    try
-    {
+    try {
       emailField.textProperty().bindBidirectional(viewModel.getEmailProperty());
       firstNameField.textProperty()
-          .bindBidirectional(viewModel.getfNameProperty());
+              .bindBidirectional(viewModel.getfNameProperty());
       lastNameField.textProperty()
-          .bindBidirectional(viewModel.getlNameProperty());
+              .bindBidirectional(viewModel.getlNameProperty());
       bookingIDField.textProperty()
-          .bindBidirectional(viewModel.getBookingIDProperty());
+              .bindBidirectional(viewModel.getBookingIDProperty());
       phoneNumberField.textProperty()
-          .bindBidirectional(viewModel.getPhoneNrProperty());
+              .bindBidirectional(viewModel.getPhoneNrProperty());
       errorLabel.textProperty()
-          .bindBidirectional(viewModel.getErrorLabelProperty());
+              .bindBidirectional(viewModel.getErrorLabelProperty());
     }
     catch (NullPointerException e)
     {

@@ -11,6 +11,12 @@ import viewModel.AdminLogInViewModel;
 
 import java.io.IOException;
 
+/**
+ * A class where AdminLogInViewController is created and the functionality is given to the gui.
+ *
+ * @author Group 5
+ * @version 25-05-25
+ */
 public class AdminLogInViewController extends ViewController
 {
   private AdminLogInViewModel viewModel;
@@ -19,6 +25,9 @@ public class AdminLogInViewController extends ViewController
   @FXML private Label errorLabel;
 
 
+  /**
+   * A none argument, void method initializing instance variables.
+   */
   @Override protected void init()
   {
     viewModel = getViewModelFactory().getAdminLogInViewModel();
@@ -29,6 +38,10 @@ public class AdminLogInViewController extends ViewController
     reset();
   }
 
+  /**
+   * A method used to reset the error label and
+   * text fields of username and password to an empty string
+   */
   @Override public void reset()
   {
     password.setText("");
@@ -36,6 +49,13 @@ public class AdminLogInViewController extends ViewController
     username.setText("");
   }
 
+  /**
+   * A method used to give functionality to the log in button.
+   * In the method the program checks if the given username and password are correct
+   * and if so it will open depending on the log in info either receptionist view or hotel manager view.
+   * Otherwise it will provide an error label.
+   * @throws IOException
+   */
   public void LogInButton() throws IOException
   {
     String userID = username.getText();
@@ -57,6 +77,11 @@ public class AdminLogInViewController extends ViewController
     }
   }
 
+  /**
+   * A method used to provide functionality to the main menu button.
+   * If the button is pressed the program goes back to the first window.
+   * @throws IOException
+   */
   public void MainMenuButton() throws IOException
   {
     getViewHandler().openView("UserLoginMainView.fxml");
