@@ -32,15 +32,13 @@ public class GuestReservationViewModel
   private ObjectProperty<LocalDate> startDatePicker;
   private ObjectProperty<LocalDate> endDatePicker;
   private SimpleStringProperty errorLabel;
-  private TemporaryInformation temp;
 
   /**
    * Constructor initializing instance variables.
    *
    * @param model    model interface
-   * @param tempInfo shared object with GuestInformationViewModel to store selected room
    */
-  public GuestReservationViewModel(Model model, TemporaryInformation tempInfo)
+  public GuestReservationViewModel(Model model)
   {
     this.model = model;
     this.availableRooms = FXCollections.observableArrayList();
@@ -51,8 +49,6 @@ public class GuestReservationViewModel
 
     getAllAvailableRooms();
 
-    //TODO not needed??
-    this.temp = tempInfo;
   }
 
   /**

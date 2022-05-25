@@ -1,7 +1,6 @@
 package viewModel;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.util.converter.IntegerStringConverter;
 import model.Guest;
 import model.Model;
@@ -12,7 +11,7 @@ import model.Model;
  * @version 16/05/2022
  */
 
-public class GuestDetailsForReceptionistViewModel
+public class ReceptionistGuestDetailsViewModel
 {
 
   private Model model;
@@ -28,7 +27,7 @@ public class GuestDetailsForReceptionistViewModel
    *
    * @param model model interface
    */
-  public GuestDetailsForReceptionistViewModel(Model model)
+  public ReceptionistGuestDetailsViewModel(Model model)
   {
     this.model = model;
 

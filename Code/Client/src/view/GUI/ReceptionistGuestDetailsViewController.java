@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import view.ViewController;
-import viewModel.GuestDetailsForReceptionistViewModel;
+import viewModel.ReceptionistGuestDetailsViewModel;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class ReceptionistGuestDetailsViewController extends ViewController
   @FXML private TextField phoneNumberField;
   @FXML private Label errorLabel;
 
-  private GuestDetailsForReceptionistViewModel viewModel;
+  private ReceptionistGuestDetailsViewModel viewModel;
 
 
   /**

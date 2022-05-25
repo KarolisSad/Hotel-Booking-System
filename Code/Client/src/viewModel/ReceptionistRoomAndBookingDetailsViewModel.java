@@ -38,14 +38,13 @@ public class ReceptionistRoomAndBookingDetailsViewModel
 
   private SimpleStringProperty errorLabel;
 
-  private TemporaryInformation temp;
 
   /**
    * Constructor initializing instance variables
    *
    * @param model model interface
    */
-  public ReceptionistRoomAndBookingDetailsViewModel(Model model, TemporaryInformation temp)
+  public ReceptionistRoomAndBookingDetailsViewModel(Model model)
   {
     this.model = model;
 

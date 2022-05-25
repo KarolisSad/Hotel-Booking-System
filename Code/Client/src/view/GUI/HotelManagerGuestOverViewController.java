@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import view.ViewController;
-import viewModel.GuestOverViewForHotelManagerModel;
+import viewModel.HotelManagerGuestOverViewModel;
 import viewModel.Helpers.SimpleGuestViewModel;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class HotelManagerGuestOverViewController extends ViewController
   @FXML private TableColumn<SimpleGuestViewModel, String> lNameColumn;
   @FXML private TableColumn<SimpleGuestViewModel, String> emailColumn;
   @FXML private TableColumn<SimpleGuestViewModel, Integer> phoneColumn;
-  private GuestOverViewForHotelManagerModel viewModel;
+  private HotelManagerGuestOverViewModel viewModel;
 
   /**
    * A none argument, void method initializing instance variables.

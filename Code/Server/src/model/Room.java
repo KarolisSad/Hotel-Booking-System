@@ -127,8 +127,6 @@ public class Room
     this.price = price;
   }
 
-
-
   /**
    * A method meant for calling room ID (room number)
    *

@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import view.ViewController;
-import viewModel.ConferenceAvailableRoomViewModel;
+import viewModel.GuestConferenceAvailableRoomViewModel;
 import viewModel.Helpers.SimpleRoomViewModel;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class GuestConferenceAvailableRoomViewController extends ViewController
     @FXML private TableColumn<SimpleRoomViewModel, Integer> capacityColumn;
     @FXML private TableColumn<SimpleRoomViewModel, String> dailyPriceColumn;
     @FXML private TableColumn<SimpleRoomViewModel, String> totalPriceColumn;
-    private ConferenceAvailableRoomViewModel viewModel;
+    private GuestConferenceAvailableRoomViewModel viewModel;
 
     /**
      * A none argument, void method initializing instance variables.

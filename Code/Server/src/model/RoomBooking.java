@@ -79,19 +79,6 @@ public class RoomBooking
   }
 
   /**
-   * A method setting a username in the system.
-   * @throws IllegalArgumentException if the username is null.
-   * @param username
-   */
-  public void setUsername(String username) {
-    if (username == null)
-    {
-      throw new IllegalArgumentException("User should not be empty");
-    }
-    this.username = username;
-  }
-
-  /**
    * A 6 argument constructor meant to initialize all instance variables.
    * This version of the constructor is used when retrieving a RoomBooking object from the database.
    *
@@ -111,6 +98,19 @@ public class RoomBooking
     this.state = getStateFromString(state);
     this.bookingID = bookingID;
 
+  }
+
+  /**
+   * A method setting a username in the system.
+   * @throws IllegalArgumentException if the username is null.
+   * @param username
+   */
+  public void setUsername(String username) {
+    if (username == null)
+    {
+      throw new IllegalArgumentException("User should not be empty");
+    }
+    this.username = username;
   }
 
 

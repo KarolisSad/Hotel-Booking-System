@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * @version 04/05/2022
  */
 
-public class ConferenceAvailableRoomViewModel
+public class GuestConferenceAvailableRoomViewModel
 {
 
     private Model model;
@@ -39,7 +39,7 @@ public class ConferenceAvailableRoomViewModel
      *
      * @param model    model interface
      */
-    public ConferenceAvailableRoomViewModel(Model model)
+    public GuestConferenceAvailableRoomViewModel(Model model)
     {
         this.model = model;
         this.availableRooms = FXCollections.observableArrayList();

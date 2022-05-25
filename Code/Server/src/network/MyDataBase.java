@@ -88,15 +88,12 @@ public class MyDataBase
 
   }
 
-  public void addOneRoom(Room room)
-
   /**
    * A method adding a room to the database.
-   * @param roomID
-   * @param roomType
-   * @param nrBeds
+   * @param room the room to add
    * @throws SQLException
    */
+  public void addOneRoom(Room room)
       throws SQLException
   {
     try (Connection connection = getConnection())
@@ -219,7 +216,7 @@ public class MyDataBase
   }
 
   /**
-   * A method getting information about all rooms that are in the database.
+   * A method getting information about all regular rooms (non-conference) that are in the database.
    * @param startDate
    * @param endDate
    * @return ArrayList of rooms

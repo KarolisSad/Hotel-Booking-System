@@ -12,7 +12,7 @@ import viewModel.Helpers.SimpleGuestViewModel;
  * @author Group 5
  * @version 12/05/2022
  */
-public class GuestOverViewForHotelManagerModel
+public class HotelManagerGuestOverViewModel
 {
 
   private Model model;
@@ -23,7 +23,7 @@ public class GuestOverViewForHotelManagerModel
    *
    * @param model interface
    */
-  public GuestOverViewForHotelManagerModel(Model model)
+  public HotelManagerGuestOverViewModel(Model model)
   {
     this.guests = FXCollections.observableArrayList();
     this.model = model;
