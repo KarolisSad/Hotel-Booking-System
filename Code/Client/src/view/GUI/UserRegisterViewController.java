@@ -54,11 +54,14 @@ public class UserRegisterViewController extends ViewController
      * @throws IOException
      */
     public void register() throws IOException {
+
         if (viewModel.register())
         {
+         setUsernameInGuestInfo();
             getViewHandler().openView("GuestMenuView.fxml");
 
         }
+
 
     }
 
@@ -68,5 +71,9 @@ public class UserRegisterViewController extends ViewController
      */
     public void goBack() throws IOException {
         getViewHandler().openView("UserLoginMainView.fxml");
+    }
+
+    public void setUsernameInGuestInfo(){
+        getViewModelFactory().getGuestMenuModel().passTheUsernameInfo(viewModel.usernameProperty().get());
     }
 }

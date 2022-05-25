@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -34,9 +35,16 @@
             </font>
         </Label>
         <HBox alignment="CENTER" prefHeight="212.0" prefWidth="600.0">
-            <children>
-                <ListView fx:id="availableRoom" prefHeight="200.0" prefWidth="200.0" />
-            </children>
+         <children>
+            <TableView fx:id="availableRoom" prefHeight="173.0" prefWidth="358.0">
+              <columns>
+                <TableColumn fx:id="roomIdColumn" prefWidth="50.0" text="Room" />
+                <TableColumn fx:id="capacityColumn" prefWidth="63.0" text="Capacity" />
+                  <TableColumn fx:id="dailyPriceColumn" prefWidth="103.0" text="Price pr. day" />
+                  <TableColumn fx:id="totalPriceColumn" prefWidth="141.0" text="Total price" />
+              </columns>
+            </TableView>
+         </children>
         </HBox>
         <HBox alignment="TOP_CENTER" prefHeight="29.0" prefWidth="590.0">
             <children>

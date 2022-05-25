@@ -47,6 +47,7 @@ public class GuestMenuController extends ViewController
      * @throws IOException
      */
     public void makeABooking() throws IOException {
+        getViewModelFactory().getReservationViewModel().getAllAvailableRooms();
         getViewHandler().openView("ReservationView.fxml");
     }
 

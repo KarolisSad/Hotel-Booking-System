@@ -27,6 +27,7 @@ public class RoomTransfer
   private Guest guest;
   private String message;
   private Room room;
+  private int dailyPrice;
 
   /**
    * Purpose of this object is to store different values when sending to a server
@@ -112,6 +113,15 @@ public class RoomTransfer
   public RoomTransfer(String type)
   {
     this.type = type;
+  }
+
+  public RoomTransfer(String type, String roomID, RoomType roomType, int numberOfBeds, int dailyPrice)
+  {
+    this.type = type;
+    this.roomId = roomID;
+    this.roomType = roomType;
+    this.nrBeds = numberOfBeds;
+    this.dailyPrice = dailyPrice;
   }
 
   public Room getRoom()

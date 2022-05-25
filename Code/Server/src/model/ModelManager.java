@@ -61,17 +61,11 @@ public class ModelManager implements Model
      * @param nrBeds the number of beds in the room to be added
      * @return true if room is added successfully
      */
-    @Override public void addRoom(String roomId, RoomType type, int nrBeds)
+    @Override public void addRoom(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
-
-        if (roomId.equals(""))
-        {
-            // todo change it
-            //todo shouldn't this create a room object and pass that to the database????
-            throw new IllegalArgumentException("non");
-        }
-        dataBaseAdapter.addRoom(roomId, type, nrBeds);
+        Room room = new Room(roomId, type, nrBeds, price);
+        dataBaseAdapter.addRoom(room);
     }
 
     /**
@@ -148,11 +142,11 @@ public class ModelManager implements Model
      * @param nrBeds The (new) number of beds in the room.
      * @return true if editing succeeds
      */
-    @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds)
+    @Override public void editRoomInfo(String roomId, RoomType type, int nrBeds, int price)
         throws SQLException
     {
         //todo shouldn't this do something if a null-value is passed as roomID???
-        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds);
+        dataBaseAdapter.editRoomInfo(roomId, type, nrBeds, price);
     }
 
     /**
@@ -419,6 +413,7 @@ public class ModelManager implements Model
 
     @Override
     public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        checkForLegalDates(startDate, endDate);
         return dataBaseAdapter.availableConferenceRooms(startDate,endDate);
     }
 }
