@@ -1,29 +1,26 @@
+/*
 .header label{
-    -fx-font-size: 100px;
-    -fx-font-family: open-sans;
+    -fx-font-size: 30px;
+    -fx-font-family: 'Brush Script MT';
     -fx-font-color: #392F2E;
     -fx-background-color: white;
 }
 
 .text{
-    -fx-font-size: 10px;
-    -fx-font-family: open-sans;
+    -fx-font-size: 30px;
+    -fx-font-family: 'Verdana';
     -fx-font-color: #392F2E;
     -fx-background-color: white;
 }
-
-.header{
-    -fx-font-size: 14px;
-    -fx-font-family: lato;
-}
+*/
 
 .button{
     -fx-font-size: 10px;
     -fx-font-family: open-sans;
     -fx-font-color: #392F2E;
-     -fx-border-color: #3A7563;
-        -fx-border-width: 2;
-        -fx-border-radius: 5;
+    -fx-border-color: #3A7563;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
 }
 
 .root{
