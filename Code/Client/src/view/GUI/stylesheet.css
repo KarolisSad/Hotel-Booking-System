@@ -1,8 +1,15 @@
-.textfield{
+.header label{
+    -fx-font-size: 100px;
+    -fx-font-family: open-sans;
+    -fx-font-color: #392F2E;
+    -fx-background-color: white;
+}
+
+.text{
     -fx-font-size: 10px;
     -fx-font-family: open-sans;
     -fx-font-color: #392F2E;
-    -fx-background-color: #E6D3A8;
+    -fx-background-color: white;
 }
 
 .header{
@@ -19,6 +26,6 @@
         -fx-border-radius: 5;
 }
 
-.body{
+.root{
        -fx-background-color: #E6D3A8;
 }
