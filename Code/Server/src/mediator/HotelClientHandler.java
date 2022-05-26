@@ -66,7 +66,14 @@ public class HotelClientHandler implements Runnable
       }
       catch (IOException e)
       {
-        e.printStackTrace();
+        try
+        {
+          socket.close();
+        }
+        catch (IOException ex)
+        {
+          throw new RuntimeException(ex);
+        }
       }
       String type = (String) json.fromJson(message, Map.class).get("type");
 
@@ -148,8 +155,7 @@ public class HotelClientHandler implements Runnable
 
         case "edit":
           room = json.fromJson(message, RoomTransfer.class);
-          System.out.println("RECEIVED FROM CLIENT: " + message);
-          System.out.println("AFTER CONVERT: " + room);
+
           try
           {
             model.editRoomInfo(room.getRoomId(), room.getRoomType(),
@@ -305,7 +311,6 @@ public class HotelClientHandler implements Runnable
           guest = json.fromJson(message, GuestTransfer.class);
           try
           {
-            System.out.println(guest.getFullName());
             model.editGuestWithUsername(guest.getUsername(), guest.getfName(),
                     guest.getlName(), guest.getEmail(), guest.getPhoneNr());
           out.println(successMessage);
@@ -328,7 +333,6 @@ public class HotelClientHandler implements Runnable
           }
           catch (Exception e)
           {
-            System.out.println(e.getMessage());
             out.println(
                 json.toJson(new RoomBookingTransfer("error", e.getMessage())));
           }

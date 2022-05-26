@@ -151,7 +151,6 @@ public class ReceptionistGuestDetailsViewModel
     model.editGuest("editGuest", getBookingID(), getfName(), getlName(),
         getEmail(), Integer.parseInt(phoneNr.get()));
 
-    //System.out.println("In the viewModel update guest argumentd:\n" + getBookingID() + " " + getEmail() + " " +  getfName() + " " +  getlName() + " " +  getPhoneNr());
   }
 
   /**

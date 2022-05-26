@@ -35,7 +35,6 @@ public class GuestMenuModel {
      */
     public void passTheUsernameInfo(String username){
         this.username = username;
-        System.out.println("username passed: " + username);
     }
 
     /**

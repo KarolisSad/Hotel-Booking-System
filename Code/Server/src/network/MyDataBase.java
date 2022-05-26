@@ -683,7 +683,6 @@ public class MyDataBase
       }
       catch (Exception e)
       {
-        //e.printStackTrace();
         throw new IllegalArgumentException(e.getMessage());
       }
     }

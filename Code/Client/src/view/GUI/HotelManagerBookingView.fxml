@@ -19,7 +19,7 @@
                   <TableColumn fx:id="startDate" prefWidth="91.0" text="Start-Date" />
                   <TableColumn fx:id="endDate" prefWidth="98.0" text="End-Date" />
                   <TableColumn fx:id="roomID" prefWidth="59.0" text="Room" />
-                  <TableColumn fx:id="guestID" prefWidth="112.0" text="Customer" />
+                  <TableColumn fx:id="guestPhoneNr" prefWidth="112.0" text="Customer" />
                   <TableColumn fx:id="state" prefWidth="95.0" text="Status" />
                   <TableColumn fx:id="bookingID" prefWidth="129.0" text="BookingID" />
                </columns>

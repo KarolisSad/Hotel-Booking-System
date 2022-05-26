@@ -129,12 +129,10 @@ public class HotelManagerAddEditRoomViewController extends ViewController
         if (result.get() == confirm)
         {
           viewModel.addRoom();
-          System.out.println("You confirmed.");
           getViewHandler().openView("HotelManagerRoomListView.fxml");
         }
         else
         {
-          System.out.println("You pressed NO");
           alert.close();
         }
       }
@@ -174,8 +172,7 @@ public class HotelManagerAddEditRoomViewController extends ViewController
     }
       catch(Exception e)
       {
-      System.out.println(e.getMessage());
-      errorLabel.setText(e.getMessage() + "");
+      errorLabel.setText(e.getMessage());
     }
   }
 

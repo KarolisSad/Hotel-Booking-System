@@ -99,7 +99,6 @@ public class ReceptionistRoomAndBookingDetailsViewController extends ViewControl
     }
     else
     {
-      System.out.println("You pressed NO");
       alert.close();
     }
   }
@@ -133,11 +132,9 @@ public class ReceptionistRoomAndBookingDetailsViewController extends ViewControl
         viewModel.removeBooking();
         getViewModelFactory().getBookingsForReceptionistViewModel().reset();
         getViewHandler().openView("ReceptionistBookingView.fxml");
-        System.out.println("The booking is canceled.");
       }
       else
       {
-        System.out.println("You pressed NO");
         alert.close();
       }
     }

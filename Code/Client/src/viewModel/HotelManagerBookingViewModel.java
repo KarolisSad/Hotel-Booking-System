@@ -63,7 +63,6 @@ public class HotelManagerBookingViewModel
     bookings.clear();
 
     RoomBookingTransfer bookingTransfer = model.getAllBookings();
-    System.out.println(bookingTransfer);
     if (bookingTransfer.getMessage() == null)
     {
       for (int i = 0; i < bookingTransfer.getRoomBookings().size(); i++)

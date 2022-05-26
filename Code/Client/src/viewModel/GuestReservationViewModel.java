@@ -94,7 +94,9 @@ public class GuestReservationViewModel
   }
 
   /**
-   * REDO THIS TODO
+   * Method used to call the bookARoomWhenLoggedIn method from the model, and hereby booking a room in the system.
+   * The room is booked using roomName passed as argument, and the dates from the two datepickers. If an error occurs during the booking process the errorlabel is updated, otherwise, a confirmation-window appears.
+   *
    *
    * @param roomName selected room ID
    */
@@ -107,7 +109,6 @@ public class GuestReservationViewModel
 
     if (!(roomBookingTransfer.getMessage().equals("null")))
     {
-      System.out.println("ERROR: " + roomBookingTransfer.getMessage());
       errorLabel.setValue(
           "Room wasn't added.." + roomBookingTransfer.getMessage());
     }

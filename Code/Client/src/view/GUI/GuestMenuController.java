@@ -64,7 +64,6 @@ public class GuestMenuController extends ViewController
      * @throws IOException
      */
     public void personalDetails() throws IOException {
-        System.out.println("Personal details");
         getViewModelFactory().getGuestPersonalInformationViewModel().setUsername(viewModel.getUsername());
         getViewHandler().openView("GuestPersonalInformation.fxml");
         getViewModelFactory().getGuestPersonalInformationViewModel().setValues();

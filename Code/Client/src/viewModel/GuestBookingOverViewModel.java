@@ -82,7 +82,6 @@ public class GuestBookingOverViewModel
   public void removeBooking()
     {
         try {
-            System.out.println("test");
             model.removeBooking(getSelectedBookingProperty().bookingIdProperty().get());
             reset();
         }

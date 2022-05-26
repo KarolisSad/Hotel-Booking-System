@@ -75,11 +75,9 @@ public class GuestBookingOverViewController extends ViewController
             if (result.get() == confirm)
             {
                 viewModel.removeBooking();
-                System.out.println("The booking is canceled.");
             }
             else
             {
-                System.out.println("You pressed NO");
                 alert.close();
             }
         }
