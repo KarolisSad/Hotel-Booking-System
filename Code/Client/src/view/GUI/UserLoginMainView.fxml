@@ -6,11 +6,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-font-family: Arial" stylesheets="stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.UserLoginMainViewController">
     <children>
-      <HBox styleClass="header" alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" prefHeight="137.0" prefWidth="653.0" text="Hotel Booking System" textAlignment="CENTER">
+            <Label prefHeight="128.0" prefWidth="656.0" text="Hotel Booking System" textAlignment="CENTER">
                <font>
-                  <Font size="100.0" />
+                  <Font size="30.0" />
                </font>
             </Label>
          </children>
