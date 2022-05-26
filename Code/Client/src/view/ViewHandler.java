@@ -70,8 +70,8 @@ public class ViewHandler extends ViewCreator
 
     primaryStage.setTitle(title);
     primaryStage.setScene(currentScene);
-    primaryStage.setWidth(root.getPrefWidth());
-    primaryStage.setHeight(root.getPrefHeight());
+    primaryStage.setWidth(800);
+    primaryStage.setHeight(600);
     primaryStage.show();
   }
 
