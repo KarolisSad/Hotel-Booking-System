@@ -109,4 +109,18 @@ public class GuestRegisterModel
     public SimpleStringProperty getErrorLabel() {
         return errorLabel;
     }
+
+    /**
+     * Method used for setting the instance variables to empty strings.
+     */
+    public void reset()
+    {
+        username.set("");
+        password.set("");
+        fName.set("");
+        lName.set("");
+        email.set("");
+        phoneNR.set("");
+        errorLabel.set("");
+    }
 }

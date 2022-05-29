@@ -159,7 +159,7 @@ public class HotelManagerAddEditRoomViewModel
       alert.showAndWait();    }
     else
     {
-      errorProperty.set(roomTransfer.getMessage());
+      throw new IllegalArgumentException(roomTransfer.getMessage());
     }
     reset();
   }

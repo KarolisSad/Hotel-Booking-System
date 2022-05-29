@@ -2,6 +2,7 @@ package viewModel;
 
 import javafx.beans.property.*;
 import javafx.util.converter.IntegerStringConverter;
+import mediator.GuestTransfer;
 import model.Guest;
 import model.Model;
 
@@ -148,9 +149,16 @@ public class ReceptionistGuestDetailsViewModel
    */
   public void updateGuest()
   {
-    model.editGuest("editGuest", getBookingID(), getfName(), getlName(),
-        getEmail(), Integer.parseInt(phoneNr.get()));
-
+    GuestTransfer guestTransfer = model.editGuest("editGuest", getBookingID(), getfName(), getlName(),
+          getEmail(), Integer.parseInt(phoneNr.get()));
+    if (guestTransfer.getType().equals("error"))
+    {
+      errorLabel.set(guestTransfer.getErrorMessage());
+    }
+    else
+    {
+      errorLabel.set("Changes saved.");
+    }
   }
 
   /**
