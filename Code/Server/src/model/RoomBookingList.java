@@ -115,18 +115,6 @@ public class RoomBookingList
     return allBookings.size();
   }
 
-  /**
-   * A method that is meant for getting a list of rooms in the span of given dates.
-   *
-   * @param startDate start date
-   * @param endDate   end date
-   * @return rooms
-   */
-  public ArrayList<Room> getBookedRoomsBy(LocalDate startDate,
-      LocalDate endDate)
-  {
-    return null;
-  }
 
   /**
    * A method used for converting the ArrayList of RoomBookings to a new ArrayList of RoomBookingTransferObjects, as you cannot write abstract classes to jSon.

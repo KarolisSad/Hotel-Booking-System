@@ -96,7 +96,6 @@ public class HotelClient implements Model
         e.printStackTrace();
       }
     }
-    System.out.println("RETURN WHEN ADD ROOM: " + message);
     return json.fromJson(message, RoomTransfer.class);
   }
 
@@ -122,7 +121,6 @@ public class HotelClient implements Model
     {
       e.printStackTrace();
     }
-    System.out.println("MESSAGE: " + message);
     return json.fromJson(message, RoomTransfer.class);
   }
 
@@ -619,7 +617,6 @@ public class HotelClient implements Model
       }
     }
     GuestTransfer guestTransfer = json.fromJson(message, GuestTransfer.class);
-    System.out.println(guestTransfer.getType() + " styppe");
     if (guestTransfer.getType().equals("Success"))
     {
       this.username = username;
@@ -635,7 +632,6 @@ public class HotelClient implements Model
   @Override
   public synchronized RoomBookingTransfer getBookingsWhenLoggedIn() {
     sendToServerAsJsonBooking(new RoomBookingTransfer("getBookingsWhenLoggedIn", username));
-    System.out.println("Username: " + username + " When getting all bookings.");
     try
     {
       wait();

@@ -20,7 +20,7 @@ public class RoomBookingTransfer
   private int bookingNr;
   private LocalDate startDate;
   private LocalDate endDate;
-  private int guestID;
+  private int guestPhoneNr;
   private String roomID;
   private String stateString;
   private String username;
@@ -109,13 +109,13 @@ public class RoomBookingTransfer
    *
    * @param type      The type of transfer
    * @param bookingNr the bookingNr of the booking.
-   * @param guestID guest identification.
+   * @param guestPhoneNr guest identification.
    */
-  public RoomBookingTransfer(String type, int bookingNr, int guestID)
+  public RoomBookingTransfer(String type, int bookingNr, int guestPhoneNr)
   {
     this.type = type;
     this.bookingNr = bookingNr;
-    this.guestID = guestID;
+    this.guestPhoneNr = guestPhoneNr;
   }
 
   /**
@@ -128,15 +128,6 @@ public class RoomBookingTransfer
     return type;
   }
 
-  /**
-   * Getter for the booking nr
-   *
-   * @return booking nr
-   */
-  public int getBookingNr()
-  {
-    return bookingNr;
-  }
 
   /**
    * Getter for the startDate
@@ -158,35 +149,7 @@ public class RoomBookingTransfer
     return endDate;
   }
 
-  /**
-   * Getter for the Guest ID
-   *
-   * @return guest id
-   */
-  public int getGuestID()
-  {
-    return guestID;
-  }
 
-  /**
-   * Getter for the Room ID
-   *
-   * @return room id
-   */
-  public String getRoomID()
-  {
-    return roomID;
-  }
-
-  /**
-   * Getter for the Booking state
-   *
-   * @return Booking state as a String
-   */
-  public String getStateString()
-  {
-    return stateString;
-  }
 
   /**
    * Getter for the ArrayList of bookings
@@ -251,7 +214,7 @@ public class RoomBookingTransfer
             ", bookingNr=" + bookingNr +
             ", startDate=" + startDate +
             ", endDate=" + endDate +
-            ", guestID=" + guestID +
+            ", guestPhoneNr=" + guestPhoneNr +
             ", roomID='" + roomID + '\'' +
             ", stateString='" + stateString + '\'' +
             ", username='" + username + '\'' +

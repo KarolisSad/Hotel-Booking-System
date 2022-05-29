@@ -119,13 +119,14 @@ BEGIN
     WHERE roomID = new.roomID
         AND bookingID != new.bookingID
         AND (new.startDate BETWEEN startDate AND endDate
-            OR new.endDate BETWEEN startDate AND endDate)
+            OR new.endDate BETWEEN startDate AND endDate
        OR (new.startDate < startDate AND new.endDate > endDate)
-       OR (new.startDate > startDate AND new.endDate < endDate);
+       OR (new.startDate > startDate AND new.endDate < endDate))
+    EXCEPT SELECT count(*) FROM roomBooking WHERE roomID = new.roomID AND state = 'Cancelled';
 
 
     IF (vBookingCount > 0) THEN
-        RAISE EXCEPTION 'Room % is already booked during these dates',
+        RAISE EXCEPTION 'Room % is already booked during these dates.',
             new.roomID;
     END IF;
     RETURN new;

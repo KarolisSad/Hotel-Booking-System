@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-font-family: Arial" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.ReceptionistBookingViewController">
+
+   <children>
+      <Label alignment="CENTER" prefHeight="72.0" prefWidth="602.0" text="Bookings">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="326.0" prefWidth="600.0">
+         <children>
+            <TableView fx:id="bookingsTable" prefHeight="278.0" prefWidth="556.0">
+               <columns>
+                  <TableColumn fx:id="bookingIdColumn" prefWidth="44.0" text="ID" />
+                  <TableColumn fx:id="startDateColumn" prefWidth="92.0" text="Start Date" />
+                  <TableColumn fx:id="endDateColumn" prefWidth="89.0" text="End Date" />
+                  <TableColumn fx:id="guestColumn" prefWidth="75.0" text="Guest" />
+                  <TableColumn fx:id="roomNumberColumn" prefWidth="75.0" text="Room" />
+                  <TableColumn fx:id="stateColumn" prefWidth="73.0" text="Status" />
+               </columns>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TableView>
+            <VBox alignment="CENTER" prefHeight="291.0" prefWidth="258.0">
+               <children>
+                  <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#showInProgressButton" prefHeight="30.0" prefWidth="140.0" text="Show in Progress">
+
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bookedButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showBookedButton" prefHeight="30.0" prefWidth="140.0" text="Show Booked">
+
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="guestInfoButton" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#guestInformationButton" prefHeight="30.0" prefWidth="140.0" text="Guest Information">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="roomInfoButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#roomInformationButton" prefHeight="30.0" prefWidth="140.0" text="Room Information">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="checkIn" mnemonicParsing="false" onAction="#checkInButton" prefHeight="30.0" prefWidth="140.0" text="Check in">
+
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#mainMenuButtonClicked" prefHeight="30.0" prefWidth="140.0" text="Main Menu">
+               <HBox.margin>
+                  <Insets left="300.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+
+         </children>
+      </HBox>
+      <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="637.0" text="Error Label" textFill="#ee0000">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Label>
+   </children>
+</VBox>

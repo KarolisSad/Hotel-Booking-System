@@ -28,8 +28,6 @@ public class RoomBookingTransfer
   private ArrayList<RoomBookingTransferObject> roomBookings;
 
   private String message;
-
-  // Might not be used
   private RoomBooking booking;
   private Guest guest;
 
@@ -48,8 +46,6 @@ public class RoomBookingTransfer
     this.roomBookings = roomBookings;
   }
 
-
-
   /**
    * 2 argument constructor used to transfer exception messages.
    *
@@ -61,8 +57,6 @@ public class RoomBookingTransfer
     this.type = type;
     this.message = message;
   }
-
-
 
   /**
    * 3 argument constructor used to request RoomBookingState updates.

@@ -29,21 +29,6 @@ public class RoomTransfer
   private Room room;
   private int dailyPrice;
 
-  /**
-   * Purpose of this object is to store different values when sending to a server
-   *
-   * 2020-05-08
-   * @author Group5
-   */
-  public RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds,
-      ArrayList<Room> roomList)
-  {
-    this.roomId = roomId;
-    this.roomType = roomType;
-    this.nrBeds = nrBeds;
-    this.type = type;
-    this.roomList = roomList;
-  }
 
   /**
    * 5 argument constructor used for transferring a type of the transfer and room identification
@@ -91,20 +76,6 @@ public class RoomTransfer
     this.message = message;
   }
 
-  /**
-   * 4 argument constructor used for transferring a type of the transfer and room information.
-   * @param type The type of transfer
-   * @param roomId The room identifiction
-   * @param roomType The type of the room
-   * @param nrBeds Number of beds in the room
-   */
-  RoomTransfer(String type, String roomId, RoomType roomType, int nrBeds)
-  {
-    this.roomType = roomType;
-    this.type = type;
-    this.roomId = roomId;
-    this.nrBeds = nrBeds;
-  }
 
   /**
    * 1 argument constructor used for transferring a type of the transfer.
@@ -115,6 +86,14 @@ public class RoomTransfer
     this.type = type;
   }
 
+  /**
+   *5 argument constructor used for transferring a type of RoomTransfer.
+   * @param type The type of transfer
+   * @param roomID The room id
+   * @param dailyPrice the price
+   * @param numberOfBeds the number of beds
+   * @param roomType the type of room.
+   */
   public RoomTransfer(String type, String roomID, RoomType roomType, int numberOfBeds, int dailyPrice)
   {
     this.type = type;
@@ -124,6 +103,10 @@ public class RoomTransfer
     this.dailyPrice = dailyPrice;
   }
 
+  /**
+   * A getter for a room object
+   * @return Room
+   */
   public Room getRoom()
   {
     return room;
@@ -156,40 +139,14 @@ public class RoomTransfer
     return startDate;
   }
 
-  /**
-   * A getter for a type of the room.
-   * @return RoomType object called roomType.
-   */
-  public RoomType getRoomType()
-  {
-    return roomType;
-  }
 
   /**
-   * A getter for a room identification.
-   * @return String object called roomId.
-   */
-  public String getRoomId()
-  {
-    return roomId;
-  }
-
-  /**
-   * A getter for a type of the room.
+   * A getter for a type of the roomtransfer.
    * @return String object called type.
    */
   public String getType()
   {
     return type;
-  }
-
-  /**
-   * A getter for number of beds in the room.
-   * @return int object called nrBeds.
-   */
-  public int getNrBeds()
-  {
-    return nrBeds;
   }
 
   /**

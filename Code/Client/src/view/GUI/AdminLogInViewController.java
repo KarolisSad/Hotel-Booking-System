@@ -31,9 +31,8 @@ public class AdminLogInViewController extends ViewController
   @Override protected void init()
   {
     viewModel = getViewModelFactory().getAdminLogInViewModel();
-    errorLabel.setText("");
-    username.setText("");
-    password.setText("");
+    username.textProperty().bindBidirectional(viewModel.getUsername());
+    password.textProperty().bindBidirectional(viewModel.getPassword());
 
     reset();
   }
@@ -58,17 +57,17 @@ public class AdminLogInViewController extends ViewController
    */
   public void LogInButton() throws IOException
   {
-    String userID = username.getText();
-    String pass = password.getText();
+    String userID = viewModel.getUsername().get();
+    String pass = viewModel.getPassword().get();
 
     if ((viewModel.getLogInfo().containsKey(userID)) && (viewModel.getLogInfo().get(userID).equals(pass))){
       if (userID.equals("hotel"))
       {
-        getViewHandler().openView("MenuForHotelManager.fxml");
+        getViewHandler().openView("HotelManagerMenu.fxml");
       }
       else
       {
-        getViewHandler().openView("BookingsForReceptionistView.fxml");
+        getViewHandler().openView("ReceptionistBookingView.fxml");
       }
     }
     else
@@ -84,7 +83,7 @@ public class AdminLogInViewController extends ViewController
    */
   public void MainMenuButton() throws IOException
   {
-    getViewHandler().openView("UserLoginMainView.fxml");
+    getViewHandler().openView("MainMenu.fxml");
   }
 
 

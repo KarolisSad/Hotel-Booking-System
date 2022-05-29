@@ -159,7 +159,6 @@ public class GuestPersonalInformationViewModel {
      */
     public void setUsername(String username) {
         this.username.setValue(username + "");
-        System.out.println("username should be set: " + username);
     }
 
     /**
@@ -167,12 +166,10 @@ public class GuestPersonalInformationViewModel {
      * email and phone number.
      */
     public void setValues() {
-        System.out.println("Username in setValues: " + getUsername());
         GuestTransfer guestTransfer = model.getGuestByUsername(getUsername());
         fName.setValue(guestTransfer.getfName());
         lName.setValue(guestTransfer.getlName());
         email.setValue(guestTransfer.getEmail());
         phoneNr.setValue(guestTransfer.getPhoneNr());
-        System.out.println(fName + " " + lName);
     }
 }

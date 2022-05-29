@@ -12,12 +12,16 @@ import java.util.HashMap;
 public class AdminLogInViewModel
 {
   private HashMap<String, String> logInfo = new HashMap<String, String>();
+  private StringProperty username;
+  private StringProperty password;
 
   /**
    * Zero-argument constructor that puts value in the hashmap list.
    */
   public AdminLogInViewModel ()
   {
+    username = new SimpleStringProperty();
+    password = new SimpleStringProperty();
     logInfo.put("receptionist1", "pass1");
     logInfo.put("receptionist2", "pass2");
     logInfo.put("receptionist3", "pass3");
@@ -31,6 +35,16 @@ public class AdminLogInViewModel
   public HashMap<String, String> getLogInfo()
   {
     return logInfo;
+  }
+
+  public StringProperty getUsername()
+  {
+    return username;
+  }
+
+  public StringProperty getPassword()
+  {
+    return password;
   }
 
 }
