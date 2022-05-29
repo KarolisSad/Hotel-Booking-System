@@ -1567,18 +1567,91 @@ class ModelManagerTest
   //                                                //
   ////////////////////////////////////////////////////
 
-                // TODO Not done yet
   //  Zero:
 
+  @Test void editGuestWithNullfName()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.book("1", LocalDate.now().plusDays(8), LocalDate.now().plusDays(10), bob);
+     assertThrows(IllegalArgumentException.class,()->  model.editGuest(model.getAllBookings("").getBooking(0).getBookingID(), null, "NewBuilder", "newbob@build.com", 11224455));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
   //  One:
 
+  @Test void editGuest1Guest()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.book("1", LocalDate.now().plusDays(8), LocalDate.now().plusDays(10), bob);
+      assertEquals("Bob", model.getAllBookings("").getBooking(0).getGuest().getfName());
+      assertEquals(bob.getlName(), model.getAllBookings("").getBooking(0).getGuest().getlName());
+      assertEquals(bob.getEmail(), model.getAllBookings("").getBooking(0).getGuest().getEmail());
+      assertEquals(bob.getPhoneNr(), model.getAllBookings("").getBooking(0).getGuest().getPhoneNr());
+      model.editGuest(model.getAllBookings("").getBooking(0).getBookingID(), "NewBob", "NewBuilder", "newbob@build.com", 11224455);
+      assertEquals("NewBob", model.getAllBookings("").getBooking(0).getGuest().getfName());
+      assertEquals("NewBuilder", model.getAllBookings("").getBooking(0).getGuest().getlName());
+      assertEquals("newbob@build.com", model.getAllBookings("").getBooking(0).getGuest().getEmail());
+      assertEquals(11224455, model.getAllBookings("").getBooking(0).getGuest().getPhoneNr());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
   //  Many:
+
+  @Test void editGuestWith2BookingsInDB()
+  {
+    try
+    {
+      model.addRoom("1", RoomType.SINGLE, 1, 10);
+      model.book("1", LocalDate.now().plusDays(8), LocalDate.now().plusDays(10), bob);
+
+      Guest wendy = new Guest("WendyWork", "Wendy", "Worker", "wendy@worker.com", 99887766);
+      model.book("1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(4), wendy);
+
+      assertEquals("Bob", model.getAllBookings("").getBooking(0).getGuest().getfName());
+      assertEquals(bob.getlName(), model.getAllBookings("").getBooking(0).getGuest().getlName());
+      assertEquals(bob.getEmail(), model.getAllBookings("").getBooking(0).getGuest().getEmail());
+      assertEquals(bob.getPhoneNr(), model.getAllBookings("").getBooking(0).getGuest().getPhoneNr());
+      model.editGuest(model.getAllBookings("").getBooking(0).getBookingID(), "NewBob", "NewBuilder", "newbob@build.com", 11224455);
+      assertEquals("NewBob", model.getAllBookings("").getBooking(0).getGuest().getfName());
+      assertEquals("NewBuilder", model.getAllBookings("").getBooking(0).getGuest().getlName());
+      assertEquals("newbob@build.com", model.getAllBookings("").getBooking(0).getGuest().getEmail());
+      assertEquals(11224455, model.getAllBookings("").getBooking(0).getGuest().getPhoneNr());
+
+      assertEquals(wendy.getfName(), model.getAllBookings("").getBooking(1).getGuest().getfName());
+      assertEquals(wendy.getlName(), model.getAllBookings("").getBooking(1).getGuest().getlName());
+      assertEquals(wendy.getEmail(), model.getAllBookings("").getBooking(1).getGuest().getEmail());
+      assertEquals(wendy.getPhoneNr(), model.getAllBookings("").getBooking(1).getGuest().getPhoneNr());
+      model.editGuest(model.getAllBookings("").getBooking(1).getBookingID(), "NewWendy", "NewWorker", "newWendy@worker.com", 55446677);
+      assertEquals("NewWendy", model.getAllBookings("").getBooking(1).getGuest().getfName());
+      assertEquals("NewWorker", model.getAllBookings("").getBooking(1).getGuest().getlName());
+      assertEquals("newWendy@worker.com", model.getAllBookings("").getBooking(1).getGuest().getEmail());
+      assertEquals(55446677, model.getAllBookings("").getBooking(1).getGuest().getPhoneNr());
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
   //  Boundary:
 
+  // No boundaries to test
+
   //  Exception:
 
+  // Exception already tested.
 
 
   ////////////////////////////////////////////////////
