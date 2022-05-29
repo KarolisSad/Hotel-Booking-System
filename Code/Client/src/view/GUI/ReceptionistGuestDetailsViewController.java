@@ -62,14 +62,7 @@ public class ReceptionistGuestDetailsViewController extends ViewController
 
   public void saveDetailsButton()
   {
-    try
-    {
       viewModel.updateGuest();
-    }
-    catch (Exception e)
-    {
-      errorLabel.setText(e.getMessage());
-    }
   }
 
   /**
@@ -77,8 +70,8 @@ public class ReceptionistGuestDetailsViewController extends ViewController
    */
   public void exitButton() throws IOException
   {
-    reset();
     getViewHandler().openView("ReceptionistBookingView.fxml");
+    reset();
   }
 
   /**
@@ -86,6 +79,7 @@ public class ReceptionistGuestDetailsViewController extends ViewController
    */
   @Override public void reset()
   {
+    errorLabel.setText("");
     viewModel.reset();
   }
 }

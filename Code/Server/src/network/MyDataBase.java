@@ -81,7 +81,7 @@ public class MyDataBase
     // Nina
     //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Milit@ria2003");
     // Christian
-    //  return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
+//      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
     // Juste
    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
 
@@ -111,7 +111,8 @@ public class MyDataBase
       }
       catch (Exception e)
       {
-        String error = e.toString();
+
+        String error = e.getMessage();
         // else if because you are not able to use .contains in switch :)
         if (error.contains("room_pkey"))
         {
@@ -121,7 +122,7 @@ public class MyDataBase
         else if (error.contains("room_roomtype_check"))
         {
           throw new IllegalArgumentException(
-              "Room must be one of the fallowing: Family, Single, Double, Suite.");
+              "Room must be one of the fallowing: Family, Single, Double, Suite or Conference.");
         }
         else if (error.contains("room_nrbeds_check"))
         {

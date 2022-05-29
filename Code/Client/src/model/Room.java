@@ -38,7 +38,7 @@ public class Room
   {
     if (roomOfType == null)
     {
-      throw new IllegalArgumentException("Room type cannot be null");
+      throw new IllegalArgumentException("Please select a room type.");
     }
 
     else
@@ -55,7 +55,7 @@ public class Room
   {
     if (numberOfBeds <= 0)
     {
-      throw new IllegalArgumentException("Number of beds should not be smaller that 1.");
+      throw new IllegalArgumentException("Capacity should not be less that 1.");
     }
 
     else

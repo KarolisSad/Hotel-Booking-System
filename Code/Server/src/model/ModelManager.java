@@ -282,6 +282,7 @@ public class ModelManager implements Model
     @Override
     public void editGuest(int bookingID, String fName, String lName, String email, int phoneNr) throws SQLException {
 
+      checkGuestBeforeEditing("dummyUsername", fName, lName, email, phoneNr);
         dataBaseAdapter.editGuest(bookingID, fName, lName, email, phoneNr);
     }
 
@@ -380,25 +381,19 @@ public class ModelManager implements Model
      */
     @Override
     public void editGuestWithUsername(String username, String name, String lastName, String email, int phoneNr) throws IllegalArgumentException, SQLException {
-        try {
             checkGuestBeforeEditing(username,name, lastName,email,phoneNr);
         dataBaseAdapter.editGuestWithUsername(username,  name,  lastName,  email, phoneNr);
-
-        }
-        catch (Exception e)
-        {
-            throw new IllegalArgumentException("Please fill in missing details");
-        }
     }
 
     private void checkGuestBeforeEditing(String username, String name, String lastName, String email, int phoneNr) {
 
-        if (username.equals("") || username == null
-                || name.equals("") || name == null
-                || lastName.equals("") || lastName == null
-                || email.equals("") || phoneNr <9999999 || phoneNr > 99999999)
+        try
         {
-            throw new IllegalArgumentException("Please fill in missing details.");
+            Guest guest = new Guest(username, name, lastName, email, phoneNr);
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

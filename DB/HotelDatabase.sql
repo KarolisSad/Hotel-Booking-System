@@ -3,7 +3,7 @@ DROP SCHEMA hotel CASCADE;
 --------------------------
 
 
-CREATE SCHEMA hotel;
+CREATE SCHEMA IF NOT EXISTS hotel;
 SET SCHEMA 'hotel';
 
 CREATE TABLE IF NOT EXISTS room

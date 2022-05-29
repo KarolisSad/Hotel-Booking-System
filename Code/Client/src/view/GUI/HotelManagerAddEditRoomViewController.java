@@ -106,8 +106,6 @@ public class HotelManagerAddEditRoomViewController extends ViewController
 
       if (viewModel.getViewState().isAdd())
       {
-
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         //Style
         DialogPane dialogPane = alert.getDialogPane();
