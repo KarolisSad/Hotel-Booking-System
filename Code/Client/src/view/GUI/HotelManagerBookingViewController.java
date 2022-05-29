@@ -51,7 +51,7 @@ public class HotelManagerBookingViewController extends ViewController
         cellData -> cellData.getValue().bookingStateProperty());
     table.setItems(viewModel.getBookings());
 
-    //
+
     table.getSelectionModel().selectedItemProperty()
         .addListener((n, oldValue, newValue) -> {
           if (newValue != null)
@@ -59,8 +59,6 @@ public class HotelManagerBookingViewController extends ViewController
             viewModel.setSelected(newValue.bookingIdProperty().get());
             cancelButton.setDisable(false);
           }
-
-          //                    viewModel.setSelected(newValue.getBookingID().get());
         });
 
     reset();

@@ -69,7 +69,13 @@ public class GuestBookingOverViewModel
      */
     public void setSelected(SimpleBookingViewModel selectedBooking)
     {
-        selectedBookingProperty.set(selectedBooking);
+        try
+        {
+            selectedBookingProperty.set(selectedBooking);
+        }
+        catch (NullPointerException ignored)
+        {
+        }
     }
 
     /**
@@ -77,6 +83,7 @@ public class GuestBookingOverViewModel
      */
     public void reset() {
         updateBookings();
+        setSelected(null);
     }
 
   public void removeBooking()

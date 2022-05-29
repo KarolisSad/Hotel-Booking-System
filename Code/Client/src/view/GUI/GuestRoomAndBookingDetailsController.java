@@ -63,6 +63,7 @@ public class GuestRoomAndBookingDetailsController extends ViewController
     @Override
     public void reset() {
 
+        viewModel.reset();
     }
 
     /**
@@ -71,6 +72,7 @@ public class GuestRoomAndBookingDetailsController extends ViewController
      * @throws IOException
      */
     public void exitButton() throws IOException {
+        getViewModelFactory().getBookingOverviewForGuestModel().reset();
         getViewHandler().openView("GuestBookingOverView.fxml");
     }
 }

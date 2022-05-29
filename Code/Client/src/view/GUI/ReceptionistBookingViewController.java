@@ -2,6 +2,7 @@ package view.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 import view.ViewController;
 import viewModel.ReceptionistBookingViewModel;
 import viewModel.Helpers.SimpleBookingViewModel;
@@ -95,6 +96,9 @@ public class ReceptionistBookingViewController extends ViewController
     guestInfoButton.setDisable(true);
     roomInfoButton.setDisable(true);
     viewModel.reset();
+
+colorAccordingToDays();
+
   }
 
   /**
@@ -268,5 +272,38 @@ public class ReceptionistBookingViewController extends ViewController
     {
       throw new RuntimeException(e);
     }
+  }
+
+
+  /**
+   * Method used to color the rows in the table according the dates and states of the bookings.
+   * If the start date is todays date, and the booking is in the booked state, the row will turn green,
+   * and if the end date is today and the booking is in progress, the row will turn red.
+   */
+  private void colorAccordingToDays()
+  {
+    bookingsTable.setRowFactory(booking -> new TableRow<>() {
+      @Override protected void updateItem(
+          SimpleBookingViewModel booking, boolean empty)
+      {
+        super.updateItem(booking, empty);
+        if (booking == null)
+        {
+          setStyle("");
+        }
+        else if (booking.bookingStateProperty().get().equals("Booked") && booking.getStartDate().isEqual(LocalDate.now()))
+        {
+          setStyle("-fx-font-weight: bold; -fx-background-color: green;");
+        }
+        else if (booking.bookingStateProperty().get().equals("In progress") && booking.getEndDate().isEqual(LocalDate.now()))
+        {
+          setStyle("-fx-font-weight: bold; -fx-background-color: red;");
+        }
+        else
+        {
+          setStyle("");
+        }
+      }
+    });
   }
 }

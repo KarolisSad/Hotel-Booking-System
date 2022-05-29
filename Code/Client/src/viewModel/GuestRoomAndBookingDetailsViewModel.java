@@ -41,6 +41,11 @@ public class GuestRoomAndBookingDetailsViewModel
         errorLabel = new SimpleStringProperty("");
     }
 
+    public void reset()
+    {
+        errorLabel.set("");
+    }
+
     /**
      * A getter returning the start date of the date picker
      *
