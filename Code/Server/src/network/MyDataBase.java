@@ -56,42 +56,12 @@ public class MyDataBase
    */
   private Connection getConnection() throws SQLException
   {
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", postgreSQLpassword);
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteldatabase", "postgres", postgreSQLpassword);
+  }
 
-
-
-          ////////////////////////////////////////////////////
-          //                                                //
-          //       USE ONE OF THE BELOW FOR NORMAL USE      //
-          //                                                //
-          ////////////////////////////////////////////////////
-
-    // Karolis
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
-    // Nina
-     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
-    // Christian
-   // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
-    // Juste
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
-
-
-          ////////////////////////////////////////////////////
-          //                                                //
-          //     USE ONE OF THE BELOW FOR jUnit Testing     //
-          //                                                //
-          ////////////////////////////////////////////////////
-
-    // Karolis
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest", "postgres", "123");
-    // Nina
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Milit@ria2003");
-    // Christian
-//      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
-    // Juste
-   // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
-
-
+  private Connection getConnection(String test) throws SQLException
+  {
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest", "postgres", postgreSQLpassword);
   }
 
   /**
