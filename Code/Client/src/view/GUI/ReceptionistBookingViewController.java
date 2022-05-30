@@ -293,11 +293,11 @@ colorAccordingToDays();
         }
         else if (booking.bookingStateProperty().get().equals("Booked") && booking.getStartDate().isEqual(LocalDate.now()))
         {
-          setStyle("-fx-font-weight: bold; -fx-background-color: green;");
+          setStyle("-fx-background-color: green;");
         }
         else if (booking.bookingStateProperty().get().equals("In progress") && booking.getEndDate().isEqual(LocalDate.now()))
         {
-          setStyle("-fx-font-weight: bold; -fx-background-color: red;");
+          setStyle("-fx-background-color: red;");
         }
         else
         {
