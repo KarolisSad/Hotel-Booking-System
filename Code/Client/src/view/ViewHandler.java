@@ -42,6 +42,7 @@ public class ViewHandler extends ViewCreator
   {
     this.primaryStage = primaryStage;
     this.currentScene = new Scene(new Region());
+    currentScene.getStylesheets().add(getClass().getResource("GUI/stylesheet.css").toExternalForm());
 
     openView("MainMenu.fxml");
 

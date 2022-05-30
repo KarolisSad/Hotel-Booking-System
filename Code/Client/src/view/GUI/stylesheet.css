@@ -1,0 +1,115 @@
+
+.header{
+    -fx-font-size: 50px;
+    -fx-font-family: Lato, Helvetica, sans-serif;
+    -fx-font-color: #392F2E;
+    -fx-font-color: white;
+    -fx-background-color: transparent;
+
+}
+
+.errorlabel{
+           -fx-font-size: 10px;
+          -fx-font-family: 'Brush Script MT';
+          -fx-font-color: #392F2E;
+          -fx-background-color: transparent;
+}
+
+.label{
+          -fx-font-size: 20px;
+          -fx-font-family: 'Brush Script MT';
+          -fx-font-color: #392F2E;
+          -fx-background-color: transparent;
+
+}
+
+
+.text{
+    -fx-font-size: 20px;
+    -fx-font-family: 'Verdana', bold;
+    -fx-font-color: #392F2E;
+    -fx-background-color: transparent;
+
+}
+
+
+.button{
+    -fx-font: 15px 'Verdana';
+    -fx-text-fill: #3A7563;
+
+    -fx-border-color: #3A7563;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-color: transparent;
+}
+
+.root{
+       -fx-background-color: #E6D3A8;
+}
+
+.table-view .table-cell{
+    -fx-border-color: #3A7563;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-view{
+    -fx-border-color: #3A7563;
+}
+
+.table-row-cell: hover {
+    -fx-border-color: #59A984;
+    -fx-text-background-color: #3A7563;
+}
+
+.table-row-cell:selected {
+    -fx-border-color: #3A7563;
+    -fx-background-color: #3A7563 !important;
+    -fx-text-background-color: black;
+}
+
+.table-view .column-header {
+    -fx-font: 20px 'Verdana' ;
+}
+
+.button:hover {
+    -fx-effect: dropshadow( gaussian , green , 10,0,0,1 );
+}
+
+.table-view .table-cell{
+    -fx-border-color: #3A7563;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-row-cell: odd{
+    -fx-border-color: #3A7563;
+    -fx-background-color: #E6D3A8;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell: even{
+    -fx-border-color: #3A7563;
+    -fx-background-color: #D6C59F;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-view .column-header {
+    -fx-border-color: #3A7563;
+    -fx-background-color: #3A7563;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: #D6C59F;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,117,99,1) 35%, rgba(0,212,255,1) 100%);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,117,99,1) 35%, rgba(0,212,255,1) 100%);
+}
