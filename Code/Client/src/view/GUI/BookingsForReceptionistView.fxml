@@ -13,16 +13,17 @@
             <Font name="Arial" size="30.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="326.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="326.0" prefWidth="700.0">
          <children>
-            <TableView styleClass="table-view" fx:id="bookingsTable" prefHeight="300.0" prefWidth="560.0">
+            <TableView styleClass="table-view" fx:id="bookingsTable" prefHeight="300.0" prefWidth="650.0">
+               <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                <columns>
-                  <TableColumn fx:id="bookingIdColumn" prefWidth="44.0" text="ID" />
-                  <TableColumn fx:id="startDateColumn" prefWidth="92.0" text="Start Date" />
-                  <TableColumn fx:id="endDateColumn" prefWidth="89.0" text="End Date" />
-                  <TableColumn fx:id="guestColumn" prefWidth="75.0" text="Guest" />
-                  <TableColumn fx:id="roomNumberColumn" prefWidth="75.0" text="Room" />
-                  <TableColumn fx:id="stateColumn" prefWidth="73.0" text="Status" />
+                  <TableColumn fx:id="bookingIdColumn" minWidth="30.0" text="ID" />
+                  <TableColumn fx:id="startDateColumn" minWidth="75.0" text="Start Date" />
+                  <TableColumn fx:id="endDateColumn" minWidth="75.0" text="End Date" />
+                  <TableColumn fx:id="guestColumn" minWidth="60.0" text="Guest" />
+                  <TableColumn fx:id="roomNumberColumn" minWidth="40.0" text="Room" />
+                  <TableColumn fx:id="stateColumn" minWidth="50.0" text="Status" />
                </columns>
                <HBox.margin>
                   <Insets left="10.0" />

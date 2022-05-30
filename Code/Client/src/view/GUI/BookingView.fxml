@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="600.0" style="-fx-font-family: Arial" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.BookingViewController" stylesheets="stylesheet.css">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="600.0" style="-fx-font-family: Arial" stylesheets="stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUI.BookingViewController">
    <children>
       <Label alignment="CENTER" prefHeight="72.0" prefWidth="602.0" text="Booking Overview">
          <font>
@@ -14,56 +14,72 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="299.0" prefWidth="598.0">
          <children>
-            <TableView styleClass="table-view" fx:id="table" prefHeight="274.0" prefWidth="455.0">
+            <TableView fx:id="table" prefHeight="274.0" minWidth="660.0" styleClass="table-view">
+               <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                <columns>
-                  <TableColumn fx:id="startDate" prefWidth="91.0" text="Start-Date" />
-                  <TableColumn fx:id="endDate" prefWidth="98.0" text="End-Date" />
-                  <TableColumn fx:id="roomID" prefWidth="59.0" text="Room" />
-                  <TableColumn fx:id="guestID" prefWidth="112.0" text="Customer" />
+                  <TableColumn fx:id="startDate" minWidth="55.0" text="Start-Date" />
+                  <TableColumn fx:id="endDate" minWidth="55.0" text="End-Date" />
+                  <TableColumn fx:id="roomID" prefWidth="50.0" text="Room" />
+                  <TableColumn fx:id="guestID" prefWidth="50.0" text="Customer" />
                   <TableColumn fx:id="state" prefWidth="95.0" text="Status" />
-                  <TableColumn fx:id="bookingID" prefWidth="129.0" text="BookingID" />
+                  <TableColumn fx:id="bookingID" prefWidth="60.0" text="BookingID" />
                </columns>
             </TableView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="613.0">
+      <HBox alignment="CENTER" prefHeight="103.0" prefWidth="550.0">
          <children>
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelTheBookingButton" prefHeight="30.0" prefWidth="140.0" text="Cancel the booking">
+            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelTheBookingButton" prefHeight="40.0" prefWidth="200.0" text="Cancel the booking">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </Button>
-            <Button mnemonicParsing="false" onAction="#menuButton" prefHeight="31.0" prefWidth="122.0" text="Menu">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#menuButton" prefHeight="40.0" prefWidth="200.0" text="Menu">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </Button>
-            <VBox alignment="BOTTOM_RIGHT" prefHeight="73.0" prefWidth="188.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="73.0" prefWidth="188.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#hideCancelledBookings" prefHeight="24.0" prefWidth="171.0" text="Hide Cacelled Bookings">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hideCancelledBookings" prefHeight="40.0" prefWidth="200.0" text="Hide Cacelled Bookings">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#showCancelledBookings" prefHeight="24.0" prefWidth="171.0" text="Show Cancelled bookings">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showCancelledBookings" prefHeight="40.0" prefWidth="200.0" text="Show Cancelled bookings">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </Button>
                </children>
             </VBox>
          </children>
          <VBox.margin>
-            <Insets left="50.0" />
+            <Insets />
          </VBox.margin>
       </HBox>
    </children>

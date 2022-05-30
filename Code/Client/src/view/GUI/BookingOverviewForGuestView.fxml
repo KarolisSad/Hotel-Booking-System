@@ -20,6 +20,7 @@
         <HBox alignment="CENTER" prefHeight="326.0" prefWidth="600.0">
             <children>
                 <TableView styleClass="table-view" fx:id="bookingsTable" prefHeight="278.0" prefWidth="556.0">
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                     <columns>
                         <TableColumn fx:id="bookingIdColumn" prefWidth="44.0" text="ID" />
                         <TableColumn fx:id="startDateColumn" prefWidth="100.0" text="Start Date" />
