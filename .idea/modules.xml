@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Code/Client/Client.iml" filepath="$PROJECT_DIR$/Code/Client/Client.iml" />
       <module fileurl="file://$PROJECT_DIR$/Code/Server/Server.iml" filepath="$PROJECT_DIR$/Code/Server/Server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Code/SetUpServer/SetUpServer.iml" filepath="$PROJECT_DIR$/Code/SetUpServer/SetUpServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Code/SetupDatabase/SetupDatabase.iml" filepath="$PROJECT_DIR$/Code/SetupDatabase/SetupDatabase.iml" />
     </modules>
   </component>
 </project>

@@ -18,7 +18,7 @@ class ModelManagerTest
 
   @BeforeEach void setUp() throws SQLException
   {
-    model = new ModelManager();
+    model = new ModelManager("123456789");
     bob = new Guest("Bob", "Builder", "bob@builder.com", 12345678, "BobBuilder", "BobBuilderPassword");
   }
 

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SetupDatabase:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SetupDatabase_jar</output-path>
+    <root id="archive" name="SetupDatabase.jar">
+      <element id="module-output" name="SetupDatabase" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Code/lib/postgresql-42.2.11.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
