@@ -63,9 +63,9 @@ public class MyDataBase
     // Karolis
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
     // Nina
-      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
+     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
@@ -232,7 +232,7 @@ public class MyDataBase
           "SELECT *\n" + "FROM regularrooms\n" + "WHERE roomID IN (SELECT roomID\n"
               + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
               + "                 FROM roomBooking\n"
-              + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
+              + "                 WHERE state in ('Booked', 'In progress', 'Archived') AND\n"
               + "                         (startDate BETWEEN (?) AND (?)\n"
               + "                         OR endDate BETWEEN (?) AND (?)))"
               + "ORDER BY roomID;");
@@ -402,7 +402,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'Booked' ORDER BY bookingid;");
+              "SELECT * FROM regularBookings WHERE state = 'Booked' ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
@@ -427,7 +427,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'In progress' ORDER BY bookingid;");
+              "SELECT * FROM regularBookings WHERE state = 'In progress' ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
@@ -452,7 +452,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'Cancelled' ORDER BY bookingid;");
+              "SELECT * FROM cancelledBookings ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
@@ -477,7 +477,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'Archived' ORDER BY bookingid;");
+              "SELECT * FROM regularBookings WHERE state = 'Archived' ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
