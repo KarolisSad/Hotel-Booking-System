@@ -1,6 +1,8 @@
 package mediator;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import localDateHelpers.Converters;
 import model.Guest;
 import model.Model;
 import model.Room;
@@ -45,7 +47,8 @@ public class HotelClientHandler implements Runnable
     this.in = new BufferedReader(
         new InputStreamReader(socket.getInputStream()));
     this.out = new PrintWriter(new PrintWriter(socket.getOutputStream()), true);
-    json = new Gson();
+    json = Converters.registerLocalDate(new GsonBuilder()).create();
+   // json = new Gson();
     message = null;
   }
 
