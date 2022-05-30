@@ -3,7 +3,7 @@ DROP SCHEMA hotel CASCADE;
 --------------------------
 
 
-CREATE SCHEMA IF NOT EXISTS hotel;
+CREATE SCHEMA hotel;
 SET SCHEMA 'hotel';
 
 CREATE TABLE IF NOT EXISTS room
@@ -155,91 +155,45 @@ from room
 where roomType not in ('Conference');
 -------------------------------<
 
+-----------Dummy-Data---------->
+insert into guest(username, fName, lName, email, phoneNr)
+values ('bob','Bob','Builder','BobBuilder@gmail.com', 88851515);
+insert into login(username, userPassword)
+values ('bob', 'builder');
+insert into guest(username, fName, lName, email, phoneNr)
+values ('julia','Julia','Mcclain', 'JuliaMcclain@gmail.com', 15637557);
+insert into login(username, userPassword)
+values ('julia', 'password');
+insert into guest(username, fName, lName, email, phoneNr)
+values ('norman','Norman','William', 'NormanWilliam@gmail.com', 12637227);
+insert into login(username, userPassword)
+values ('norman', 'password');
+insert into guest(username, fName, lName, email, phoneNr)
+values ('Filip','Filip','Joyner', 'Flip@gmail.com', 12437212);
+insert into login(username, userPassword)
+values ('Filip', 'password');
 
-drop view conferenceRooms;
-drop view conferenceRooms;
 
+insert into room(roomID, roomType, nrBeds, dailyPrice)
+values ('202','Family',4,950);
+insert into room(roomID, roomType, nrBeds, dailyPrice)
+values ('101','Single',1,350);
+insert into room(roomID, roomType, nrBeds, dailyPrice)
+values ('210','Double',4,650);
+insert into room(roomID, roomType, nrBeds, dailyPrice)
+values ('303','Family',5,1200);
+insert into room(roomID, roomType, nrBeds, dailyPrice)
+values ('104','Single',1,350);
 
-
-
-
-
---------Guest-------
-
-DELETE
-FROM guest;
-
-INSERT INTO guest (fName, lName, email, phoneNr)
-VALUES ('Karolis', 'Anon', 'Karolis@gmail.com', 11112222);
-
----------Room--------
-
-DELETE
-FROM room;
-
-INSERT INTO room
-VALUES ('1', 'Single', 1);
-
-INSERT INTO room
-VALUES ('2', 'Double', 3);
-
-INSERT INTO room
-VALUES ('3', 'Family', 5);
-
-----------Room-Booking---------
-DELETE
-FROM roomBooking;
-
-INSERT INTO roomBooking (startDate, endDate, guest, roomID, state)
-VALUES ('2022-06-10', '2022-06-20', 11112222, 1, 'Booked');
-
-INSERT INTO roomBooking (startDate, endDate, guest, roomID, state)
-VALUES ('2022-06-10', '2022-06-20', 11112222, 3, 'Booked');
-
-INSERT INTO roomBooking (startDate, endDate, guest, roomID, state)
-VALUES ('2023-06-10', '2023-06-20', 11112222, 3, 'Booked');
-
-------All-Available-Rooms------>
-
-SELECT *
-FROM room
-WHERE roomID IN (SELECT roomID
-                 FROM room
-                 EXCEPT
-                 SELECT roomID
-                 FROM roomBooking
-                 WHERE startDate BETWEEN '2022-01-03' AND '2022-01-11'
-                    OR endDate BETWEEN '2022-01-03' AND '2022-01-11'
-);
-
-SELECT *
-FROM guest
-WHERE username = 'christhougaard';
-
--- Ignore cancelled bookings testing:
-
-SELECT *
-FROM room
-WHERE roomID IN (SELECT roomID
-    FROM room
-    EXCEPT
-        SELECT roomID
-                 FROM roomBooking
-                 WHERE state in ('Booked', 'In Progress', 'Archived') AND
-                         (startDate BETWEEN '2022-05-27' AND '2022-05-29'
-                         OR endDate BETWEEN '2022-05-27' AND '2022-05-29'));
-
+insert into roomBooking(startDate, endDate, guest, roomID, state)
+values ('2022-06-09', '2022-06-11','Filip','303','Booked');
+insert into roomBooking(startDate, endDate, guest, roomID, state)
+values ('2022-07-11', '2022-07-14','Filip','202','Booked');
+insert into roomBooking(startDate, endDate, guest, roomID, state)
+values ('2022-07-11', '2022-07-17','bob','210','Booked');
+insert into roomBooking(startDate, endDate, guest, roomID, state)
+values ('2022-06-09', '2022-06-14','julia','104','Booked');
+insert into roomBooking(startDate, endDate, guest, roomID, state)
+values ('2022-06-22', '2022-06-24','norman','101','Booked');
 -------------------------------<
-insert into login(username, userPassword) VALUES ('nina', 'password');
 
-insert into guest (username, fName, lName, email, phoneNr)
-values ('nina', 'Nina', 'Wrona', 'n@gmail.com', 12344567);
-
-update guest
-                 set fname = 'Maria',
-                 lname = 'Cook',
-                 email ='m@g.com',
-                 phonenr = 12345678
-where username = 'nina';
-
-select * from guest where username = 'nina';
