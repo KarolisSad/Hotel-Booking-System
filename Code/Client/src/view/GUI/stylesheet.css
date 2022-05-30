@@ -1,9 +1,9 @@
 
-.header label{
-    -fx-font-size: 30px;
-    -fx-font-family: 'Lato';
+.header{
+    -fx-font-size: 50px;
+    -fx-font-family: Lato, Helvetica, sans-serif;
     -fx-font-color: #392F2E;
-    -fx-background-color: white;
+    -fx-font-color: white;
     -fx-background-color: transparent;
 
 }
@@ -16,7 +16,7 @@
 }
 
 .label{
-          -fx-font-size: 30px;
+          -fx-font-size: 20px;
           -fx-font-family: 'Brush Script MT';
           -fx-font-color: #392F2E;
           -fx-background-color: transparent;
@@ -25,7 +25,7 @@
 
 
 .text{
-    -fx-font-size: 30px;
+    -fx-font-size: 20px;
     -fx-font-family: 'Verdana', bold;
     -fx-font-color: #392F2E;
     -fx-background-color: transparent;

@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="49.0" prefWidth="600.0">
          <children>
-            <Text layoutX="224.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Show booking">
+            <Text styleClass="header" layoutX="224.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Show booking">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
