@@ -59,11 +59,6 @@ public class MyDataBase
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteldatabase", "postgres", postgreSQLpassword);
   }
 
-  private Connection getConnection(String test) throws SQLException
-  {
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest", "postgres", postgreSQLpassword);
-  }
-
   /**
    * A method adding a room to the database.
    * @param room the room to add
