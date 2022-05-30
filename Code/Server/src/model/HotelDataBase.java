@@ -17,9 +17,11 @@ import java.util.ArrayList;
  */
 public class HotelDataBase implements HotelPersistence
 {
+  private String postgreSQLpassword;
 
-  public HotelDataBase()
+  public HotelDataBase(String postgreSQLpassword)
   {
+    this.postgreSQLpassword = postgreSQLpassword;
   }
 
   @Override public void addRoom(Room room) throws SQLException
@@ -31,7 +33,7 @@ public class HotelDataBase implements HotelPersistence
    * @throws SQLException
    */
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.addOneRoom(room);
   }
 
@@ -42,7 +44,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public void remove(String ID) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.removeOneRoom(ID);
   }
 
@@ -53,7 +55,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public ArrayList<Room> getAllRooms() throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.getAllRooms();
   }
 
@@ -67,7 +69,7 @@ public class HotelDataBase implements HotelPersistence
   @Override public ArrayList<Room> availableRooms(LocalDate startDate,
       LocalDate endDate) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.availableRooms(startDate, endDate);
   }
 
@@ -82,7 +84,7 @@ public class HotelDataBase implements HotelPersistence
    */
       throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.editRoomInfo(roomID, type, nrBeds, price);
   }
 
@@ -98,7 +100,7 @@ public class HotelDataBase implements HotelPersistence
   @Override public void editGuest(int bookingID, String fName, String lName,
       String email, int phoneNr) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.editGuest(bookingID, fName, lName, email, phoneNr);
   }
 
@@ -111,7 +113,7 @@ public class HotelDataBase implements HotelPersistence
   @Override public ArrayList<RoomBooking> getAllBookings(String type)
       throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.getAllRoomBookings(type);
   }
 
@@ -122,7 +124,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public void processBooking(RoomBooking booking) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.processBooking(booking);
   }
 
@@ -134,7 +136,7 @@ public class HotelDataBase implements HotelPersistence
   @Override public void cancelBooking(RoomBooking roomBooking)
       throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.cancelBooking(roomBooking);
   }
 
@@ -149,7 +151,7 @@ public class HotelDataBase implements HotelPersistence
   @Override public void editBooking(int bookingId, LocalDate startDate,
       LocalDate endDate, String roomId) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.editBooking(bookingId, startDate, endDate, roomId);
   }
 
@@ -161,7 +163,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public Room getRoom(String roomId) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.getRoom(roomId);
 
   }
@@ -173,7 +175,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public ArrayList<Guest> getAllGuests() throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.getAllGuests();
   }
 
@@ -194,7 +196,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public void book(RoomBooking roomBooking) throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.book(roomBooking);
   }
 
@@ -205,7 +207,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override
   public void register(Guest guest) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.register(guest);
   }
 
@@ -217,7 +219,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override
   public void login(String username, String password) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.login(username,password);
   }
 
@@ -240,7 +242,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override
   public ArrayList<RoomBooking> getBookingsWhenLoggedIn(String username) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.getBookingsWhenLoggedIn(username);
   }
 
@@ -252,7 +254,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override
   public void bookARoomWhenLoggedIn(RoomBooking roomBooking) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.bookARoomWhenLoggedIn(roomBooking);
   }
 
@@ -262,7 +264,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override public void clearDatabase() throws SQLException
   {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.clearDatabase();
   }
 
@@ -278,7 +280,7 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override
   public void editGuestWithUsername(String username, String getfName, String getlName, String email, int phoneNr) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     dataBase.editGuestWithUsername( username,  getfName,  getlName,  email,  phoneNr);
   }
 
@@ -292,13 +294,13 @@ public class HotelDataBase implements HotelPersistence
    */
   @Override
   public GuestTransfer getGuestByUsername(String username) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.getGuestByUsername(username);
   }
 
   @Override
   public ArrayList<Room> availableConferenceRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
-    MyDataBase dataBase = MyDataBase.getInstance();
+    MyDataBase dataBase = MyDataBase.getInstance(postgreSQLpassword);
     return dataBase.availableConferenceRooms(startDate,endDate);
   }
 

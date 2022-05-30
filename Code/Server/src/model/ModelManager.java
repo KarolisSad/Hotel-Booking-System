@@ -30,12 +30,12 @@ public class ModelManager implements Model
      * that will store a list of all rooms and a list of booked rooms.
      * This constructor also initializes the adapter used for communication with the database.
      */
-    public ModelManager()
+    public ModelManager(String postgreSQLpassword)
     {
         bookingList = new RoomBookingList();
         roomList = new RoomList();
         property = new PropertyChangeSupport(this);
-        this.dataBaseAdapter = new HotelDataBase();
+        this.dataBaseAdapter = new HotelDataBase(postgreSQLpassword);
     }
 
 

@@ -22,13 +22,15 @@ public class MyDataBase
 {
 
   private static MyDataBase instance;
+  private String postgreSQLpassword;
 
   /**
    * A constructor registering the Driver.
    */
-  private MyDataBase() throws SQLException
+  private MyDataBase(String postgreSQLpassword) throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
+    this.postgreSQLpassword = postgreSQLpassword;
   }
 
   /**
@@ -38,11 +40,11 @@ public class MyDataBase
    * @return MyDataBase instance variable.
    * @throws SQLException
    */
-  public static synchronized MyDataBase getInstance() throws SQLException
+  public static synchronized MyDataBase getInstance(String postgreSQLpassword) throws SQLException
   {
     if (instance == null)
     {
-      instance = new MyDataBase();
+      instance = new MyDataBase(postgreSQLpassword);
     }
     return instance;
   }
@@ -54,6 +56,10 @@ public class MyDataBase
    */
   private Connection getConnection() throws SQLException
   {
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", postgreSQLpassword);
+
+
+
           ////////////////////////////////////////////////////
           //                                                //
           //       USE ONE OF THE BELOW FOR NORMAL USE      //
@@ -65,7 +71,7 @@ public class MyDataBase
     // Nina
      // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
     // Christian
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
+   // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
     // Juste
     // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
 
