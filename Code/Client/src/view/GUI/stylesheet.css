@@ -1,7 +1,7 @@
 
 .header label{
     -fx-font-size: 30px;
-    -fx-font-family: 'Brush Script MT';
+    -fx-font-family: 'Lato';
     -fx-font-color: #392F2E;
     -fx-background-color: white;
     -fx-background-color: transparent;
@@ -63,7 +63,7 @@
 
 .table-row-cell:selected {
     -fx-border-color: #3A7563;
-    -fx-background-color: #59A984;
+    -fx-background-color: #3A7563 !important;
     -fx-text-background-color: black;
 }
 
