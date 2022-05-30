@@ -1,6 +1,6 @@
 
 .header{
-    -fx-font-size: 50px;
+    -fx-font-size: 20px;
     -fx-font-family: Lato, Helvetica, sans-serif;
     -fx-font-color: #392F2E;
     -fx-font-color: white;
@@ -9,7 +9,7 @@
 }
 
 .errorlabel{
-           -fx-font-size: 10px;
+           -fx-font-size: 5px;
           -fx-font-family: 'Brush Script MT';
           -fx-font-color: #392F2E;
           -fx-background-color: transparent;
@@ -34,7 +34,7 @@
 
 
 .button{
-    -fx-font: 15px 'Verdana';
+    -fx-font: 10px 'Verdana';
     -fx-text-fill: #3A7563;
 
     -fx-border-color: #3A7563;
@@ -68,7 +68,7 @@
 }
 
 .table-view .column-header {
-    -fx-font: 20px 'Verdana' ;
+    -fx-font: 10px 'Verdana' ;
 }
 
 .button:hover {
