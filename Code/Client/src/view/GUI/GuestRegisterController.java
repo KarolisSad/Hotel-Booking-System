@@ -40,12 +40,16 @@ public class GuestRegisterController extends ViewController
         lName.textProperty().bindBidirectional(viewModel.getlName());
         fName.textProperty().bindBidirectional(viewModel.fNameProperty());
         errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
+
+        reset();
     }
 
-
+    /**
+     * Method calling the reset method in the viewmodel.
+     */
     @Override
     public void reset() {
-
+        viewModel.reset();
     }
 
     /**
@@ -59,7 +63,7 @@ public class GuestRegisterController extends ViewController
         {
          setUsernameInGuestInfo();
             getViewHandler().openView("GuestMenuView.fxml");
-
+            reset();
         }
 
 
@@ -71,6 +75,7 @@ public class GuestRegisterController extends ViewController
      */
     public void goBack() throws IOException {
         getViewHandler().openView("MainMenu.fxml");
+        reset();
     }
 
     public void setUsernameInGuestInfo(){

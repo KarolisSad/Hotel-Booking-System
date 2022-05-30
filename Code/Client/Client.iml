@@ -7,11 +7,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="JavaFX11" level="application" />
     <orderEntry type="library" name="JavaFX11.02" level="application" />
     <orderEntry type="library" name="postgresql-42.2.11" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="gson-2.9.0" level="application" />
     <orderEntry type="library" name="MyObserver-1.4" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/OneDrive - ViaUC/Semester 2/SDJ2/Java packages/gson-2.8.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

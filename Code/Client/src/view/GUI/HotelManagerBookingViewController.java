@@ -26,7 +26,7 @@ public class HotelManagerBookingViewController extends ViewController
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> endDate;
   @FXML private TableColumn<SimpleBookingViewModel, LocalDate> startDate;
   @FXML private TableColumn<SimpleBookingViewModel, String> roomID;
-  @FXML private TableColumn<SimpleBookingViewModel, Integer> guestID;
+  @FXML private TableColumn<SimpleBookingViewModel, Integer> guestPhoneNr;
   @FXML private TableColumn<SimpleBookingViewModel, String> state;
   @FXML private TableColumn<SimpleBookingViewModel, Integer> bookingID;
 
@@ -41,7 +41,7 @@ public class HotelManagerBookingViewController extends ViewController
         cellDate -> cellDate.getValue().startDateProperty());
     endDate.setCellValueFactory(
         cellData -> cellData.getValue().endDateProperty());
-    guestID.setCellValueFactory(
+    guestPhoneNr.setCellValueFactory(
         cellData -> cellData.getValue().guestIdProperty().asObject());
     roomID.setCellValueFactory(
         cellData -> cellData.getValue().roomIdProperty());
@@ -56,8 +56,12 @@ public class HotelManagerBookingViewController extends ViewController
         .addListener((n, oldValue, newValue) -> {
           if (newValue != null)
           {
+            cancelButton.setDisable(true);
             viewModel.setSelected(newValue.bookingIdProperty().get());
-            cancelButton.setDisable(false);
+            if (newValue.bookingStateProperty().get().equals("Booked"))
+            {
+              cancelButton.setDisable(false);
+            }
           }
         });
 
@@ -80,8 +84,8 @@ public class HotelManagerBookingViewController extends ViewController
    */
   public void cancelTheBookingButton()
   {
-
     viewModel.cancelBooking();
+    reset();
   }
 
   /**
@@ -100,6 +104,8 @@ public class HotelManagerBookingViewController extends ViewController
   {
     viewModel.removeCanceledBookings();
     viewModel.removeCanceledBookings();
+    viewModel.removeCanceledBookings();
+    viewModel.removeCanceledBookings();
   }
 
   /**
@@ -109,6 +115,7 @@ public class HotelManagerBookingViewController extends ViewController
   public void showCancelledBookings()
   {
     viewModel.showCancelledBookings();
+
   }
 
 }

@@ -35,9 +35,12 @@ public class GuestLoginViewController extends ViewController {
         error.textProperty().bindBidirectional(viewModel.getError());
     }
 
+    /**
+     * Method calling the reset method in the viewmodel.
+     */
     @Override
     public void reset() {
-
+        viewModel.reset();
     }
 
     /**

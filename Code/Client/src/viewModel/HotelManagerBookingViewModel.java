@@ -35,7 +35,6 @@ public class HotelManagerBookingViewModel
 
   }
 
-  // for loop to add all Bookings :)
 
   /**
    * A method meant for getting all bookings
@@ -119,6 +118,7 @@ public class HotelManagerBookingViewModel
   public void removeCanceledBookings()
   {
     hideCancelledRooms = true;
+
     for (int i = 0; i < bookings.size(); i++)
     {
       if (bookings.get(i).bookingStateProperty().get().equals("Cancelled"))

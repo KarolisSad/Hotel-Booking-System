@@ -63,4 +63,14 @@ public class GuestLoginModel
         GuestTransfer guestTransfer = model.login(username.get(),password.get());
         return guestTransfer;
     }
+
+    /**
+     * Method used for setting the instance variables to empty strings.
+     */
+    public void reset()
+    {
+        username.set("");
+        password.set("");
+        error.set("");
+    }
 }
