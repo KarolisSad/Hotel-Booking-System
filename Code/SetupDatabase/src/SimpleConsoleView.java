@@ -1,11 +1,20 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * Class creating a Console GUI for setting up the database.
+ *
+ * @author Group 5
+ * @version 30/05/2022
+ */
 public class SimpleConsoleView
 {
   private Scanner input;
   private boolean running;
 
+  /**
+   * Constructor initializing the Scanner, setting the running boolean to true and executing the run() method.
+   */
   public SimpleConsoleView()
   {
     input = new Scanner(System.in);
@@ -13,6 +22,9 @@ public class SimpleConsoleView
     run();
   }
 
+  /**
+   * Method starting a simple Console GUI while the boolean running is true.
+   */
   private void run()
   {
     while (running)

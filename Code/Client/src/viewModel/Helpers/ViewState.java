@@ -45,6 +45,7 @@ public class ViewState {
 
   /**
    * A boolean method setting an add variable to either true or false
+   * @param add boolean. True if adding, false if not
    */
   public void setAdd(boolean add){
     this.add = add;

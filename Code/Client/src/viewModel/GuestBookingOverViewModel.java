@@ -40,7 +40,6 @@ public class GuestBookingOverViewModel
      * Method returning list of Bookings made by Guest.
      * @return ObservableList<SimpleBookingViewModel> bookings
      */
-
     public ObservableList<SimpleBookingViewModel> getBookings() {
         return bookings;
     }

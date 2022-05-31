@@ -188,7 +188,8 @@ public class HotelManagerAddEditRoomViewModel
   }
 
   /**
-   * A non argument method setting a RoomTypes instance valuable called type.
+   * A method setting a RoomTypes instance valuable called type.
+   * @param type the type of room.
    */
   public void setType(RoomType type)
   {

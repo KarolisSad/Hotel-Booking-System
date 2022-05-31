@@ -21,6 +21,7 @@ public class Room
    * @param roomId room number
    * @param roomOfType The type of room
    * @param numberOfBeds the number of beds to be assigned to the room.
+   * @param dailyPrice the daily price of the room
    */
   public Room(String roomId, RoomType roomOfType, int numberOfBeds, int dailyPrice)
   {
@@ -67,7 +68,7 @@ public class Room
   /**
    * Method setting the roomId variable to the string given as argument.
    *
-   * @param roomId
+   * @param roomId the room id to set
    * @throws IllegalArgumentException if argument is null or an empty String.
    */
   public void setRoomId(String roomId)
@@ -108,7 +109,7 @@ public class Room
 
   /**
    * A method returning the RoomType of a room.
-   * @return
+   * @return roomtype
    */
   public RoomType getRoomType()
   {
@@ -117,7 +118,7 @@ public class Room
 
   /**
    * A method returning the number of beds of a room.
-   * @return
+   * @return number of beds
    */
   public int getNumberOfBeds()
   {
