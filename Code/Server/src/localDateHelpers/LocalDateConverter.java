@@ -14,6 +14,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * GSON serialiser/deserialiser for converting {@link LocalDate} objects.
+ * @author gkopff
+ * Code gotten from: https://github.com/gkopff/gson-javatime-serialisers
  */
 public class LocalDateConverter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate>
 {

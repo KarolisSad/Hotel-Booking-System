@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 /**
  * The {@code Converters} class contains static methods for registering Java Time converters.
+ * @author gkopff
+ * Code gotten from: https://github.com/gkopff/gson-javatime-serialisers
  */
 @SuppressWarnings({ "UnusedReturnValue", "WeakerAccess" })
 public class Converters
