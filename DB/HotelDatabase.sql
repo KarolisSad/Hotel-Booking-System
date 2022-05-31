@@ -65,9 +65,8 @@ BEGIN
 
     SELECT COUNT(*)
     INTO vBookingCount
-    FROM roomBooking
+    FROM regularBookings
     WHERE roomID = new.roomID
-        AND old.state NOT LIKE 'Cancelled'
         AND (new.startDate BETWEEN startDate AND endDate
             OR new.endDate BETWEEN startDate AND endDate)
        OR (new.startDate < startDate AND new.endDate > endDate)
@@ -115,14 +114,13 @@ BEGIN
 
     SELECT COUNT(*)
     INTO vBookingCount
-    FROM roomBooking
+    FROM regularBookings
     WHERE roomID = new.roomID
         AND bookingID != new.bookingID
         AND (new.startDate BETWEEN startDate AND endDate
             OR new.endDate BETWEEN startDate AND endDate
        OR (new.startDate < startDate AND new.endDate > endDate)
-       OR (new.startDate > startDate AND new.endDate < endDate))
-    EXCEPT SELECT count(*) FROM roomBooking WHERE roomID = new.roomID AND state = 'Cancelled';
+       OR (new.startDate > startDate AND new.endDate < endDate));
 
 
     IF (vBookingCount > 0) THEN
@@ -153,6 +151,20 @@ create view regularRooms as
 select *
 from room
 where roomType not in ('Conference');
+
+create view regularBookings as
+    SELECT *
+        from roomBooking
+            where state not in ('Cancelled')
+ORDER BY bookingID;
+
+create view cancelledBookings AS
+    SELECT *
+FROM roomBooking
+WHERE state IN ('Cancelled')
+ORDER BY bookingID;
+
+
 -------------------------------<
 
 -----------Dummy-Data---------->

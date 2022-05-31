@@ -19,6 +19,7 @@ import java.util.function.UnaryOperator;
  */
 public class GuestReservationController extends ViewController
 {
+  @FXML private Button bookButton;
   @FXML private Button filterPriceButton;
   @FXML private ComboBox<String> roomTypeFilter;
   @FXML private TextField bedsFilter;
@@ -53,10 +54,11 @@ public class GuestReservationController extends ViewController
     endDate.getEditor().setDisable(true);
     endDate.getEditor().setOpacity(1);
 
+
     // Binding
     startDate.valueProperty().bindBidirectional(viewModel.getStartDatePicker());
     endDate.valueProperty().bindBidirectional(viewModel.getEndDatePicker());
-    errorLabel.textProperty().bind(viewModel.getErrorLabel());
+    errorLabel.textProperty().bindBidirectional(viewModel.getErrorLabel());
 
     // Table
     roomNumberColumn.setCellValueFactory(
@@ -97,6 +99,7 @@ public class GuestReservationController extends ViewController
     availableRoomsTable.getSelectionModel().selectedItemProperty()
         .addListener((obs, oldValue, newValue) -> {
           viewModel.setSelected(newValue);
+          bookButton.setDisable(false);
         });
 
     //Filtering
@@ -142,11 +145,12 @@ public class GuestReservationController extends ViewController
 
   /**
    * Method used for resetting the view.
-   * This is done by calling the clear() method in the viewModel.
+   * This is done by calling the clear() method in the viewModel, and by resetting all filtering.
    */
   @Override public void reset()
   {
     viewModel.clear();
+
     roomTypeFilter.getSelectionModel().select("All");
     bedsFilter.textProperty().set("");
     priceFromFilter.textProperty().set("");
@@ -161,6 +165,7 @@ public class GuestReservationController extends ViewController
       filterPriceButton.setDisable(true);
     }
 
+    bookButton.setDisable(true);
 
   }
 
@@ -174,6 +179,11 @@ public class GuestReservationController extends ViewController
     viewModel.getAllAvailableRooms();
   }
 
+  /**
+   * Method used for filtering by roomTypes.
+   * This is done by removing all bookings from the list that does not match the roomtype selected.
+   * @param selection The chosen selection of rooms.
+   */
   private void filterByRoomTypes(String selection)
   {
 
@@ -192,6 +202,12 @@ public class GuestReservationController extends ViewController
     }
   }
 
+  /**
+   * Method used for filtering by bed count.
+   * This is done by removing all rooms from the list if the bedcount is less than the selection.
+   * If nothing is given as selection, it cancels the filtering.
+   * @param selection
+   */
   private void filterByBedCount(String selection)
   {
     if (!selection.isEmpty())
@@ -211,6 +227,11 @@ public class GuestReservationController extends ViewController
 
   }
 
+  /**
+   * Method used to filter by the total price of the booking.
+   * This is done by checking which of the filtering fields have contents in them to be used as filters,
+   * and then removes all rooms from the list that does not fulfill the criteria specified by the filtering.
+   */
   private void runFilterByPrice()
   {
     runFilters("price");
@@ -260,6 +281,11 @@ public class GuestReservationController extends ViewController
     }
   }
 
+  /**
+   * Method called each time a filter is to be run.
+   * Checks which other filters - if any - are currently active, and makes sure that they stay active.
+   * @param callingMethod
+   */
   private void runFilters(String callingMethod)
   {
     switch (callingMethod)
@@ -302,6 +328,9 @@ public class GuestReservationController extends ViewController
     }
   }
 
+  /**
+   * Method calling the runFilterByPrice method, and then runs the filter by bed count method.
+   */
   @FXML private void filterByPrice()
   {
     runFilterByPrice();
@@ -309,15 +338,15 @@ public class GuestReservationController extends ViewController
   }
 
   /**
-   * A void method  opening the GuestInformation view.
+   * A void method calling the bookARoom method in the viewmodel.
    */
-
   public void reservationButton() throws IOException
   {
+
     viewModel.bookARoom(
-        viewModel.getSelected().get().roomNumberProperty().get());
-    roomTypeFilter.getSelectionModel().select("All");
-    reset();
+            viewModel.getSelected().get().roomNumberProperty().get());
+        roomTypeFilter.getSelectionModel().select("All");
+        reset();
   }
 
   /**

@@ -115,7 +115,6 @@ public class HotelManagerBookingViewController extends ViewController
   public void showCancelledBookings()
   {
     viewModel.showCancelledBookings();
-
   }
 
 }

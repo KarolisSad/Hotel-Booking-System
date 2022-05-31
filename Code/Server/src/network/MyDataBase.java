@@ -22,13 +22,15 @@ public class MyDataBase
 {
 
   private static MyDataBase instance;
+  private String postgreSQLpassword;
 
   /**
    * A constructor registering the Driver.
    */
-  private MyDataBase() throws SQLException
+  private MyDataBase(String postgreSQLpassword) throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
+    this.postgreSQLpassword = postgreSQLpassword;
   }
 
   /**
@@ -38,11 +40,11 @@ public class MyDataBase
    * @return MyDataBase instance variable.
    * @throws SQLException
    */
-  public static synchronized MyDataBase getInstance() throws SQLException
+  public static synchronized MyDataBase getInstance(String postgreSQLpassword) throws SQLException
   {
     if (instance == null)
     {
-      instance = new MyDataBase();
+      instance = new MyDataBase(postgreSQLpassword);
     }
     return instance;
   }
@@ -54,38 +56,7 @@ public class MyDataBase
    */
   private Connection getConnection() throws SQLException
   {
-          ////////////////////////////////////////////////////
-          //                                                //
-          //       USE ONE OF THE BELOW FOR NORMAL USE      //
-          //                                                //
-          ////////////////////////////////////////////////////
-
-    // Karolis
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel", "postgres", "123");
-    // Nina
-//      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Milit@ria2003");
-    // Christian
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "123456789");
-    // Juste
-    // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hotel","postgres", "Lopukas1");
-
-
-          ////////////////////////////////////////////////////
-          //                                                //
-          //     USE ONE OF THE BELOW FOR jUnit Testing     //
-          //                                                //
-          ////////////////////////////////////////////////////
-
-    // Karolis
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest", "postgres", "123");
-    // Nina
-    //return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Milit@ria2003");
-    // Christian
-//      return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "123456789");
-    // Juste
-   // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteltest","postgres", "Lopukas1");
-
-
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=hoteldatabase", "postgres", postgreSQLpassword);
   }
 
   /**
@@ -232,7 +203,7 @@ public class MyDataBase
           "SELECT *\n" + "FROM regularrooms\n" + "WHERE roomID IN (SELECT roomID\n"
               + "    FROM room\n" + "    EXCEPT\n" + "        SELECT roomID\n"
               + "                 FROM roomBooking\n"
-              + "                 WHERE state in ('Booked', 'In Progress', 'Archived') AND\n"
+              + "                 WHERE state in ('Booked', 'In progress', 'Archived') AND\n"
               + "                         (startDate BETWEEN (?) AND (?)\n"
               + "                         OR endDate BETWEEN (?) AND (?)))"
               + "ORDER BY roomID;");
@@ -402,7 +373,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'Booked' ORDER BY bookingid;");
+              "SELECT * FROM regularBookings WHERE state = 'Booked' ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
@@ -427,7 +398,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'In progress' ORDER BY bookingid;");
+              "SELECT * FROM regularBookings WHERE state = 'In progress' ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
@@ -452,7 +423,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'Cancelled' ORDER BY bookingid;");
+              "SELECT * FROM cancelledBookings ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())
@@ -477,7 +448,7 @@ public class MyDataBase
         try (Connection connection = getConnection())
         {
           PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM roombooking WHERE state = 'Archived' ORDER BY bookingid;");
+              "SELECT * FROM regularBookings WHERE state = 'Archived' ORDER BY bookingid;");
           ResultSet resultSet = statement.executeQuery();
 
           while (resultSet.next())

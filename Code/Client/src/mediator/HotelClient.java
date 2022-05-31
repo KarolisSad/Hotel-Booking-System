@@ -1,6 +1,8 @@
 package mediator;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import localDateHelpers.Converters;
 import model.Guest;
 import model.Model;
 import model.RoomType;
@@ -42,7 +44,7 @@ public class HotelClient implements Model
     socket = new Socket("localhost", 2917);
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     out = new PrintWriter(new PrintWriter(socket.getOutputStream()), true);
-    json = new Gson();
+    json = Converters.registerLocalDate(new GsonBuilder()).create();
     message = null;
     username = null;
     startReader();
