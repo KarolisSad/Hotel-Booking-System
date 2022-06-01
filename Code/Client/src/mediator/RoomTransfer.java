@@ -151,7 +151,7 @@ public class RoomTransfer
 
   /**
    * A getter for a list of rooms.
-   * @return ArrayList<Room> object called roomList.
+   * @return an ArrayList of Room objects called roomList.
    */
   public ArrayList<Room> getRoomList()
   {

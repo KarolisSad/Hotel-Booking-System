@@ -15,7 +15,7 @@ public class GuestMenuModel {
 
     /**
      * Constructor initializing instance variables.
-     * @param model
+     * @param model model
      */
     public GuestMenuModel(Model model) {
         this.model = model;
@@ -31,7 +31,7 @@ public class GuestMenuModel {
 
     /**
      * Method setting username information.
-     * @param username
+     * @param username the value to set the username to
      */
     public void passTheUsernameInfo(String username){
         this.username = username;

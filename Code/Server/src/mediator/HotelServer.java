@@ -40,6 +40,7 @@ public class HotelServer implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Server started.");
 
         while (true)
         {

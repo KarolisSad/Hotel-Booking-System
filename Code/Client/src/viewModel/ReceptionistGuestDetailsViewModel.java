@@ -185,9 +185,8 @@ public class ReceptionistGuestDetailsViewModel
   }
 
   /**
-   * A getter method that makes the errorLabel in the constructor display error's message.
-   *
-   * @return String called errorLabel.
+   * A method used for setting the errorlabel to the value passed as argument.
+   * @param errorLabel the value to set the errorLabel to
    */
   public void setErrorLabel(String errorLabel)
   {
@@ -210,6 +209,8 @@ public class ReceptionistGuestDetailsViewModel
   /**
    * A non argument method that sets bookingID, email,
    * fName, lName, phoneNr values to a values chosen in BookingsForReceptionistController
+   * @param bookingIdProperty the bookingID property of the booking chosen in ReceptionistRoomAndBookingDetailsViewController.
+   * @param guestProperty the guest property of the booking chosen in ReceptionistRoomAndBookingDetailsViewController.
    */
   public void setGuest(IntegerProperty bookingIdProperty,
       ObjectProperty<Guest> guestProperty)

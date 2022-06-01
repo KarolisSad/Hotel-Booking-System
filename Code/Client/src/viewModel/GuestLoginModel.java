@@ -21,7 +21,7 @@ public class GuestLoginModel
 
     /**
      * Constructor initializing all instance variables.
-     * @param model
+     * @param model model
      */
     public GuestLoginModel(Model model) {
         username = new SimpleStringProperty();
@@ -57,7 +57,7 @@ public class GuestLoginModel
     /**
      * A method calling login() method from the model.
      * @return GuestTransfer object called guestTransfer.
-     * @throws InterruptedException
+     * @throws InterruptedException if the wait associated with login is interrupted
      */
     public GuestTransfer login() throws InterruptedException {
         GuestTransfer guestTransfer = model.login(username.get(),password.get());

@@ -2,13 +2,13 @@ import mediator.HotelServer;
 import model.Model;
 import model.ModelManager;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SimpleConsoleView
 {
   private Scanner input;
   private boolean running;
+
 
   public SimpleConsoleView()
   {
@@ -36,6 +36,7 @@ public class SimpleConsoleView
         try
         {
           Model model = new ModelManager(password);
+          model.getAllRooms();
           HotelServer server = new HotelServer(model);
           Thread serverThread = new Thread(server);
           serverThread.start();
@@ -52,7 +53,8 @@ public class SimpleConsoleView
         {
           System.out.println("Something went wrong.");
           System.out.println("\nEither the database is not setup, or you entered the wrong password.");
-          System.out.println("Please try again");
+          System.out.println("Please close this window and make sure that you have run SetupDatabase.bat.");
+          System.out.println("If the database setup is already done, please close this window and run Server.bat again.");
           running = false;
         }
       }

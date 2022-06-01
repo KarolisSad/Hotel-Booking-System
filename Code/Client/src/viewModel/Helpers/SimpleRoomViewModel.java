@@ -59,7 +59,7 @@ public class SimpleRoomViewModel
 
   /**
    * A getter method for roomTypeProperty.
-   * @return ObjectProperty<RoomType> object.
+   * @return ObjectProperty RoomType object.
    */
   public ObjectProperty<RoomType> roomTypeProperty()
   {

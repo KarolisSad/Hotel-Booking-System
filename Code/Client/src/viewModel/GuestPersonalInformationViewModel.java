@@ -24,7 +24,7 @@ public class GuestPersonalInformationViewModel {
 
     /**
      * Constructor initializing instance variables.
-     * @param model
+     * @param model model
      */
     public GuestPersonalInformationViewModel(Model model) {
         this.model = model;
@@ -155,7 +155,7 @@ public class GuestPersonalInformationViewModel {
 
     /**
      * A setter method that sets guest's username.
-     * @param username
+     * @param username the value to set the username to.
      */
     public void setUsername(String username) {
         this.username.setValue(username + "");

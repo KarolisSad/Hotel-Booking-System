@@ -92,7 +92,7 @@ public class ReceptionistRoomAndBookingDetailsViewModel
   /**
    * A setter to give a value to a error label
    *
-   * @param errorLabel
+   * @param errorLabel the value to set the error label to
    */
   public void setErrorLabel(String errorLabel)
   {

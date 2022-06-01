@@ -34,6 +34,7 @@ public class ViewModelFactory
 
   /**
    * A ViewModelFactory constructor initializing all instance variables.
+   * @param model the modelManager implementing the model interface.
    */
   public ViewModelFactory(Model model)
   {

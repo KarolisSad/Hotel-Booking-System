@@ -241,7 +241,7 @@ colorAccordingToDays();
       if (result.get() == checkIn)
       {
         if (viewModel.getSelectedBookingProperty().getEndDate()
-            .isEqual(LocalDate.now().plusDays(2)))
+            .isEqual(LocalDate.now()))
         {
           viewModel.processBooking(viewModel.getSelectedBookingProperty());
           reset();

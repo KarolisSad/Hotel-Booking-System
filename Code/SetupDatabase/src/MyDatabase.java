@@ -10,6 +10,8 @@ public class MyDatabase
 
   /**
    * A constructor registering the Driver.
+   * @param postgreSQLpassword the password to the users PostgreSQL database.
+   * @throws SQLException if registering the driver fails
    */
   private MyDatabase(String postgreSQLpassword) throws SQLException
   {
@@ -20,9 +22,9 @@ public class MyDatabase
   /**
    * Method creating an instance variable of the class for the first time.
    * Then returning the same variable every time its called.
-   *
+   * @param postgreSQLpassword the password to the users PostgreSQL database.
    * @return MyDataBase instance variable.
-   * @throws SQLException
+   * @throws SQLException if the connection to the database fails
    */
   public static synchronized MyDatabase getInstance(String postgreSQLpassword) throws SQLException
   {
@@ -33,6 +35,11 @@ public class MyDatabase
     return instance;
   }
 
+  /**
+   * Method creating a connection to the postgreSQL database.
+   * @return database connection
+   * @throws SQLException if the connection to the database fails
+   */
   private Connection getConnection()
   {
     try
@@ -45,6 +52,10 @@ public class MyDatabase
     }
   }
 
+  /**
+   * Method creating the database in postgreSQL.
+   * @throws SQLException if the connection to the database fails
+   */
   public void createDatabase() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -143,6 +154,10 @@ public class MyDatabase
     }
   }
 
+  /**
+   * Method inserting data into the database.
+   * @throws SQLException if the connection to the database fails
+   */
   public void insertData() throws SQLException
   {
     try(Connection connection = getConnection())

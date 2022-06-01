@@ -23,7 +23,7 @@ public class GuestRegisterModel
 
     /**
      * Constructor initializing all instance variables.
-     * @param model
+     * @param model model
      */
     public GuestRegisterModel(Model model) {
         this.model = model;
@@ -38,6 +38,7 @@ public class GuestRegisterModel
 
     /**
      * A method calling register() method from model.
+     * @return true if logins succeeds
      */
     public boolean register()
     {

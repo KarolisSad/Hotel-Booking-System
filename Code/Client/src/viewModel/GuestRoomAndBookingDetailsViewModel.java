@@ -79,7 +79,6 @@ public class GuestRoomAndBookingDetailsViewModel
     /**
      * A setter to give a value to a error label
      *
-     * @param errorLabel
      */
     public void setErrorLabel(String errorLabel)
     {
@@ -144,6 +143,7 @@ public class GuestRoomAndBookingDetailsViewModel
      * Setter for room booking details.
      * This method retrieves a specific room from the model
      * and sets all variables.
+     * @param selectedBooking the booking selected.
      */
     public void setRoomBookingDetails(SimpleBookingViewModel selectedBooking) {
         try {

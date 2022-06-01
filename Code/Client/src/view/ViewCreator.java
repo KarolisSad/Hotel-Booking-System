@@ -20,7 +20,7 @@ public abstract class ViewCreator
   private Map<String, ViewController> controllers;
 
   /**
-   * A one argument constructor intializing Map<String, ViewController> object.
+   * A one argument constructor intializing hashmap object of types String and ViewController.
    */
   public ViewCreator()
   {
@@ -31,7 +31,7 @@ public abstract class ViewCreator
    * A getter method that gets an existing in the HashMap controller
    * or that calls the loadFromFXML method to get and put it
    * in the HashMap.
-   *
+   * @param id string representation of path to fxml file
    * @return A ViewController object called controller.
    */
   public ViewController getViewController(String id) throws IOException
